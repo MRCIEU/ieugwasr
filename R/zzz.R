@@ -28,7 +28,7 @@
 
 	# options(mrbaseapi="http://scmv-webapps.epi.bris.ac.uk:5000/")
 	# options(mrbaseapi="http://apitest.mrbase.org/")
-	toggle_api("dev")
+	toggle_api("test")
 
 	invisible()
 

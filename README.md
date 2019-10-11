@@ -1,24 +1,60 @@
-# ieugwasr
+# R interface to the IEU GWAS database API
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of ieugwasr is to ...
+R interface to the IEU GWAS database API. Includes a wrapper to make generic calls to the API, plus convenience functions for specific queries.
 
 ## Installation
 
 You can install the released version of ieugwasr from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("ieugwasr")
+devtools::install_github("mricue/ieugwasr")
 ```
 
-## Example
+## Examples
 
-This is a basic example which shows you how to solve a common problem:
+### Get API status
 
-``` r
-library(ieugwasr)
-## basic example code
-```
+
+### Get list of all available studies
+
+
+
+### Get list of a specific study
+
+
+### Extract particular associations from particular studies
+
+proxies
+
+
+### Get tophits from study
+
+clumping
+
+
+### Perform PheWAS
+
+
+### LD clumping
+
+Through API
+
+Local
+
+### LD matrix
+
+Through API
+
+Local
+
+### Variant information
+
+chrompos and rsid
+
+gene
+
+regions
 

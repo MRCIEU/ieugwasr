@@ -1,0 +1,15 @@
+Package: ieugwasr
+Title: R interface to the IEU GWAS database API
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Gibran",
+           family = "Hemani",
+           role = c("aut", "cre"),
+           email = "g.hemani@bristol.ac.uk",
+           comment = c(ORCID = "0000-0003-0920-1055"))
+Description: R interface to the IEU GWAS database API. Includes a wrapper to make generic calls to the API, plus convenience functions for specific queries.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    testthat

@@ -28,7 +28,7 @@ toggle_api <- function(where="test")
 #'
 #' @export
 #' @return access token string
-get_mrbase_access_token <- function()
+get_access_token <- function()
 {
 	tf <- basename(tempfile())
 	check <- suppressWarnings(file.create(tf))
@@ -66,11 +66,11 @@ revoke_mrbase_access_token <- function()
 #'
 #' @param path Either a full query path (e.g. for get) or an endpoint (e.g. for post) queries
 #' @param query If post query, provide a list of arguments as the payload. NULL by default
-#' @param access_token=get_mrbase_access_token()
+#' @param access_token=get_access_token()
 #'
 #' @export
 #' @return Parsed json output from query, often in form of data frame
-api_query <- function(path, query=NULL, access_token=get_mrbase_access_token())
+api_query <- function(path, query=NULL, access_token=get_access_token())
 {
 	ntry <- 0
 	ntries <- 3
@@ -172,7 +172,7 @@ print.ApiStatus <- function(x)
 #'
 #' @export
 #' @return Dataframe of details for all available studies
-gwas_info <- function(id=NULL, access_token = get_mrbase_access_token())
+gwas_info <- function(id=NULL, access_token = get_access_token())
 {
 	if(!is.null(id))
 	{

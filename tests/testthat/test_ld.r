@@ -2,18 +2,22 @@ context("LD functions")
 library(ieugwasr)
 
 a <- tophits("IEU-a-2")
-b <- dplyr::tibble(SNP=a$name, pval.exposure=a$p, id.exposure=a$id)
+au <- tophits("IEU-a-2", clump=0)
+b <- dplyr::tibble(variant=au$name, pval=au$p, id=au$id)
+bc <- ld_clump(b)
+# bcl <- ld_clump(b, bfile="/Users/gh13047/data/ld_files/data_maf0.01_rs", plink_bin="plink")
 
-test_that("ld ref", {
-	expect_equal(
-		nrow(a), nrow(ld_clump(b, clump_r2=0.1))
-	)
+test_that("ld clumping", {
+
+	expect_true(nrow(a) == nrow(bc))
+	# expect_true(nrow(bcl) == nrow(bc))
+
 })
 
 
 test_that("ld matrix", {
 	expect_equal(
-		length(unique(b$SNP)), nrow(ld_matrix(b$SNP))
+		length(unique(bc$variant)), nrow(ld_matrix(bc$variant))
 	)
 })
 

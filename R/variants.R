@@ -3,7 +3,7 @@
 #' Provide a gene identified, either Ensembl or Entrez, e.g. ENSG00000123374 or 1017
 #'
 #' @param gene Vector of genes, either Ensembl or Entrez, e.g. ENSG00000123374 or 1017
-#' @param radius=0 radius around the gene region to include
+#' @param radius Radius around the gene region to include. Default = 0
 #'
 #' @export
 #' @return data frame 
@@ -58,6 +58,7 @@ variants_chrpos <- function(chrpos, radius=0)
 #'
 #' @param variants Array of variants e.g. c("rs234", "7:105561135-105563135")
 #'
+#' @importFrom magrittr %>%
 #' @export
 #' @return list of rsids
 variants_to_rsid <- function(variants)

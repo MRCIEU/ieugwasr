@@ -11,7 +11,12 @@ Description: R interface to the IEU GWAS database API. Includes a wrapper to mak
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Import: dplyr, magrittr, httr, jsonlite, googleAuthR
 Suggests: 
     testthat
+Imports:
+    magrittr,
+    googleAuthR,
+    dplyr,
+    httr,
+    jsonlite
 RoxygenNote: 6.1.1

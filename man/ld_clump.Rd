@@ -8,23 +8,23 @@ ld_clump(dat = NULL, clump_kb = 10000, clump_r2 = 0.001,
   clump_p = 1, access_token = NULL, bfile = NULL, plink_bin = NULL)
 }
 \arguments{
-\item{dat}{Output from \code{format_data}. Must have a SNP name column (SNP) and pval column called either "P", "pval.exposure", or "pval". If id or id.exposure is present then it will  or pval.exposure not present they will be generated}
+\item{dat}{Dataframe. Must have a variant name column ("variant") and pval column called "pval". If id is present then clumping will be done per unique id.}
+
+\item{clump_kb}{Clumping kb window. Default is very strict, 10000}
+
+\item{clump_r2}{Clumping r2 threshold. Default is very strict, 0.001}
+
+\item{clump_p}{Clumping sig level for index variants. Default = 1 (i.e. no threshold)}
 
 \item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data}
 
-\item{clump_kb=10000}{Clumping window}
+\item{bfile}{If this is provided then will use the API. Default = NULL}
 
-\item{clump_r2=0.001}{Clumping r2 cutoff. Note that this default value has recently changed from 0.01.}
-
-\item{clump_p=1}{Clumping sig level for index SNPs}
-
-\item{bfile=NULL}{If this is provided then will use the API}
-
-\item{plink_bin=NULL}{If null and bfile is not null then will detect packaged plink binary for specific OS. Otherwise specify path to plink binary}
+\item{plink_bin}{If null and bfile is not null then will detect packaged plink binary for specific OS. Otherwise specify path to plink binary. Default = NULL}
 }
 \value{
 Data frame
 }
 \description{
-Uses PLINK clumping method, where SNPs in LD within a particular window will be pruned. The SNP with the lowest p-value is retained.
+Uses PLINK clumping method, where variants in LD within a particular window will be pruned. The SNP with the lowest p-value is retained.
 }

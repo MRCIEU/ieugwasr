@@ -7,20 +7,20 @@
 ld_clump_local(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin)
 }
 \arguments{
-\item{dat}{Output from \code{read_exposure_data}. Must have a SNP name column (SNP), SNP chromosome column (chr_name), SNP position column (chrom_start) and p-value column (pval.exposure)}
+\item{dat}{Dataframe. Must have a variant name column ("variant") and pval column called "pval". If id is present then clumping will be done per unique id.}
 
-\item{clump_kb=10000}{Clumping window}
+\item{clump_kb}{Clumping kb window. Default is very strict, 10000}
 
-\item{clump_r2=0.1}{Clumping r2 cutoff}
+\item{clump_r2}{Clumping r2 threshold. Default is very strict, 0.001}
 
-\item{clump_p=1}{Clumping sig level for index SNPs}
+\item{clump_p}{Clumping sig level for index variants. Default = 1 (i.e. no threshold)}
 
-\item{bfile=NULL}{Reference plink bed/bim/fam file set to be used for clumping}
+\item{bfile}{If this is provided then will use the API. Default = NULL}
 
-\item{plink_bin=NULL}{If null then will detect packaged plink binary for specific OS. Otherwise specify path to plink binary}
+\item{plink_bin}{Specify path to plink binary. Default = NULL. See https://github.com/explodecomputer/plinkbinr for convenient access to plink binaries}
 }
 \value{
-data frame of clumped SNPs
+data frame of clumped variants
 }
 \description{
 Wrapper for clump function using local plink binary and ld reference dataset

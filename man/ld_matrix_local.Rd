@@ -4,16 +4,16 @@
 \alias{ld_matrix_local}
 \title{Get LD matrix using local plink binary and reference dataset}
 \usage{
-ld_matrix_local(snps, bfile, plink_bin, with_alleles = TRUE)
+ld_matrix_local(variants, bfile, plink_bin, with_alleles = TRUE)
 }
 \arguments{
-\item{snps}{<what param does>}
+\item{variants}{List of variants (rsids)}
 
-\item{bfile}{<what param does>}
+\item{bfile}{Path to bed/bim/fam ld reference panel}
 
-\item{plink_bin}{<what param does>}
+\item{plink_bin}{Specify path to plink binary. Default = NULL. See https://github.com/explodecomputer/plinkbinr for convenient access to plink binaries}
 
-\item{with_alleles=TRUE}{<what param does>}
+\item{with_alleles}{Whether to append the allele names to the SNP names. Default: TRUE}
 }
 \value{
 data frame

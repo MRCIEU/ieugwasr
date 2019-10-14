@@ -2,20 +2,25 @@
 % Please edit documentation in R/ld_matrix.R
 \name{ld_matrix}
 \alias{ld_matrix}
-\title{Get LD matrix for list of SNPs}
+\title{Get LD matrix for list of variants}
 \usage{
-ld_matrix(snps, with_alleles = TRUE, bfile = NULL, plink_bin = NULL)
+ld_matrix(variants, with_alleles = TRUE, bfile = NULL,
+  plink_bin = NULL)
 }
 \arguments{
-\item{snps}{List of SNPs}
+\item{variants}{List of variants (rsids)}
 
 \item{with_alleles}{Whether to append the allele names to the SNP names. Default: TRUE}
+
+\item{bfile}{If this is provided then will use the API. Default = NULL}
+
+\item{plink_bin}{If null and bfile is not null then will detect packaged plink binary for specific OS. Otherwise specify path to plink binary. Default = NULL}
 }
 \value{
 Matrix of LD r values
 }
 \description{
-This function takes a list of SNPs and searches for them in 502 European samples from 1000 Genomes phase 3 data
+This function takes a list of variants and searches for them in 502 European samples from 1000 Genomes phase 3 data
 It then creates an LD matrix of r values (signed, and not squared)
 All LD values are with respect to the major alleles in the 1000G dataset. You can specify whether the allele names are displayed
 }

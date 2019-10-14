@@ -2,22 +2,22 @@
 % Please edit documentation in R/ld_clump.R
 \name{ld_clump_api}
 \alias{ld_clump_api}
-\title{Perform clumping on the chosen SNPs using through API}
+\title{Perform clumping on the chosen variants using through API}
 \usage{
 ld_clump_api(dat, clump_kb = 10000, clump_r2 = 0.1, clump_p,
   access_token = check_access_token())
 }
 \arguments{
-\item{dat}{Output from \code{read_exposure_data}. Must have a SNP name column (SNP), SNP chromosome column (chr_name), SNP position column (chrom_start) and p-value column (pval.exposure)}
+\item{dat}{Dataframe. Must have a variant name column ("variant") and pval column called "pval". If id is present then clumping will be done per unique id.}
 
-\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data#' @return Data frame of only independent SNPs}
+\item{clump_kb}{Clumping kb window. Default is very strict, 10000}
 
-\item{clump_kb=10000}{Clumping window}
+\item{clump_r2}{Clumping r2 threshold. Default is very strict, 0.001}
 
-\item{clump_r2=0.1}{Clumping r2 cutoff}
+\item{clump_p}{Clumping sig level for index variants. Default = 1 (i.e. no threshold)}
 
-\item{clump_p=1}{Clumping sig level for index SNPs}
+\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data#' @return Data frame of only independent variants}
 }
 \description{
-Perform clumping on the chosen SNPs using through API
+Perform clumping on the chosen variants using through API
 }

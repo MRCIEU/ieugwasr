@@ -9,7 +9,7 @@ variants_gene(gene, radius = 0)
 \arguments{
 \item{gene}{Vector of genes, either Ensembl or Entrez, e.g. ENSG00000123374 or 1017}
 
-\item{radius=0}{radius around the gene region to include}
+\item{radius}{Radius around the gene region to include. Default = 0}
 }
 \value{
 data frame

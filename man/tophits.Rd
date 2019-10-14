@@ -4,7 +4,7 @@
 \alias{tophits}
 \title{Obtain top hits from a GWAS dataset}
 \usage{
-tophits(id, pval = 5e-08, clump = 1, r2 = 0.001, kb = 5000,
+tophits(id, pval = 5e-08, clump = 1, r2 = 0.001, kb = 10000,
   access_token = check_access_token())
 }
 \arguments{
@@ -16,9 +16,9 @@ tophits(id, pval = 5e-08, clump = 1, r2 = 0.001, kb = 5000,
 
 \item{r2}{Clumping r2 threshold. Default is very strict, 0.001}
 
-\item{kb}{Clumping kb window. Default is very strict, 5000}
+\item{kb}{Clumping kb window. Default is very strict, 10000}
 
-\item{access_token=check_access_token()}{<what param does>}
+\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication}
 }
 \value{
 Dataframe

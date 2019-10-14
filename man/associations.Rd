@@ -17,11 +17,11 @@ associations(variants, id, proxies = 1, r2 = 0.8, align_alleles = 1,
 
 \item{r2}{Minimum proxy LD rsq value. Default=0.8}
 
-\item{align_alleles}{= 1 Try to align tag alleles to target alleles (if proxies = 1). 1 = yes, 0 = no}
+\item{align_alleles}{Try to align tag alleles to target alleles (if proxies = 1). 1 = yes (default), 0 = no}
 
-\item{palindromes}{= 1 Allow palindromic SNPs (if proxies = 1). 1 = yes, 0 = no}
+\item{palindromes}{Allow palindromic SNPs (if proxies = 1). 1 = yes (default), 0 = no}
 
-\item{maf_threshold}{= 0.3 MAF threshold to try to infer palindromic SNPs}
+\item{maf_threshold}{MAF threshold to try to infer palindromic SNPs. Default = 0.3.}
 
 \item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication}
 }

@@ -15,6 +15,9 @@ ld_matrix_local(snps, bfile, plink_bin, with_alleles = TRUE)
 
 \item{with_alleles=TRUE}{<what param does>}
 }
+\value{
+data frame
+}
 \description{
 Get LD matrix using local plink binary and reference dataset
 }

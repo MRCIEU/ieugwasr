@@ -11,7 +11,7 @@ api_query(path, query = NULL, access_token = check_access_token())
 
 \item{query}{If post query, provide a list of arguments as the payload. NULL by default}
 
-\item{access_token=check_access_token()}{}
+\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication}
 }
 \value{
 Parsed json output from query, often in form of data frame

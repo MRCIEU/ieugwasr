@@ -57,7 +57,7 @@ ld_matrix <- function(snps, with_alleles=TRUE, bfile=NULL, plink_bin=NULL)
 #' @param with_alleles=TRUE <what param does>
 #'
 #' @export
-#' @return
+#' @return data frame
 ld_matrix_local <- function(snps, bfile, plink_bin, with_alleles=TRUE)
 {
 	message("Warning: this is not doing the same behaviour as the API. Still need to implement missing SNP handling.")
@@ -69,7 +69,7 @@ ld_matrix_local <- function(snps, bfile, plink_bin, with_alleles=TRUE)
 	# Make textfile
 	shell <- ifelse(Sys.info()['sysname'] == "Windows", "cmd", "sh")
 	fn <- tempfile()
-	write.table(data.frame(dat$SNP), file=fn, row=F, col=F, qu=F)
+	write.table(data.frame(snps), file=fn, row=F, col=F, qu=F)
 
 	fun2 <- paste0(
 		shQuote(plink_bin, type=shell),

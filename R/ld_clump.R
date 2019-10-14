@@ -109,6 +109,9 @@ get_plink_exe <- function()
 #' @param clump_p=1 Clumping sig level for index SNPs
 #' @param bfile=NULL Reference plink bed/bim/fam file set to be used for clumping
 #' @param plink_bin=NULL If null then will detect packaged plink binary for specific OS. Otherwise specify path to plink binary
+#' @importFrom utils read.table
+#' @importFrom utils write.table
+
 #'
 #' @export
 #' @return data frame of clumped SNPs

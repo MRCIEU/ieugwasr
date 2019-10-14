@@ -25,5 +25,33 @@ test_that("gwasinfo",
 	)
 })
 
+test_that("associations",
+{
+	expect_true(
+		nrow(associations(c("rs9662760", "rs12759473"), "2")) == 2
+	)
+	
+	expect_true(
+		nrow(associations(c("rs9662760", "rs12759473"), "2", proxies=0)) == 1
+	)
+
+})
+
+
+# test_that("phewas",
+# {
+# 	a <- phewas("rs234")
+# 	expect_true(nrow(a)>100)
+# })
+
+
+test_that("tophits",
+{
+	expect_equal(nrow(tophits("2")), 79)
+	expect_true(nrow(tophits("2", clump=0))>79)
+})
+
+
+
 
 

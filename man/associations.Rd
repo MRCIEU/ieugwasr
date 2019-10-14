@@ -2,26 +2,32 @@
 % Please edit documentation in R/api.R
 \name{associations}
 \alias{associations}
-\title{<brief desc>}
+\title{Query specific variants from specific GWAS}
 \usage{
-associations(rsid, id, proxies, r2, align_alleles, palindromes,
-  maf_threshold)
+associations(variants, id, proxies = 1, r2 = 0.8, align_alleles = 1,
+  palindromes = 1, maf_threshold = 0.3,
+  access_token = check_access_token())
 }
 \arguments{
-\item{rsid}{<what param does>}
+\item{variants}{Array of variants e.g. c("rs234", "7:105561135-105563135")}
 
-\item{id}{<what param does>}
+\item{id}{Array of GWAS studies to query. See \code{gwasinfo} for available studies}
 
-\item{proxies}{<what param does>}
+\item{proxies}{0 or (default) 1 - indicating whether to look for proxies}
 
-\item{r2}{<what param does>}
+\item{r2}{Minimum proxy LD rsq value. Default=0.8}
 
-\item{align_alleles}{<what param does>}
+\item{align_alleles}{= 1 Try to align tag alleles to target alleles (if proxies = 1). 1 = yes, 0 = no}
 
-\item{palindromes}{<what param does>}
+\item{palindromes}{= 1 Allow palindromic SNPs (if proxies = 1). 1 = yes, 0 = no}
 
-\item{maf_threshold}{<what param does>}
+\item{maf_threshold}{= 0.3 MAF threshold to try to infer palindromic SNPs}
+
+\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication}
+}
+\value{
+Dataframe
 }
 \description{
-<full description>
+Every rsid is searched for against each requested GWAS id. To get a list of available GWAS ids, or to find their meta data, use \code{gwasinfo}. Can request LD proxies for instances when the requested rsid is not present in a particular GWAS dataset. This currently only uses an LD reference panel composed of Europeans in 1000 genomes version 3. It is also restricted to biallelic single nucleotide polymorphisms (no indels), with European MAF > 0.01.
 }

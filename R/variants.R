@@ -36,14 +36,38 @@ variants_rsid <- function(rsid)
 #'
 #' For a list of chromosome and positions, finds all variants within a given radius
 #'
-#' @param chrpos list of <chr>:<pos> in build 37, e.g. c("3:46414943", "3:122991235")
+#' @param chrpos list of <chr>:<pos> in build 37, e.g. c("3:46414943", "3:122991235"). Also allows ranges e.g "7:105561135-105563135"
 #' @param radius Radius around each chrpos, default = 0
 #'
 #' @export
 #' @return Data frame
 variants_chrpos <- function(chrpos, radius=0)
 {
-	api_query("variants/chrpos", list(chrpos = chrpos, radius=radius)) %>% bind_rows()
+	o <- api_query("variants/chrpos", list(chrpos = chrpos, radius=radius))
+	if(class(o) == "response")
+	{
+		return(o)
+	} else {
+		return(dplyr::bind_rows(o))
+	}
 }
 
+
+
+#' Convert mixed array of rsid and chrpos to list of rsid
+#'
+#' @param variants Array of variants e.g. c("rs234", "7:105561135-105563135")
+#'
+#' @export
+#' @return list of rsids
+variants_to_rsid <- function(variants)
+{
+	index <- grep(":", rsid)
+	if(length(index) > 0)
+	{
+		o <- variants_chrpos(rsid[index])$ID
+		rsid <- c(o, rsid[-index]) %>% unique
+	}
+	return(rsid)
+}
 

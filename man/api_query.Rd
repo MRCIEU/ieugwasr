@@ -4,14 +4,14 @@
 \alias{api_query}
 \title{Wrapper for sending queries and payloads to API}
 \usage{
-api_query(path, query = NULL, access_token = get_mrbase_access_token())
+api_query(path, query = NULL, access_token = check_access_token())
 }
 \arguments{
 \item{path}{Either a full query path (e.g. for get) or an endpoint (e.g. for post) queries}
 
 \item{query}{If post query, provide a list of arguments as the payload. NULL by default}
 
-\item{access_token=get_mrbase_access_token()}{}
+\item{access_token=check_access_token()}{}
 }
 \value{
 Parsed json output from query, often in form of data frame

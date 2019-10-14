@@ -4,7 +4,7 @@
 \alias{gwas_info}
 \title{Get list of studies with available GWAS summary statistics through API}
 \usage{
-gwas_info(id = NULL, access_token = get_mrbase_access_token())
+gwas_info(id = NULL, access_token = get_access_token())
 }
 \arguments{
 \item{id}{List of MR-Base IDs to retrieve. If NULL (default) retrieves all available datasets}

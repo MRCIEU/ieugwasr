@@ -49,6 +49,23 @@ get_access_token <- function()
 }
 
 
+#' Check if authentication has been made
+#'
+#' If a call to get_access_token() has been made then it will have generated mrbase.oauth. Pass the token if it is present, if not, return NULL and do not authenticate.
+#'
+#' @export
+#' @return NULL or access_token depending on current authentication state
+check_access_token <- function()
+{
+	if(file.exists("mrbase.oauth"))
+	{
+		return(get_access_token())
+	} else {
+		return(NULL)
+	}
+}
+
+
 #' Revoke access token for MR Base
 #'
 #' @export
@@ -66,11 +83,11 @@ revoke_mrbase_access_token <- function()
 #'
 #' @param path Either a full query path (e.g. for get) or an endpoint (e.g. for post) queries
 #' @param query If post query, provide a list of arguments as the payload. NULL by default
-#' @param access_token=get_access_token()
+#' @param access_token=check_access_token()
 #'
 #' @export
 #' @return Parsed json output from query, often in form of data frame
-api_query <- function(path, query=NULL, access_token=get_access_token())
+api_query <- function(path, query=NULL, access_token=check_access_token())
 {
 	ntry <- 0
 	ntries <- 3
@@ -193,33 +210,77 @@ print.GwasInfo <- function(x)
 }
 
 
-#' <brief desc>
+#' Query specific variants from specific GWAS
 #'
-#' <full description>
+#' Every rsid is searched for against each requested GWAS id. To get a list of available GWAS ids, or to find their meta data, use \code{gwasinfo}. Can request LD proxies for instances when the requested rsid is not present in a particular GWAS dataset. This currently only uses an LD reference panel composed of Europeans in 1000 genomes version 3. It is also restricted to biallelic single nucleotide polymorphisms (no indels), with European MAF > 0.01.
 #'
-#' @param rsid <what param does>
-#' @param id <what param does>
-#' @param proxies <what param does>
-#' @param r2 <what param does>
-#' @param align_alleles <what param does>
-#' @param palindromes <what param does>
-#' @param maf_threshold <what param does>
+#' @param variants Array of variants e.g. c("rs234", "7:105561135-105563135")
+#' @param id Array of GWAS studies to query. See \code{gwasinfo} for available studies
+#' @param proxies 0 or (default) 1 - indicating whether to look for proxies
+#' @param r2 Minimum proxy LD rsq value. Default=0.8
+#' @param align_alleles = 1 Try to align tag alleles to target alleles (if proxies = 1). 1 = yes, 0 = no
+#' @param palindromes = 1 Allow palindromic SNPs (if proxies = 1). 1 = yes, 0 = no
+#' @param maf_threshold = 0.3 MAF threshold to try to infer palindromic SNPs
+#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
 #'
 #' @export
-#' @return
-associations <- function(rsid, id, proxies, r2, align_alleles, palindromes, maf_threshold)
+#' @return Dataframe
+associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, access_token=check_access_token())
 {
-
+	rsid <- variants_to_rsid(variants)
+	api_query("associations", query=list(
+		rsid=rsid,
+		id=id,
+		proxies=proxies,
+		r2=r2,
+		align_alleles=align_alleles,
+		palindromes=palindromes,
+		maf_threshold=maf_threshold
+	), access_token=access_token)
 }
 
 
-phewas <- function(rsid, pval)
+#' Perform fast phewas of a specific variants against all available GWAS datasets
+#'
+#' This is faster than doing it manually through \code{associations}
+#'
+#' @param variants Array of variants e.g. c("rs234", "7:105561135-105563135")
+#' @param pval p-value threshold. Default = 0.00001
+#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
+#'
+#' @export
+#' @return Dataframe
+phewas <- function(variants, pval = 0.00001, access_token=check_access_token())
 {
-
+	rsid <- variants_to_rsid(variants)
+	api_query("phewas", query=list(
+		rsid=rsid,
+		pval=pval
+	), access_token=access_token)
 }
 
 
-tophits <- function(id, pval, clump, r2, kb)
+#' Obtain top hits from a GWAS dataset
+#'
+#' By default performs clumping on the server side. 
+#'
+#' @param id Array of GWAS studies to query. See \code{gwasinfo} for available studies
+#' @param pval P-value threshold. Default = 5e-8
+#' @param clump Whether to clump (1) or not (0). Default = 1
+#' @param r2 Clumping r2 threshold. Default is very strict, 0.001
+#' @param kb Clumping kb window. Default is very strict, 5000
+#' @param access_token=check_access_token() <what param does>
+#'
+#' @export
+#' @return Dataframe
+tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 5000, access_token=check_access_token())
 {
-
+	api_query("tophits", query=list(
+		id=id,
+		pval=pval,
+		clump=clump,
+		r2=r2,
+		kb=kb
+	), access_token=access_token)
 }
+

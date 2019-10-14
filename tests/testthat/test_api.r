@@ -1,5 +1,5 @@
 context("API")
-library(TwoSampleMR)
+library(ieugwasr)
 
 test_that("status", 
 {
@@ -28,11 +28,11 @@ test_that("gwasinfo",
 test_that("associations",
 {
 	expect_true(
-		nrow(associations(c("rs9662760", "rs12759473"), "2")) == 2
+		nrow(associations(c("rs9662760", "rs12759473"), "IEU-a-2")) == 2
 	)
 	
 	expect_true(
-		nrow(associations(c("rs9662760", "rs12759473"), "2", proxies=0)) == 1
+		nrow(associations(c("rs9662760", "rs12759473"), "IEU-a-2", proxies=0)) == 1
 	)
 
 })
@@ -47,8 +47,8 @@ test_that("associations",
 
 test_that("tophits",
 {
-	expect_equal(nrow(tophits("2")), 79)
-	expect_true(nrow(tophits("2", clump=0))>79)
+	expect_equal(nrow(tophits("IEU-a-2")), 79)
+	expect_true(nrow(tophits("IEU-a-2", clump=0))>79)
 })
 
 

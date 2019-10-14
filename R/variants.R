@@ -62,12 +62,12 @@ variants_chrpos <- function(chrpos, radius=0)
 #' @return list of rsids
 variants_to_rsid <- function(variants)
 {
-	index <- grep(":", rsid)
+	index <- grep(":", variants)
 	if(length(index) > 0)
 	{
-		o <- variants_chrpos(rsid[index])$ID
-		rsid <- c(o, rsid[-index]) %>% unique
+		o <- variants_chrpos(variants[index])$ID
+		variants <- c(o, variants[-index]) %>% unique
 	}
-	return(rsid)
+	return(variants)
 }
 

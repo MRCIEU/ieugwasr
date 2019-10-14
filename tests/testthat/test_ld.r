@@ -1,19 +1,19 @@
 context("LD functions")
-library(TwoSampleMR)
+library(ieugwasr)
 
-
-a <- extract_instruments(2)
+a <- tophits("IEU-a-2")
+b <- dplyr::tibble(SNP=a$name, pval.exposure=a$p, id.exposure=a$id)
 
 test_that("ld ref", {
 	expect_equal(
-		nrow(a), nrow(clump_data(a))
+		nrow(a), nrow(ld_clump(b, clump_r2=0.1))
 	)
 })
 
 
 test_that("ld matrix", {
 	expect_equal(
-		length(unique(a$SNP)), nrow(ld_matrix(a$SNP))
+		length(unique(b$SNP)), nrow(ld_matrix(b$SNP))
 	)
 })
 

@@ -5,7 +5,7 @@
 \title{Perform clumping on the chosen SNPs using through API}
 \usage{
 ld_clump_api(dat, clump_kb = 10000, clump_r2 = 0.1, clump_p,
-  access_token = get_access_token())
+  access_token = check_access_token())
 }
 \arguments{
 \item{dat}{Output from \code{read_exposure_data}. Must have a SNP name column (SNP), SNP chromosome column (chr_name), SNP position column (chrom_start) and p-value column (pval.exposure)}

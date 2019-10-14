@@ -70,7 +70,7 @@ check_access_token <- function()
 #'
 #' @export
 #' @return NULL
-revoke_mrbase_access_token <- function()
+revoke_access_token <- function()
 {
 	a <- googleAuthR::gar_auth("mrbase.oauth")
 	a$revoke()
@@ -83,7 +83,7 @@ revoke_mrbase_access_token <- function()
 #'
 #' @param path Either a full query path (e.g. for get) or an endpoint (e.g. for post) queries
 #' @param query If post query, provide a list of arguments as the payload. NULL by default
-#' @param access_token=check_access_token()
+#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
 #'
 #' @export
 #' @return Parsed json output from query, often in form of data frame
@@ -189,7 +189,7 @@ print.ApiStatus <- function(x)
 #'
 #' @export
 #' @return Dataframe of details for all available studies
-gwas_info <- function(id=NULL, access_token = get_access_token())
+gwasinfo <- function(id=NULL, access_token = check_access_token())
 {
 	if(!is.null(id))
 	{
@@ -227,9 +227,9 @@ print.GwasInfo <- function(x)
 #' @return Dataframe
 associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, access_token=check_access_token())
 {
-	rsid <- variants_to_rsid(variants)
+	variants <- variants_to_rsid(variants)
 	api_query("associations", query=list(
-		rsid=rsid,
+		rsid=variants,
 		id=id,
 		proxies=proxies,
 		r2=r2,

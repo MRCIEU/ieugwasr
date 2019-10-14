@@ -30,7 +30,7 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=1, access
 	}
 	if(is.null(bfile))
 	{
-		access_token = get_access_token()
+		access_token = check_access_token()
 	}
 	res <- plyr::ddply(dat, c("id.exposure"), function(x)
 	{
@@ -60,7 +60,7 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=1, access
 #' @param clump_r2=0.1 Clumping r2 cutoff
 #' @param clump_p=1 Clumping sig level for index SNPs
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data#' @return Data frame of only independent SNPs
-ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, access_token=get_access_token())
+ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, access_token=check_access_token())
 {
 	res <- api_query('ld/clump',
 			query = list(
@@ -144,3 +144,14 @@ ld_clump_local <- function(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin)
 	return(subset(dat, SNP %in% res$SNP))
 }
 
+random_string <- function(n=1, len=6)
+{
+	randomString <- c(1:n)
+	for (i in 1:n)
+	{
+		randomString[i] <- paste(sample(c(0:9, letters, LETTERS),
+		len, replace=TRUE),
+		collapse="")
+	}
+	return(randomString)
+}

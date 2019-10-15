@@ -7,7 +7,7 @@
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
 #'
 #' @export
-#' @return Parsed json output from query, often in form of data frame
+#' @return httr response object
 api_query <- function(path, query=NULL, access_token=check_access_token())
 {
 	ntry <- 0
@@ -67,23 +67,26 @@ api_query <- function(path, query=NULL, access_token=check_access_token())
 		}
 	}
 
-	if(httr::status_code(r) >= 200 & httr::status_code(r) < 300)
-	# if(httr::status_code(r) >= 200)
-	{
-		return(jsonlite::fromJSON(httr::content(r, "text", encoding='UTF-8')))
-	} else {
-		return(r)
-		stop("error code: ", httr::status_code(r), "\n  message: ", jsonlite::fromJSON(httr::content(r, "text", encoding='UTF-8')))
-	}
+	return(r)
 }
 
-# error_codes <- function(code)
-# {
-# 	codes <- list(
-# 		data_frame(code=400, message = "Incorrect"),
-# 		data_frame(code=400, message = ""),
-# 	)
-# }
+
+#' Parse out json response from httr object
+#'
+#' @param response Output from httr
+#'
+#' @export
+#' @return Parsed json output from query, often in form of data frame. If status code is not successful then return the actual response
+get_query_content <- function(response)
+{
+	if(httr::status_code(response) >= 200 & httr::status_code(response) < 300)
+	{
+		return(jsonlite::fromJSON(httr::content(response, "text", encoding='UTF-8')))
+	} else {
+		return(response)
+		# stop("error code: ", httr::status_code(response), "\n  message: ", jsonlite::fromJSON(httr::content(response, "text", encoding='UTF-8')))
+	}
+}
 
 
 #' MR-Base server status
@@ -92,7 +95,7 @@ api_query <- function(path, query=NULL, access_token=check_access_token())
 #' @return list of values regarding status
 api_status <- function()
 {
-	o <- api_query('status')
+	o <- api_query('status') %>% get_query_content
 	class(o) <- "ApiStatus"
 	return(o)
 }
@@ -116,9 +119,9 @@ gwasinfo <- function(id=NULL, access_token = check_access_token())
 	if(!is.null(id))
 	{
 		stopifnot(is.vector(id))
-		out <- api_query('gwasinfo', query = list(id=id), access_token=access_token)
+		out <- api_query('gwasinfo', query = list(id=id), access_token=access_token) %>% get_query_content()
 	} else {
-		out <- api_query('gwasinfo', access_token=access_token)
+		out <- api_query('gwasinfo', access_token=access_token) %>% get_query_content()
 	}
 	out <- dplyr::bind_rows(out) %>%
 		dplyr::select("id", "trait", "sample_size", "nsnp", "year", "consortium", "author", dplyr::everything())
@@ -158,7 +161,7 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 		align_alleles=align_alleles,
 		palindromes=palindromes,
 		maf_threshold=maf_threshold
-	), access_token=access_token)
+	), access_token=access_token) %>% get_query_content()
 }
 
 
@@ -178,7 +181,7 @@ phewas <- function(variants, pval = 0.00001, access_token=check_access_token())
 	api_query("phewas", query=list(
 		rsid=rsid,
 		pval=pval
-	), access_token=access_token)
+	), access_token=access_token) %>% get_query_content()
 }
 
 
@@ -203,6 +206,6 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, access_tok
 		clump=clump,
 		r2=r2,
 		kb=kb
-	), access_token=access_token)
+	), access_token=access_token) %>% get_query_content()
 }
 

@@ -1,9 +1,24 @@
-# R interface to the IEU GWAS database API
+# Perform fast queries in R against a massive database of complete GWAS summary data
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-R interface to the IEU GWAS database API. Includes a wrapper to make generic calls to the API, plus convenience functions for specific queries.
+The [IEU GWAS database](https://gwas.mrcieu.ac.uk/) comprises over 10,000 curated, QC'd and harmonised complete GWAS summary datasets and can be queried using an API. See [here](http://gwasapi.mrcieu.ac.uk/docs/) for documentation on the API itself. This R package is a wrapper to make generic calls to the API, plus convenience functions for specific queries. 
+
+Methods currently implemented:
+
+- Get meta data about specific or all studies
+- Obtain the top hits (with on the fly clumping as an option) from each of the GWAS datasets. Clumping and significance thresholds can be specified
+- Obtain the summary results of specific variants across specific studies. LD-proxy lookups are performed automatically if a specific variant is absent from a study
+- Query a genomic region in a GWAS dataset, e.g. for fine mapping or colocalisation analysis
+- Perform PheWAS
+
+There are a few convenience functions also:
+
+- Query dbSNP data, allowing conversion between chromosome:position and rsids and getting annotations
+- Perform LD clumping using the server, or locally
+- Obtain LD matrices for a list of SNPs using the server or locally (e.g. for fine mapping, colocalisation or Mendelian randomization)
+
 
 ## Installation
 
@@ -14,16 +29,6 @@ devtools::install_github("mricue/ieugwasr")
 ```
 
 ## Usage
-
-### General API queries
-
-The API has a number of endpoints documented [here](http://ieu-db-interface.epi.bris.ac.uk:8082/docs/). A general way to access them in R is using the `api_query` function. There are two types of endpoints - `GET` and `POST`. 
-
-- `GET` - you provide a single URL which includes the endpoint and query. For example, for the `association` endpoint you can obtain some rsids in some studies, e.g.
-    + `api_query("associations/IEU-a-2,IEU-a-7/rs234,rs123")`
-
-- `POST` - Here you send a "payload" to the endpoint. So, the path specifies the endpoint and you add a list of query specifications. This is useful for long lists of rsids being queried, for example
-    + `api_query("associations", query=list(rsid=c("rs234", "rs123"), id=c("IEU-a-2", "IEU-a-7")))`
 
 ### Authentication
 
@@ -42,6 +47,19 @@ If you are using a server which doesn’t have a graphic user interface then the
 If you are using R in a working directory that does not have write permissions then this command will fail, please navigate to a directory that does have write permissions.
 
 If you need to run this in a non-interactive script then you can generate the token file on an interactive computer, copy that file to the working directory that R will be running from, and then run a batch (non-interactive).
+
+
+### General API queries
+
+The API has a number of endpoints documented [here](http://ieu-db-interface.epi.bris.ac.uk:8082/docs/). A general way to access them in R is using the `api_query` function. There are two types of endpoints - `GET` and `POST`. 
+
+- `GET` - you provide a single URL which includes the endpoint and query. For example, for the `association` endpoint you can obtain some rsids in some studies, e.g.
+    + `api_query("associations/IEU-a-2,IEU-a-7/rs234,rs123")`
+
+- `POST` - Here you send a "payload" to the endpoint. So, the path specifies the endpoint and you add a list of query specifications. This is useful for long lists of rsids being queried, for example
+    + `api_query("associations", query=list(rsid=c("rs234", "rs123"), id=c("IEU-a-2", "IEU-a-7")))`
+
+The `api_query` function returns a `response` object from the `httr` package. See below for a list of functions that make the input and output to `api_query` more convenient.
 
 
 ### Convenient wrappers for `api_query`

@@ -23,7 +23,7 @@ ld_matrix <- function(variants, with_alleles=TRUE, bfile=NULL, plink_bin=NULL)
 		return(ld_matrix(variants, bfile=bfile, plink_bin=plink_bin, with_alleles=with_alleles))
 	}
 
-	res <- api_query('ld/matrix', query = list(rsid=variants), access_token=NULL)
+	res <- api_query('ld/matrix', query = list(rsid=variants), access_token=NULL) %>% get_query_content()
 
 	if(all(is.na(res))) stop("None of the requested variants were found")
 	variants2 <- res$snplist

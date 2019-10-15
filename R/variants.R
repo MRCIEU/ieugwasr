@@ -13,7 +13,7 @@ variants_gene <- function(gene, radius=0)
 	for(i in 1:length(gene))
 	{
 		message("Looking up ", gene[i])
-		l[[gene[i]]] <- api_query(paste0('variants/gene/', gene[i], "?radius=", format(radius, scientific=FALSE)))
+		l[[gene[i]]] <- api_query(paste0('variants/gene/', gene[i], "?radius=", format(radius, scientific=FALSE))) %>% get_query_content()
 	}
 	return(dplyr::bind_rows(l))
 }
@@ -43,7 +43,7 @@ variants_rsid <- function(rsid)
 #' @return Data frame
 variants_chrpos <- function(chrpos, radius=0)
 {
-	o <- api_query("variants/chrpos", list(chrpos = chrpos, radius=radius))
+	o <- api_query("variants/chrpos", list(chrpos = chrpos, radius=radius)) %>% get_query_content()
 	if(class(o) == "response")
 	{
 		return(o)

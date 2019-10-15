@@ -75,7 +75,7 @@ ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, access_toke
 				kb = clump_kb
 			),
 			access_token=access_token
-		)
+		) %>% get_query_content()
 	y <- subset(dat, !dat[["variant"]] %in% res)
 	if(nrow(y) > 0)
 	{

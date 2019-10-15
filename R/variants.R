@@ -28,7 +28,7 @@ variants_gene <- function(gene, radius=0)
 #' @return data frame
 variants_rsid <- function(rsid)
 {
-	api_query("variants/rsid", list(rsid = rsid))
+	api_query("variants/rsid", list(rsid = rsid)) %>% get_query_content()
 }
 
 
@@ -43,13 +43,7 @@ variants_rsid <- function(rsid)
 #' @return Data frame
 variants_chrpos <- function(chrpos, radius=0)
 {
-	o <- api_query("variants/chrpos", list(chrpos = chrpos, radius=radius)) %>% get_query_content()
-	if(class(o) == "response")
-	{
-		return(o)
-	} else {
-		return(dplyr::bind_rows(o))
-	}
+	api_query("variants/chrpos", list(chrpos = chrpos, radius=radius)) %>% get_query_content() %>% dplyr::bind_rows()
 }
 
 

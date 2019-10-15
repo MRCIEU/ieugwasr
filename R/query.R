@@ -153,7 +153,7 @@ print.GwasInfo <- function(x)
 associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, access_token=check_access_token())
 {
 	variants <- variants_to_rsid(variants)
-	api_query("associations", query=list(
+	out <- api_query("associations", query=list(
 		rsid=variants,
 		id=id,
 		proxies=proxies,
@@ -162,6 +162,19 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 		palindromes=palindromes,
 		maf_threshold=maf_threshold
 	), access_token=access_token) %>% get_query_content()
+
+	if(class(out) != "response")
+	{
+		heads <- c("id", "trait", "name", "effect_allele", "other_allele", "effect_allele_freq", "beta", "se", "p", "n", "proxy", "target_snp", "proxy_snp", "target_a1", "target_a2", "proxy_a1", "proxy_a2")
+		heads <- heads[heads %in% names(out)]
+		out <- out %>% dplyr::select(heads)
+		names(out)[names(out) == "effect_allele_freq"] <- "eaf"
+		names(out)[names(out) == "effect_allele"] <- "ea"
+		names(out)[names(out) == "other_allele"] <- "nea"
+		out %>% dplyr::as_tibble() %>% return()
+	} else {
+		out %>% return
+	}
 }
 
 
@@ -178,10 +191,16 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 phewas <- function(variants, pval = 0.00001, access_token=check_access_token())
 {
 	rsid <- variants_to_rsid(variants)
-	api_query("phewas", query=list(
+	out <- api_query("phewas", query=list(
 		rsid=rsid,
 		pval=pval
 	), access_token=access_token) %>% get_query_content()
+	if(class(out) != "response")
+	{
+		out %>% dplyr::select("id", "trait", "name", "ea" = "effect_allele", "nea" = "other_allele", "eaf" = "effect_allelel_freq", "beta", "se", "p", "n") %>% dplyr::as_tibble() %>% return()
+	} else {
+		out %>% return
+	}
 }
 
 
@@ -200,12 +219,18 @@ phewas <- function(variants, pval = 0.00001, access_token=check_access_token())
 #' @return Dataframe
 tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, access_token=check_access_token())
 {
-	api_query("tophits", query=list(
+	out <- api_query("tophits", query=list(
 		id=id,
 		pval=pval,
 		clump=clump,
 		r2=r2,
 		kb=kb
 	), access_token=access_token) %>% get_query_content()
+	if(class(out) != "response")
+	{
+		out %>% dplyr::select("id", "trait", "name", "ea" = "effect_allele", "nea" = "other_allele", "eaf" = "effect_allelel_freq", "beta", "se", "p", "n") %>% dplyr::as_tibble() %>% return()
+	} else {
+		out %>% return
+	}
 }
 

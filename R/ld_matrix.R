@@ -20,7 +20,7 @@ ld_matrix <- function(variants, with_alleles=TRUE, bfile=NULL, plink_bin=NULL)
 
 	if(!is.null(bfile))
 	{
-		return(ld_matrix(variants, bfile=bfile, plink_bin=plink_bin, with_alleles=with_alleles))
+		return(ld_matrix_local(variants, bfile=bfile, plink_bin=plink_bin, with_alleles=with_alleles))
 	}
 
 	res <- api_query('ld/matrix', query = list(rsid=variants), access_token=NULL) %>% get_query_content()
@@ -62,11 +62,22 @@ ld_matrix <- function(variants, with_alleles=TRUE, bfile=NULL, plink_bin=NULL)
 #' @return data frame
 ld_matrix_local <- function(variants, bfile, plink_bin, with_alleles=TRUE)
 {
-	message("Warning: this is not doing the same behaviour as the API. Still need to implement missing SNP handling.")
 	# Make textfile
 	shell <- ifelse(Sys.info()['sysname'] == "Windows", "cmd", "sh")
 	fn <- tempfile()
 	write.table(data.frame(variants), file=fn, row.names=F, col.names=F, quote=F)
+
+	
+	fun1 <- paste0(
+		shQuote(plink_bin, type=shell),
+		" --bfile ", shQuote(bfile, type=shell),
+		" --extract ", shQuote(fn, type=shell), 
+		" --make-just-bim ", 
+		" --out ", shQuote(fn, type=shell)
+	)
+	system(fun1)
+
+	bim <- read.table(paste0(fn, ".bim"), stringsAsFactors=FALSE)
 
 	fun2 <- paste0(
 		shQuote(plink_bin, type=shell),
@@ -75,6 +86,13 @@ ld_matrix_local <- function(variants, bfile, plink_bin, with_alleles=TRUE)
 		" --r square ", 
 		" --out ", shQuote(fn, type=shell)
 	)
-	res <- read.table(paste0(fn, ".ld"), header=TRUE)
+	system(fun2)
+	res <- read.table(paste0(fn, ".ld"), header=FALSE) %>% as.matrix
+	if(with_alleles)
+	{
+		rownames(res) <- colnames(res) <- paste(bim$V2, bim$V5, bim$V6, sep="_")
+	} else {
+		rownames(res) <- colnames(res) <- bim$V2
+	}
 	return(res)
 }

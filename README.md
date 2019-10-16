@@ -41,7 +41,7 @@ There are a few convenience functions also:
 - [RadialMR](https://github.com/WSpiller/RadialMR) - port from TwoSampleMR
 - [MRPRESSO](https://github.com/rondolab/MR-PRESSO) - port from TwoSampleMR
 - [GSMR](http://cnsgenomics.com/software/gsmr/) - TODO
-- [MR-MIX](https://github.com/gqi/MRMix) - TODO
+- [MRMix](https://github.com/gqi/MRMix) - TODO
 
 
 

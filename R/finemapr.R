@@ -4,14 +4,16 @@
 #'
 #' @param region Region of the genome to extract eg 1:109317192-110317192"
 #' @param id Array of GWAS studies to query. See \code{gwasinfo} for available studies
+#' @param bfile If this is provided then will use the API. Default = NULL
+#' @param plink_bin If null and bfile is not null then will detect packaged plink binary for specific OS. Otherwise specify path to plink binary. Default = NULL
 #'
 #' @export
 #' @return Each id will be a list of z score data, ld matrix, and sample size
-create_finemapr_input <- function(region, id, bfile=NULL, plink=NULL)
+create_finemapr_input <- function(region, id, bfile=NULL, plink_bin=NULL)
 {
 	id <- unique(id)
 	rsid <- variants_to_rsid(region)
-	ld <- ld_matrix(rsid, bfile, plink, with_alleles=FALSE) %>% greedy_remove()
+	ld <- ld_matrix(rsid, bfile, plink_bin, with_alleles=FALSE) %>% greedy_remove()
 	rsid_avail <- rownames(ld)
 	as <- associations(rsid_avail, id, proxies=0)
 	out <- list()
@@ -24,7 +26,7 @@ create_finemapr_input <- function(region, id, bfile=NULL, plink=NULL)
 		dat[["ld"]] <- ld[index, index]
 		stopifnot(all(x[["name"]] == rownames(dat[["ld"]])))
 
-		n <- a[["n"]]
+		n <- x[["n"]]
 		if(all(is.na(n)))
 		{
 			g <- gwasinfo(id[i])
@@ -39,7 +41,7 @@ create_finemapr_input <- function(region, id, bfile=NULL, plink=NULL)
 
 print.FinemaprList <- function(x)
 {
-	str(x)
+	utils::str(x)
 }
 
 
@@ -51,12 +53,12 @@ greedy_remove <- function(ld)
 	{
 		return(ld)
 	}
-	tab <- table(ind) %>% sort(decreasing=TRUE) %>% as.data.frame(.,stringsAsFactors=FALSE)
+	tab <- table(ind) %>% sort(decreasing=TRUE) %>% as.data.frame(stringsAsFactors=FALSE)
 	rem <- c()
 	for(i in 1:nrow(tab))
 	{
-		ind <- ind[!(ind[,1] == tab$ind[i] | ind[,2] == tab$ind[i]), ]
-		rem <- c(rem, tab$ind[i])
+		ind <- ind[!(ind[,1] == tab[["ind"]][i] | ind[,2] == tab[["ind"]][i]), ]
+		rem <- c(rem, tab[["ind"]][i])
 		if(nrow(ind) == 0) break
 	}
 	rem <- as.numeric(rem)

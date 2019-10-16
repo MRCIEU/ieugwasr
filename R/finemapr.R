@@ -7,7 +7,7 @@
 #'
 #' @export
 #' @return Each id will be a list of z score data, ld matrix, and sample size
-create_finemapr_data <- function(region, id, bfile=NULL, plink=NULL)
+create_finemapr_input <- function(region, id, bfile=NULL, plink=NULL)
 {
 	id <- unique(id)
 	rsid <- variants_to_rsid(region)

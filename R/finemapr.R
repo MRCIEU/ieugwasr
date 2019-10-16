@@ -64,3 +64,4 @@ greedy_remove <- function(ld)
 	stopifnot(all(is.finite(ld)))
 	return(ld)
 }
+

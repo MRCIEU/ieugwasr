@@ -1,8 +1,8 @@
 #' Obtain variants around a gene
 #'
-#' Provide a gene identified, either Ensembl or Entrez, e.g. ENSG00000123374 or 1017
+#' Provide a gene identified, either Ensembl or Entrez
 #'
-#' @param gene Vector of genes, either Ensembl or Entrez, e.g. ENSG00000123374 or 1017
+#' @param gene Vector of genes, either Ensembl or Entrez, e.g. c("ENSG00000123374", "ENSG00000160791") or 1017
 #' @param radius Radius around the gene region to include. Default = 0
 #'
 #' @export
@@ -13,8 +13,13 @@ variants_gene <- function(gene, radius=0)
 	for(i in 1:length(gene))
 	{
 		message("Looking up ", gene[i])
-		l[[gene[i]]] <- api_query(paste0('variants/gene/', gene[i], "?radius=", format(radius, scientific=FALSE))) %>% get_query_content()
+		o <- api_query(paste0('variants/gene/', gene[i], "?radius=", format(radius, scientific=FALSE))) %>% get_query_content()
+		if(class(o) != "response")
+		{
+			l[[gene[i]]] <- o %>% dplyr::bind_rows() %>% format_variants()
+		}		
 	}
+
 	return(dplyr::bind_rows(l))
 }
 
@@ -28,7 +33,13 @@ variants_gene <- function(gene, radius=0)
 #' @return data frame
 variants_rsid <- function(rsid)
 {
-	api_query("variants/rsid", list(rsid = rsid)) %>% get_query_content()
+	o <- api_query("variants/rsid", list(rsid = rsid)) %>% get_query_content()
+	if(class(o) != "response")
+	{
+		o %>% dplyr::bind_rows() %>% format_variants() %>% return()
+	} else {
+		return(o)
+	}
 }
 
 
@@ -43,7 +54,14 @@ variants_rsid <- function(rsid)
 #' @return Data frame
 variants_chrpos <- function(chrpos, radius=0)
 {
-	api_query("variants/chrpos", list(chrpos = chrpos, radius=radius)) %>% get_query_content() %>% dplyr::bind_rows()
+	o <- api_query("variants/chrpos", list(chrpos = chrpos, radius=radius)) %>% get_query_content() 
+
+	if(class(o) != "response")
+	{
+		o %>% dplyr::bind_rows() %>% format_variants() %>% return()
+	} else {
+		return(o)
+	}
 }
 
 
@@ -60,9 +78,40 @@ variants_to_rsid <- function(variants)
 	index <- grep(":", variants)
 	if(length(index) > 0)
 	{
-		o <- variants_chrpos(variants[index])$ID
+		o <- variants_chrpos(variants[index])$name
 		variants <- c(o, variants[-index]) %>% unique
 	}
 	return(variants)
+}
+
+
+format_variants <- function(v)
+{
+	dplyr::tibble(
+		query=v[["query"]],
+		name=v[["ID"]],
+		chr=v[["CHROM"]],
+		pos=v[["POS"]],
+		geneinfo=v[["GENEINFO"]],
+		MUS=v[["MUS"]],
+		U5=v[["U5"]],
+		U3=v[["U3"]],
+		MSM=v[["MSM"]],
+		ASS=v[["ASS"]],
+		VLD=v[["VLD"]],
+		NSF=v[["NSF"]],
+		COMMON=v[["COMMON"]],
+		PMC=v[["PMC"]],
+		PM=v[["PM"]],
+		R5=v[["R5"]],
+		VC=v[["VC"]],
+		TPA=v[["TPA"]],
+		R3=v[["R3"]],
+		DSS=v[["DSS"]],
+		dbSNPBuildID=v[["dbSNPBuildID"]],
+		OM=v[["OM"]],
+		INT=v[["INT"]],
+		SYN=v[["SYN"]]
+	)
 }
 

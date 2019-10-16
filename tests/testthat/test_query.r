@@ -30,11 +30,11 @@ test_that("associations",
 })
 
 
-# test_that("phewas",
-# {
-# 	a <- phewas("rs234")
-# 	expect_true(nrow(a)>100)
-# })
+test_that("phewas",
+{
+	a <- phewas("rs234", 1)
+	expect_true(nrow(a)>100)
+})
 
 
 test_that("tophits",

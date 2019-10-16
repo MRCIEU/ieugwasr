@@ -20,6 +20,32 @@ There are a few convenience functions also:
 - Obtain LD matrices for a list of SNPs using the server or locally (e.g. for fine mapping, colocalisation or Mendelian randomization)
 
 
+## Connections to other packages
+
+### Finemapping
+- [finemapr](https://github.com/variani/finemapr) 
+    - [FINEMAP](http://www.christianbenner.com/)
+    - [PAINTOR](https://github.com/gkichaev/PAINTOR_V3.0)
+    - [CAVIAR](https://github.com/fhormoz/caviar)
+- [SuSIE](https://stephenslab.github.io/susie-paper/index.html) - TODO
+
+### colocalisation
+- [coloc](https://cloud.r-project.org/web/packages/coloc/index.html) - TODO
+- [HEIDI](http://cnsgenomics.com/software/gsmr/) - TODO
+- [eCAVIAR](https://github.com/fhormoz/caviar) - TODO
+- [S-Predixcan](https://github.com/hakyimlab/MetaXcan) - TODO
+
+### Mendelian randomization
+- [TwoSampleMR](https://github.com/mrcieu/TwoSampleMR)
+- [MendelianRandomization](https://cran.r-project.org/web/packages/MendelianRandomization/index.html) - port from TwoSampleMR
+- [RadialMR](https://github.com/WSpiller/RadialMR) - port from TwoSampleMR
+- [MRPRESSO](https://github.com/rondolab/MR-PRESSO) - port from TwoSampleMR
+- [GSMR](http://cnsgenomics.com/software/gsmr/) - TODO
+- [MR-MIX](https://github.com/gqi/MRMix) - TODO
+
+
+
+
 ## Installation
 
 You can install the released version of ieugwasr from [CRAN](https://CRAN.R-project.org) with:
@@ -158,8 +184,8 @@ Translating between rsids and chromosome:position, while also getting other info
 
 The `chrpos` argument can accept the following
 
-- <chr>:<position>
-- <chr>:<start>-<end>
+- `<chr>:<position>`
+- `<chr>:<start>-<end>`
 
 For example
 

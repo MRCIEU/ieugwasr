@@ -1,4 +1,4 @@
-Package: ieugwasr
+Package: ieugwas
 Title: R interface to the IEU GWAS database API
 Version: 0.0.0.9000
 Authors@R: 

@@ -4,10 +4,11 @@
 #'
 #' @export
 #' @return NULL
-toggle_api <- function(where="test")
+toggle_api <- function(where="release")
 {
 	url <- switch(where,
-		test = "http://ieu-db-interface.epi.bris.ac.uk:8084/",
+		release = "http://gwasapi.mrcieu.ac.uk/",
+		test = "http://ieu-db-interface.epi.bris.ac.uk:8082/",
 		dev = "http://localhost:8019/"
 	)
 	if(is.null(url))

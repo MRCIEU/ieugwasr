@@ -1,3 +1,4 @@
 ^LICENSE\.md$
 ^mrbase\.oauth$
 ^ieugwasr_oauth$
+.travis.yml

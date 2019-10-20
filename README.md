@@ -4,9 +4,9 @@
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
-[![Travis-CI build status](https://travis-ci.org/mrcieu/ieugwas.svg?branch=master)](https://travis-ci.org/mrcieu/ieugwas)
+[![Travis-CI build status](https://travis-ci.org/MRCIEU/ieugwasr.svg?branch=master)](https://travis-ci.org/mrcieu/ieugwasr)
 
-[![codecov](https://codecov.io/github/mrcieu/ieugwas/branch/master/graphs/badge.svg)](https://codecov.io/github/mrcieu/ieugwas) 
+[![codecov](https://codecov.io/github/mrcieu/ieugwasr/branch/master/graphs/badge.svg)](https://codecov.io/github/mrcieu/ieugwasr) 
 
 <!-- badges: end -->
 

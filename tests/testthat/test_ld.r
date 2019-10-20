@@ -1,5 +1,5 @@
 context("LD functions")
-library(ieugwasr)
+library(ieugwas)
 
 a <- tophits("IEU-a-2")
 au <- tophits("IEU-a-2", clump=0)

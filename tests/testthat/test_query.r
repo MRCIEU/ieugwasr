@@ -1,5 +1,5 @@
 context("Queries")
-library(ieugwasr)
+library(ieugwas)
 
 
 test_that("gwasinfo", 

@@ -1,5 +1,5 @@
 context("finemapr")
-library(ieugwas)
+library(ieugwasr)
 
 
 # v <- variants_rsid("rs7528419")

@@ -1,4 +1,4 @@
 library(testthat)
-library(ieugwas)
+library(ieugwasr)
 
-test_check("ieugwas")
+test_check("ieugwasr")

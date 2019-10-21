@@ -4,7 +4,8 @@
 \alias{api_query}
 \title{Wrapper for sending queries and payloads to API}
 \usage{
-api_query(path, query = NULL, access_token = check_access_token())
+api_query(path, query = NULL, access_token = check_access_token(),
+  method = "GET", silent = TRUE)
 }
 \arguments{
 \item{path}{Either a full query path (e.g. for get) or an endpoint (e.g. for post) queries}
@@ -12,6 +13,10 @@ api_query(path, query = NULL, access_token = check_access_token())
 \item{query}{If post query, provide a list of arguments as the payload. NULL by default}
 
 \item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication}
+
+\item{method}{GET (default) or POST, DELETE etc}
+
+\item{silent}{TRUE/FALSE to be passed to httr call. TRUE by default}
 }
 \value{
 httr response object

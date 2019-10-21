@@ -5,10 +5,12 @@
 #' @param path Either a full query path (e.g. for get) or an endpoint (e.g. for post) queries
 #' @param query If post query, provide a list of arguments as the payload. NULL by default
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
+#' @param method GET (default) or POST, DELETE etc
+#' @param silent TRUE/FALSE to be passed to httr call. TRUE by default
 #'
 #' @export
 #' @return httr response object
-api_query <- function(path, query=NULL, access_token=check_access_token())
+api_query <- function(path, query=NULL, access_token=check_access_token(), method="GET", silent=TRUE)
 {
 	ntry <- 0
 	ntries <- 3
@@ -20,6 +22,17 @@ api_query <- function(path, query=NULL, access_token=check_access_token())
 
 	while(ntry <= ntries)
 	{
+		if(method == "DELETE")
+		{
+			r <- try(
+				httr::DELETE(
+					paste0(options()$mrbaseapi, path),
+					headers,
+					httr::timeout(300)
+				),
+				silent=TRUE
+			)
+		}
 		if(!is.null(query))
 		{
 			r <- try(

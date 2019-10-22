@@ -32,9 +32,7 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 				),
 				silent=TRUE
 			)
-		}
-		if(!is.null(query))
-		{
+		} else if(!is.null(query)) {
 			r <- try(
 				httr::POST(
 					paste0(options()$mrbaseapi, path),

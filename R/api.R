@@ -29,6 +29,11 @@ toggle_api <- function(where="release")
 #' @return access token string
 get_access_token <- function()
 {
+	message(
+		"By generating access tokens to retrieve data from the IEU GWAS\n",
+        "database you consent to having your email address logged on\n",
+        "our servers. For info on how this is used see logging_info()\n"
+    )
 	tf <- basename(tempfile())
 	check <- suppressWarnings(file.create(tf))
 	if(!check)
@@ -76,3 +81,16 @@ revoke_access_token <- function()
 }
 
 
+#' Details of how access token logs are used
+#'
+#' @export
+#' @return NULL
+logging_info <- function()
+{
+	message(
+		"Please note that we log your email address to\n",
+		"a) ensure that you obtain appropriate access to the GWAS database,\n", 
+		"b) to compile usage statistics that help us keep this project funded, and\n", 
+		"c) to monitor inappropriate or unfair usage.\n",
+		"We do NOT log the queries that are being performed, and we do NOT share your email address with anybody else.")
+}

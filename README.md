@@ -31,12 +31,14 @@ There are a few convenience functions also:
     - [PAINTOR](https://github.com/gkichaev/PAINTOR_V3.0)
     - [CAVIAR](https://github.com/fhormoz/caviar)
 - [SuSIE](https://stephenslab.github.io/susie-paper/index.html) - TODO
+- [JAM]() - TODO
 
 ### colocalisation
 - [coloc](https://cloud.r-project.org/web/packages/coloc/index.html) - TODO
 - [HEIDI](http://cnsgenomics.com/software/gsmr/) - TODO
 - [eCAVIAR](https://github.com/fhormoz/caviar) - TODO
 - [S-Predixcan](https://github.com/hakyimlab/MetaXcan) - TODO
+- [hyprcoloc](https://github.com/jrs95/hyprcoloc) - TODO
 
 ### Mendelian randomization
 - [TwoSampleMR](https://github.com/mrcieu/TwoSampleMR)
@@ -46,6 +48,8 @@ There are a few convenience functions also:
 - [GSMR](http://cnsgenomics.com/software/gsmr/) - TODO
 - [MRMix](https://github.com/gqi/MRMix) - TODO
 
+### Visualisation
+- Locus zoom plots e.g. [https://github.com/jrs95/gassocplot] - TODO
 
 
 

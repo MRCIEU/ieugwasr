@@ -134,6 +134,10 @@ gwasinfo <- function(id=NULL, access_token = check_access_token())
 	} else {
 		out <- api_query('gwasinfo', access_token=access_token) %>% get_query_content()
 	}
+	if(length(out) == 0)
+	{
+		return(dplyr::tibble())
+	}
 	out <- dplyr::bind_rows(out) %>%
 		dplyr::select("id", "trait", "sample_size", "nsnp", "year", "consortium", "author", dplyr::everything())
 	class(out) <- c("GwasInfo", class(out))
@@ -174,8 +178,10 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 		maf_threshold=maf_threshold
 	), access_token=access_token) %>% get_query_content()
 
-	if(class(out) != "response")
+	if(class(out) == "response")
 	{
+		return(out)
+	} else if(is.data.frame(out)) {
 		heads <- c("id", "trait", "name", "effect_allele", "other_allele", "effect_allele_freq", "beta", "se", "p", "n", "proxy", "target_snp", "proxy_snp", "target_a1", "target_a2", "proxy_a1", "proxy_a2")
 		heads <- heads[heads %in% names(out)]
 		out <- out %>% dplyr::select(heads)
@@ -184,7 +190,7 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 		names(out)[names(out) == "other_allele"] <- "nea"
 		out %>% dplyr::as_tibble() %>% return()
 	} else {
-		out %>% return
+		return(dplyr::tibble())
 	}
 }
 
@@ -237,11 +243,13 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, access_tok
 		r2=r2,
 		kb=kb
 	), access_token=access_token) %>% get_query_content()
-	if(class(out) != "response")
+	if(class(out) == "response")
 	{
+		return(out)
+	} else if(is.data.frame(out)) {
 		out %>% dplyr::select("id", "trait", "name", "ea" = "effect_allele", "nea" = "other_allele", "eaf" = "effect_allelel_freq", "beta", "se", "p", "n") %>% dplyr::as_tibble() %>% return()
 	} else {
-		out %>% return
+		return(dplyr::tibble())
 	}
 }
 

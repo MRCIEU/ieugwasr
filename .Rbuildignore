@@ -2,3 +2,6 @@
 ^mrbase\.oauth$
 ^ieugwasr_oauth$
 .travis.yml
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

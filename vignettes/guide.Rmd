@@ -18,6 +18,9 @@ knitr::opts_chunk$set(
 )
 ```
 
+The [IEU GWAS database](https://gwas.mrcieu.ac.uk/) comprises over 10,000 curated, QC'd and harmonised complete GWAS summary datasets and can be queried using an API. See [here](http://gwasapi.mrcieu.ac.uk/docs/) for documentation on the API itself. This R package is a wrapper to make generic calls to the API, plus convenience functions for specific queries. 
+
+
 ## Authentication
 
 Most datasets in the database are public and don't need authentication. But if you want to access a private dataset that is linked to your (gmail) email address, you need to authenticate the query using a method known as Google OAuth2.0.
@@ -48,11 +51,6 @@ The API has a number of endpoints documented [here](http://ieu-db-interface.epi.
     + `api_query("associations", query=list(rsid=c("rs234", "rs123"), id=c("IEU-a-2", "IEU-a-7")))`
 
 The `api_query` function returns a `response` object from the `httr` package. See below for a list of functions that make the input and output to `api_query` more convenient.
-
-
-## Convenient wrappers for `api_query`
-
-It can be cumbersome to generate the query manually, so here are some convenient functions to run various operations
 
 ## Get API status
 
@@ -89,7 +87,7 @@ associations(variants="7:105561135-105563135", id=c("IEU-a-2"), proxies=0)
 ```
 
 
-## Get tophits from study
+## Get the tophits from a study
 
 The tophits can be obtained using
 
@@ -102,7 +100,12 @@ Note that it will perform strict clumping by default (r2 = 0.001 and radius = 10
 
 ## Perform PheWAS
 
-(Under development).
+Lookup association of specified variants across every study, returning at a particular threshold. Note that no LD proxy lookups are made here.
+
+```
+phewas(variants="rs1205", pval=1e-5)
+```
+
 
 ## LD clumping
 

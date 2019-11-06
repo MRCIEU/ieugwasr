@@ -4,7 +4,7 @@
 #'
 #' @export
 #' @return NULL
-toggle_api <- function(where="release")
+select_api <- function(where="release")
 {
 	url <- switch(where,
 		release = "http://gwasapi.mrcieu.ac.uk/",

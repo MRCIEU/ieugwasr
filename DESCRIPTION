@@ -12,7 +12,9 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 Imports:
     magrittr,
     googleAuthR,
@@ -20,3 +22,4 @@ Imports:
     httr,
     jsonlite
 RoxygenNote: 6.1.1
+VignetteBuilder: knitr

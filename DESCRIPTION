@@ -8,6 +8,8 @@ Authors@R:
            email = "g.hemani@bristol.ac.uk",
            comment = c(ORCID = "0000-0003-0920-1055"))
 Description: R interface to the IEU GWAS database API. Includes a wrapper to make generic calls to the API, plus convenience functions for specific queries.
+URL: https://github.com/mrcieu/ieugwasr
+BugReports: https://github.com/mrcieu/ieugwasr/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

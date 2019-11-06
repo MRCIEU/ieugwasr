@@ -62,7 +62,14 @@
   <a href="news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/mrcieu/ieugwasr">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -101,133 +108,22 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the released version of ieugwasr from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
 <pre class="sourceCode r" id="cb1"><code class="sourceCode r"><div class="sourceLine" id="cb1-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"mricue/ieugwasr"</span>)</div></code></pre>
-</div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<div id="authentication" class="section level3">
-<h3 class="hasAnchor">
-<a href="#authentication" class="anchor"></a>Authentication</h3>
-<p>Most datasets in the database are public and don’t need authentication. But if you want to access a private dataset that is linked to your (gmail) email address, you need to authenticate the query using a method known as Google OAuth2.0.</p>
-<p>Essentially - you run this command at the start of your session:</p>
-<pre><code><a href="reference/get_access_token.html">get_access_token()</a></code></pre>
-<p>which will open up a web browser asking you to provide your google username and password, and upon doing so a directory will be created in your working directory called <code>ieugwasr_oauth</code>. This directory contains a file that looks like this: <code>&lt;random_string&gt;_&lt;email@address&gt;</code>. It is a binary file (not human readable), which contains your access token, and it acts as a convenient way to hold a randomly generated password.</p>
-<p>If you are using a server which doesn’t have a graphic user interface then the <code><a href="reference/get_access_token.html">get_access_token()</a></code> method is not going to work. You need to generate the <code>ieugwasr_oauth</code> directory and token file on a computer that has a web browser, and then copy that directory (containing the token file) to your server (to the relevant work directory).</p>
-<p>If you are using R in a working directory that does not have write permissions then this command will fail, please navigate to a directory that does have write permissions.</p>
-<p>If you need to run this in a non-interactive script then you can generate the token file on an interactive computer, copy that file to the working directory that R will be running from, and then run a batch (non-interactive).</p>
-</div>
-<div id="general-api-queries" class="section level3">
-<h3 class="hasAnchor">
-<a href="#general-api-queries" class="anchor"></a>General API queries</h3>
-<p>The API has a number of endpoints documented <a href="http://ieu-db-interface.epi.bris.ac.uk:8082/docs/">here</a>. A general way to access them in R is using the <code>api_query</code> function. There are two types of endpoints - <code>GET</code> and <code>POST</code>.</p>
-<ul>
-<li>
-<code>GET</code> - you provide a single URL which includes the endpoint and query. For example, for the <code>association</code> endpoint you can obtain some rsids in some studies, e.g.
-<ul>
-<li><code><a href="reference/api_query.html">api_query("associations/IEU-a-2,IEU-a-7/rs234,rs123")</a></code></li>
-</ul>
-</li>
-<li>
-<code>POST</code> - Here you send a “payload” to the endpoint. So, the path specifies the endpoint and you add a list of query specifications. This is useful for long lists of rsids being queried, for example
-<ul>
-<li><code><a href="reference/api_query.html">api_query("associations", query=list(rsid=c("rs234", "rs123"), id=c("IEU-a-2", "IEU-a-7")))</a></code></li>
-</ul>
-</li>
-</ul>
-<p>The <code>api_query</code> function returns a <code>response</code> object from the <code>httr</code> package. See below for a list of functions that make the input and output to <code>api_query</code> more convenient.</p>
-</div>
-<div id="convenient-wrappers-for-api_query" class="section level3">
-<h3 class="hasAnchor">
-<a href="#convenient-wrappers-for-api_query" class="anchor"></a>Convenient wrappers for <code>api_query</code>
-</h3>
-<p>It can be cumbersome to generate the query manually, so here are some convenient functions to run various operations</p>
-</div>
-<div id="get-api-status" class="section level3">
-<h3 class="hasAnchor">
-<a href="#get-api-status" class="anchor"></a>Get API status</h3>
-<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><div class="sourceLine" id="cb3-1" data-line-number="1">
-<span class="kw"><a href="reference/api_status.html">api_status</a></span>()</div></code></pre>
-</div>
-<div id="get-list-of-all-available-studies" class="section level3">
-<h3 class="hasAnchor">
-<a href="#get-list-of-all-available-studies" class="anchor"></a>Get list of all available studies</h3>
-<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><div class="sourceLine" id="cb4-1" data-line-number="1">
-<span class="kw"><a href="reference/gwasinfo.html">gwasinfo</a></span>()</div></code></pre>
-</div>
-<div id="get-list-of-a-specific-study" class="section level3">
-<h3 class="hasAnchor">
-<a href="#get-list-of-a-specific-study" class="anchor"></a>Get list of a specific study</h3>
-<pre class="sourceCode r" id="cb5"><code class="sourceCode r"><div class="sourceLine" id="cb5-1" data-line-number="1">
-<span class="kw"><a href="reference/gwasinfo.html">gwasinfo</a></span>(<span class="st">"IEU-a-2"</span>)</div></code></pre>
-</div>
-<div id="extract-particular-associations-from-particular-studies" class="section level3">
-<h3 class="hasAnchor">
-<a href="#extract-particular-associations-from-particular-studies" class="anchor"></a>Extract particular associations from particular studies</h3>
-<p>Provide a list of variants to be obtained from a list of studies:</p>
-<pre class="sourceCode r" id="cb6"><code class="sourceCode r"><div class="sourceLine" id="cb6-1" data-line-number="1">
-<span class="kw"><a href="reference/associations.html">associations</a></span>(<span class="dt">variants=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rs123"</span>, <span class="st">"7:105561135"</span>), <span class="dt">id=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"IEU-a-2"</span>, <span class="st">"IEU-a-7"</span>))</div></code></pre>
-<p>By default this will look for LD proxies using 1000 genomes reference data (Europeans only, the reference panel has INDELs removed and only retains SNPs with MAF &gt; 0.01). This behaviour can be turned off using <code>proxies=0</code> as an argument.</p>
-<p>Note that the queries are performed on rsids, but chromosome:position values will be automatically converted. A range query can be done using e.g.</p>
-<pre class="sourceCode r" id="cb7"><code class="sourceCode r"><div class="sourceLine" id="cb7-1" data-line-number="1">
-<span class="kw"><a href="reference/associations.html">associations</a></span>(<span class="dt">variants=</span><span class="st">"7:105561135-105563135"</span>, <span class="dt">id=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"IEU-a-2"</span>), <span class="dt">proxies=</span><span class="dv">0</span>)</div></code></pre>
-</div>
-<div id="get-tophits-from-study" class="section level3">
-<h3 class="hasAnchor">
-<a href="#get-tophits-from-study" class="anchor"></a>Get tophits from study</h3>
-<p>The tophits can be obtained using</p>
-<pre><code><a href="reference/tophits.html">tophits(id="IEU-a-2")</a></code></pre>
-<p>Note that it will perform strict clumping by default (r2 = 0.001 and radius = 10000kb). This can be turned off with <code>clump=0</code>.</p>
-</div>
-<div id="perform-phewas" class="section level3">
-<h3 class="hasAnchor">
-<a href="#perform-phewas" class="anchor"></a>Perform PheWAS</h3>
-<p>(Under development).</p>
-</div>
-<div id="ld-clumping" class="section level3">
-<h3 class="hasAnchor">
-<a href="#ld-clumping" class="anchor"></a>LD clumping</h3>
-<p>The API has a wrapper around <a href="https://www.cog-genomics.org/plink/1.9">plink version 1.90</a> and can use it to perform clumping with an LD reference panel from 1000 genomes reference data (Europeans only, the reference panel has INDELs removed and only retains SNPs with MAF &gt; 0.01).</p>
-<pre><code>a &lt;- tophits(id="IEU-a-2", clump=0)
-b &lt;- ld_clump(
-    dplyr::tibble(variant=a$name, pval=a$p, id=a$id)
-)</code></pre>
-<p>Note that you can perform the same operation locally if you provide a path to plink and a bed/bim/fam LD reference dataset. e.g.</p>
-<pre><code><a href="reference/ld_clump.html">ld_clump(
-    dplyr::tibble(variant=a$name, pval=a$p, id=a$id),
-    plink_bin = "/path/to/plink",
-    bfile = "/path/to/reference_data"
-)</a></code></pre>
-</div>
-<div id="ld-matrix" class="section level3">
-<h3 class="hasAnchor">
-<a href="#ld-matrix" class="anchor"></a>LD matrix</h3>
-<p>Similarly, a matrix of LD r values can be generated using</p>
-<pre><code><a href="reference/ld_matrix.html">ld_matrix(b$variant)</a></code></pre>
-<p>This uses the API by default but is limited to only 500 variants. You can use, instead, local plink and LD reference data in the same manner as in the <code>ld_clump</code> function, e.g.</p>
-<pre><code><a href="reference/ld_matrix.html">ld_matrix(b$variant, plink_bin = "/path/to/plink", bfile = "/path/to/reference_data")</a></code></pre>
-</div>
-<div id="variant-information" class="section level3">
-<h3 class="hasAnchor">
-<a href="#variant-information" class="anchor"></a>Variant information</h3>
-<p>Translating between rsids and chromosome:position, while also getting other information, can be achieved.</p>
-<p>The <code>chrpos</code> argument can accept the following</p>
-<ul>
-<li><code>&lt;chr&gt;:&lt;position&gt;</code></li>
-<li><code>&lt;chr&gt;:&lt;start&gt;-&lt;end&gt;</code></li>
-</ul>
-<p>For example</p>
-<pre><code>a &lt;- variants_chrpos(c("7:105561135-105563135", "10:44865737"))</code></pre>
-<p>This provides a table with dbSNP variant IDs, gene info, and various other metadata. Similar data can be obtained from searching by rsid</p>
-<pre><code>b &lt;- variants_rsid(c("rs234", "rs333"))</code></pre>
-<p>And a list of variants within a particular gene region can also be found. Provide a ensembl or entrez gene ID (e.g. ENSG00000123374 or 1017) to the following:</p>
-<pre><code>c &lt;- variants_gene("ENSG00000123374")</code></pre>
-</div>
+<p>Browse the vignettes for information on how to use this package.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div class="license">
+    <div class="links">
+<h2>Links</h2>
+<ul class="list-unstyled">
+<li>Browse source code at <br><a href="https://github.com/mrcieu/ieugwasr">https://​github.com/​mrcieu/​ieugwasr</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/mrcieu/ieugwasr/issues">https://​github.com/​mrcieu/​ieugwasr/​issues</a>
+</li>
+</ul>
+</div>
+<div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>

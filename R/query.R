@@ -26,7 +26,7 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 		{
 			r <- try(
 				httr::DELETE(
-					paste0(options()$mrbaseapi, path),
+					paste0(options()$ieugwasr_api, path),
 					headers,
 					httr::timeout(300)
 				),
@@ -35,7 +35,7 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 		} else if(!is.null(query)) {
 			r <- try(
 				httr::POST(
-					paste0(options()$mrbaseapi, path),
+					paste0(options()$ieugwasr_api, path),
 					body = query, 
 					headers,
 					encode="json",
@@ -46,7 +46,7 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 		} else {
 			r <- try(
 				httr::GET(
-					paste0(options()$mrbaseapi, path),
+					paste0(options()$ieugwasr_api, path),
 					headers,
 					httr::timeout(300)
 				),

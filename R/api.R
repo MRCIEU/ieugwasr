@@ -13,11 +13,11 @@ select_api <- function(where="release")
 	)
 	if(is.null(url))
 	{
-		url <- options()$mrbaseapi
+		url <- options()$ieugwasr_api
 		warning("A valid API was not selected. No change")
 	}
 
-	options(mrbaseapi=url)
+	options(ieugwasr_api=url)
 	message("API: ", where, ": ", url)
 }
 

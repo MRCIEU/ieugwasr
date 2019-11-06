@@ -27,11 +27,11 @@ See [https://github.com/MRCIEU/gwasglue] for information about how to connect th
 
 ## Installation
 
-You can install the released version of ieugwasr from [CRAN](https://CRAN.R-project.org) with:
+You can install the developer version of ieugwasr with:
 
 ``` r
 devtools::install_github("mricue/ieugwasr")
 ```
 
-Browse the vignettes for information on how to use this package.
+Browse the vignettes etc for information on how to use this package: [https://mrcieu.github.io/ieugwasr/](https://mrcieu.github.io/ieugwasr/)
 

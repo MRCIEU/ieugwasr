@@ -34,9 +34,13 @@ variants_gene <- function(gene, radius=0)
 variants_rsid <- function(rsid)
 {
 	o <- api_query("variants/rsid", list(rsid = rsid)) %>% get_query_content()
-	if(class(o) != "response")
+	if(! class(o) %in% "response")
 	{
-		o %>% dplyr::bind_rows() %>% format_variants() %>% return()
+		if(!is.data.frame(o) & is.list(o))
+		{
+			o <- dplyr::bind_rows(o)
+		}
+		cbind(o[["_id"]], o[["_source"]]) %>% dplyr::rename(query=1) %>% format_variants() %>% return()
 	} else {
 		return(o)
 	}
@@ -56,7 +60,7 @@ variants_chrpos <- function(chrpos, radius=0)
 {
 	o <- api_query("variants/chrpos", list(chrpos = chrpos, radius=radius)) %>% get_query_content() 
 
-	if(class(o) != "response")
+	if(! class(o) %in% "response")
 	{
 		o %>% dplyr::bind_rows() %>% format_variants() %>% return()
 	} else {

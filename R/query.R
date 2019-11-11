@@ -214,7 +214,7 @@ phewas <- function(variants, pval = 0.00001, access_token=check_access_token())
 	), access_token=access_token) %>% get_query_content()
 	if(class(out) != "response")
 	{
-		out[[1]] %>% dplyr::select("id", "trait", "name", "ea" = "effect_allele", "nea" = "other_allele", "eaf" = "effect_allele_freq", "beta", "se", "p", "n") %>% dplyr::as_tibble() %>% dplyr::arrange(p) %>% return()
+		out[[1]] %>% dplyr::select("id", "trait", "name", "ea" = "effect_allele", "nea" = "other_allele", "eaf" = "effect_allele_freq", "beta", "se", "p", "n") %>% dplyr::as_tibble() %>% {.[order(.[["p"]]),]} %>% return()
 	} else {
 		out %>% return
 	}

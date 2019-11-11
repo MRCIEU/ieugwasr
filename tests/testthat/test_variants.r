@@ -24,9 +24,20 @@ test_that("chrpos",
 })
 
 
+test_that("rsid", 
+{
+	o <- variants_chrpos("7:105561135-105563135")
+	p <- variants_rsid(o$name)
+	expect_true(all(nrow(o) == nrow(p)))
+	expect_true(all(o$name == p$name))
+})
+
 
 test_that("conversion",
 {
+	o <- variants_to_rsid(c("rs1205", "7:105561135"))
+	expect_true(length(o) == 2)
+
 	o <- variants_to_rsid(c("rs234", "7:105561135"))
 	expect_true(length(o) == 1)
 

@@ -6,7 +6,7 @@
 \usage{
 associations(variants, id, proxies = 1, r2 = 0.8, align_alleles = 1,
   palindromes = 1, maf_threshold = 0.3,
-  access_token = check_access_token())
+  access_token = check_access_token(), allow_duplicates = FALSE)
 }
 \arguments{
 \item{variants}{Array of variants e.g. c("rs234", "7:105561135-105563135")}
@@ -24,6 +24,8 @@ associations(variants, id, proxies = 1, r2 = 0.8, align_alleles = 1,
 \item{maf_threshold}{MAF threshold to try to infer palindromic SNPs. Default = 0.3.}
 
 \item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication}
+
+\item{allow_duplicates}{Check and remove duplicate values in variants and id}
 }
 \value{
 Dataframe

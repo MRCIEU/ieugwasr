@@ -40,7 +40,7 @@ test_that("phewas",
 test_that("tophits",
 {
 	expect_equal(nrow(tophits("ieu-a-2")), 79)
-	expect_true(nrow(tophits("ieu-a-2", clump=0))>79)
+	expect_true(nrow(tophits("ieu-a-2", preclumped=0, clump=0))>79)
 })
 
 

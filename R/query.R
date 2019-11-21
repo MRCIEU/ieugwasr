@@ -162,12 +162,28 @@ print.GwasInfo <- function(x)
 #' @param palindromes Allow palindromic SNPs (if proxies = 1). 1 = yes (default), 0 = no
 #' @param maf_threshold MAF threshold to try to infer palindromic SNPs. Default = 0.3.
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
+#' @param allow_duplicates Check and remove duplicate values in variants and id
 #'
 #' @export
 #' @return Dataframe
-associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, access_token=check_access_token())
+associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, access_token=check_access_token(), allow_duplicates=FALSE)
 {
 	variants <- variants_to_rsid(variants)
+	if(!allow_duplicates)
+	{
+		index <- duplicated(variants)
+		if(sum(index) > 0)
+		{
+			message("Removing ", sum(index), " duplicate variants")
+			variants <- variants[!index]
+		}
+		index <- duplicated(id)
+		if(sum(index) > 0)
+		{
+			message("Removing ", sum(index), " duplicate ids")
+			id <- id[!index]
+		}
+	}
 	out <- api_query("associations", query=list(
 		rsid=variants,
 		id=id,
@@ -227,18 +243,20 @@ phewas <- function(variants, pval = 0.00001, access_token=check_access_token())
 #' By default performs clumping on the server side. 
 #'
 #' @param id Array of GWAS studies to query. See \code{gwasinfo} for available studies
-#' @param pval P-value threshold. Default = 5e-8
-#' @param clump Whether to clump (1) or not (0). Default = 1
-#' @param r2 Clumping r2 threshold. Default is very strict, 0.001
-#' @param kb Clumping kb window. Default is very strict, 10000
+#' @param preclumped By default will return preclumped hits. p-value threshold 5e-8, with r2 threshold 0.001 and kb threshold 10000, using only SNPs with MAF > 0.01 in the European samples in 1000 genomes. If preclumped = 0 then will use the other specified parameters to obtain tophits.
+#' @param pval If preclumped = 0, use this p-value threshold. Default = 5e-8
+#' @param clump If preclumped = 0, whether to clump (1) or not (0). Default = 1
+#' @param r2 If preclumped = 0, use this clumping r2 threshold. Default is very strict, 0.001
+#' @param kb If preclumped = 0, use this clumping kb window. Default is very strict, 10000
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
 #'
 #' @export
 #' @return Dataframe
-tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, access_token=check_access_token())
+tophits <- function(id, preclumped = 1, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, access_token=check_access_token())
 {
 	out <- api_query("tophits", query=list(
 		id=id,
+		preclumped=preclumped,
 		pval=pval,
 		clump=clump,
 		r2=r2,
@@ -248,7 +266,7 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, access_tok
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
-		out %>% dplyr::select("id", "trait", "name", "ea" = "effect_allele", "nea" = "other_allele", "eaf" = "effect_allelel_freq", "beta", "se", "p", "n") %>% dplyr::as_tibble() %>% return()
+		out %>% dplyr::select("id", "trait", "name", "ea" = "effect_allele", "nea" = "other_allele", "eaf" = "effect_allele_freq", "beta", "se", "p", "n") %>% dplyr::as_tibble() %>% return()
 	} else {
 		return(dplyr::tibble())
 	}

@@ -6,7 +6,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 <!-- badges: end -->
 
-The [IEU GWAS database](https://gwas.mrcieu.ac.uk/) comprises over 10,000 curated, QC'd and harmonised complete GWAS summary datasets and can be queried using an API. See [here](http://gwasapi.mrcieu.ac.uk/docs/) for documentation on the API itself. This R package is a wrapper to make generic calls to the API, plus convenience functions for specific queries. 
+The [IEU GWAS database](https://gwas.mrcieu.ac.uk/) comprises over 10,000 curated, QC'd and harmonised complete GWAS summary datasets and can be queried using an API. See [here](https://gwas-api.mrcieu.ac.uk/docs) for documentation on the API itself. This R package is a wrapper to make generic calls to the API, plus convenience functions for specific queries. 
 
 Methods currently implemented:
 

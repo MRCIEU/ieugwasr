@@ -5,18 +5,20 @@
 \title{Obtain top hits from a GWAS dataset}
 \usage{
 tophits(id, pval = 5e-08, clump = 1, r2 = 0.001, kb = 10000,
-  access_token = check_access_token())
+  force_server = FALSE, access_token = check_access_token())
 }
 \arguments{
 \item{id}{Array of GWAS studies to query. See \code{gwasinfo} for available studies}
 
-\item{pval}{P-value threshold. Default = 5e-8}
+\item{pval}{use this p-value threshold. Default = 5e-8}
 
-\item{clump}{Whether to clump (1) or not (0). Default = 1}
+\item{clump}{whether to clump (1) or not (0). Default = 1}
 
-\item{r2}{Clumping r2 threshold. Default is very strict, 0.001}
+\item{r2}{use this clumping r2 threshold. Default is very strict, 0.001}
 
-\item{kb}{Clumping kb window. Default is very strict, 10000}
+\item{kb}{use this clumping kb window. Default is very strict, 10000}
+
+\item{force_server}{By default will return preclumped hits. p-value threshold 5e-8, with r2 threshold 0.001 and kb threshold 10000, using only SNPs with MAF > 0.01 in the European samples in 1000 genomes. If force_server = TRUE then will recompute using server side LD reference panel.}
 
 \item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication}
 }

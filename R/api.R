@@ -4,11 +4,11 @@
 #'
 #' @export
 #' @return NULL
-select_api <- function(where="release")
+select_api <- function(where="public")
 {
 	url <- switch(where,
-		release = "http://gwasapi.mrcieu.ac.uk/",
-		test = "http://ieu-db-interface.epi.bris.ac.uk:8082/",
+		public = "https://gwas-api.mrcieu.ac.uk/",
+		private = "http://ieu-db-interface.epi.bris.ac.uk:8082/",
 		dev = "http://localhost:8019/"
 	)
 	if(is.null(url))
@@ -30,9 +30,7 @@ select_api <- function(where="release")
 get_access_token <- function()
 {
 	message(
-		"By generating access tokens to retrieve data from the IEU GWAS\n",
-        "database you consent to having your email address logged on\n",
-        "our servers. For info on how this is used see logging_info()\n"
+		"Using access token. For info on how this is used see logging_info()\n"
     )
 	tf <- basename(tempfile())
 	check <- suppressWarnings(file.create(tf))

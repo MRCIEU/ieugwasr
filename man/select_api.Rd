@@ -4,7 +4,7 @@
 \alias{select_api}
 \title{Toggle API address between development and release}
 \usage{
-select_api(where = "release")
+select_api(where = "public")
 }
 \arguments{
 \item{where}{Which API to use. Choice between "local", "release", "test". Default = "local"}

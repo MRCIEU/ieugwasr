@@ -227,19 +227,31 @@ phewas <- function(variants, pval = 0.00001, access_token=check_access_token())
 #' By default performs clumping on the server side. 
 #'
 #' @param id Array of GWAS studies to query. See \code{gwasinfo} for available studies
-#' @param pval P-value threshold. Default = 5e-8
-#' @param clump Whether to clump (1) or not (0). Default = 1
-#' @param r2 Clumping r2 threshold. Default is very strict, 0.001
-#' @param kb Clumping kb window. Default is very strict, 10000
+#' @param pval use this p-value threshold. Default = 5e-8
+#' @param clump whether to clump (1) or not (0). Default = 1
+#' @param r2 use this clumping r2 threshold. Default is very strict, 0.001
+#' @param kb use this clumping kb window. Default is very strict, 10000
+#' @param force_server By default will return preclumped hits. p-value threshold 5e-8, with r2 threshold 0.001 and kb threshold 10000, using only SNPs with MAF > 0.01 in the European samples in 1000 genomes. If force_server = TRUE then will recompute using server side LD reference panel.
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
 #'
 #' @export
 #' @return Dataframe
-tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, access_token=check_access_token())
+tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, force_server = FALSE, access_token=check_access_token())
 {
+	if(clump == 1 & r2 == 0.001 & kb == 10000)
+	{
+		preclumped <- 1
+	} else {
+		preclumped <- 0
+	}
+	if(preclumped == 1 & force_server)
+	{
+		preclumped <- 0
+	}
 	out <- api_query("tophits", query=list(
 		id=id,
 		pval=pval,
+		preclumped=preclumped,
 		clump=clump,
 		r2=r2,
 		kb=kb
@@ -248,7 +260,7 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, access_tok
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
-		out %>% dplyr::select("id", "trait", "name", "ea" = "effect_allele", "nea" = "other_allele", "eaf" = "effect_allelel_freq", "beta", "se", "p", "n") %>% dplyr::as_tibble() %>% return()
+		out %>% dplyr::select("id", "trait", "name", "ea" = "effect_allele", "nea" = "other_allele", "eaf" = "effect_allele_freq", "beta", "se", "p", "n") %>% dplyr::as_tibble() %>% return()
 	} else {
 		return(dplyr::tibble())
 	}

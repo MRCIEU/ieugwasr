@@ -23,7 +23,7 @@
 	# toset <- !(names(op.googleAuthR) %in% names(op))
 	# if(any(toset)) options(op.googleAuthR[toset])
 	options(op.googleAuthR)
-	select_api("dev")
+	select_api("public")
 
 	invisible()
 

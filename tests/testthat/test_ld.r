@@ -9,7 +9,7 @@ bc <- ld_clump(b)
 # bcl <- ld_clump(b, bfile="/Users/gh13047/data/ld_files/data_maf0.01_rs", plink_bin="plink")
 
 test_that("preclumped", {
-	all(ap$name %in% a$name)
+	expect_true(all(ap$name %in% a$name))
 })
 
 

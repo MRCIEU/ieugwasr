@@ -127,6 +127,7 @@ print.ApiStatus <- function(x)
 #' @return Dataframe of details for all available studies
 gwasinfo <- function(id=NULL, access_token = check_access_token())
 {
+	id <- legacy_ids(id)
 	if(!is.null(id))
 	{
 		stopifnot(is.vector(id))
@@ -167,6 +168,7 @@ print.GwasInfo <- function(x)
 #' @return Dataframe
 associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, access_token=check_access_token())
 {
+	id <- legacy_ids(id)
 	variants <- variants_to_rsid(variants)
 	out <- api_query("associations", query=list(
 		rsid=variants,
@@ -238,6 +240,7 @@ phewas <- function(variants, pval = 0.00001, access_token=check_access_token())
 #' @return Dataframe
 tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, force_server = FALSE, access_token=check_access_token())
 {
+	id <- legacy_ids(id)
 	if(clump == 1 & r2 == 0.001 & kb == 10000)
 	{
 		preclumped <- 1

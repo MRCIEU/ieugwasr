@@ -45,10 +45,10 @@ If you need to run this in a non-interactive script then you can generate the to
 The API has a number of endpoints documented [here](http://ieu-db-interface.epi.bris.ac.uk:8082/docs/). A general way to access them in R is using the `api_query` function. There are two types of endpoints - `GET` and `POST`. 
 
 - `GET` - you provide a single URL which includes the endpoint and query. For example, for the `association` endpoint you can obtain some rsids in some studies, e.g.
-    + `api_query("associations/IEU-a-2,IEU-a-7/rs234,rs123")`
+    + `api_query("associations/ieu-a-2,ieu-a-7/rs234,rs123")`
 
 - `POST` - Here you send a "payload" to the endpoint. So, the path specifies the endpoint and you add a list of query specifications. This is useful for long lists of rsids being queried, for example
-    + `api_query("associations", query=list(rsid=c("rs234", "rs123"), id=c("IEU-a-2", "IEU-a-7")))`
+    + `api_query("associations", query=list(rsid=c("rs234", "rs123"), id=c("ieu-a-2", "ieu-a-7")))`
 
 The `api_query` function returns a `response` object from the `httr` package. See below for a list of functions that make the input and output to `api_query` more convenient.
 
@@ -67,7 +67,7 @@ gwasinfo()
 ## Get list of a specific study
 
 ```r
-gwasinfo("IEU-a-2")
+gwasinfo("ieu-a-2")
 ```
 
 ## Extract particular associations from particular studies
@@ -75,7 +75,7 @@ gwasinfo("IEU-a-2")
 Provide a list of variants to be obtained from a list of studies:
 
 ```r
-associations(variants=c("rs123", "7:105561135"), id=c("IEU-a-2", "IEU-a-7"))
+associations(variants=c("rs123", "7:105561135"), id=c("ieu-a-2", "ieu-a-7"))
 ```
 
 By default this will look for LD proxies using 1000 genomes reference data (Europeans only, the reference panel has INDELs removed and only retains SNPs with MAF > 0.01). This behaviour can be turned off using `proxies=0` as an argument.
@@ -83,7 +83,7 @@ By default this will look for LD proxies using 1000 genomes reference data (Euro
 Note that the queries are performed on rsids, but chromosome:position values will be automatically converted. A range query can be done using e.g.
 
 ```r
-associations(variants="7:105561135-105563135", id=c("IEU-a-2"), proxies=0)
+associations(variants="7:105561135-105563135", id=c("ieu-a-2"), proxies=0)
 ```
 
 
@@ -92,7 +92,7 @@ associations(variants="7:105561135-105563135", id=c("IEU-a-2"), proxies=0)
 The tophits can be obtained using
 
 ```
-tophits(id="IEU-a-2")
+tophits(id="ieu-a-2")
 ```
 
 Note that it will perform strict clumping by default (r2 = 0.001 and radius = 10000kb). This can be turned off with `clump=0`.
@@ -112,7 +112,7 @@ phewas(variants="rs1205", pval=1e-5)
 The API has a wrapper around [plink version 1.90](https://www.cog-genomics.org/plink/1.9) and can use it to perform clumping with an LD reference panel from 1000 genomes reference data (Europeans only, the reference panel has INDELs removed and only retains SNPs with MAF > 0.01).
 
 ```
-a <- tophits(id="IEU-a-2", clump=0)
+a <- tophits(id="ieu-a-2", clump=0)
 b <- ld_clump(
     dplyr::tibble(variant=a$name, pval=a$p, id=a$id)
 )

@@ -169,9 +169,8 @@ print.GwasInfo <- function(x)
 associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, access_token=check_access_token())
 {
 	id <- legacy_ids(id)
-	variants <- variants_to_rsid(variants)
 	out <- api_query("associations", query=list(
-		rsid=variants,
+		variant=variants,
 		id=id,
 		proxies=proxies,
 		r2=r2,
@@ -184,12 +183,6 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
-		heads <- c("id", "trait", "name", "effect_allele", "other_allele", "effect_allele_freq", "beta", "se", "p", "n", "proxy", "target_snp", "proxy_snp", "target_a1", "target_a2", "proxy_a1", "proxy_a2")
-		heads <- heads[heads %in% names(out)]
-		out <- out %>% dplyr::select(heads)
-		names(out)[names(out) == "effect_allele_freq"] <- "eaf"
-		names(out)[names(out) == "effect_allele"] <- "ea"
-		names(out)[names(out) == "other_allele"] <- "nea"
 		out %>% dplyr::as_tibble() %>% return()
 	} else {
 		return(dplyr::tibble())
@@ -209,14 +202,13 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 #' @return Dataframe
 phewas <- function(variants, pval = 0.00001, access_token=check_access_token())
 {
-	rsid <- variants_to_rsid(variants)
 	out <- api_query("phewas", query=list(
-		rsid=rsid,
+		variant=variants,
 		pval=pval
 	), access_token=access_token) %>% get_query_content()
 	if(class(out) != "response")
 	{
-		out <- out[[1]] %>% dplyr::select("id", "trait", "name", "ea" = "effect_allele", "nea" = "other_allele", "eaf" = "effect_allele_freq", "beta", "se", "p", "n") %>% dplyr::as_tibble()
+		out <- out %>% dplyr::as_tibble()
 		out[order(out[["p"]]),] %>% return()
 	} else {
 		out %>% return
@@ -263,7 +255,7 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, force_serv
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
-		out %>% dplyr::select("id", "trait", "name", "ea" = "effect_allele", "nea" = "other_allele", "eaf" = "effect_allele_freq", "beta", "se", "p", "n") %>% dplyr::as_tibble() %>% return()
+		out %>% dplyr::as_tibble() %>% return()
 	} else {
 		return(dplyr::tibble())
 	}

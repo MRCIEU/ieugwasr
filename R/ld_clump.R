@@ -2,7 +2,7 @@
 #'
 #' Uses PLINK clumping method, where variants in LD within a particular window will be pruned. The SNP with the lowest p-value is retained.
 #'
-#' @param dat Dataframe. Must have a variant name column ("variant") and pval column called "pval". If id is present then clumping will be done per unique id.
+#' @param dat Dataframe. Must have a variant name column ("rsid") and pval column called "pval". If id is present then clumping will be done per unique id.
 #' @param clump_kb Clumping kb window. Default is very strict, 10000
 #' @param clump_r2 Clumping r2 threshold. Default is very strict, 0.001
 #' @param clump_p Clumping sig level for index variants. Default = 1 (i.e. no threshold)
@@ -15,7 +15,7 @@
 ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=1, access_token=NULL, bfile=NULL, plink_bin=NULL)
 {
 
-	stopifnot("variant" %in% names(dat))
+	stopifnot("rsid" %in% names(dat))
 	stopifnot(is.data.frame(dat))
 
 	if(! "pval" %in% names(dat))
@@ -68,7 +68,7 @@ ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, access_toke
 {
 	res <- api_query('ld/clump',
 			query = list(
-				rsid = dat[["variant"]],
+				rsid = dat[["rsid"]],
 				pval = dat[["pval"]],
 				pthresh = clump_p,
 				r2 = clump_r2,
@@ -76,12 +76,12 @@ ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, access_toke
 			),
 			access_token=access_token
 		) %>% get_query_content()
-	y <- subset(dat, !dat[["variant"]] %in% res)
+	y <- subset(dat, !dat[["rsid"]] %in% res)
 	if(nrow(y) > 0)
 	{
-		message("Removing ", length(y[["variant"]]), " of ", nrow(dat), " variants due to LD with other variants or absence from LD reference panel")
+		message("Removing ", length(y[["rsid"]]), " of ", nrow(dat), " variants due to LD with other variants or absence from LD reference panel")
 	}
-	return(subset(dat, dat[["variant"]] %in% res))
+	return(subset(dat, dat[["rsid"]] %in% res))
 }
 
 
@@ -105,7 +105,7 @@ ld_clump_local <- function(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin)
 	# Make textfile
 	shell <- ifelse(Sys.info()['sysname'] == "Windows", "cmd", "sh")
 	fn <- tempfile()
-	write.table(data.frame(SNP=dat[["variant"]], P=dat[["pval"]]), file=fn, row.names=F, col.names=T, quote=F)
+	write.table(data.frame(SNP=dat[["rsid"]], P=dat[["pval"]]), file=fn, row.names=F, col.names=T, quote=F)
 
 	fun2 <- paste0(
 		shQuote(plink_bin, type=shell),
@@ -119,12 +119,12 @@ ld_clump_local <- function(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin)
 	system(fun2)
 	res <- read.table(paste(fn, ".clumped", sep=""), header=T)
 	unlink(paste(fn, "*", sep=""))
-	y <- subset(dat, !dat[["variant"]] %in% res[["SNP"]])
+	y <- subset(dat, !dat[["rsid"]] %in% res[["SNP"]])
 	if(nrow(y) > 0)
 	{
-		message("Removing ", length(y[["variant"]]), " of ", nrow(dat), " variants due to LD with other variants or absence from LD reference panel")
+		message("Removing ", length(y[["rsid"]]), " of ", nrow(dat), " variants due to LD with other variants or absence from LD reference panel")
 	}
-	return(subset(dat, dat[["variant"]] %in% res[["SNP"]]))
+	return(subset(dat, dat[["rsid"]] %in% res[["SNP"]]))
 }
 
 random_string <- function(n=1, len=6)

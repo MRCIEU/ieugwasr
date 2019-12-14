@@ -113,13 +113,13 @@
 <li>
 <code>GET</code> - you provide a single URL which includes the endpoint and query. For example, for the <code>association</code> endpoint you can obtain some rsids in some studies, e.g.
 <ul>
-<li><code><a href="../reference/api_query.html">api_query("associations/IEU-a-2,IEU-a-7/rs234,rs123")</a></code></li>
+<li><code><a href="../reference/api_query.html">api_query("associations/ieu-a-2,ieu-a-7/rs234,rs123")</a></code></li>
 </ul>
 </li>
 <li>
 <code>POST</code> - Here you send a “payload” to the endpoint. So, the path specifies the endpoint and you add a list of query specifications. This is useful for long lists of rsids being queried, for example
 <ul>
-<li><code><a href="../reference/api_query.html">api_query("associations", query=list(rsid=c("rs234", "rs123"), id=c("IEU-a-2", "IEU-a-7")))</a></code></li>
+<li><code><a href="../reference/api_query.html">api_query("associations", query=list(rsid=c("rs234", "rs123"), id=c("ieu-a-2", "ieu-a-7")))</a></code></li>
 </ul>
 </li>
 </ul>
@@ -128,37 +128,32 @@
 <div id="get-api-status" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-api-status" class="anchor"></a>Get API status</h2>
-<pre class="sourceCode r" id="cb2"><code class="sourceCode r"><div class="sourceLine" id="cb2-1" data-line-number="1">
-<span class="kw"><a href="../reference/api_status.html">api_status</a></span>()</div></code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="../reference/api_status.html">api_status</a></span>()</span></code></pre></div>
 </div>
 <div id="get-list-of-all-available-studies" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-list-of-all-available-studies" class="anchor"></a>Get list of all available studies</h2>
-<pre class="sourceCode r" id="cb3"><code class="sourceCode r"><div class="sourceLine" id="cb3-1" data-line-number="1">
-<span class="kw"><a href="../reference/gwasinfo.html">gwasinfo</a></span>()</div></code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="../reference/gwasinfo.html">gwasinfo</a></span>()</span></code></pre></div>
 </div>
 <div id="get-list-of-a-specific-study" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-list-of-a-specific-study" class="anchor"></a>Get list of a specific study</h2>
-<pre class="sourceCode r" id="cb4"><code class="sourceCode r"><div class="sourceLine" id="cb4-1" data-line-number="1">
-<span class="kw"><a href="../reference/gwasinfo.html">gwasinfo</a></span>(<span class="st">"IEU-a-2"</span>)</div></code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="../reference/gwasinfo.html">gwasinfo</a></span>(<span class="st">"ieu-a-2"</span>)</span></code></pre></div>
 </div>
 <div id="extract-particular-associations-from-particular-studies" class="section level2">
 <h2 class="hasAnchor">
 <a href="#extract-particular-associations-from-particular-studies" class="anchor"></a>Extract particular associations from particular studies</h2>
 <p>Provide a list of variants to be obtained from a list of studies:</p>
-<pre class="sourceCode r" id="cb5"><code class="sourceCode r"><div class="sourceLine" id="cb5-1" data-line-number="1">
-<span class="kw"><a href="../reference/associations.html">associations</a></span>(<span class="dt">variants=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rs123"</span>, <span class="st">"7:105561135"</span>), <span class="dt">id=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"IEU-a-2"</span>, <span class="st">"IEU-a-7"</span>))</div></code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="../reference/associations.html">associations</a></span>(<span class="dt">variants=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rs123"</span>, <span class="st">"7:105561135"</span>), <span class="dt">id=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ieu-a-2"</span>, <span class="st">"ieu-a-7"</span>))</span></code></pre></div>
 <p>By default this will look for LD proxies using 1000 genomes reference data (Europeans only, the reference panel has INDELs removed and only retains SNPs with MAF &gt; 0.01). This behaviour can be turned off using <code>proxies=0</code> as an argument.</p>
 <p>Note that the queries are performed on rsids, but chromosome:position values will be automatically converted. A range query can be done using e.g.</p>
-<pre class="sourceCode r" id="cb6"><code class="sourceCode r"><div class="sourceLine" id="cb6-1" data-line-number="1">
-<span class="kw"><a href="../reference/associations.html">associations</a></span>(<span class="dt">variants=</span><span class="st">"7:105561135-105563135"</span>, <span class="dt">id=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"IEU-a-2"</span>), <span class="dt">proxies=</span><span class="dv">0</span>)</div></code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="../reference/associations.html">associations</a></span>(<span class="dt">variants=</span><span class="st">"7:105561135-105563135"</span>, <span class="dt">id=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ieu-a-2"</span>), <span class="dt">proxies=</span><span class="dv">0</span>)</span></code></pre></div>
 </div>
 <div id="get-the-tophits-from-a-study" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-the-tophits-from-a-study" class="anchor"></a>Get the tophits from a study</h2>
 <p>The tophits can be obtained using</p>
-<pre><code><a href="../reference/tophits.html">tophits(id="IEU-a-2")</a></code></pre>
+<pre><code><a href="../reference/tophits.html">tophits(id="ieu-a-2")</a></code></pre>
 <p>Note that it will perform strict clumping by default (r2 = 0.001 and radius = 10000kb). This can be turned off with <code>clump=0</code>.</p>
 </div>
 <div id="perform-phewas" class="section level2">
@@ -171,7 +166,7 @@
 <h2 class="hasAnchor">
 <a href="#ld-clumping" class="anchor"></a>LD clumping</h2>
 <p>The API has a wrapper around <a href="https://www.cog-genomics.org/plink/1.9">plink version 1.90</a> and can use it to perform clumping with an LD reference panel from 1000 genomes reference data (Europeans only, the reference panel has INDELs removed and only retains SNPs with MAF &gt; 0.01).</p>
-<pre><code>a &lt;- tophits(id="IEU-a-2", clump=0)
+<pre><code>a &lt;- tophits(id="ieu-a-2", clump=0)
 b &lt;- ld_clump(
     dplyr::tibble(variant=a$name, pval=a$p, id=a$id)
 )</code></pre>
@@ -209,6 +204,7 @@ b &lt;- ld_clump(
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>

@@ -27,6 +27,10 @@ test_that("associations",
 		nrow(associations(c("rs9662760", "rs12759473"), "ieu-a-2", proxies=0)) == 1
 	)
 
+	expect_true(
+		nrow(associations(c("1:1000000-10002000", "2:1000000-10002000"), "ieu-a-2")) > 10000
+	)
+
 })
 
 
@@ -36,6 +40,22 @@ test_that("phewas",
 	expect_true(nrow(a)>100)
 })
 
+
+# test_that("phewas",
+# {
+# 	a <- phewas("1:1000000-10000100", 0.1)
+# 	expect_true(nrow(a)>100)
+# })
+
+
+test_that("phewas",
+{
+	a <- phewas("1:1850428", 0.1)
+	expect_true(nrow(a)>100)
+})
+
+
+1850428
 
 test_that("tophits",
 {

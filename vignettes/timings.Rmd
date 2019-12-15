@@ -1,0 +1,98 @@
+---
+title: Comparison if rsid vs chr:pos lookup in ElasticSearch
+author: "Gibran Hemani"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{Perform fast queries against a massive database of complete GWAS summary data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r}
+library(knitr)
+library(pander)
+library(microbenchmark)
+library(ieugwasr)
+```
+
+Get a set of SNPs too query:
+
+```{r}
+a <- tophits("ieu-a-2")
+rsid <- a$rsid
+chrpos <- paste0(a$chr, ":", a$position)
+length(rsid)
+```
+
+## 1. Comparison of rsid lookup vs chromosome:position
+
+```{r}
+mbm <- microbenchmark("rsid" = {
+		b <- associations(rsid, "ieu-a-7", proxies=0)
+	},
+	"chrpos" = {
+		b <- associations(chrpos, "ieu-a-7", proxies=0)
+	}, times=10
+)
+kable(summary(mbm))
+```
+
+
+## 2. Single range query
+
+Specify a range, and then get the corresponding rsIDs in that range
+
+```{r}
+radius <- 100000
+chrpos <- paste0(a$chr[1], ":", a$position[1]-100000, "-", a$position[1]+100000)
+b <- associations(chrpos, "ieu-a-7", proxies=0)
+rsid <- b$rsid
+```
+
+This is a `r radius * 2` size window, which has `r length(rsid)` variants to lookup.
+
+```{r}
+mbm <- microbenchmark("rsid" = {
+		b <- associations(rsid, "ieu-a-7", proxies=0)
+	},
+	"chrpos" = {
+		b <- associations(chrpos, "ieu-a-7", proxies=0)
+	}, times=10
+)
+kable(summary(mbm))
+```
+
+
+## 3. Multiple range queries
+
+Specify multiple ranges, and then get the corresponding rsIDs across all those ranges
+
+```{r}
+chrpos <- paste0(a$chr, ":", a$position-10000, "-", a$position+10000)
+b <- associations(chrpos, "ieu-a-7", proxies=0)
+rsid <- b$rsid
+```
+
+This `r length(chrpos)` ranges of `r 20000` size window, which is covered by `r length(rsid)` variants to lookup.
+
+
+```{r}
+mbm <- microbenchmark("rsid" = {
+		b <- associations(rsid, "ieu-a-7", proxies=0)
+	},
+	"chrpos" = {
+		b <- associations(chrpos, "ieu-a-7", proxies=0)
+	}, times=5
+)
+kable(summary(mbm))
+```

@@ -8,7 +8,7 @@ ld_clump(dat = NULL, clump_kb = 10000, clump_r2 = 0.001,
   clump_p = 1, access_token = NULL, bfile = NULL, plink_bin = NULL)
 }
 \arguments{
-\item{dat}{Dataframe. Must have a variant name column ("variant") and pval column called "pval". If id is present then clumping will be done per unique id.}
+\item{dat}{Dataframe. Must have a variant name column ("rsid") and pval column called "pval". If id is present then clumping will be done per unique id.}
 
 \item{clump_kb}{Clumping kb window. Default is very strict, 10000}
 

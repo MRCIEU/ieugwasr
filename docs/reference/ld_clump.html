@@ -94,6 +94,9 @@
     <li>
       <a href="../articles/guide.html">Perform fast queries against a massive database of complete GWAS summary data</a>
     </li>
+    <li>
+      <a href="../articles/timings.html">Comparison of rsid vs chr:pos lookup in ElasticSearch</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -137,7 +140,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dat</th>
-      <td><p>Dataframe. Must have a variant name column ("variant") and pval column called "pval". If id is present then clumping will be done per unique id.</p></td>
+      <td><p>Dataframe. Must have a variant name column ("rsid") and pval column called "pval". If id is present then clumping will be done per unique id.</p></td>
     </tr>
     <tr>
       <th>clump_kb</th>

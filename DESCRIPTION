@@ -16,6 +16,8 @@ LazyData: true
 Suggests: 
     testthat,
     knitr,
+    pander,
+    microbenchmark,
     rmarkdown
 Imports:
     magrittr,

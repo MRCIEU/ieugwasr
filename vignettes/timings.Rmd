@@ -1,12 +1,12 @@
 ---
-title: Comparison if rsid vs chr:pos lookup in ElasticSearch
+title: Comparison of rsid vs chr:pos lookup in ElasticSearch
 author: "Gibran Hemani"
 output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 3
 vignette: >
-  %\VignetteIndexEntry{Perform fast queries against a massive database of complete GWAS summary data}
+  %\VignetteIndexEntry{Comparison of rsid vs chr:pos lookup in ElasticSearch}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

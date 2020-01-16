@@ -4,9 +4,16 @@
 \alias{associations}
 \title{Query specific variants from specific GWAS}
 \usage{
-associations(variants, id, proxies = 1, r2 = 0.8, align_alleles = 1,
-  palindromes = 1, maf_threshold = 0.3,
-  access_token = check_access_token())
+associations(
+  variants,
+  id,
+  proxies = 1,
+  r2 = 0.8,
+  align_alleles = 1,
+  palindromes = 1,
+  maf_threshold = 0.3,
+  access_token = check_access_token()
+)
 }
 \arguments{
 \item{variants}{Array of variants e.g. c("rs234", "7:105561135-105563135")}

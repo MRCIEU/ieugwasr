@@ -4,8 +4,15 @@
 \alias{tophits}
 \title{Obtain top hits from a GWAS dataset}
 \usage{
-tophits(id, pval = 5e-08, clump = 1, r2 = 0.001, kb = 10000,
-  force_server = FALSE, access_token = check_access_token())
+tophits(
+  id,
+  pval = 5e-08,
+  clump = 1,
+  r2 = 0.001,
+  kb = 10000,
+  force_server = FALSE,
+  access_token = check_access_token()
+)
 }
 \arguments{
 \item{id}{Array of GWAS studies to query. See \code{gwasinfo} for available studies}

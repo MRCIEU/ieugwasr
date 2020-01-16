@@ -1,6 +1,6 @@
 Package: ieugwasr
 Title: R interface to the IEU GWAS database API
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person(given = "Gibran",
            family = "Hemani",
@@ -25,5 +25,5 @@ Imports:
     dplyr,
     httr,
     jsonlite
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 VignetteBuilder: knitr

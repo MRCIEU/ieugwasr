@@ -4,8 +4,7 @@
 \alias{ld_matrix}
 \title{Get LD matrix for list of variants}
 \usage{
-ld_matrix(variants, with_alleles = TRUE, bfile = NULL,
-  plink_bin = NULL)
+ld_matrix(variants, with_alleles = TRUE, bfile = NULL, plink_bin = NULL)
 }
 \arguments{
 \item{variants}{List of variants (rsids)}

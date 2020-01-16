@@ -4,8 +4,13 @@
 \alias{ld_clump_api}
 \title{Perform clumping on the chosen variants using through API}
 \usage{
-ld_clump_api(dat, clump_kb = 10000, clump_r2 = 0.1, clump_p,
-  access_token = check_access_token())
+ld_clump_api(
+  dat,
+  clump_kb = 10000,
+  clump_r2 = 0.1,
+  clump_p,
+  access_token = check_access_token()
+)
 }
 \arguments{
 \item{dat}{Dataframe. Must have a variant name column ("variant") and pval column called "pval". If id is present then clumping will be done per unique id.}

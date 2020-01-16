@@ -4,8 +4,13 @@
 \alias{api_query}
 \title{Wrapper for sending queries and payloads to API}
 \usage{
-api_query(path, query = NULL, access_token = check_access_token(),
-  method = "GET", silent = TRUE)
+api_query(
+  path,
+  query = NULL,
+  access_token = check_access_token(),
+  method = "GET",
+  silent = TRUE
+)
 }
 \arguments{
 \item{path}{Either a full query path (e.g. for get) or an endpoint (e.g. for post) queries}

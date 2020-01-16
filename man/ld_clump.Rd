@@ -4,8 +4,15 @@
 \alias{ld_clump}
 \title{Perform LD clumping on SNP data}
 \usage{
-ld_clump(dat = NULL, clump_kb = 10000, clump_r2 = 0.001,
-  clump_p = 1, access_token = NULL, bfile = NULL, plink_bin = NULL)
+ld_clump(
+  dat = NULL,
+  clump_kb = 10000,
+  clump_r2 = 0.001,
+  clump_p = 1,
+  access_token = NULL,
+  bfile = NULL,
+  plink_bin = NULL
+)
 }
 \arguments{
 \item{dat}{Dataframe. Must have a variant name column ("rsid") and pval column called "pval". If id is present then clumping will be done per unique id.}

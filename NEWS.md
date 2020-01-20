@@ -1,3 +1,7 @@
+# ieugwasr 0.1.2
+
+* Updated API address
+
 # ieugwasr 0.1.1
 
 * Fixed bug in ld_clump - wasn't doing all traits

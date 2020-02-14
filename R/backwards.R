@@ -31,6 +31,14 @@ legacy_ids <- function(x)
 		}
 	}
 
+	# met datasets
+	index <- x %in% paste0("ieu-a-", 303:754)
+	x[index] <- gsub("ieu-a-", "met-a-", x[index])
+	index <- x %in% paste0("ieu-a-", 119:269)
+	x[index] <- gsub("ieu-a-", "met-b-", x[index])
+	index <- x %in% paste0("ieu-a-", 838:960)
+	x[index] <- gsub("ieu-a-", "met-c-", x[index])
+
 	overallindex <- y != x
 	if(any(overallindex))
 	{

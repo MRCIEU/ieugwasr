@@ -28,16 +28,26 @@ Most datasets in the database are public and don't need authentication. But if y
 Essentially - you run this command at the start of your session: 
 
 ```
-get_access_token()
+ieugwasr::get_access_token()
 ```
 
 which will open up a web browser asking you to provide your google username and password, and upon doing so a directory will be created in your working directory called `ieugwasr_oauth`. This directory contains a file that looks like this: `<random_string>_<email@address>`. It is a binary file (not human readable), which contains your access token, and it acts as a convenient way to hold a randomly generated password.
 
-If you are using a server which doesn’t have a graphic user interface then the `get_access_token()` method is not going to work. You need to generate the `ieugwasr_oauth` directory and token file on a computer that has a web browser, and then copy that directory (containing the token file) to your server (to the relevant work directory).
+If you are using a server which doesn’t have a graphic user interface then the `ieugwasr::get_access_token()` method is not going to work. You need to generate the `ieugwasr_oauth` directory and token file on a computer that has a web browser, and then copy that directory (containing the token file) to your server (to the relevant work directory).
 
 If you are using R in a working directory that does not have write permissions then this command will fail, please navigate to a directory that does have write permissions.
 
 If you need to run this in a non-interactive script then you can generate the token file on an interactive computer, copy that file to the working directory that R will be running from, and then run a batch (non-interactive).
+
+You can test to see if you have authenticated using the function
+
+```
+ieugwasr::check_access_token()
+```
+
+It will return `NULL` if you are not authenticated, or a long random token string if you are.
+
+To unauthenticate, simply delete the relevant file in the `ieugwasr_oauth` folder, or delete the folder entirely.
 
 
 ## General API queries

@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ieugwasr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
       </span>
     </div>
 
@@ -132,9 +132,16 @@
     <p>Every rsid is searched for against each requested GWAS id. To get a list of available GWAS ids, or to find their meta data, use <code>gwasinfo</code>. Can request LD proxies for instances when the requested rsid is not present in a particular GWAS dataset. This currently only uses an LD reference panel composed of Europeans in 1000 genomes version 3. It is also restricted to biallelic single nucleotide polymorphisms (no indels), with European MAF &gt; 0.01.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>associations</span>(<span class='no'>variants</span>, <span class='no'>id</span>, <span class='kw'>proxies</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>r2</span> <span class='kw'>=</span> <span class='fl'>0.8</span>, <span class='kw'>align_alleles</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>palindromes</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>maf_threshold</span> <span class='kw'>=</span> <span class='fl'>0.3</span>,
-  <span class='kw'>access_token</span> <span class='kw'>=</span> <span class='fu'><a href='check_access_token.html'>check_access_token</a></span>())</pre>
+    <pre class="usage"><span class='fu'>associations</span>(
+  <span class='no'>variants</span>,
+  <span class='no'>id</span>,
+  <span class='kw'>proxies</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>r2</span> <span class='kw'>=</span> <span class='fl'>0.8</span>,
+  <span class='kw'>align_alleles</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>palindromes</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>maf_threshold</span> <span class='kw'>=</span> <span class='fl'>0.3</span>,
+  <span class='kw'>access_token</span> <span class='kw'>=</span> <span class='fu'><a href='check_access_token.html'>check_access_token</a></span>()
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

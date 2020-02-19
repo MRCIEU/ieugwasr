@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ieugwasr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
       </span>
     </div>
 
@@ -100,13 +100,20 @@
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(pander)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(microbenchmark)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ieugwasr)</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#&gt; API: public: https://gwas-api.mrcieu.ac.uk/</span></span></code></pre></div>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#&gt; API: public: http://gwas-api.mrcieu.ac.uk/</span></span></code></pre></div>
 <p>Get a set of SNPs too query:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>a &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tophits.html">tophits</a></span>(<span class="st">"ieu-a-2"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a>rsid &lt;-<span class="st"> </span>a<span class="op">$</span>rsid</span>
-<span id="cb2-3"><a href="#cb2-3"></a>chrpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(a<span class="op">$</span>chr, <span class="st">":"</span>, a<span class="op">$</span>position)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(rsid)</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt; [1] 79</span></span></code></pre></div>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt; 2020-02-19 20:37:52&gt; Setting client.id from options(googleAuthR.client_id)</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>rsid &lt;-<span class="st"> </span>a<span class="op">$</span>rsid</span>
+<span id="cb2-10"><a href="#cb2-10"></a>chrpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(a<span class="op">$</span>chr, <span class="st">":"</span>, a<span class="op">$</span>position)</span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(rsid)</span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt; [1] 79</span></span></code></pre></div>
 <div id="comparison-of-rsid-lookup-vs-chromosomeposition" class="section level2">
 <h2 class="hasAnchor">
 <a href="#comparison-of-rsid-lookup-vs-chromosomeposition" class="anchor"></a>1. Comparison of rsid lookup vs chromosome:position</h2>
@@ -117,7 +124,127 @@
 <span id="cb3-5"><a href="#cb3-5"></a>        b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/associations.html">associations</a></span>(chrpos, <span class="st">"ieu-a-7"</span>, <span class="dt">proxies=</span><span class="dv">0</span>)</span>
 <span id="cb3-6"><a href="#cb3-6"></a>    }, <span class="dt">times=</span><span class="dv">10</span></span>
 <span id="cb3-7"><a href="#cb3-7"></a>)</span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(mbm))</span></code></pre></div>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-31"><a href="#cb3-31"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-32"><a href="#cb3-32"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-33"><a href="#cb3-33"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-34"><a href="#cb3-34"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-35"><a href="#cb3-35"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-36"><a href="#cb3-36"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-37"><a href="#cb3-37"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-38"><a href="#cb3-38"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-39"><a href="#cb3-39"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-40"><a href="#cb3-40"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-41"><a href="#cb3-41"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-42"><a href="#cb3-42"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-43"><a href="#cb3-43"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-44"><a href="#cb3-44"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-45"><a href="#cb3-45"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-46"><a href="#cb3-46"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-47"><a href="#cb3-47"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-48"><a href="#cb3-48"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-49"><a href="#cb3-49"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-50"><a href="#cb3-50"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-51"><a href="#cb3-51"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-52"><a href="#cb3-52"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-53"><a href="#cb3-53"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-54"><a href="#cb3-54"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-55"><a href="#cb3-55"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-56"><a href="#cb3-56"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-57"><a href="#cb3-57"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-58"><a href="#cb3-58"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-59"><a href="#cb3-59"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-60"><a href="#cb3-60"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-61"><a href="#cb3-61"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-62"><a href="#cb3-62"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-63"><a href="#cb3-63"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-64"><a href="#cb3-64"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-65"><a href="#cb3-65"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-66"><a href="#cb3-66"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-67"><a href="#cb3-67"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-68"><a href="#cb3-68"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-69"><a href="#cb3-69"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-70"><a href="#cb3-70"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-71"><a href="#cb3-71"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-72"><a href="#cb3-72"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-73"><a href="#cb3-73"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-74"><a href="#cb3-74"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-75"><a href="#cb3-75"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-76"><a href="#cb3-76"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-77"><a href="#cb3-77"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-78"><a href="#cb3-78"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-79"><a href="#cb3-79"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-80"><a href="#cb3-80"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-81"><a href="#cb3-81"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-82"><a href="#cb3-82"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-83"><a href="#cb3-83"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-84"><a href="#cb3-84"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-85"><a href="#cb3-85"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-86"><a href="#cb3-86"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-87"><a href="#cb3-87"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-88"><a href="#cb3-88"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-89"><a href="#cb3-89"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-90"><a href="#cb3-90"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-91"><a href="#cb3-91"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-92"><a href="#cb3-92"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-93"><a href="#cb3-93"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-94"><a href="#cb3-94"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-95"><a href="#cb3-95"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-96"><a href="#cb3-96"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-97"><a href="#cb3-97"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-98"><a href="#cb3-98"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-99"><a href="#cb3-99"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-100"><a href="#cb3-100"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-101"><a href="#cb3-101"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-102"><a href="#cb3-102"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-103"><a href="#cb3-103"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-104"><a href="#cb3-104"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-105"><a href="#cb3-105"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-106"><a href="#cb3-106"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-107"><a href="#cb3-107"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-108"><a href="#cb3-108"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-109"><a href="#cb3-109"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-110"><a href="#cb3-110"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-111"><a href="#cb3-111"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-112"><a href="#cb3-112"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-113"><a href="#cb3-113"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-114"><a href="#cb3-114"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-115"><a href="#cb3-115"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-116"><a href="#cb3-116"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-117"><a href="#cb3-117"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-118"><a href="#cb3-118"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-119"><a href="#cb3-119"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-120"><a href="#cb3-120"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-121"><a href="#cb3-121"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-122"><a href="#cb3-122"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb3-123"><a href="#cb3-123"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb3-124"><a href="#cb3-124"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb3-125"><a href="#cb3-125"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb3-126"><a href="#cb3-126"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb3-127"><a href="#cb3-127"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb3-128"><a href="#cb3-128"></a><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(mbm))</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">expr</th>
@@ -132,22 +259,22 @@
 <tbody>
 <tr class="odd">
 <td align="left">rsid</td>
-<td align="right">96.00377</td>
-<td align="right">103.2440</td>
-<td align="right">552.6163</td>
-<td align="right">373.5561</td>
-<td align="right">1133.998</td>
-<td align="right">1260.4475</td>
+<td align="right">351.3429</td>
+<td align="right">368.0007</td>
+<td align="right">486.4147</td>
+<td align="right">396.8553</td>
+<td align="right">411.4692</td>
+<td align="right">1129.883</td>
 <td align="right">10</td>
 </tr>
 <tr class="even">
 <td align="left">chrpos</td>
-<td align="right">416.18348</td>
-<td align="right">511.6154</td>
-<td align="right">550.8324</td>
-<td align="right">543.4908</td>
-<td align="right">577.659</td>
-<td align="right">685.7309</td>
+<td align="right">818.7630</td>
+<td align="right">895.8556</td>
+<td align="right">1211.1454</td>
+<td align="right">1024.6875</td>
+<td align="right">1532.4273</td>
+<td align="right">2213.318</td>
 <td align="right">10</td>
 </tr>
 </tbody>
@@ -160,8 +287,14 @@
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>radius &lt;-<span class="st"> </span><span class="dv">100000</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a>chrpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(a<span class="op">$</span>chr[<span class="dv">1</span>], <span class="st">":"</span>, a<span class="op">$</span>position[<span class="dv">1</span>]<span class="op">-</span><span class="dv">100000</span>, <span class="st">"-"</span>, a<span class="op">$</span>position[<span class="dv">1</span>]<span class="op">+</span><span class="dv">100000</span>)</span>
 <span id="cb4-3"><a href="#cb4-3"></a>b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/associations.html">associations</a></span>(chrpos, <span class="st">"ieu-a-7"</span>, <span class="dt">proxies=</span><span class="dv">0</span>)</span>
-<span id="cb4-4"><a href="#cb4-4"></a>rsid &lt;-<span class="st"> </span>b<span class="op">$</span>rsid</span></code></pre></div>
-<p>This is a 210^{5} size window, which has 530 variants to lookup.</p>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>rsid &lt;-<span class="st"> </span>b<span class="op">$</span>rsid</span></code></pre></div>
+<p>This is a 210^{5} size window, which has 586 variants to lookup.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>mbm &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span>(<span class="st">"rsid"</span> =<span class="st"> </span>{</span>
 <span id="cb5-2"><a href="#cb5-2"></a>        b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/associations.html">associations</a></span>(rsid, <span class="st">"ieu-a-7"</span>, <span class="dt">proxies=</span><span class="dv">0</span>)</span>
 <span id="cb5-3"><a href="#cb5-3"></a>    },</span>
@@ -169,7 +302,127 @@
 <span id="cb5-5"><a href="#cb5-5"></a>        b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/associations.html">associations</a></span>(chrpos, <span class="st">"ieu-a-7"</span>, <span class="dt">proxies=</span><span class="dv">0</span>)</span>
 <span id="cb5-6"><a href="#cb5-6"></a>    }, <span class="dt">times=</span><span class="dv">10</span></span>
 <span id="cb5-7"><a href="#cb5-7"></a>)</span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(mbm))</span></code></pre></div>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-32"><a href="#cb5-32"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-34"><a href="#cb5-34"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-35"><a href="#cb5-35"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-36"><a href="#cb5-36"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-37"><a href="#cb5-37"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-38"><a href="#cb5-38"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-39"><a href="#cb5-39"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-40"><a href="#cb5-40"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-41"><a href="#cb5-41"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-42"><a href="#cb5-42"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-43"><a href="#cb5-43"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-44"><a href="#cb5-44"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-45"><a href="#cb5-45"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-46"><a href="#cb5-46"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-47"><a href="#cb5-47"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-48"><a href="#cb5-48"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-49"><a href="#cb5-49"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-50"><a href="#cb5-50"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-51"><a href="#cb5-51"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-52"><a href="#cb5-52"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-53"><a href="#cb5-53"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-54"><a href="#cb5-54"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-55"><a href="#cb5-55"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-56"><a href="#cb5-56"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-57"><a href="#cb5-57"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-58"><a href="#cb5-58"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-59"><a href="#cb5-59"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-60"><a href="#cb5-60"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-61"><a href="#cb5-61"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-62"><a href="#cb5-62"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-63"><a href="#cb5-63"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-64"><a href="#cb5-64"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-65"><a href="#cb5-65"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-66"><a href="#cb5-66"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-67"><a href="#cb5-67"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-68"><a href="#cb5-68"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-69"><a href="#cb5-69"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-70"><a href="#cb5-70"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-71"><a href="#cb5-71"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-72"><a href="#cb5-72"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-73"><a href="#cb5-73"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-74"><a href="#cb5-74"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-75"><a href="#cb5-75"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-76"><a href="#cb5-76"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-77"><a href="#cb5-77"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-78"><a href="#cb5-78"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-79"><a href="#cb5-79"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-80"><a href="#cb5-80"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-81"><a href="#cb5-81"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-82"><a href="#cb5-82"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-83"><a href="#cb5-83"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-84"><a href="#cb5-84"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-85"><a href="#cb5-85"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-86"><a href="#cb5-86"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-87"><a href="#cb5-87"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-88"><a href="#cb5-88"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-89"><a href="#cb5-89"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-90"><a href="#cb5-90"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-91"><a href="#cb5-91"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-92"><a href="#cb5-92"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-93"><a href="#cb5-93"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-94"><a href="#cb5-94"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-95"><a href="#cb5-95"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-96"><a href="#cb5-96"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-97"><a href="#cb5-97"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-98"><a href="#cb5-98"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-99"><a href="#cb5-99"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-100"><a href="#cb5-100"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-101"><a href="#cb5-101"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-102"><a href="#cb5-102"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-103"><a href="#cb5-103"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-104"><a href="#cb5-104"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-105"><a href="#cb5-105"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-106"><a href="#cb5-106"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-107"><a href="#cb5-107"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-108"><a href="#cb5-108"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-109"><a href="#cb5-109"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-110"><a href="#cb5-110"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-111"><a href="#cb5-111"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-112"><a href="#cb5-112"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-113"><a href="#cb5-113"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-114"><a href="#cb5-114"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-115"><a href="#cb5-115"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-116"><a href="#cb5-116"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-117"><a href="#cb5-117"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-118"><a href="#cb5-118"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-119"><a href="#cb5-119"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-120"><a href="#cb5-120"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-121"><a href="#cb5-121"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-122"><a href="#cb5-122"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb5-123"><a href="#cb5-123"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb5-124"><a href="#cb5-124"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb5-125"><a href="#cb5-125"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb5-126"><a href="#cb5-126"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb5-127"><a href="#cb5-127"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb5-128"><a href="#cb5-128"></a><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(mbm))</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">expr</th>
@@ -184,22 +437,22 @@
 <tbody>
 <tr class="odd">
 <td align="left">rsid</td>
-<td align="right">190.1469</td>
-<td align="right">209.4475</td>
-<td align="right">246.3893</td>
-<td align="right">234.0893</td>
-<td align="right">269.2324</td>
-<td align="right">349.8974</td>
+<td align="right">513.7637</td>
+<td align="right">545.9371</td>
+<td align="right">1154.0541</td>
+<td align="right">1234.6186</td>
+<td align="right">1439.096</td>
+<td align="right">2145.258</td>
 <td align="right">10</td>
 </tr>
 <tr class="even">
 <td align="left">chrpos</td>
-<td align="right">179.5993</td>
-<td align="right">190.0588</td>
-<td align="right">232.4721</td>
-<td align="right">228.3989</td>
-<td align="right">251.8106</td>
-<td align="right">368.9863</td>
+<td align="right">488.5195</td>
+<td align="right">517.7653</td>
+<td align="right">755.3524</td>
+<td align="right">555.6152</td>
+<td align="right">1173.508</td>
+<td align="right">1479.274</td>
 <td align="right">10</td>
 </tr>
 </tbody>
@@ -211,7 +464,13 @@
 <p>Specify multiple ranges, and then get the corresponding rsIDs across all those ranges</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>chrpos &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(a<span class="op">$</span>chr, <span class="st">":"</span>, a<span class="op">$</span>position<span class="dv">-10000</span>, <span class="st">"-"</span>, a<span class="op">$</span>position<span class="op">+</span><span class="dv">10000</span>)</span>
 <span id="cb6-2"><a href="#cb6-2"></a>b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/associations.html">associations</a></span>(chrpos, <span class="st">"ieu-a-7"</span>, <span class="dt">proxies=</span><span class="dv">0</span>)</span>
-<span id="cb6-3"><a href="#cb6-3"></a>rsid &lt;-<span class="st"> </span>b<span class="op">$</span>rsid</span></code></pre></div>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>rsid &lt;-<span class="st"> </span>b<span class="op">$</span>rsid</span></code></pre></div>
 <p>This 79 ranges of 210^{4} size window, which is covered by 4508 variants to lookup.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>mbm &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html">microbenchmark</a></span>(<span class="st">"rsid"</span> =<span class="st"> </span>{</span>
 <span id="cb7-2"><a href="#cb7-2"></a>        b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/associations.html">associations</a></span>(rsid, <span class="st">"ieu-a-7"</span>, <span class="dt">proxies=</span><span class="dv">0</span>)</span>
@@ -220,7 +479,67 @@
 <span id="cb7-5"><a href="#cb7-5"></a>        b &lt;-<span class="st"> </span><span class="kw"><a href="../reference/associations.html">associations</a></span>(chrpos, <span class="st">"ieu-a-7"</span>, <span class="dt">proxies=</span><span class="dv">0</span>)</span>
 <span id="cb7-6"><a href="#cb7-6"></a>    }, <span class="dt">times=</span><span class="dv">5</span></span>
 <span id="cb7-7"><a href="#cb7-7"></a>)</span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(mbm))</span></code></pre></div>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb7-31"><a href="#cb7-31"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb7-36"><a href="#cb7-36"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb7-37"><a href="#cb7-37"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb7-38"><a href="#cb7-38"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb7-39"><a href="#cb7-39"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb7-41"><a href="#cb7-41"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb7-42"><a href="#cb7-42"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb7-43"><a href="#cb7-43"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb7-44"><a href="#cb7-44"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb7-46"><a href="#cb7-46"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb7-47"><a href="#cb7-47"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb7-48"><a href="#cb7-48"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb7-49"><a href="#cb7-49"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb7-50"><a href="#cb7-50"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb7-51"><a href="#cb7-51"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb7-52"><a href="#cb7-52"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb7-53"><a href="#cb7-53"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb7-54"><a href="#cb7-54"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb7-55"><a href="#cb7-55"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb7-56"><a href="#cb7-56"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb7-57"><a href="#cb7-57"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb7-58"><a href="#cb7-58"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb7-59"><a href="#cb7-59"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb7-60"><a href="#cb7-60"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb7-61"><a href="#cb7-61"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb7-62"><a href="#cb7-62"></a><span class="co">#&gt; Using access token. For info on how this is used see logging_info()</span></span>
+<span id="cb7-63"><a href="#cb7-63"></a><span class="co">#&gt; Using an auto-discovered, cached token.</span></span>
+<span id="cb7-64"><a href="#cb7-64"></a><span class="co">#&gt; To suppress this message, modify your code or options to clearly consent to the use of a cached token.</span></span>
+<span id="cb7-65"><a href="#cb7-65"></a><span class="co">#&gt; See gargle's "Non-interactive auth" vignette for more details:</span></span>
+<span id="cb7-66"><a href="#cb7-66"></a><span class="co">#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</span></span>
+<span id="cb7-67"><a href="#cb7-67"></a><span class="co">#&gt; The googleAuthR package is using a cached token for explodecomputer@gmail.com.</span></span>
+<span id="cb7-68"><a href="#cb7-68"></a><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(mbm))</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">expr</th>
@@ -235,22 +554,22 @@
 <tbody>
 <tr class="odd">
 <td align="left">rsid</td>
-<td align="right">1.477741</td>
-<td align="right">1.642348</td>
-<td align="right">1.691588</td>
-<td align="right">1.759426</td>
-<td align="right">1.773397</td>
-<td align="right">1.805031</td>
+<td align="right">399.6377</td>
+<td align="right">479.7054</td>
+<td align="right">2342.2136</td>
+<td align="right">518.8083</td>
+<td align="right">4527.4420</td>
+<td align="right">5785.4747</td>
 <td align="right">5</td>
 </tr>
 <tr class="even">
 <td align="left">chrpos</td>
-<td align="right">3.045796</td>
-<td align="right">3.127663</td>
-<td align="right">3.218500</td>
-<td align="right">3.197494</td>
-<td align="right">3.340778</td>
-<td align="right">3.380767</td>
+<td align="right">280.5812</td>
+<td align="right">305.2770</td>
+<td align="right">304.8905</td>
+<td align="right">306.7753</td>
+<td align="right">308.8067</td>
+<td align="right">323.0121</td>
 <td align="right">5</td>
 </tr>
 </tbody>

@@ -96,7 +96,6 @@ Note that the queries are performed on rsids, but chromosome:position values wil
 associations(variants="7:105561135-105563135", id=c("ieu-a-2"), proxies=0)
 ```
 
-
 ## Get the tophits from a study
 
 The tophits can be obtained using
@@ -178,5 +177,19 @@ And a list of variants within a particular gene region can also be found. Provid
 
 ```
 c <- variants_gene("ENSG00000123374")
+```
+
+## Extracting GWAS summary data based on gene region
+
+Here is an example of how to obtain summary data for some datasets for a gene region. As an example, we'll extract CDK2 (HGNC number 1017) from a BMI dataset (ieu-a-2)
+
+Use the [mygene](https://bioconductor.org/packages/release/bioc/html/mygene.html) bioconductor package to query the [mygene.info](https://mygene.info/) API.
+
+
+```r
+library(mygene)
+a <- mygene::getGene("1017", fields="genomic_pos_hg19")
+r <- paste0(a[[1]]$genomic_pos_hg19$chr, ":", a[[1]]$genomic_pos_hg19$start, "-", a[[1]]$genomic_pos_hg19$end)
+b <- ieugwasr::associations(r, "ieu-a-2")
 ```
 

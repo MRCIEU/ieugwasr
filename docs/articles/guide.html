@@ -208,6 +208,16 @@ b &lt;- ld_clump(
 <p>And a list of variants within a particular gene region can also be found. Provide a ensembl or entrez gene ID (e.g. ENSG00000123374 or 1017) to the following:</p>
 <pre><code>c &lt;- variants_gene("ENSG00000123374")</code></pre>
 </div>
+<div id="extracting-gwas-summary-data-based-on-gene-region" class="section level2">
+<h2 class="hasAnchor">
+<a href="#extracting-gwas-summary-data-based-on-gene-region" class="anchor"></a>Extracting GWAS summary data based on gene region</h2>
+<p>Here is an example of how to obtain summary data for some datasets for a gene region. As an example, we’ll extract CDK2 (HGNC number 1017) from a BMI dataset (ieu-a-2)</p>
+<p>Use the <a href="https://bioconductor.org/packages/release/bioc/html/mygene.html">mygene</a> bioconductor package to query the <a href="https://mygene.info/">mygene.info</a> API.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(mygene)</span>
+<span id="cb17-2"><a href="#cb17-2"></a>a &lt;-<span class="st"> </span>mygene<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/mygene/man/getGene.html">getGene</a></span>(<span class="st">"1017"</span>, <span class="dt">fields=</span><span class="st">"genomic_pos_hg19"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3"></a>r &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(a[[<span class="dv">1</span>]]<span class="op">$</span>genomic_pos_hg19<span class="op">$</span>chr, <span class="st">":"</span>, a[[<span class="dv">1</span>]]<span class="op">$</span>genomic_pos_hg19<span class="op">$</span>start, <span class="st">"-"</span>, a[[<span class="dv">1</span>]]<span class="op">$</span>genomic_pos_hg19<span class="op">$</span>end)</span>
+<span id="cb17-4"><a href="#cb17-4"></a>b &lt;-<span class="st"> </span>ieugwasr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ieugwasr/man/associations.html">associations</a></span>(r, <span class="st">"ieu-a-2"</span>)</span></code></pre></div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -227,6 +237,7 @@ b &lt;- ld_clump(
       <li><a href="#ld-clumping">LD clumping</a></li>
       <li><a href="#ld-matrix">LD matrix</a></li>
       <li><a href="#variant-information">Variant information</a></li>
+      <li><a href="#extracting-gwas-summary-data-based-on-gene-region">Extracting GWAS summary data based on gene region</a></li>
       </ul>
 </div>
       </div>

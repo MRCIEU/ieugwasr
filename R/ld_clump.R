@@ -12,7 +12,7 @@
 #'
 #' @export
 #' @return Data frame
-ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=1, access_token=NULL, bfile=NULL, plink_bin=NULL)
+ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99, access_token=NULL, bfile=NULL, plink_bin=NULL)
 {
 
 	stopifnot("rsid" %in% names(dat))
@@ -20,7 +20,8 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=1, access
 
 	if(! "pval" %in% names(dat))
 	{
-		dat$pval <- 0.99
+		warning("No 'pval' column found in dat object. Setting p-values for all SNPs to clump_p parameter.")
+		dat$pval <- clump_p
 	}
 
 	if(! "id" %in% names(dat))

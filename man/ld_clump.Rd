@@ -8,7 +8,7 @@ ld_clump(
   dat = NULL,
   clump_kb = 10000,
   clump_r2 = 0.001,
-  clump_p = 1,
+  clump_p = 0.99,
   access_token = NULL,
   bfile = NULL,
   plink_bin = NULL

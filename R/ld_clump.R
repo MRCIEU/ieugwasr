@@ -42,7 +42,7 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99, acc
 		if(nrow(x) == 1)
 		{
 			message("Only one SNP for ", ids[i])
-			return(x)
+			res[[i]] <- x
 		} else {
 			message("Clumping ", ids[i], ", ", nrow(x), " variants")
 			if(is.null(bfile))

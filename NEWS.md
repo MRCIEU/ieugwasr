@@ -1,3 +1,11 @@
+# ieugwasr 0.1.4
+
+* Bug fixes in clumping. Thanks to [bethleegy](https://github.com/bethleegy) for pointing this out
+
+# ieugwasr 0.1.3
+
+* Bug fixes in clumping
+
 # ieugwasr 0.1.2
 
 * Updated API address

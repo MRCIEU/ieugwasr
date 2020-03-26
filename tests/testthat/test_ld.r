@@ -35,3 +35,11 @@ test_that("multiple", {
 	)
 })
 
+
+a <- tophits(c("ieu-a-2", "ieu-a-7")) %>% subset(., !duplicated(id))
+ab <- ld_clump(a)
+test_that("onesnp", {
+	expect_equal(nrow(ab), 2)
+})
+
+

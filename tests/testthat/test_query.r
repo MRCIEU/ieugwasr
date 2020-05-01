@@ -38,6 +38,8 @@ test_that("phewas",
 {
 	a <- phewas("rs234", 1)
 	expect_true(nrow(a)>100)
+	b <- phewas("rs234", 1, batch=c("ieu-a"))
+	expect_true(nrow(b) < nrow(a))
 })
 
 

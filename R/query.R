@@ -92,7 +92,12 @@ get_query_content <- function(response)
 {
 	if(httr::status_code(response) >= 200 & httr::status_code(response) < 300)
 	{
-		return(jsonlite::fromJSON(httr::content(response, "text", encoding='UTF-8')))
+		o <- jsonlite::fromJSON(httr::content(response, "text", encoding='UTF-8'))
+		if('eaf' %in% names(o)) 
+		{
+			o[["eaf"]] <- as.numeric(o[["eaf"]])
+		}
+		return(o)
 	} else {
 		return(response)
 		# stop("error code: ", httr::status_code(response), "\n  message: ", jsonlite::fromJSON(httr::content(response, "text", encoding='UTF-8')))
@@ -150,6 +155,24 @@ print.GwasInfo <- function(x)
 	dplyr::glimpse(x)
 }
 
+batch <- function(x) UseMethod("batch", x)
+batch.GwasInfo <- function(x)
+{
+	sapply(strsplit(x[["id"]], "-"), function(x) paste(x[1], x[2], sep="-"))
+}
+
+
+#' Get list of data batches in IEU GWAS database
+#'
+#'
+#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data
+#'
+#' @export
+#' @return data frame
+batches <- function(access_token = check_access_token())
+{
+	api_query('batches', access_token=access_token) %>% get_query_content()
+}
 
 #' Query specific variants from specific GWAS
 #'
@@ -196,15 +219,17 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 #'
 #' @param variants Array of variants e.g. c("rs234", "7:105561135-105563135")
 #' @param pval p-value threshold. Default = 0.00001
+#' @param batch Vector of batch IDs to search across. If c() (default) then returns all batches
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
 #'
 #' @export
 #' @return Dataframe
-phewas <- function(variants, pval = 0.00001, access_token=check_access_token())
+phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_access_token())
 {
 	out <- api_query("phewas", query=list(
 		variant=variants,
-		pval=pval
+		pval=pval,
+		index_list=batch
 	), access_token=access_token) %>% get_query_content()
 	if(class(out) != "response")
 	{

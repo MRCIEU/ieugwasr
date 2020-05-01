@@ -6,19 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Perform fast queries against a massive database of complete GWAS summary data • ieugwasr</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Perform fast queries against a massive database of complete GWAS summary data">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="ieugwasr">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -67,7 +67,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/mrcieu/ieugwasr">
+  <a href="https://github.com/mrcieu/ieugwasr/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -85,7 +85,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Perform fast queries against a massive database of complete GWAS summary data</h1>
+      <h1 data-toc-skip>Perform fast queries against a massive database of complete GWAS summary data</h1>
                         <h4 class="author">Gibran Hemani</h4>
             
       
@@ -135,26 +135,26 @@
 <div id="get-api-status" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-api-status" class="anchor"></a>Get API status</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="../reference/api_status.html">api_status</a></span>()</span></code></pre></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/api_status.html">api_status</a></span>()</pre></body></html></div>
 </div>
 <div id="get-list-of-all-available-studies" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-list-of-all-available-studies" class="anchor"></a>Get list of all available studies</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="../reference/gwasinfo.html">gwasinfo</a></span>()</span></code></pre></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/gwasinfo.html">gwasinfo</a></span>()</pre></body></html></div>
 </div>
 <div id="get-list-of-a-specific-study" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-list-of-a-specific-study" class="anchor"></a>Get list of a specific study</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="../reference/gwasinfo.html">gwasinfo</a></span>(<span class="st">"ieu-a-2"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/gwasinfo.html">gwasinfo</a></span>(<span class="st">"ieu-a-2"</span>)</pre></body></html></div>
 </div>
 <div id="extract-particular-associations-from-particular-studies" class="section level2">
 <h2 class="hasAnchor">
 <a href="#extract-particular-associations-from-particular-studies" class="anchor"></a>Extract particular associations from particular studies</h2>
 <p>Provide a list of variants to be obtained from a list of studies:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="../reference/associations.html">associations</a></span>(<span class="dt">variants=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rs123"</span>, <span class="st">"7:105561135"</span>), <span class="dt">id=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ieu-a-2"</span>, <span class="st">"ieu-a-7"</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/associations.html">associations</a></span>(<span class="kw">variants</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rs123"</span>, <span class="st">"7:105561135"</span>), <span class="kw">id</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ieu-a-2"</span>, <span class="st">"ieu-a-7"</span>))</pre></body></html></div>
 <p>By default this will look for LD proxies using 1000 genomes reference data (Europeans only, the reference panel has INDELs removed and only retains SNPs with MAF &gt; 0.01). This behaviour can be turned off using <code>proxies=0</code> as an argument.</p>
 <p>Note that the queries are performed on rsids, but chromosome:position values will be automatically converted. A range query can be done using e.g.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="../reference/associations.html">associations</a></span>(<span class="dt">variants=</span><span class="st">"7:105561135-105563135"</span>, <span class="dt">id=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ieu-a-2"</span>), <span class="dt">proxies=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../reference/associations.html">associations</a></span>(<span class="kw">variants</span><span class="kw">=</span><span class="st">"7:105561135-105563135"</span>, <span class="kw">id</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ieu-a-2"</span>), <span class="kw">proxies</span><span class="kw">=</span><span class="fl">0</span>)</pre></body></html></div>
 </div>
 <div id="get-the-tophits-from-a-study" class="section level2">
 <h2 class="hasAnchor">
@@ -168,6 +168,11 @@
 <a href="#perform-phewas" class="anchor"></a>Perform PheWAS</h2>
 <p>Lookup association of specified variants across every study, returning at a particular threshold. Note that no LD proxy lookups are made here.</p>
 <pre><code><a href="../reference/phewas.html">phewas(variants="rs1205", pval=1e-5)</a></code></pre>
+<p>PheWAS can also be performed in only specific subsets of the data. The datasets in the IGD are organised by batch, you can see info about it here: <a href="https://gwas.mrcieu.ac.uk/datasets/" class="uri">https://gwas.mrcieu.ac.uk/datasets/</a> or get a list of batches and their descriptions using:</p>
+<pre><code><a href="../reference/batches.html">batches()</a></code></pre>
+<p>You can perform PheWAS in only specified batches using:</p>
+<pre><code><a href="../reference/phewas.html">phewas(variants="rs1205", pval=1e-5, batch=c('ieu-a', 'ukb-b'))</a></code></pre>
+<p>By default PheWAS is performed in all batches (which is of course somewhat slower).</p>
 </div>
 <div id="ld-clumping" class="section level2">
 <h2 class="hasAnchor">
@@ -213,34 +218,18 @@ b &lt;- ld_clump(
 <a href="#extracting-gwas-summary-data-based-on-gene-region" class="anchor"></a>Extracting GWAS summary data based on gene region</h2>
 <p>Here is an example of how to obtain summary data for some datasets for a gene region. As an example, we’ll extract CDK2 (HGNC number 1017) from a BMI dataset (ieu-a-2)</p>
 <p>Use the <a href="https://bioconductor.org/packages/release/bioc/html/mygene.html">mygene</a> bioconductor package to query the <a href="https://mygene.info/">mygene.info</a> API.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(mygene)</span>
-<span id="cb17-2"><a href="#cb17-2"></a>a &lt;-<span class="st"> </span>mygene<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/mygene/man/getGene.html">getGene</a></span>(<span class="st">"1017"</span>, <span class="dt">fields=</span><span class="st">"genomic_pos_hg19"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3"></a>r &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(a[[<span class="dv">1</span>]]<span class="op">$</span>genomic_pos_hg19<span class="op">$</span>chr, <span class="st">":"</span>, a[[<span class="dv">1</span>]]<span class="op">$</span>genomic_pos_hg19<span class="op">$</span>start, <span class="st">"-"</span>, a[[<span class="dv">1</span>]]<span class="op">$</span>genomic_pos_hg19<span class="op">$</span>end)</span>
-<span id="cb17-4"><a href="#cb17-4"></a>b &lt;-<span class="st"> </span>ieugwasr<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ieugwasr/man/associations.html">associations</a></span>(r, <span class="st">"ieu-a-2"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">mygene</span>)
+<span class="no">a</span> <span class="kw">&lt;-</span> <span class="kw pkg">mygene</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/mygene/man/getGene.html">getGene</a></span>(<span class="st">"1017"</span>, <span class="kw">fields</span><span class="kw">=</span><span class="st">"genomic_pos_hg19"</span>)
+<span class="no">r</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">a</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">genomic_pos_hg19</span>$<span class="no">chr</span>, <span class="st">":"</span>, <span class="no">a</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">genomic_pos_hg19</span>$<span class="no">start</span>, <span class="st">"-"</span>, <span class="no">a</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">genomic_pos_hg19</span>$<span class="no">end</span>)
+<span class="no">b</span> <span class="kw">&lt;-</span> <span class="kw pkg">ieugwasr</span><span class="kw ns">::</span><span class="fu"><a href="../reference/associations.html">associations</a></span>(<span class="no">r</span>, <span class="st">"ieu-a-2"</span>)</pre></body></html></div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#authentication">Authentication</a></li>
-      <li><a href="#general-api-queries">General API queries</a></li>
-      <li><a href="#get-api-status">Get API status</a></li>
-      <li><a href="#get-list-of-all-available-studies">Get list of all available studies</a></li>
-      <li><a href="#get-list-of-a-specific-study">Get list of a specific study</a></li>
-      <li><a href="#extract-particular-associations-from-particular-studies">Extract particular associations from particular studies</a></li>
-      <li><a href="#get-the-tophits-from-a-study">Get the tophits from a study</a></li>
-      <li><a href="#perform-phewas">Perform PheWAS</a></li>
-      <li><a href="#ld-clumping">LD clumping</a></li>
-      <li><a href="#ld-matrix">LD matrix</a></li>
-      <li><a href="#variant-information">Variant information</a></li>
-      <li><a href="#extracting-gwas-summary-data-based-on-gene-region">Extracting GWAS summary data based on gene region</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
@@ -251,7 +240,7 @@ b &lt;- ld_clump(
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

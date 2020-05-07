@@ -251,11 +251,12 @@ phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_acces
 #' @param r2 use this clumping r2 threshold. Default is very strict, 0.001
 #' @param kb use this clumping kb window. Default is very strict, 10000
 #' @param force_server By default will return preclumped hits. p-value threshold 5e-8, with r2 threshold 0.001 and kb threshold 10000, using only SNPs with MAF > 0.01 in the European samples in 1000 genomes. If force_server = TRUE then will recompute using server side LD reference panel.
+#' @param pop Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
 #'
 #' @export
 #' @return Dataframe
-tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, force_server = FALSE, access_token=check_access_token())
+tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", force_server = FALSE, access_token=check_access_token())
 {
 	id <- legacy_ids(id)
 	if(clump == 1 & r2 == 0.001 & kb == 10000 & pval == 5e-8)
@@ -274,7 +275,8 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, force_serv
 		preclumped=preclumped,
 		clump=clump,
 		r2=r2,
-		kb=kb
+		kb=kb,
+		pop=pop
 	), access_token=access_token) %>% get_query_content()
 	if(class(out) == "response")
 	{

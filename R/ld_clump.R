@@ -6,13 +6,14 @@
 #' @param clump_kb Clumping kb window. Default is very strict, 10000
 #' @param clump_r2 Clumping r2 threshold. Default is very strict, 0.001
 #' @param clump_p Clumping sig level for index variants. Default = 1 (i.e. no threshold)
+#' @param pop Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data
 #' @param bfile If this is provided then will use the API. Default = NULL
 #' @param plink_bin If null and bfile is not null then will detect packaged plink binary for specific OS. Otherwise specify path to plink binary. Default = NULL
 #'
 #' @export
 #' @return Data frame
-ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99, access_token=NULL, bfile=NULL, plink_bin=NULL)
+ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99, pop = "EUR", access_token=NULL, bfile=NULL, plink_bin=NULL)
 {
 
 	stopifnot("rsid" %in% names(dat))
@@ -20,8 +21,14 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99, acc
 
 	if(! "pval" %in% names(dat))
 	{
-		warning("No 'pval' column found in dat object. Setting p-values for all SNPs to clump_p parameter.")
-		dat$pval <- clump_p
+		if( "p" %in% names(dat))
+		{
+			warning("No 'pval' column found in dat object. Using 'p' column.")
+			dat[["pval"]] <- dat[["p"]]
+		} else {
+			warning("No 'pval' column found in dat object. Setting p-values for all SNPs to clump_p parameter.")
+			dat[["pval"]] <- clump_p
+		}
 	}
 
 	if(! "id" %in% names(dat))
@@ -44,10 +51,10 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99, acc
 			message("Only one SNP for ", ids[i])
 			res[[i]] <- x
 		} else {
-			message("Clumping ", ids[i], ", ", nrow(x), " variants")
+			message("Clumping ", ids[i], ", ", nrow(x), " variants, using ", pop, " population reference")
 			if(is.null(bfile))
 			{
-				res[[i]] <- ld_clump_api(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, access_token=access_token)
+				res[[i]] <- ld_clump_api(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, pop=pop, access_token=access_token)
 			} else {
 				res[[i]] <- ld_clump_local(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, bfile=bfile, plink_bin=plink_bin)
 			}
@@ -64,8 +71,9 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99, acc
 #' @param clump_kb Clumping kb window. Default is very strict, 10000
 #' @param clump_r2 Clumping r2 threshold. Default is very strict, 0.001
 #' @param clump_p Clumping sig level for index variants. Default = 1 (i.e. no threshold)
+#' @param pop Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data#' @return Data frame of only independent variants
-ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, access_token=check_access_token())
+ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, pop="EUR", access_token=check_access_token())
 {
 	res <- api_query('ld/clump',
 			query = list(
@@ -73,7 +81,8 @@ ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, access_toke
 				pval = dat[["pval"]],
 				pthresh = clump_p,
 				r2 = clump_r2,
-				kb = clump_kb
+				kb = clump_kb,
+				pop = pop
 			),
 			access_token=access_token
 		) %>% get_query_content()

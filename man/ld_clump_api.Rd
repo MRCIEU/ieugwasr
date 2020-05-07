@@ -9,6 +9,7 @@ ld_clump_api(
   clump_kb = 10000,
   clump_r2 = 0.1,
   clump_p,
+  pop = "EUR",
   access_token = check_access_token()
 )
 }
@@ -20,6 +21,8 @@ ld_clump_api(
 \item{clump_r2}{Clumping r2 threshold. Default is very strict, 0.001}
 
 \item{clump_p}{Clumping sig level for index variants. Default = 1 (i.e. no threshold)}
+
+\item{pop}{Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR}
 
 \item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data#' @return Data frame of only independent variants}
 }

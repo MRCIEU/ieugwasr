@@ -10,6 +10,7 @@ tophits(
   clump = 1,
   r2 = 0.001,
   kb = 10000,
+  pop = "EUR",
   force_server = FALSE,
   access_token = check_access_token()
 )
@@ -24,6 +25,8 @@ tophits(
 \item{r2}{use this clumping r2 threshold. Default is very strict, 0.001}
 
 \item{kb}{use this clumping kb window. Default is very strict, 10000}
+
+\item{pop}{Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR}
 
 \item{force_server}{By default will return preclumped hits. p-value threshold 5e-8, with r2 threshold 0.001 and kb threshold 10000, using only SNPs with MAF > 0.01 in the European samples in 1000 genomes. If force_server = TRUE then will recompute using server side LD reference panel.}
 

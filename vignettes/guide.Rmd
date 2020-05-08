@@ -132,7 +132,7 @@ By default PheWAS is performed in all batches (which is of course somewhat slowe
 
 ## LD clumping
 
-The API has a wrapper around [plink version 1.90](https://www.cog-genomics.org/plink/1.9) and can use it to perform clumping with an LD reference panel from 1000 genomes reference data (Europeans only, the reference panel has INDELs removed and only retains SNPs with MAF > 0.01).
+The API has a wrapper around [plink version 1.90](https://www.cog-genomics.org/plink/1.9) and can use it to perform clumping with an LD reference panel from 1000 genomes reference data.
 
 ```
 a <- tophits(id="ieu-a-2", clump=0)
@@ -140,6 +140,8 @@ b <- ld_clump(
     dplyr::tibble(variant=a$name, pval=a$p, id=a$id)
 )
 ```
+
+There are 5 super-populations that can be requested via the `pop` argument. By default this will use the Europeans subset (EUR super-population). The reference panel has INDELs removed and only retains SNPs with MAF > 0.01 in the selected population.
 
 Note that you can perform the same operation locally if you provide a path to plink and a bed/bim/fam LD reference dataset. e.g.
 
@@ -164,6 +166,8 @@ This uses the API by default but is limited to only 500 variants. You can use, i
 ```
 ld_matrix(b$variant, plink_bin = "/path/to/plink", bfile = "/path/to/reference_data")
 ```
+
+There are 5 super-populations that can be requested via the `pop` argument. By default this will use the Europeans subset (EUR super-population). The reference panel has INDELs removed and only retains SNPs with MAF > 0.01 in the selected population.
 
 
 ## Variant information

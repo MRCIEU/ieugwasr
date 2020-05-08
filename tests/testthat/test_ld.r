@@ -9,7 +9,7 @@ bc <- ld_clump(b)
 # bcl <- ld_clump(b, bfile="/Users/gh13047/data/ld_files/data_maf0.01_rs", plink_bin="plink")
 
 test_that("preclumped", {
-	expect_true(all(ap$rsid %in% a$rsid))
+	expect_true(nrow(ap) == nrow(bc))
 })
 
 

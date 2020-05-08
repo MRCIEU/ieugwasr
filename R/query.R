@@ -13,7 +13,7 @@
 api_query <- function(path, query=NULL, access_token=check_access_token(), method="GET", silent=TRUE)
 {
 	ntry <- 0
-	ntries <- 3
+	ntries <- 5
 	headers <- httr::add_headers(
 		# 'Content-Type'='application/json; charset=UTF-8',
 		'X-Api-Token'=access_token,
@@ -53,20 +53,26 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 				silent=TRUE
 			)			
 		}
-		if(class(r) == 'try-error')
+		if('try-error' %in% class(r))
 		{
 			if(grepl("Timeout", as.character(attributes(r)$condition)))
 			{
 				stop("The query to MR-Base exceeded 300 seconds and timed out. Please simplify the query")
 			}
 		}
-		if(class(r) != 'try-error')
+		if(! 'try-error' %in% class(r))
 		{
-			break
+			if(r$status_code != 503)
+			{
+				break
+			} else {
+				message("Server is probably experiencing traffic, trying again...")
+				Sys.sleep(1)
+			}
 		}
 		ntry <- ntry + 1
 	}
-	if(class(r) == 'try-error')
+	if('try-error' %in% class(r))
 	{
 		if(grepl("Could not resolve host", as.character(attributes(r)$condition)))
 		{

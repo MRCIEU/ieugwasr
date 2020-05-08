@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Get LD matrix for list of variants — ld_matrix" />
-<meta property="og:description" content="This function takes a list of variants and searches for them in 502 European samples from 1000 Genomes phase 3 data
+<meta property="og:description" content="This function takes a list of variants and searches for them in samples from 1000 Genomes phase 3 data
 It then creates an LD matrix of r values (signed, and not squared)
 All LD values are with respect to the major alleles in the 1000G dataset. You can specify whether the allele names are displayed" />
 
@@ -74,7 +74,7 @@ All LD values are with respect to the major alleles in the 1000G dataset. You ca
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ieugwasr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
       </span>
     </div>
 
@@ -134,12 +134,18 @@ All LD values are with respect to the major alleles in the 1000G dataset. You ca
     </div>
 
     <div class="ref-description">
-    <p>This function takes a list of variants and searches for them in 502 European samples from 1000 Genomes phase 3 data
+    <p>This function takes a list of variants and searches for them in samples from 1000 Genomes phase 3 data
 It then creates an LD matrix of r values (signed, and not squared)
 All LD values are with respect to the major alleles in the 1000G dataset. You can specify whether the allele names are displayed</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ld_matrix</span>(<span class='no'>variants</span>, <span class='kw'>with_alleles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>bfile</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>plink_bin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>ld_matrix</span>(
+  <span class='no'>variants</span>,
+  <span class='kw'>with_alleles</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>pop</span> <span class='kw'>=</span> <span class='st'>"EUR"</span>,
+  <span class='kw'>bfile</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>plink_bin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,6 +157,10 @@ All LD values are with respect to the major alleles in the 1000G dataset. You ca
     <tr>
       <th>with_alleles</th>
       <td><p>Whether to append the allele names to the SNP names. Default: TRUE</p></td>
+    </tr>
+    <tr>
+      <th>pop</th>
+      <td><p>Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR</p></td>
     </tr>
     <tr>
       <th>bfile</th>

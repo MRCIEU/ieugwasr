@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ieugwasr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
       </span>
     </div>
 
@@ -140,6 +140,7 @@
   <span class='kw'>clump_kb</span> <span class='kw'>=</span> <span class='fl'>10000</span>,
   <span class='kw'>clump_r2</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
   <span class='no'>clump_p</span>,
+  <span class='kw'>pop</span> <span class='kw'>=</span> <span class='st'>"EUR"</span>,
   <span class='kw'>access_token</span> <span class='kw'>=</span> <span class='fu'><a href='check_access_token.html'>check_access_token</a></span>()
 )</pre>
 
@@ -161,6 +162,10 @@
     <tr>
       <th>clump_p</th>
       <td><p>Clumping sig level for index variants. Default = 1 (i.e. no threshold)</p></td>
+    </tr>
+    <tr>
+      <th>pop</th>
+      <td><p>Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR</p></td>
     </tr>
     <tr>
       <th>access_token</th>

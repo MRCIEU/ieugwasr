@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ieugwasr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
       </span>
     </div>
 
@@ -177,11 +177,12 @@
 <div id="ld-clumping" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ld-clumping" class="anchor"></a>LD clumping</h2>
-<p>The API has a wrapper around <a href="https://www.cog-genomics.org/plink/1.9">plink version 1.90</a> and can use it to perform clumping with an LD reference panel from 1000 genomes reference data (Europeans only, the reference panel has INDELs removed and only retains SNPs with MAF &gt; 0.01).</p>
+<p>The API has a wrapper around <a href="https://www.cog-genomics.org/plink/1.9">plink version 1.90</a> and can use it to perform clumping with an LD reference panel from 1000 genomes reference data.</p>
 <pre><code>a &lt;- tophits(id="ieu-a-2", clump=0)
 b &lt;- ld_clump(
     dplyr::tibble(variant=a$name, pval=a$p, id=a$id)
 )</code></pre>
+<p>There are 5 super-populations that can be requested via the <code>pop</code> argument. By default this will use the Europeans subset (EUR super-population). The reference panel has INDELs removed and only retains SNPs with MAF &gt; 0.01 in the selected population.</p>
 <p>Note that you can perform the same operation locally if you provide a path to plink and a bed/bim/fam LD reference dataset. e.g.</p>
 <pre><code><a href="../reference/ld_clump.html">ld_clump(
     dplyr::tibble(variant=a$name, pval=a$p, id=a$id),
@@ -196,6 +197,7 @@ b &lt;- ld_clump(
 <pre><code><a href="../reference/ld_matrix.html">ld_matrix(b$variant)</a></code></pre>
 <p>This uses the API by default but is limited to only 500 variants. You can use, instead, local plink and LD reference data in the same manner as in the <code>ld_clump</code> function, e.g.</p>
 <pre><code><a href="../reference/ld_matrix.html">ld_matrix(b$variant, plink_bin = "/path/to/plink", bfile = "/path/to/reference_data")</a></code></pre>
+<p>There are 5 super-populations that can be requested via the <code>pop</code> argument. By default this will use the Europeans subset (EUR super-population). The reference panel has INDELs removed and only retains SNPs with MAF &gt; 0.01 in the selected population.</p>
 </div>
 <div id="variant-information" class="section level2">
 <h2 class="hasAnchor">

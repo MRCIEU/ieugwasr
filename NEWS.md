@@ -1,3 +1,8 @@
+# ieugwasr 0.1.5
+
+* Added options to perform LD functions on different super-populations
+* Catching 503 error codes and retrying up to 5 times. This should help avoid fails when the server is busy.
+
 # ieugwasr 0.1.4
 
 * Bug fixes in clumping. Thanks to [bethleegy](https://github.com/bethleegy) for pointing this out

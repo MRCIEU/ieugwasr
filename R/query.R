@@ -240,10 +240,16 @@ phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_acces
 	if(class(out) != "response")
 	{
 		out <- out %>% dplyr::as_tibble()
-		out[order(out[["p"]]),] %>% return()
-	} else {
-		out %>% return
+		if(nrow(out) > 0)
+		{
+			out <- dplyr::arrange(out, p)
+		}
+		if(nrow(out) >= 100000)
+		{
+			warning("Reached output limit of 100000 rows. Please reduce your query size.")
+		}
 	}
+	return(out)
 }
 
 

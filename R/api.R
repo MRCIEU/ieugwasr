@@ -30,9 +30,7 @@ select_api <- function(where="public")
 #' @return access token string
 get_access_token <- function()
 {
-	message(
-		"Using access token. For info on how this is used see logging_info()\n"
-    )
+	message("Using access token. For info on how this is used see logging_info()")
 	tf <- basename(tempfile())
 	check <- suppressWarnings(file.create(tf))
 	if(!check)

@@ -7,10 +7,12 @@
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
 #' @param method GET (default) or POST, DELETE etc
 #' @param silent TRUE/FALSE to be passed to httr call. TRUE by default
+#' @param encode Default = json, see httr::POST for options
+#' @param timeout Default = 300, avoid increasing this, preferentially simplify the query first.
 #'
 #' @export
 #' @return httr response object
-api_query <- function(path, query=NULL, access_token=check_access_token(), method="GET", silent=TRUE)
+api_query <- function(path, query=NULL, access_token=check_access_token(), method="GET", silent=TRUE, encode="json", timeout=300)
 {
 	ntry <- 0
 	ntries <- 5
@@ -28,7 +30,7 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 				httr::DELETE(
 					paste0(options()$ieugwasr_api, path),
 					headers,
-					httr::timeout(300)
+					httr::timeout(timeout)
 				),
 				silent=TRUE
 			)
@@ -38,8 +40,8 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 					paste0(options()$ieugwasr_api, path),
 					body = query, 
 					headers,
-					encode="json",
-					httr::timeout(300)
+					encode=encode,
+					httr::timeout(timeout)
 				),
 				silent=TRUE
 			)
@@ -48,7 +50,7 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 				httr::GET(
 					paste0(options()$ieugwasr_api, path),
 					headers,
-					httr::timeout(300)
+					httr::timeout(timeout)
 				),
 				silent=TRUE
 			)			
@@ -57,7 +59,7 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 		{
 			if(grepl("Timeout", as.character(attributes(r)$condition)))
 			{
-				stop("The query to MR-Base exceeded 300 seconds and timed out. Please simplify the query")
+				stop("The query to MR-Base exceeded ", timeout, " seconds and timed out. Please simplify the query")
 			}
 		}
 		if(! 'try-error' %in% class(r))

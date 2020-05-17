@@ -9,7 +9,9 @@ api_query(
   query = NULL,
   access_token = check_access_token(),
   method = "GET",
-  silent = TRUE
+  silent = TRUE,
+  encode = "json",
+  timeout = 300
 )
 }
 \arguments{
@@ -22,6 +24,10 @@ api_query(
 \item{method}{GET (default) or POST, DELETE etc}
 
 \item{silent}{TRUE/FALSE to be passed to httr call. TRUE by default}
+
+\item{encode}{Default = json, see httr::POST for options}
+
+\item{timeout}{Default = 300, avoid increasing this, preferentially simplify the query first.}
 }
 \value{
 httr response object

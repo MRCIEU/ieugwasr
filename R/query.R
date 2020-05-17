@@ -62,12 +62,12 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 		}
 		if(! 'try-error' %in% class(r))
 		{
-			if(r$status_code != 503)
+			if(r$status_code >= 500 & r$status_code < 600)
 			{
-				break
-			} else {
-				message("Server is probably experiencing traffic, trying again...")
+				message("Server code: ", r$status_code, "; Server is possibly experiencing traffic, trying again...")
 				Sys.sleep(1)
+			} else {
+				break
 			}
 		}
 		ntry <- ntry + 1
@@ -300,3 +300,20 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 	}
 }
 
+
+#' Check datasets that are in process of being uploaded
+#'
+#' @param id ID
+#' @param access_token=check_access_token() <what param does>
+#'
+#' @export
+#' @return
+editcheck <- function(id, access_token=check_access_token())
+{
+	api <- options()[["ieugwasr_api"]]
+	select_api("private")
+	out <- api_query(paste0("edit/check/", id), access_token=access_token) %>%
+		get_query_content()
+	options(ieugwasr_api=api)
+	return(out)
+}

@@ -19,6 +19,11 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99, pop
 	stopifnot("rsid" %in% names(dat))
 	stopifnot(is.data.frame(dat))
 
+	if(is.null(bfile))
+	{
+		message("Please look at vignettes for options on running this locally if you need to run many instances of this command.")
+	}
+
 	if(! "pval" %in% names(dat))
 	{
 		if( "p" %in% names(dat))

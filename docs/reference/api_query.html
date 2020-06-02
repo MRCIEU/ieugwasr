@@ -98,6 +98,9 @@
       <a href="../articles/guide.html">Perform fast queries against a massive database of complete GWAS summary data</a>
     </li>
     <li>
+      <a href="../articles/local_ld.html">Running local LD operations</a>
+    </li>
+    <li>
       <a href="../articles/timings.html">Comparison of rsid vs chr:pos lookup in ElasticSearch</a>
     </li>
   </ul>
@@ -140,7 +143,9 @@
   <span class='kw'>query</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>access_token</span> <span class='kw'>=</span> <span class='fu'><a href='check_access_token.html'>check_access_token</a></span>(),
   <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"GET"</span>,
-  <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>silent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>encode</span> <span class='kw'>=</span> <span class='st'>"json"</span>,
+  <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='fl'>300</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -165,6 +170,14 @@
     <tr>
       <th>silent</th>
       <td><p>TRUE/FALSE to be passed to httr call. TRUE by default</p></td>
+    </tr>
+    <tr>
+      <th>encode</th>
+      <td><p>Default = json, see httr::POST for options</p></td>
+    </tr>
+    <tr>
+      <th>timeout</th>
+      <td><p>Default = 300, avoid increasing this, preferentially simplify the query first.</p></td>
     </tr>
     </table>
 

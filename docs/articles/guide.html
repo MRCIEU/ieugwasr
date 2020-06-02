@@ -57,6 +57,9 @@
       <a href="../articles/guide.html">Perform fast queries against a massive database of complete GWAS summary data</a>
     </li>
     <li>
+      <a href="../articles/local_ld.html">Running local LD operations</a>
+    </li>
+    <li>
       <a href="../articles/timings.html">Comparison of rsid vs chr:pos lookup in ElasticSearch</a>
     </li>
   </ul>
@@ -189,6 +192,7 @@ b &lt;- ld_clump(
     plink_bin = "/path/to/plink",
     bfile = "/path/to/reference_data"
 )</a></code></pre>
+<p>See the following vignette for more information: <a href="local_ld.html">Running local LD operations</a></p>
 </div>
 <div id="ld-matrix" class="section level2">
 <h2 class="hasAnchor">
@@ -198,6 +202,7 @@ b &lt;- ld_clump(
 <p>This uses the API by default but is limited to only 500 variants. You can use, instead, local plink and LD reference data in the same manner as in the <code>ld_clump</code> function, e.g.</p>
 <pre><code><a href="../reference/ld_matrix.html">ld_matrix(b$variant, plink_bin = "/path/to/plink", bfile = "/path/to/reference_data")</a></code></pre>
 <p>There are 5 super-populations that can be requested via the <code>pop</code> argument. By default this will use the Europeans subset (EUR super-population). The reference panel has INDELs removed and only retains SNPs with MAF &gt; 0.01 in the selected population.</p>
+<p>See the following vignette for more information: <a href="local_ld.html">Running local LD operations</a></p>
 </div>
 <div id="variant-information" class="section level2">
 <h2 class="hasAnchor">

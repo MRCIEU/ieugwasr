@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parse out json response from httr object — get_query_content • ieugwasr</title>
+<title>Check datasets that are in process of being uploaded — editcheck • ieugwasr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Parse out json response from httr object — get_query_content" />
-<meta property="og:description" content="Parse out json response from httr object" />
+<meta property="og:title" content="Check datasets that are in process of being uploaded — editcheck" />
+<meta property="og:description" content="Check datasets that are in process of being uploaded" />
 
 
 
@@ -129,29 +129,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parse out json response from httr object</h1>
+    <h1>Check datasets that are in process of being uploaded</h1>
     <small class="dont-index">Source: <a href='https://github.com/mrcieu/ieugwasr/blob/master/R/query.R'><code>R/query.R</code></a></small>
-    <div class="hidden name"><code>get_query_content.Rd</code></div>
+    <div class="hidden name"><code>editcheck.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Parse out json response from httr object</p>
+    <p>Check datasets that are in process of being uploaded</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_query_content</span>(<span class='no'>response</span>)</pre>
+    <pre class="usage"><span class='fu'>editcheck</span>(<span class='no'>id</span>, <span class='kw'>access_token</span> <span class='kw'>=</span> <span class='fu'><a href='check_access_token.html'>check_access_token</a></span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>response</th>
-      <td><p>Output from httr</p></td>
+      <th>id</th>
+      <td><p>ID</p></td>
+    </tr>
+    <tr>
+      <th>access_token=check_access_token()</th>
+      <td><p>&lt;what param does&gt;</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Parsed json output from query, often in form of data frame. If status code is not successful then return the actual response</p>
+    
+
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

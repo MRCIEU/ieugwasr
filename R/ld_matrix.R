@@ -16,8 +16,14 @@ ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", bfile=NULL, plink_
 {
 	if(length(variants) > 500 & is.null(bfile))
 	{
-		stop("SNP list must be smaller than 500. Try running locally by providing local ld reference with bfile argument")
+		stop("SNP list must be smaller than 500. Try running locally by providing local ld reference with bfile argument. See vignettes for a guide on how to do this.")
 	}
+
+	if(is.null(bfile))
+	{
+		message("Please look at vignettes for options on running this locally if you need to run many instances of this command.")
+	}
+
 
 	if(!is.null(bfile))
 	{

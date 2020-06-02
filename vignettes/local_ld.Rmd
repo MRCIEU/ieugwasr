@@ -35,7 +35,7 @@ The API has a wrapper around [plink version 1.90](https://www.cog-genomics.org/p
 ```
 a <- tophits(id="ieu-a-2", clump=0)
 b <- ld_clump(
-    dplyr::tibble(variant=a$name, pval=a$p, id=a$id)
+    dplyr::tibble(rsid=a$name, pval=a$p, id=a$id)
 )
 ```
 
@@ -70,7 +70,7 @@ to perform clumping, just do the following:
 
 ```
 ld_clump(
-    dplyr::tibble(variant=dat$rsid, pval=dat$pval, id=dat$trait_id),
+    dplyr::tibble(rsid=dat$rsid, pval=dat$pval, id=dat$trait_id),
     plink_bin = genetics.binaRies::get_plink_binary(),
     bfile = "/path/to/reference/EUR"
 )

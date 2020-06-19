@@ -153,7 +153,7 @@ gwasinfo <- function(id=NULL, access_token = check_access_token())
 		return(dplyr::tibble())
 	}
 	out <- dplyr::bind_rows(out) %>%
-		dplyr::select("id", "trait", "sample_size", "nsnp", "year", "consortium", "author", dplyr::everything())
+		dplyr::select("id", "trait", dplyr::everything())
 	class(out) <- c("GwasInfo", class(out))
 	return(out)
 }

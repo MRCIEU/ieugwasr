@@ -17,7 +17,7 @@ ld_matrix(
 
 \item{with_alleles}{Whether to append the allele names to the SNP names. Default: TRUE}
 
-\item{pop}{Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR}
+\item{pop}{Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR. 'legacy' also available - which is a previously used verison of the EUR panel with a slightly different set of markers}
 
 \item{bfile}{If this is provided then will use the API. Default = NULL}
 

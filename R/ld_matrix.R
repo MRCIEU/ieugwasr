@@ -6,7 +6,7 @@
 #'
 #' @param variants List of variants (rsids)
 #' @param with_alleles Whether to append the allele names to the SNP names. Default: TRUE
-#' @param pop Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR
+#' @param pop Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR. 'legacy' also available - which is a previously used verison of the EUR panel with a slightly different set of markers
 #' @param bfile If this is provided then will use the API. Default = NULL
 #' @param plink_bin If null and bfile is not null then will detect packaged plink binary for specific OS. Otherwise specify path to plink binary. Default = NULL
 #'

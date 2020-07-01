@@ -6,7 +6,7 @@
 #' @param clump_kb Clumping kb window. Default is very strict, 10000
 #' @param clump_r2 Clumping r2 threshold. Default is very strict, 0.001
 #' @param clump_p Clumping sig level for index variants. Default = 1 (i.e. no threshold)
-#' @param pop Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR
+#' @param pop Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR. 'legacy' also available - which is a previously used verison of the EUR panel with a slightly different set of markers
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data
 #' @param bfile If this is provided then will use the API. Default = NULL
 #' @param plink_bin If null and bfile is not null then will detect packaged plink binary for specific OS. Otherwise specify path to plink binary. Default = NULL

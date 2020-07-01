@@ -24,7 +24,7 @@ ld_clump(
 
 \item{clump_p}{Clumping sig level for index variants. Default = 1 (i.e. no threshold)}
 
-\item{pop}{Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR}
+\item{pop}{Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR. 'legacy' also available - which is a previously used verison of the EUR panel with a slightly different set of markers}
 
 \item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data}
 

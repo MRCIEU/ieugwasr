@@ -22,6 +22,8 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 		'X-Api-Source'=ifelse(is.null(options()$mrbase.environment), 'R/TwoSampleMR', 'mr-base-shiny')
 	)
 
+	retry_flag <- FALSE
+
 	while(ntry <= ntries)
 	{
 		if(method == "DELETE")
@@ -67,12 +69,24 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 			if(r$status_code >= 500 & r$status_code < 600)
 			{
 				message("Server code: ", r$status_code, "; Server is possibly experiencing traffic, trying again...")
+				retry_flag <- TRUE
 				Sys.sleep(1)
 			} else {
+				if(retry_flag)
+				{
+					message("Retry succeeded!")
+				}
 				break
 			}
 		}
 		ntry <- ntry + 1
+	}
+
+	if(r$status_code >= 500 & r$status_code < 600)
+	{
+		message("Server error: ", r$status_code)
+		message("Failed to retrieve results from server. See error status message in the returned object and contact the developers if the problem persists.")
+		return(r)
 	}
 	if('try-error' %in% class(r))
 	{

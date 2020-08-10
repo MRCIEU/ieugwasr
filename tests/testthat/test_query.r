@@ -57,8 +57,6 @@ test_that("phewas",
 })
 
 
-1850428
-
 test_that("tophits",
 {
 	expect_equal(nrow(tophits("ieu-a-2")), 79)
@@ -66,6 +64,8 @@ test_that("tophits",
 })
 
 
-
-
+test_that("batch", {
+	b <- batch_from_id(c("ieu-a-1", "ukb-b-100-10"))
+	expect_true(all(b == c("ieu-a", "ukb-b")))
+})
 

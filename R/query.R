@@ -177,12 +177,16 @@ print.GwasInfo <- function(x)
 	dplyr::glimpse(x)
 }
 
-batch <- function(x) UseMethod("batch", x)
-batch.GwasInfo <- function(x)
+#' Extract batch name from study ID
+#'
+#' @param id Array of study IDs
+#'
+#' @export
+#' @return Array of batch names
+batch_from_id <- function(id)
 {
-	sapply(strsplit(x[["id"]], "-"), function(x) paste(x[1], x[2], sep="-"))
+	sapply(strsplit(id, "-"), function(x) paste(x[1], x[2], sep="-"))
 }
-
 
 #' Get list of data batches in IEU GWAS database
 #'
@@ -320,10 +324,10 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 #' Check datasets that are in process of being uploaded
 #'
 #' @param id ID
-#' @param access_token=check_access_token() <what param does>
+#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
 #'
 #' @export
-#' @return
+#' @return Dataframe
 editcheck <- function(id, access_token=check_access_token())
 {
 	api <- options()[["ieugwasr_api"]]

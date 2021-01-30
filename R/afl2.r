@@ -1,17 +1,3 @@
-# Get list of 20k SNPs 
-
-
-# select_api()
-# b <- associations(snpinfo$rsid, "ieu-a-7", proxies=FALSE)
-
-# ab <- dplyr::inner_join(b, snpinfo)
-# dplyr::select(ab, eaf, starts_with("AF.")) %>% cor
-
-# ab$z <- ab$beta / ab$se
-# summary(lm(z ~ L2.EUR, ab))
-
-
-
 #' Retrieve a list of ~20k variants that are common in all five human super populations
 #'
 #' Data frame includes 1000 genomes metadata including sample sizes, allele frequency and LD score
@@ -20,13 +6,51 @@
 #' @return Data frame
 common_snpinfo <- function()
 {
-	select_api("dev1")
 	api_query("variants/afl2/snplist") %>% 
 		get_query_content() %>%
 		dplyr::as_tibble()
 }
 
 
+#' Look up allele frequencies and LD scores for 1000 genomes populations by rsid
+#'
+#' @param rsid Vector of rsids
+#' @param reference Default="1000g"
+#'
+#' @export
+#' @return data frame
+afl2_rsid <- function(rsid, reference="1000g")
+{
+	out <- api_query("variants/afl2/rsid", list(rsid=rsid)) %>% get_query_content()
+	if(class(out) == "response")
+	{
+		return(out)
+	} else if(is.data.frame(out)) {
+		out %>% dplyr::as_tibble() %>% return()
+	} else {
+		return(dplyr::tibble())
+	}
+}
+
+#' Look up allele frequencies and LD scores for 1000 genomes populations by chrpos
+#'
+#' @param chrpos list of <chr>:<pos> in build 37, e.g. c("3:46414943", "3:122991235"). Also allows ranges e.g "7:105561135-105563135"
+#' @param reference Default="1000g"
+#'
+#' @export
+#' @return data frame
+afl2_chrpos <- function(chrpos, reference="1000g")
+{
+	out <- api_query("variants/afl2/chrpos", list(chrpos=chrpos)) %>% get_query_content()
+	if(class(out) == "response")
+	{
+		return(out)
+	} else if(is.data.frame(out)) {
+		out %>% dplyr::as_tibble() %>% return()
+	} else {
+		return(dplyr::tibble())
+	}
+}
 
 
 #' Infer ancestry of GWAS dataset by matching against 1000 genomes allele frequencies
@@ -55,6 +79,33 @@ infer_ancestry <- function(d, snpinfo=NULL)
 	return(out)
 }
 
+#' Look up sample sizes when meta data is missing from associations
+#'
+#' @param d Output from \code{associations}
+#'
+#' @export
+#' @return Updated version of d
+fill_n <- function(d)
+{
+	id <- d$id[1]
+	if(! "n" %in% names(d))
+	{
+		d$n <- NA
+	}
+	d$n <- as.numeric(d$n)
+	if(any(is.na(d$n)))
+	{
+		info <- gwasinfo(id)
+		if(!is.na(info$sample_size))
+		{
+			d$n <- info$sample_size
+		} else {
+			d$n <- info$ncase + info$ncontrol
+		}
+	}
+	return(d)	
+}
+
 
 #' Perform basic version of bivariate LD score regression
 #'
@@ -68,6 +119,7 @@ infer_ancestry <- function(d, snpinfo=NULL)
 #' @return List of results
 bv_ldsc <- function(id1, id2, ancestry="infer", snpinfo=NULL)
 {
+	.Deprecated("TwoSampleMR::LDSC_rg")
 	if(is.null(snpinfo))
 	{
 		snpinfo <- common_snpinfo()
@@ -149,32 +201,4 @@ bv_ldsc <- function(id1, id2, ancestry="infer", snpinfo=NULL)
 	res$intercept_numerator = res$intercept / sqrt(res$n1 * res$n2)
 
 	return(res)
-}
-
-
-
-#' Look up sample sizes when meta data is missing from associations
-#'
-#' @param d Output from \code{associations}
-#'
-#' @export
-#' @return Updated version of d
-fill_n <- function(d)
-{
-	id <- d$id[1]
-	if(! "n" %in% names(d))
-	{
-		d$n <- NA
-	}
-	if(any(is.na(d$n)))
-	{
-		info <- gwasinfo(id)
-		if(!is.na(info$sample_size))
-		{
-			d$n <- info$sample_size
-		} else {
-			d$n <- info$ncase + info$ncontrol
-		}
-	}
-	return(d)	
 }

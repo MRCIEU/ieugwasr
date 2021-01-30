@@ -33,13 +33,21 @@ test_that("associations",
 
 })
 
+test_that("fill_n", 
+{
+	x <- associations(c("rs12759473"), "bbj-a-10") %>% fill_n
+	expect_true(
+		is.numeric(x$n) & !is.na(x$n)
+	)
+})
 
 test_that("phewas",
 {
-	a <- phewas("rs234", 1)
+	a <- phewas("rs977747", 0.01)
 	expect_true(nrow(a)>100)
-	b <- phewas("rs234", 1, batch=c("ieu-a"))
+	b <- phewas("rs977747", 0.01, batch=c("ieu-a"))
 	expect_true(nrow(b) < nrow(a))
+	expect_true(nrow(b) > 0)
 })
 
 
@@ -52,8 +60,8 @@ test_that("phewas",
 
 test_that("phewas",
 {
-	a <- phewas("1:1850428", 0.1)
-	expect_true(nrow(a)>100)
+	a <- phewas("1:1850428", 0.001)
+	expect_true(nrow(a)>10)
 })
 
 

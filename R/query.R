@@ -238,6 +238,33 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 	}
 }
 
+#' Look up sample sizes when meta data is missing from associations
+#'
+#' @param d Output from \code{associations}
+#'
+#' @export
+#' @return Updated version of d
+fill_n <- function(d)
+{
+	id <- d$id[1]
+	if(! "n" %in% names(d))
+	{
+		d$n <- NA
+	}
+	d$n <- as.numeric(d$n)
+	if(any(is.na(d$n)))
+	{
+		info <- gwasinfo(id)
+		if(!is.na(info$sample_size))
+		{
+			d$n <- info$sample_size
+		} else {
+			d$n <- info$ncase + info$ncontrol
+		}
+	}
+	return(d)	
+}
+
 
 #' Perform fast phewas of a specific variants against all available GWAS datasets
 #'

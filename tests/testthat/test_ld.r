@@ -28,7 +28,7 @@ test_that("ld matrix", {
 })
 
 ab <- tophits(c("ieu-a-2", "ieu-a-1001"))
-ab2 <- ld_clump(ab)
+expect_warning(ab2 <- ld_clump(ab))
 test_that("multiple", {
 	expect_equal(
 		length(unique(ab2$id)), length(unique(ab$id))
@@ -37,7 +37,7 @@ test_that("multiple", {
 
 
 a <- tophits(c("ieu-a-2", "ieu-a-7")) %>% subset(., !duplicated(id))
-ab <- ld_clump(a)
+expect_warning(ab <- ld_clump(a))
 test_that("onesnp", {
 	expect_equal(nrow(ab), 2)
 })

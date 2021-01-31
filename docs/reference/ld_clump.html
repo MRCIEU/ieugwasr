@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -112,7 +112,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mrcieu/ieugwasr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -138,16 +138,16 @@
     <p>Uses PLINK clumping method, where variants in LD within a particular window will be pruned. The SNP with the lowest p-value is retained.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ld_clump</span>(
-  <span class='kw'>dat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>clump_kb</span> <span class='kw'>=</span> <span class='fl'>10000</span>,
-  <span class='kw'>clump_r2</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
-  <span class='kw'>clump_p</span> <span class='kw'>=</span> <span class='fl'>0.99</span>,
-  <span class='kw'>pop</span> <span class='kw'>=</span> <span class='st'>"EUR"</span>,
-  <span class='kw'>access_token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bfile</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>plink_bin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>ld_clump</span><span class='op'>(</span>
+  dat <span class='op'>=</span> <span class='cn'>NULL</span>,
+  clump_kb <span class='op'>=</span> <span class='fl'>10000</span>,
+  clump_r2 <span class='op'>=</span> <span class='fl'>0.001</span>,
+  clump_p <span class='op'>=</span> <span class='fl'>0.99</span>,
+  pop <span class='op'>=</span> <span class='st'>"EUR"</span>,
+  access_token <span class='op'>=</span> <span class='cn'>NULL</span>,
+  bfile <span class='op'>=</span> <span class='cn'>NULL</span>,
+  plink_bin <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -170,7 +170,7 @@
     </tr>
     <tr>
       <th>pop</th>
-      <td><p>Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR</p></td>
+      <td><p>Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR. 'legacy' also available - which is a previously used verison of the EUR panel with a slightly different set of markers</p></td>
     </tr>
     <tr>
       <th>access_token</th>
@@ -205,7 +205,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

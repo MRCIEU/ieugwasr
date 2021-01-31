@@ -18,3 +18,15 @@ test_that("ancestry", {
 	expect_true(res$pop[1] == "EAS")
 })
 
+test_that("chrpos", {
+	a <- afl2_chrpos("1:100000-900000")
+	expect_true(nrow(a) > 100)
+})
+
+test_that("rsid", {
+	a <- afl2_rsid(c("rs234", "rs123"))
+	expect_true(nrow(a) == 2)
+})
+
+
+

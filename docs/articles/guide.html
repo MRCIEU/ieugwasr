@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -71,7 +71,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/mrcieu/ieugwasr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -85,7 +85,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="guide_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Perform fast queries against a massive database of complete GWAS summary data</h1>
@@ -138,26 +138,31 @@
 <div id="get-api-status" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-api-status" class="anchor"></a>Get API status</h2>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/api_status.html">api_status</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="../reference/api_status.html">api_status</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 </div>
 <div id="get-list-of-all-available-studies" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-list-of-all-available-studies" class="anchor"></a>Get list of all available studies</h2>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/gwasinfo.html">gwasinfo</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="../reference/gwasinfo.html">gwasinfo</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 </div>
 <div id="get-list-of-a-specific-study" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-list-of-a-specific-study" class="anchor"></a>Get list of a specific study</h2>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/gwasinfo.html">gwasinfo</a></span>(<span class="st">"ieu-a-2"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="../reference/gwasinfo.html">gwasinfo</a></span><span class="op">(</span><span class="st">"ieu-a-2"</span><span class="op">)</span></pre></div>
 </div>
 <div id="extract-particular-associations-from-particular-studies" class="section level2">
 <h2 class="hasAnchor">
 <a href="#extract-particular-associations-from-particular-studies" class="anchor"></a>Extract particular associations from particular studies</h2>
 <p>Provide a list of variants to be obtained from a list of studies:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/associations.html">associations</a></span>(<span class="kw">variants</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rs123"</span>, <span class="st">"7:105561135"</span>), <span class="kw">id</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ieu-a-2"</span>, <span class="st">"ieu-a-7"</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="../reference/associations.html">associations</a></span><span class="op">(</span>variants<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rs123"</span>, <span class="st">"7:105561135"</span><span class="op">)</span>, id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ieu-a-2"</span>, <span class="st">"ieu-a-7"</span><span class="op">)</span><span class="op">)</span></pre></div>
 <p>By default this will look for LD proxies using 1000 genomes reference data (Europeans only, the reference panel has INDELs removed and only retains SNPs with MAF &gt; 0.01). This behaviour can be turned off using <code>proxies=0</code> as an argument.</p>
 <p>Note that the queries are performed on rsids, but chromosome:position values will be automatically converted. A range query can be done using e.g.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../reference/associations.html">associations</a></span>(<span class="kw">variants</span><span class="kw">=</span><span class="st">"7:105561135-105563135"</span>, <span class="kw">id</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"ieu-a-2"</span>), <span class="kw">proxies</span><span class="kw">=</span><span class="fl">0</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="fu"><a href="../reference/associations.html">associations</a></span><span class="op">(</span>variants<span class="op">=</span><span class="st">"7:105561135-105563135"</span>, id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ieu-a-2"</span><span class="op">)</span>, proxies<span class="op">=</span><span class="fl">0</span><span class="op">)</span></pre></div>
 </div>
 <div id="get-the-tophits-from-a-study" class="section level2">
 <h2 class="hasAnchor">
@@ -202,6 +207,14 @@ b &lt;- ld_clump(
 <p>This uses the API by default but is limited to only 500 variants. You can use, instead, local plink and LD reference data in the same manner as in the <code>ld_clump</code> function, e.g.</p>
 <pre><code><a href="../reference/ld_matrix.html">ld_matrix(b$variant, plink_bin = "/path/to/plink", bfile = "/path/to/reference_data")</a></code></pre>
 <p>There are 5 super-populations that can be requested via the <code>pop</code> argument. By default this will use the Europeans subset (EUR super-population). The reference panel has INDELs removed and only retains SNPs with MAF &gt; 0.01 in the selected population.</p>
+<p>Super-populations:</p>
+<ul>
+<li>EUR = European</li>
+<li>EAS = East Asian</li>
+<li>AMR = Admixed American</li>
+<li>SAS = South Asian</li>
+<li>AFR = African</li>
+</ul>
 <p>See the following vignette for more information: <a href="local_ld.html">Running local LD operations</a></p>
 </div>
 <div id="variant-information" class="section level2">
@@ -225,10 +238,47 @@ b &lt;- ld_clump(
 <a href="#extracting-gwas-summary-data-based-on-gene-region" class="anchor"></a>Extracting GWAS summary data based on gene region</h2>
 <p>Here is an example of how to obtain summary data for some datasets for a gene region. As an example, we’ll extract CDK2 (HGNC number 1017) from a BMI dataset (ieu-a-2)</p>
 <p>Use the <a href="https://bioconductor.org/packages/release/bioc/html/mygene.html">mygene</a> bioconductor package to query the <a href="https://mygene.info/">mygene.info</a> API.</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">mygene</span>)
-<span class="no">a</span> <span class="kw">&lt;-</span> <span class="kw pkg">mygene</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/mygene/man/getGene.html">getGene</a></span>(<span class="st">"1017"</span>, <span class="kw">fields</span><span class="kw">=</span><span class="st">"genomic_pos_hg19"</span>)
-<span class="no">r</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">a</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">genomic_pos_hg19</span>$<span class="no">chr</span>, <span class="st">":"</span>, <span class="no">a</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">genomic_pos_hg19</span>$<span class="no">start</span>, <span class="st">"-"</span>, <span class="no">a</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">genomic_pos_hg19</span>$<span class="no">end</span>)
-<span class="no">b</span> <span class="kw">&lt;-</span> <span class="kw pkg">ieugwasr</span><span class="kw ns">::</span><span class="fu"><a href="../reference/associations.html">associations</a></span>(<span class="no">r</span>, <span class="st">"ieu-a-2"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb19"><pre class="downlit">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">mygene</span><span class="op">)</span>
+<span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">mygene</span><span class="fu">::</span><span class="fu">getGene</span><span class="op">(</span><span class="st">"1017"</span>, fields<span class="op">=</span><span class="st">"genomic_pos_hg19"</span><span class="op">)</span>
+<span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">a</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">genomic_pos_hg19</span><span class="op">$</span><span class="va">chr</span>, <span class="st">":"</span>, <span class="va">a</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">genomic_pos_hg19</span><span class="op">$</span><span class="va">start</span>, <span class="st">"-"</span>, <span class="va">a</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">genomic_pos_hg19</span><span class="op">$</span><span class="va">end</span><span class="op">)</span>
+<span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="../reference/associations.html">associations</a></span><span class="op">(</span><span class="va">r</span>, <span class="st">"ieu-a-2"</span><span class="op">)</span></pre></div>
+</div>
+<div id="genomes-annotations" class="section level2">
+<h2 class="hasAnchor">
+<a href="#genomes-annotations" class="anchor"></a>1000 genomes annotations</h2>
+<p>The OpenGWAS database contains a database of population annotations from the 1000 genomes project - the alternative allele frequencies and the LD scores for each variant, calculated for each super population separately. Only variants are present if they are MAF &gt; 1% in at least one super population. You can access this info in different ways</p>
+<ol style="list-style-type: decimal">
+<li>
+<p>Look up a particular set of rsids</p>
+<div class="sourceCode" id="cb20"><pre class="downlit">
+<span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="../reference/afl2_rsid.html">afl2_rsid</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rs234"</span>, <span class="st">"rs123"</span><span class="op">)</span><span class="op">)</span></pre></div>
+</li>
+<li>
+<p>Look up a set of positions or regions</p>
+<div class="sourceCode" id="cb21"><pre class="downlit">
+<span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="../reference/afl2_chrpos.html">afl2_chrpos</a></span><span class="op">(</span><span class="st">"1:100000-900000"</span><span class="op">)</span></pre></div>
+</li>
+<li>
+<p>Extract annotations for a list of 20k variants that are common in all super populations, and evenly spaced across the genome</p>
+<div class="sourceCode" id="cb22"><pre class="downlit">
+<span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="../reference/afl2_list.html">afl2_list</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+</li>
+<li>
+<p>Extract annotations for a 1.3 million HapMap3 variants</p>
+<div class="sourceCode" id="cb23"><pre class="downlit">
+<span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="../reference/afl2_list.html">afl2_list</a></span><span class="op">(</span><span class="st">"hapmap3"</span><span class="op">)</span></pre></div>
+</li>
+<li>
+<p>Infer the ancestry of a particular study by comparing the allele frequencies with different super population reference frequencies</p>
+<div class="sourceCode" id="cb24"><pre class="downlit">
+<span class="va">snplist</span> <span class="op">&lt;-</span> <span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="../reference/afl2_list.html">afl2_list</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">eur_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/associations.html">associations</a></span><span class="op">(</span><span class="va">snplist</span><span class="op">$</span><span class="va">rsid</span>, <span class="st">"ieu-a-2"</span><span class="op">)</span>
+<span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="../reference/infer_ancestry.html">infer_ancestry</a></span><span class="op">(</span><span class="va">eur_example</span>, <span class="va">snplist</span><span class="op">)</span>
+<span class="va">eas_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/associations.html">associations</a></span><span class="op">(</span><span class="va">snplist</span><span class="op">$</span><span class="va">rsid</span>, <span class="st">"bbj-a-10"</span><span class="op">)</span>
+<span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="../reference/infer_ancestry.html">infer_ancestry</a></span><span class="op">(</span><span class="va">eur_example</span>, <span class="va">snplist</span><span class="op">)</span></pre></div>
+</li>
+</ol>
 </div>
   </div>
 
@@ -247,7 +297,7 @@ b &lt;- ld_clump(
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

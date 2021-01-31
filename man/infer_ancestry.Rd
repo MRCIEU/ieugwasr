@@ -8,6 +8,8 @@ infer_ancestry(d, snpinfo = NULL)
 }
 \arguments{
 \item{d}{Data frame containing at least rsid and eaf columns. e.g. output from associations}
+
+\item{snpinfo}{}
 }
 \value{
 data frame ordered by most likely ancestry

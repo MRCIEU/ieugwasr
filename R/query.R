@@ -289,7 +289,7 @@ phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_acces
 		out <- out %>% dplyr::as_tibble()
 		if(nrow(out) > 0)
 		{
-			out <- dplyr::arrange(out, p)
+			out <- dplyr::arrange(out, .data$p)
 		}
 		if(nrow(out) >= 100000)
 		{

@@ -24,6 +24,8 @@ Imports:
     googleAuthR,
     dplyr,
     httr,
-    jsonlite
+    jsonlite,
+    rlang,
+    stats
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr

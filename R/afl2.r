@@ -71,7 +71,7 @@ afl2_chrpos <- function(chrpos, reference="1000g")
 #' Uses ~20k SNPs selected for common frequency across 5 major super populations
 #'
 #' @param d Data frame containing at least rsid and eaf columns. e.g. output from associations
-#' @param snpinfo 
+#' @param snpinfo Output from afl2_list, afl2_rsid or afl2_chrpos. If NULL then afl2_list() is used by default
 #'
 #' @export
 #' @return data frame ordered by most likely ancestry

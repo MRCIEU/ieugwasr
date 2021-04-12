@@ -80,6 +80,7 @@ ld_matrix_local <- function(variants, bfile, plink_bin, with_alleles=TRUE)
 		" --bfile ", shQuote(bfile, type=shell),
 		" --extract ", shQuote(fn, type=shell), 
 		" --make-just-bim ", 
+		" --keep-allele-order ",
 		" --out ", shQuote(fn, type=shell)
 	)
 	system(fun1)
@@ -91,6 +92,7 @@ ld_matrix_local <- function(variants, bfile, plink_bin, with_alleles=TRUE)
 		" --bfile ", shQuote(bfile, type=shell),
 		" --extract ", shQuote(fn, type=shell), 
 		" --r square ", 
+		" --keep-allele-order ",
 		" --out ", shQuote(fn, type=shell)
 	)
 	system(fun2)

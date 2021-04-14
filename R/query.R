@@ -232,7 +232,7 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
-		out %>% dplyr::as_tibble() %>% return()
+		out %>% dplyr::as_tibble() %>% fix_n() %>% return()
 	} else {
 		return(dplyr::tibble())
 	}
@@ -265,6 +265,14 @@ fill_n <- function(d)
 	return(d)	
 }
 
+fix_n <- function(d)
+{
+	if("n" %in% names(d))
+	{
+		d[["n"]] <- as.numeric(d[["n"]])
+	}
+	return(d)
+}
 
 #' Perform fast phewas of a specific variants against all available GWAS datasets
 #'
@@ -286,7 +294,7 @@ phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_acces
 	), access_token=access_token) %>% get_query_content()
 	if(class(out) != "response")
 	{
-		out <- out %>% dplyr::as_tibble()
+		out <- out %>% dplyr::as_tibble() %>% fix_n()
 		if(nrow(out) > 0)
 		{
 			out <- dplyr::arrange(out, .data$p)
@@ -341,7 +349,7 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
-		out %>% dplyr::as_tibble() %>% return()
+		out %>% dplyr::as_tibble() %>% fix_n() %>% return()
 	} else {
 		return(dplyr::tibble())
 	}

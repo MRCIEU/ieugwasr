@@ -271,6 +271,9 @@ fix_n <- function(d)
 	{
 		d[["n"]] <- as.numeric(d[["n"]])
 	}
+	# Issue with the ukb-e batch - need to flip alleles until it is fixed
+	index <- grepl("ukb-e", d[["id"]])
+	d[["beta"]][index] <- d[["beta"]][index] * -1
 	return(d)
 }
 

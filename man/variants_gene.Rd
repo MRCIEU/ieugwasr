@@ -12,7 +12,10 @@ variants_gene(gene, radius = 0)
 \item{radius}{Radius around the gene region to include. Default = 0}
 }
 \value{
-data frame
+data frame with the following columns
+\describe{
+	\item{}{}
+}
 }
 \description{
 Provide a gene identified, either Ensembl or Entrez

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ld_matrix.R
 \name{ld_matrix}
 \alias{ld_matrix}
-\title{Get LD matrix for list of variants}
+\title{Get LD matrix for list of SNPs}
 \usage{
 ld_matrix(
   variants,
@@ -27,7 +27,14 @@ ld_matrix(
 Matrix of LD r values
 }
 \description{
-This function takes a list of variants and searches for them in samples from 1000 Genomes phase 3 data
-It then creates an LD matrix of r values (signed, and not squared)
-All LD values are with respect to the major alleles in the 1000G dataset. You can specify whether the allele names are displayed
+This function takes a list of SNPs and searches for them in a specified super-population in the 1000 Genomes phase 3 reference panel.
+It then creates an LD matrix of r values (signed, and not squared).
+All LD values are with respect to the major alleles in the 1000G dataset. You can specify whether the allele names are displayed.
+}
+\details{
+The data used for generating the LD matrix includes only bi-allelic SNPs with MAF > 0.01, so it's quite possible that a variant you want to include will be absent. If it is absent, it will be automatically excluded from the results.
+
+You can check if your variants are present in the LD reference panel using ieugwasr::ld_reflookup()
+
+This function does put load on the OpenGWAS servers, which makes life more difficult for other users, and has been limited to analyse only up to 500 variants at a time. We have implemented a method and made available the LD reference panels to perform the operation locally, see ieugwasr::ld_matrix() and related vignettes for details.
 }

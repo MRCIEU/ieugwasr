@@ -153,3 +153,28 @@ random_string <- function(n=1, len=6)
 	}
 	return(randomString)
 }
+
+
+#' Check which rsids are present in a remote LD reference panel
+#'
+#' Provide a list of rsids that you may want to perform LD operations on to check if they are present in the LD reference panel. If they are not then some functions e.g. ld_clump will exclude them from the analysis, so you may want to consider how to handle those variants in your data.
+#'
+#' @param rsid Array of rsids to check
+#' @param pop Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR
+#'
+#' @export
+#' @return Array of rsids that are present in the LD reference panel
+ld_reflookup <- function(rsid, pop='EUR')
+{
+	res <- api_query('ld/reflookup',
+			query = list(
+				rsid = rsid,
+				pop = pop
+			)
+		) %>% get_query_content()
+	if(length(res) == 0)
+	{
+		res <- character(0)
+	}
+	return(res)
+}

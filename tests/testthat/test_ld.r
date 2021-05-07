@@ -43,3 +43,10 @@ test_that("onesnp", {
 })
 
 
+
+test_that("ld_reflookup", {
+
+	a <- ld_reflookup(c("rs234", "fakesnp"), pop="AFR")
+	expect_true(a == "rs234")
+})
+

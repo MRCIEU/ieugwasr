@@ -17,21 +17,25 @@ api_query(
 \arguments{
 \item{path}{Either a full query path (e.g. for get) or an endpoint (e.g. for post) queries}
 
-\item{query}{If post query, provide a list of arguments as the payload. NULL by default}
+\item{query}{If post query, provide a list of arguments as the payload. \code{NULL} by default}
 
-\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication}
+\item{access_token}{Google OAuth2 access token.
+Used to authenticate level of access to data. By default, checks if already
+authenticated through \code{\link{get_access_token}} and if not then does not perform authentication}
 
-\item{method}{GET (default) or POST, DELETE etc}
+\item{method}{\code{"GET"} (default) or \code{"POST"}, \code{"DELETE"} etc}
 
-\item{silent}{TRUE/FALSE to be passed to httr call. TRUE by default}
+\item{silent}{\code{TRUE}/\code{FALSE} to be passed to httr call. \code{TRUE} by default}
 
-\item{encode}{Default = json, see httr::POST for options}
+\item{encode}{Default = \code{"json"}, see \code{\link[httr:POST]{httr::POST}} for options}
 
-\item{timeout}{Default = 300, avoid increasing this, preferentially simplify the query first.}
+\item{timeout}{Default = \code{300}, avoid increasing this, preferentially
+simplify the query first.}
 }
 \value{
 httr response object
 }
 \description{
-There are a number of different GET and POST endpoints in the GWAS database API. This is a generic way to access them
+There are a number of different GET and POST endpoints in the GWAS database API.
+This is a generic way to access them.
 }

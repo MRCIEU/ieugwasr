@@ -7,9 +7,10 @@
 afl2_chrpos(chrpos, reference = "1000g")
 }
 \arguments{
-\item{chrpos}{list of <chr>:<pos> in build 37, e.g. c("3:46414943", "3:122991235"). Also allows ranges e.g "7:105561135-105563135"}
+\item{chrpos}{list of \verb{<chr>:<pos>} in build 37, e.g. \code{c("3:46414943", "3:122991235")}.
+Also allows ranges e.g \code{"7:105561135-105563135"}}
 
-\item{reference}{Default="1000g"}
+\item{reference}{Default=\code{"1000g"}}
 }
 \value{
 data frame

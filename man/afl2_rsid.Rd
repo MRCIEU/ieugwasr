@@ -9,7 +9,7 @@ afl2_rsid(rsid, reference = "1000g")
 \arguments{
 \item{rsid}{Vector of rsids}
 
-\item{reference}{Default="1000g"}
+\item{reference}{Default=\code{"1000g"}}
 }
 \value{
 data frame

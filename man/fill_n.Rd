@@ -9,7 +9,7 @@ fill_n(d)
 fill_n(d)
 }
 \arguments{
-\item{d}{Output from \code{associations}}
+\item{d}{Output from \code{\link{associations}}}
 }
 \value{
 Updated version of d

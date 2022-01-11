@@ -11,9 +11,11 @@ ld_matrix_local(variants, bfile, plink_bin, with_alleles = TRUE)
 
 \item{bfile}{Path to bed/bim/fam ld reference panel}
 
-\item{plink_bin}{Specify path to plink binary. Default = NULL. See https://github.com/explodecomputer/plinkbinr for convenient access to plink binaries}
+\item{plink_bin}{Specify path to plink binary. Default = \code{NULL}.
+See \url{https://github.com/explodecomputer/plinkbinr} for convenient access to plink binaries}
 
-\item{with_alleles}{Whether to append the allele names to the SNP names. Default: TRUE}
+\item{with_alleles}{Whether to append the allele names to the SNP names.
+Default: \code{TRUE}}
 }
 \value{
 data frame

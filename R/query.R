@@ -335,14 +335,21 @@ phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_acces
 #'
 #' By default performs clumping on the server side. 
 #'
-#' @param id Array of GWAS studies to query. See \code{gwasinfo} for available studies
-#' @param pval use this p-value threshold. Default = 5e-8
-#' @param clump whether to clump (1) or not (0). Default = 1
-#' @param r2 use this clumping r2 threshold. Default is very strict, 0.001
-#' @param kb use this clumping kb window. Default is very strict, 10000
-#' @param force_server By default will return preclumped hits. p-value threshold 5e-8, with r2 threshold 0.001 and kb threshold 10000, using only SNPs with MAF > 0.01 in the European samples in 1000 genomes. If force_server = TRUE then will recompute using server side LD reference panel.
-#' @param pop Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
+#' @param id Array of GWAS studies to query. See [`gwasinfo`] for available studies
+#' @param pval use this p-value threshold. Default = `5e-8`
+#' @param clump whether to clump (`1`) or not (`0`). Default = `1`
+#' @param r2 use this clumping r2 threshold. Default is very strict, `0.001`
+#' @param kb use this clumping kb window. Default is very strict, `10000`
+#' @param force_server Logical. By default will return preclumped hits. 
+#' p-value threshold 5e-8, with r2 threshold 0.001 and kb threshold 10000, 
+#' using only SNPs with MAF > 0.01 in the European samples in 1000 genomes. 
+#' If force_server = `TRUE` then will recompute using server side LD reference panel.
+#' @param pop Super-population to use as reference panel. Default = `"EUR"`. 
+#' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`
+#' @param access_token Google OAuth2 access token. 
+#' Used to authenticate level of access to data. 
+#' By default, checks if already authenticated through [`get_access_token`] 
+#' and if not then does not perform authentication
 #'
 #' @export
 #' @return Dataframe

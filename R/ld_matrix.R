@@ -82,8 +82,10 @@ ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", bfile=NULL, plink_
 #'
 #' @param variants List of variants (rsids)
 #' @param bfile Path to bed/bim/fam ld reference panel
-#' @param plink_bin Specify path to plink binary. Default = NULL. See https://github.com/explodecomputer/plinkbinr for convenient access to plink binaries
-#' @param with_alleles Whether to append the allele names to the SNP names. Default: TRUE
+#' @param plink_bin Specify path to plink binary. Default = `NULL`. 
+#' See \url{https://github.com/explodecomputer/plinkbinr} for convenient access to plink binaries
+#' @param with_alleles Whether to append the allele names to the SNP names. 
+#' Default: `TRUE`
 #'
 #' @export
 #' @return data frame

@@ -23,7 +23,7 @@ There are a few convenience functions also:
 - Perform LD clumping using the server, or locally
 - Obtain LD matrices for a list of SNPs using the server or locally (e.g. for fine mapping, colocalisation or Mendelian randomization)
 
-See [https://github.com/MRCIEU/gwasglue] for information about how to connect the genotype and LD data to other packages involving colocalisation, finemapping, visualisation and MR.
+See https://github.com/MRCIEU/gwasglue for information about how to connect the genotype and LD data to other packages involving colocalisation, finemapping, visualisation and MR.
 
 
 ## Installation

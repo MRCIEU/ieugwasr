@@ -152,7 +152,8 @@ print.ApiStatus <- function(x)
 
 #' Get list of studies with available GWAS summary statistics through API
 #'
-#' @param id List of MR-Base IDs to retrieve. If NULL (default) retrieves all available datasets
+#' @param id List of MR-Base IDs to retrieve. If `NULL` (default) retrieves all 
+#' available datasets
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data
 #'
 #' @importFrom magrittr %>%

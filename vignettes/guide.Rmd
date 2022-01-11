@@ -27,7 +27,7 @@ Most datasets in the database are public and don't need authentication. But if y
 
 Essentially - you run this command at the start of your session: 
 
-```
+```r
 ieugwasr::get_access_token()
 ```
 
@@ -41,7 +41,7 @@ If you need to run this in a non-interactive script then you can generate the to
 
 You can test to see if you have authenticated using the function
 
-```
+```r
 ieugwasr::check_access_token()
 ```
 
@@ -100,7 +100,7 @@ associations(variants="7:105561135-105563135", id=c("ieu-a-2"), proxies=0)
 
 The tophits can be obtained using
 
-```
+```r
 tophits(id="ieu-a-2")
 ```
 
@@ -111,19 +111,19 @@ Note that it will perform strict clumping by default (r2 = 0.001 and radius = 10
 
 Lookup association of specified variants across every study, returning at a particular threshold. Note that no LD proxy lookups are made here.
 
-```
+```r
 phewas(variants="rs1205", pval=1e-5)
 ```
 
 PheWAS can also be performed in only specific subsets of the data. The datasets in the IGD are organised by batch, you can see info about it here: https://gwas.mrcieu.ac.uk/datasets/ or get a list of batches and their descriptions using:
 
-```
+```r
 batches()
 ```
 
 You can perform PheWAS in only specified batches using:
 
-```
+```r
 phewas(variants="rs1205", pval=1e-5, batch=c('ieu-a', 'ukb-b'))
 ```
 
@@ -134,7 +134,7 @@ By default PheWAS is performed in all batches (which is of course somewhat slowe
 
 The API has a wrapper around [plink version 1.90](https://www.cog-genomics.org/plink/1.9) and can use it to perform clumping with an LD reference panel from 1000 genomes reference data.
 
-```
+```r
 a <- tophits(id="ieu-a-2", clump=0)
 b <- ld_clump(
     dplyr::tibble(rsid=a$name, pval=a$p, id=a$id)
@@ -145,7 +145,7 @@ There are 5 super-populations that can be requested via the `pop` argument. By d
 
 Note that you can perform the same operation locally if you provide a path to plink and a bed/bim/fam LD reference dataset. e.g.
 
-```
+```r
 ld_clump(
     dplyr::tibble(rsid=a$name, pval=a$p, id=a$id),
     plink_bin = "/path/to/plink",
@@ -159,13 +159,13 @@ See the following vignette for more information: [Running local LD operations](l
 
 Similarly, a matrix of LD r values can be generated using
 
-```
+```r
 ld_matrix(b$variant)
 ```
 
 This uses the API by default but is limited to only 500 variants. You can use, instead, local plink and LD reference data in the same manner as in the `ld_clump` function, e.g.
 
-```
+```r
 ld_matrix(b$variant, plink_bin = "/path/to/plink", bfile = "/path/to/reference_data")
 ```
 
@@ -192,19 +192,19 @@ The `chrpos` argument can accept the following
 
 For example
 
-```
+```r
 a <- variants_chrpos(c("7:105561135-105563135", "10:44865737"))
 ```
 
 This provides a table with dbSNP variant IDs, gene info, and various other metadata. Similar data can be obtained from searching by rsid
 
-```
+```r
 b <- variants_rsid(c("rs234", "rs333"))
 ```
 
 And a list of variants within a particular gene region can also be found. Provide a ensembl or entrez gene ID (e.g. ENSG00000123374 or 1017) to the following:
 
-```
+```r
 c <- variants_gene("ENSG00000123374")
 ```
 

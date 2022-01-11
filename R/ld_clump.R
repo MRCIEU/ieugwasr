@@ -138,8 +138,6 @@ ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, pop="EUR", 
 #' See \url{https://github.com/explodecomputer/plinkbinr} for convenient access to plink binaries
 #' @importFrom utils read.table
 #' @importFrom utils write.table
-
-#'
 #' @export
 #' @return data frame of clumped variants
 ld_clump_local <- function(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin)

@@ -128,12 +128,14 @@ ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, pop="EUR", 
 
 #' Wrapper for clump function using local plink binary and ld reference dataset
 #'
-#' @param dat Dataframe. Must have a variant name column ("variant") and pval column called "pval". If id is present then clumping will be done per unique id.
-#' @param clump_kb Clumping kb window. Default is very strict, 10000
-#' @param clump_r2 Clumping r2 threshold. Default is very strict, 0.001
-#' @param clump_p Clumping sig level for index variants. Default = 1 (i.e. no threshold)
-#' @param bfile If this is provided then will use the API. Default = NULL
-#' @param plink_bin Specify path to plink binary. Default = NULL. See https://github.com/explodecomputer/plinkbinr for convenient access to plink binaries
+#' @param dat Dataframe. Must have a variant name column (`variant`) and pval column called `pval`. 
+#' If `id` is present then clumping will be done per unique id.
+#' @param clump_kb Clumping kb window. Default is very strict, `10000`
+#' @param clump_r2 Clumping r2 threshold. Default is very strict, `0.001`
+#' @param clump_p Clumping sig level for index variants. Default = `1` (i.e. no threshold)
+#' @param bfile If this is provided then will use the API. Default = `NULL`
+#' @param plink_bin Specify path to plink binary. Default = `NULL`. 
+#' See \url{https://github.com/explodecomputer/plinkbinr} for convenient access to plink binaries
 #' @importFrom utils read.table
 #' @importFrom utils write.table
 

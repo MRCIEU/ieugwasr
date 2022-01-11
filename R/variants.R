@@ -2,8 +2,9 @@
 #'
 #' Provide a gene identified, either Ensembl or Entrez
 #'
-#' @param gene Vector of genes, either Ensembl or Entrez, e.g. c("ENSG00000123374", "ENSG00000160791") or 1017
-#' @param radius Radius around the gene region to include. Default = 0
+#' @param gene Vector of genes, either Ensembl or Entrez, 
+#' e.g. `c("ENSG00000123374", "ENSG00000160791")` or `1017`
+#' @param radius Radius around the gene region to include. Default = `0`
 #'
 #' @export
 #' @return data frame with the following columns

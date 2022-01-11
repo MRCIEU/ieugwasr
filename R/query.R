@@ -114,7 +114,8 @@ api_query <- function(path, query=NULL, access_token=check_access_token(),
 #' @param response Output from httr
 #'
 #' @export
-#' @return Parsed json output from query, often in form of data frame. If status code is not successful then return the actual response
+#' @return Parsed json output from query, often in form of data frame. 
+#' If status code is not successful then return the actual response
 get_query_content <- function(response)
 {
 	if(httr::status_code(response) >= 200 & httr::status_code(response) < 300)

@@ -99,5 +99,3 @@ ld_matrix(
 To automatically extract variants from a dataset, and search for LD proxies when a requested variant is not present in the dataset, please look at the options available in the [gwasvcf](https://mrcieu.github.io/gwasvcf/) package:
 
 https://mrcieu.github.io/gwasvcf/articles/guide.html#ld-proxies-1
-
-

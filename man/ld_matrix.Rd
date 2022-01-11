@@ -15,26 +15,39 @@ ld_matrix(
 \arguments{
 \item{variants}{List of variants (rsids)}
 
-\item{with_alleles}{Whether to append the allele names to the SNP names. Default: TRUE}
+\item{with_alleles}{Whether to append the allele names to the SNP names. Default: \code{TRUE}}
 
-\item{pop}{Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR. 'legacy' also available - which is a previously used verison of the EUR panel with a slightly different set of markers}
+\item{pop}{Super-population to use as reference panel. Default = \code{"EUR"}.
+Options are \code{"EUR"}, \code{"SAS"}, \code{"EAS"}, \code{"AFR"}, \code{"AMR"}.
+\code{'legacy'} also available - which is a previously used verison of the EUR
+panel with a slightly different set of markers}
 
-\item{bfile}{If this is provided then will use the API. Default = NULL}
+\item{bfile}{If this is provided then will use the API. Default = \code{NULL}}
 
-\item{plink_bin}{If null and bfile is not null then will detect packaged plink binary for specific OS. Otherwise specify path to plink binary. Default = NULL}
+\item{plink_bin}{If \code{NULL} and bfile is not \code{NULL} then will detect packaged
+plink binary for specific OS. Otherwise specify path to plink binary. Default = \code{NULL}}
 }
 \value{
 Matrix of LD r values
 }
 \description{
-This function takes a list of SNPs and searches for them in a specified super-population in the 1000 Genomes phase 3 reference panel.
+This function takes a list of SNPs and searches for them in a specified
+super-population in the 1000 Genomes phase 3 reference panel.
 It then creates an LD matrix of r values (signed, and not squared).
-All LD values are with respect to the major alleles in the 1000G dataset. You can specify whether the allele names are displayed.
+All LD values are with respect to the major alleles in the 1000G dataset.
+You can specify whether the allele names are displayed.
 }
 \details{
-The data used for generating the LD matrix includes only bi-allelic SNPs with MAF > 0.01, so it's quite possible that a variant you want to include will be absent. If it is absent, it will be automatically excluded from the results.
+The data used for generating the LD matrix includes only bi-allelic SNPs
+with MAF > 0.01, so it's quite possible that a variant you want to include
+will be absent. If it is absent, it will be automatically excluded from the results.
 
-You can check if your variants are present in the LD reference panel using ieugwasr::ld_reflookup()
+You can check if your variants are present in the LD reference panel using
+\code{\link[=ld_reflookup]{ld_reflookup()}}
 
-This function does put load on the OpenGWAS servers, which makes life more difficult for other users, and has been limited to analyse only up to 500 variants at a time. We have implemented a method and made available the LD reference panels to perform the operation locally, see ieugwasr::ld_matrix() and related vignettes for details.
+This function does put load on the OpenGWAS servers, which makes life more
+difficult for other users, and has been limited to analyse only up to 500
+variants at a time. We have implemented a method and made available the LD
+reference panels to perform the operation locally, see \code{\link[=ld_matrix]{ld_matrix()}} and
+related vignettes for details.
 }

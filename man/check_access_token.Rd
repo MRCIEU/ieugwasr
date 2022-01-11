@@ -10,5 +10,6 @@ check_access_token()
 NULL or access_token depending on current authentication state
 }
 \description{
-If a call to get_access_token() has been made then it will have generated mrbase.oauth. Pass the token if it is present, if not, return NULL and do not authenticate.
+If a call to \code{\link[=get_access_token]{get_access_token()}} has been made then it will have generated \code{mrbase.oauth}.
+Pass the token if it is present, if not, return \code{NULL} and do not authenticate.
 }

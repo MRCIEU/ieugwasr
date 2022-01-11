@@ -1,18 +1,23 @@
 #' Wrapper for sending queries and payloads to API
 #'
-#' There are a number of different GET and POST endpoints in the GWAS database API. This is a generic way to access them
+#' There are a number of different GET and POST endpoints in the GWAS database API. 
+#' This is a generic way to access them.
 #'
 #' @param path Either a full query path (e.g. for get) or an endpoint (e.g. for post) queries
-#' @param query If post query, provide a list of arguments as the payload. NULL by default
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
-#' @param method GET (default) or POST, DELETE etc
-#' @param silent TRUE/FALSE to be passed to httr call. TRUE by default
-#' @param encode Default = json, see httr::POST for options
-#' @param timeout Default = 300, avoid increasing this, preferentially simplify the query first.
+#' @param query If post query, provide a list of arguments as the payload. `NULL` by default
+#' @param access_token Google OAuth2 access token. 
+#' Used to authenticate level of access to data. By default, checks if already 
+#' authenticated through [`get_access_token`] and if not then does not perform authentication
+#' @param method `"GET"` (default) or `"POST"`, `"DELETE"` etc
+#' @param silent `TRUE`/`FALSE` to be passed to httr call. `TRUE` by default
+#' @param encode Default = `"json"`, see [`httr::POST`] for options
+#' @param timeout Default = `300`, avoid increasing this, preferentially 
+#' simplify the query first.
 #'
 #' @export
 #' @return httr response object
-api_query <- function(path, query=NULL, access_token=check_access_token(), method="GET", silent=TRUE, encode="json", timeout=300)
+api_query <- function(path, query=NULL, access_token=check_access_token(), 
+                      method="GET", silent=TRUE, encode="json", timeout=300)
 {
 	ntry <- 0
 	ntries <- 5
@@ -109,7 +114,8 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), metho
 #' @param response Output from httr
 #'
 #' @export
-#' @return Parsed json output from query, often in form of data frame. If status code is not successful then return the actual response
+#' @return Parsed json output from query, often in form of data frame. 
+#' If status code is not successful then return the actual response
 get_query_content <- function(response)
 {
 	if(httr::status_code(response) >= 200 & httr::status_code(response) < 300)
@@ -146,7 +152,8 @@ print.ApiStatus <- function(x)
 
 #' Get list of studies with available GWAS summary statistics through API
 #'
-#' @param id List of MR-Base IDs to retrieve. If NULL (default) retrieves all available datasets
+#' @param id List of MR-Base IDs to retrieve. If `NULL` (default) retrieves all 
+#' available datasets
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data
 #'
 #' @importFrom magrittr %>%
@@ -202,16 +209,26 @@ batches <- function(access_token = check_access_token())
 
 #' Query specific variants from specific GWAS
 #'
-#' Every rsid is searched for against each requested GWAS id. To get a list of available GWAS ids, or to find their meta data, use \code{gwasinfo}. Can request LD proxies for instances when the requested rsid is not present in a particular GWAS dataset. This currently only uses an LD reference panel composed of Europeans in 1000 genomes version 3. It is also restricted to biallelic single nucleotide polymorphisms (no indels), with European MAF > 0.01.
+#' Every rsid is searched for against each requested GWAS id. To get a list of 
+#' available GWAS ids, or to find their meta data, use [`gwasinfo`]. 
+#' Can request LD proxies for instances when the requested rsid is not present 
+#' in a particular GWAS dataset. This currently only uses an LD reference panel 
+#' composed of Europeans in 1000 genomes version 3. 
+#' It is also restricted to biallelic single nucleotide polymorphisms (no indels), 
+#' with European MAF > 0.01.
 #'
-#' @param variants Array of variants e.g. c("rs234", "7:105561135-105563135")
-#' @param id Array of GWAS studies to query. See \code{gwasinfo} for available studies
-#' @param proxies 0 or (default) 1 - indicating whether to look for proxies
-#' @param r2 Minimum proxy LD rsq value. Default=0.8
-#' @param align_alleles Try to align tag alleles to target alleles (if proxies = 1). 1 = yes (default), 0 = no
-#' @param palindromes Allow palindromic SNPs (if proxies = 1). 1 = yes (default), 0 = no
-#' @param maf_threshold MAF threshold to try to infer palindromic SNPs. Default = 0.3.
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
+#' @param variants Array of variants e.g. `c("rs234", "7:105561135-105563135")`
+#' @param id Array of GWAS studies to query. See [`gwasinfo`] for available studies
+#' @param proxies `0` or (default) `1` - indicating whether to look for proxies
+#' @param r2 Minimum proxy LD rsq value. Default=`0.8`
+#' @param align_alleles Try to align tag alleles to target alleles (if `proxies = 1`). 
+#' `1` = yes (default), `0` = no
+#' @param palindromes Allow palindromic SNPs (if `proxies = 1`). `1` = yes (default), `0` = no
+#' @param maf_threshold MAF threshold to try to infer palindromic SNPs. Default = `0.3`.
+#' @param access_token Google OAuth2 access token. 
+#' Used to authenticate level of access to data. 
+#' By default, checks if already authenticated through [`get_access_token`] and 
+#' if not then does not perform authentication
 #'
 #' @export
 #' @return Dataframe
@@ -240,7 +257,7 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 
 #' Look up sample sizes when meta data is missing from associations
 #'
-#' @param d Output from \code{associations}
+#' @param d Output from [`associations`]
 #'
 #' @export
 #' @return Updated version of d
@@ -279,12 +296,15 @@ fix_n <- function(d)
 
 #' Perform fast phewas of a specific variants against all available GWAS datasets
 #'
-#' This is faster than doing it manually through \code{associations}
+#' This is faster than doing it manually through [`associations`]
 #'
-#' @param variants Array of variants e.g. c("rs234", "7:105561135-105563135")
-#' @param pval p-value threshold. Default = 0.00001
-#' @param batch Vector of batch IDs to search across. If c() (default) then returns all batches
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
+#' @param variants Array of variants e.g. `c("rs234", "7:105561135-105563135")`
+#' @param pval p-value threshold. Default = `0.00001`
+#' @param batch Vector of batch IDs to search across. If `c()` (default) then returns all batches
+#' @param access_token Google OAuth2 access token. 
+#' Used to authenticate level of access to data. 
+#' By default, checks if already authenticated through [`get_access_token`] and 
+#' if not then does not perform authentication
 #'
 #' @export
 #' @return Dataframe
@@ -315,18 +335,26 @@ phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_acces
 #'
 #' By default performs clumping on the server side. 
 #'
-#' @param id Array of GWAS studies to query. See \code{gwasinfo} for available studies
-#' @param pval use this p-value threshold. Default = 5e-8
-#' @param clump whether to clump (1) or not (0). Default = 1
-#' @param r2 use this clumping r2 threshold. Default is very strict, 0.001
-#' @param kb use this clumping kb window. Default is very strict, 10000
-#' @param force_server By default will return preclumped hits. p-value threshold 5e-8, with r2 threshold 0.001 and kb threshold 10000, using only SNPs with MAF > 0.01 in the European samples in 1000 genomes. If force_server = TRUE then will recompute using server side LD reference panel.
-#' @param pop Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
+#' @param id Array of GWAS studies to query. See [`gwasinfo`] for available studies
+#' @param pval use this p-value threshold. Default = `5e-8`
+#' @param clump whether to clump (`1`) or not (`0`). Default = `1`
+#' @param r2 use this clumping r2 threshold. Default is very strict, `0.001`
+#' @param kb use this clumping kb window. Default is very strict, `10000`
+#' @param force_server Logical. By default will return preclumped hits. 
+#' p-value threshold 5e-8, with r2 threshold 0.001 and kb threshold 10000, 
+#' using only SNPs with MAF > 0.01 in the European samples in 1000 genomes. 
+#' If force_server = `TRUE` then will recompute using server side LD reference panel.
+#' @param pop Super-population to use as reference panel. Default = `"EUR"`. 
+#' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`
+#' @param access_token Google OAuth2 access token. 
+#' Used to authenticate level of access to data. 
+#' By default, checks if already authenticated through [`get_access_token`] 
+#' and if not then does not perform authentication
 #'
 #' @export
 #' @return Dataframe
-tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", force_server = FALSE, access_token=check_access_token())
+tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", 
+                    force_server = FALSE, access_token=check_access_token())
 {
 	id <- legacy_ids(id)
 	if(clump == 1 & r2 == 0.001 & kb == 10000 & pval == 5e-8)
@@ -362,7 +390,10 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 #' Check datasets that are in process of being uploaded
 #'
 #' @param id ID
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
+#' @param access_token Google OAuth2 access token. 
+#' Used to authenticate level of access to data. 
+#' By default, checks if already authenticated through [`get_access_token`] 
+#' and if not then does not perform authentication
 #'
 #' @export
 #' @return Dataframe

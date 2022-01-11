@@ -7,7 +7,7 @@
 variants_to_rsid(variants)
 }
 \arguments{
-\item{variants}{Array of variants e.g. c("rs234", "7:105561135-105563135")}
+\item{variants}{Array of variants e.g. \code{c("rs234", "7:105561135-105563135")}}
 }
 \value{
 list of rsids

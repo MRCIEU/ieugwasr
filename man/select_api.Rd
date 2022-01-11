@@ -7,7 +7,8 @@
 select_api(where = "public")
 }
 \arguments{
-\item{where}{Which API to use. Choice between "local", "release", "test". Default = "local"}
+\item{where}{Which API to use. Choice between \code{"public"}, \code{"private"}, \code{"dev1"}, \code{"dev2"}.
+Default = \code{"public"}.}
 }
 \description{
 Toggle API address between development and release

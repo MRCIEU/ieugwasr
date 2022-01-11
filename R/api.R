@@ -1,6 +1,7 @@
 #' Toggle API address between development and release
 #'
-#' @param where Which API to use. Choice between "local", "release", "test". Default = "local"
+#' @param where Which API to use. Choice between `"public"`, `"private"`, `"dev1"`, `"dev2"`. 
+#' Default = `"public"`.
 #'
 #' @export
 #' @return NULL
@@ -52,7 +53,8 @@ get_access_token <- function()
 
 #' Check if authentication has been made
 #'
-#' If a call to get_access_token() has been made then it will have generated mrbase.oauth. Pass the token if it is present, if not, return NULL and do not authenticate.
+#' If a call to [`get_access_token()`] has been made then it will have generated `mrbase.oauth`. 
+#' Pass the token if it is present, if not, return `NULL` and do not authenticate.
 #'
 #' @export
 #' @return NULL or access_token depending on current authentication state

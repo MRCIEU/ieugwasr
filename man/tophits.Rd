@@ -16,21 +16,28 @@ tophits(
 )
 }
 \arguments{
-\item{id}{Array of GWAS studies to query. See \code{gwasinfo} for available studies}
+\item{id}{Array of GWAS studies to query. See \code{\link{gwasinfo}} for available studies}
 
-\item{pval}{use this p-value threshold. Default = 5e-8}
+\item{pval}{use this p-value threshold. Default = \code{5e-8}}
 
-\item{clump}{whether to clump (1) or not (0). Default = 1}
+\item{clump}{whether to clump (\code{1}) or not (\code{0}). Default = \code{1}}
 
-\item{r2}{use this clumping r2 threshold. Default is very strict, 0.001}
+\item{r2}{use this clumping r2 threshold. Default is very strict, \code{0.001}}
 
-\item{kb}{use this clumping kb window. Default is very strict, 10000}
+\item{kb}{use this clumping kb window. Default is very strict, \code{10000}}
 
-\item{pop}{Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR}
+\item{pop}{Super-population to use as reference panel. Default = \code{"EUR"}.
+Options are \code{"EUR"}, \code{"SAS"}, \code{"EAS"}, \code{"AFR"}, \code{"AMR"}}
 
-\item{force_server}{By default will return preclumped hits. p-value threshold 5e-8, with r2 threshold 0.001 and kb threshold 10000, using only SNPs with MAF > 0.01 in the European samples in 1000 genomes. If force_server = TRUE then will recompute using server side LD reference panel.}
+\item{force_server}{Logical. By default will return preclumped hits.
+p-value threshold 5e-8, with r2 threshold 0.001 and kb threshold 10000,
+using only SNPs with MAF > 0.01 in the European samples in 1000 genomes.
+If force_server = \code{TRUE} then will recompute using server side LD reference panel.}
 
-\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication}
+\item{access_token}{Google OAuth2 access token.
+Used to authenticate level of access to data.
+By default, checks if already authenticated through \code{\link{get_access_token}}
+and if not then does not perform authentication}
 }
 \value{
 Dataframe

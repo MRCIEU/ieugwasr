@@ -10,7 +10,8 @@ get_query_content(response)
 \item{response}{Output from httr}
 }
 \value{
-Parsed json output from query, often in form of data frame. If status code is not successful then return the actual response
+Parsed json output from query, often in form of data frame.
+If status code is not successful then return the actual response
 }
 \description{
 Parse out json response from httr object

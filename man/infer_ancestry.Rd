@@ -7,9 +7,11 @@
 infer_ancestry(d, snpinfo = NULL)
 }
 \arguments{
-\item{d}{Data frame containing at least rsid and eaf columns. e.g. output from associations}
+\item{d}{Data frame containing at least \code{rsid} and \code{eaf} columns.
+e.g. output from associations}
 
-\item{snpinfo}{Output from afl2_list, afl2_rsid or afl2_chrpos. If NULL then afl2_list() is used by default}
+\item{snpinfo}{Output from \code{\link{afl2_list}}, \code{\link{afl2_rsid}} or \code{\link{afl2_chrpos}}.
+If \code{NULL} then \code{\link[=afl2_list]{afl2_list()}} is used by default}
 }
 \value{
 data frame ordered by most likely ancestry

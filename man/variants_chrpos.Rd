@@ -7,9 +7,10 @@
 variants_chrpos(chrpos, radius = 0)
 }
 \arguments{
-\item{chrpos}{list of <chr>:<pos> in build 37, e.g. c("3:46414943", "3:122991235"). Also allows ranges e.g "7:105561135-105563135"}
+\item{chrpos}{list of \verb{<chr>:<pos>} in build 37,
+e.g. \code{c("3:46414943", "3:122991235")}. Also allows ranges e.g. \code{"7:105561135-105563135"}}
 
-\item{radius}{Radius around each chrpos, default = 0}
+\item{radius}{Radius around each chrpos, default = \code{0}}
 }
 \value{
 Data frame

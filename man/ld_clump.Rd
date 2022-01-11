@@ -16,32 +16,47 @@ ld_clump(
 )
 }
 \arguments{
-\item{dat}{Dataframe. Must have a variant name column ("rsid") and pval column called "pval". If id is present then clumping will be done per unique id.}
+\item{dat}{Dataframe. Must have a variant name column (\code{rsid}) and pval column called \code{pval}.
+If \code{id} is present then clumping will be done per unique id.}
 
-\item{clump_kb}{Clumping kb window. Default is very strict, 10000}
+\item{clump_kb}{Clumping kb window. Default is very strict, \code{10000}}
 
-\item{clump_r2}{Clumping r2 threshold. Default is very strict, 0.001}
+\item{clump_r2}{Clumping r2 threshold. Default is very strict, \code{0.001}}
 
-\item{clump_p}{Clumping sig level for index variants. Default = 1 (i.e. no threshold)}
+\item{clump_p}{Clumping sig level for index variants. Default = \code{1} (i.e. no threshold)}
 
-\item{pop}{Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR. 'legacy' also available - which is a previously used verison of the EUR panel with a slightly different set of markers}
+\item{pop}{Super-population to use as reference panel. Default = \code{"EUR"}.
+Options are \code{"EUR"}, \code{"SAS"}, \code{"EAS"}, \code{"AFR"}, \code{"AMR"}.
+\code{'legacy'} also available - which is a previously used verison of the EUR
+panel with a slightly different set of markers}
 
 \item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data}
 
-\item{bfile}{If this is provided then will use the API. Default = NULL}
+\item{bfile}{If this is provided then will use the API. Default = \code{NULL}}
 
-\item{plink_bin}{If null and bfile is not null then will detect packaged plink binary for specific OS. Otherwise specify path to plink binary. Default = NULL}
+\item{plink_bin}{If \code{NULL} and \code{bfile} is not \code{NULL} then will detect
+packaged plink binary for specific OS. Otherwise specify path to plink binary.
+Default = \code{NULL}}
 }
 \value{
 Data frame
 }
 \description{
-Uses PLINK clumping method, where SNPs in LD within a particular window will be pruned. The SNP with the lowest p-value is retained.
+Uses PLINK clumping method, where SNPs in LD within a particular window will be pruned.
+The SNP with the lowest p-value is retained.
 }
 \details{
-This function interacts with the OpenGWAS API, which houses LD reference panels for the 5 super-populations in the 1000 genomes reference panel. It includes only bi-allelic SNPs with MAF > 0.01, so it's quite possible that a variant you want to include in the clumping process will be absent. If it is absent, it will be automatically excluded from the results.
+This function interacts with the OpenGWAS API, which houses LD reference panels
+for the 5 super-populations in the 1000 genomes reference panel.
+It includes only bi-allelic SNPs with MAF > 0.01, so it's quite possible that
+a variant you want to include in the clumping process will be absent.
+If it is absent, it will be automatically excluded from the results.
 
-You can check if your variants are present in the LD reference panel using ieugwasr::ld_reflookup()
+You can check if your variants are present in the LD reference panel using
+\code{\link[=ld_reflookup]{ld_reflookup()}}.
 
-This function does put load on the OpenGWAS servers, which makes life more difficult for other users. We have implemented a method and made available the LD reference panels to perform clumping locally, see ieugwasr::ld_clump() and related vignettes for details.
+This function does put load on the OpenGWAS servers, which makes life more
+difficult for other users. We have implemented a method and made available
+the LD reference panels to perform clumping locally, see
+\code{\link[=ld_clump]{ld_clump()}} and related vignettes for details.
 }

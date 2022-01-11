@@ -32,7 +32,7 @@ library(ieugwasr)
 
 The API has a wrapper around [plink version 1.90](https://www.cog-genomics.org/plink/1.9) and can use it to perform clumping with an LD reference panel from 1000 genomes reference data.
 
-```
+``` r
 a <- tophits(id="ieu-a-2", clump=0)
 b <- ld_clump(
     dplyr::tibble(rsid=a$name, pval=a$p, id=a$id)
@@ -45,7 +45,7 @@ Note that you can perform the same operation locally if you provide a path to pl
 
 To get a path to plink you can do the following:
 
-```
+``` r
 devtools::install_github("explodecomputer/genetics.binaRies")
 genetics.binaRies::get_plink_binary()
 ```
@@ -68,7 +68,7 @@ Now supposing in R you have a dataframe, `dat`, with the following columns:
 
 to perform clumping, just do the following:
 
-```
+``` r
 ld_clump(
     dplyr::tibble(rsid=dat$rsid, pval=dat$pval, id=dat$trait_id),
     plink_bin = genetics.binaRies::get_plink_binary(),
@@ -80,13 +80,13 @@ ld_clump(
 
 Similarly, a matrix of LD r values can be generated using
 
-```
+``` r
 ld_matrix(b$variant)
 ```
 
 This uses the API by default but is limited to only 500 variants. You can use, instead, local plink and LD reference data in the same manner as in the `ld_clump` function, e.g.
 
-```
+``` r
 ld_matrix(
 	dat$rsid,
 	plink_bin = genetics.binaRies::get_plink_binary(),
@@ -99,5 +99,3 @@ ld_matrix(
 To automatically extract variants from a dataset, and search for LD proxies when a requested variant is not present in the dataset, please look at the options available in the [gwasvcf](https://mrcieu.github.io/gwasvcf/) package:
 
 https://mrcieu.github.io/gwasvcf/articles/guide.html#ld-proxies-1
-
-

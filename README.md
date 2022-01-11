@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R build status](https://github.com/MRCIEU/ieugwasr/workflows/R-CMD-check/badge.svg)](https://github.com/MRCIEU/ieugwasr/actions)
 [![codecov](https://codecov.io/github/mrcieu/ieugwasr/branch/master/graphs/badge.svg)](https://codecov.io/github/mrcieu/ieugwasr) 
 <!-- badges: end -->
@@ -23,7 +23,7 @@ There are a few convenience functions also:
 - Perform LD clumping using the server, or locally
 - Obtain LD matrices for a list of SNPs using the server or locally (e.g. for fine mapping, colocalisation or Mendelian randomization)
 
-See [https://github.com/MRCIEU/gwasglue] for information about how to connect the genotype and LD data to other packages involving colocalisation, finemapping, visualisation and MR.
+See https://github.com/MRCIEU/gwasglue for information about how to connect the genotype and LD data to other packages involving colocalisation, finemapping, visualisation and MR.
 
 
 ## Installation
@@ -31,8 +31,7 @@ See [https://github.com/MRCIEU/gwasglue] for information about how to connect th
 You can install the developer version of ieugwasr with:
 
 ``` r
-devtools::install_github("mrcieu/ieugwasr")
+remotes::install_github("mrcieu/ieugwasr")
 ```
 
-Browse the vignettes etc for information on how to use this package: [https://mrcieu.github.io/ieugwasr/](https://mrcieu.github.io/ieugwasr/)
-
+Browse the vignettes etc for information on how to use this package: https://mrcieu.github.io/ieugwasr/

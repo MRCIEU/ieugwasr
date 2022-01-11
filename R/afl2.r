@@ -1,8 +1,12 @@
 #' Retrieve a allele frequency and LD scores for pre-defined lists of variants
 #'
-#' Data frame includes 1000 genomes metadata including sample sizes, allele frequency and LD score, separated by 5 super populations (EUR = European, AFR = African, EAS = East Asian, AMR = Admixed American, SAS = South Asian)
+#' Data frame includes 1000 genomes metadata including sample sizes, 
+#' allele frequency and LD score, separated by 5 super populations 
+#' (EUR = European, AFR = African, EAS = East Asian, AMR = Admixed American, 
+#' SAS = South Asian)
 #'
-#' @param variantlist Choose pre-defined list. reduced = ~20k SNPs that are common in all super populations (default). hapmap3 = ~1.3 million hm3 SNPs
+#' @param variantlist Choose pre-defined list. reduced = ~20k SNPs that are 
+#' common in all super populations (default). hapmap3 = ~1.3 million hm3 SNPs
 #'
 #' @export
 #' @return Data frame
@@ -28,7 +32,7 @@ afl2_list <- function(variantlist=c("reduced", "hapmap3")[1])
 #' Look up allele frequencies and LD scores for 1000 genomes populations by rsid
 #'
 #' @param rsid Vector of rsids
-#' @param reference Default="1000g"
+#' @param reference Default=`"1000g"`
 #'
 #' @export
 #' @return data frame
@@ -47,8 +51,9 @@ afl2_rsid <- function(rsid, reference="1000g")
 
 #' Look up allele frequencies and LD scores for 1000 genomes populations by chrpos
 #'
-#' @param chrpos list of <chr>:<pos> in build 37, e.g. c("3:46414943", "3:122991235"). Also allows ranges e.g "7:105561135-105563135"
-#' @param reference Default="1000g"
+#' @param chrpos list of `<chr>:<pos>` in build 37, e.g. `c("3:46414943", "3:122991235")`. 
+#' Also allows ranges e.g `"7:105561135-105563135"`
+#' @param reference Default=`"1000g"`
 #'
 #' @export
 #' @return data frame
@@ -70,8 +75,10 @@ afl2_chrpos <- function(chrpos, reference="1000g")
 #'
 #' Uses ~20k SNPs selected for common frequency across 5 major super populations
 #'
-#' @param d Data frame containing at least rsid and eaf columns. e.g. output from associations
-#' @param snpinfo Output from afl2_list, afl2_rsid or afl2_chrpos. If NULL then afl2_list() is used by default
+#' @param d Data frame containing at least `rsid` and `eaf` columns. 
+#' e.g. output from associations
+#' @param snpinfo Output from [`afl2_list`], [`afl2_rsid`] or [`afl2_chrpos`]. 
+#' If `NULL` then [`afl2_list()`] is used by default
 #'
 #' @export
 #' @return data frame ordered by most likely ancestry
@@ -95,7 +102,7 @@ infer_ancestry <- function(d, snpinfo=NULL)
 
 #' Look up sample sizes when meta data is missing from associations
 #'
-#' @param d Output from \code{associations}
+#' @param d Output from [`associations`]
 #'
 #' @export
 #' @return Updated version of d

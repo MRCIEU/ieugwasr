@@ -9,7 +9,10 @@ editcheck(id, access_token = check_access_token())
 \arguments{
 \item{id}{ID}
 
-\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication}
+\item{access_token}{Google OAuth2 access token.
+Used to authenticate level of access to data.
+By default, checks if already authenticated through \code{\link{get_access_token}}
+and if not then does not perform authentication}
 }
 \value{
 Dataframe

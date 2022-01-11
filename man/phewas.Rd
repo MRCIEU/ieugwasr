@@ -12,17 +12,20 @@ phewas(
 )
 }
 \arguments{
-\item{variants}{Array of variants e.g. c("rs234", "7:105561135-105563135")}
+\item{variants}{Array of variants e.g. \code{c("rs234", "7:105561135-105563135")}}
 
-\item{pval}{p-value threshold. Default = 0.00001}
+\item{pval}{p-value threshold. Default = \code{0.00001}}
 
-\item{batch}{Vector of batch IDs to search across. If c() (default) then returns all batches}
+\item{batch}{Vector of batch IDs to search across. If \code{c()} (default) then returns all batches}
 
-\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication}
+\item{access_token}{Google OAuth2 access token.
+Used to authenticate level of access to data.
+By default, checks if already authenticated through \code{\link{get_access_token}} and
+if not then does not perform authentication}
 }
 \value{
 Dataframe
 }
 \description{
-This is faster than doing it manually through \code{associations}
+This is faster than doing it manually through \code{\link{associations}}
 }

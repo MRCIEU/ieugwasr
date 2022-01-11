@@ -14,17 +14,22 @@ ld_clump_api(
 )
 }
 \arguments{
-\item{dat}{Dataframe. Must have a variant name column ("variant") and pval column called "pval". If id is present then clumping will be done per unique id.}
+\item{dat}{Dataframe. Must have a variant name column (\code{variant}) and pval column called \code{pval}.
+If \code{id} is present then clumping will be done per unique id.}
 
-\item{clump_kb}{Clumping kb window. Default is very strict, 10000}
+\item{clump_kb}{Clumping kb window. Default is very strict, \code{10000}}
 
-\item{clump_r2}{Clumping r2 threshold. Default is very strict, 0.001}
+\item{clump_r2}{Clumping r2 threshold. Default is very strict, \code{0.001}}
 
-\item{clump_p}{Clumping sig level for index variants. Default = 1 (i.e. no threshold)}
+\item{clump_p}{Clumping sig level for index variants. Default = \code{1} (i.e. no threshold)}
 
-\item{pop}{Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR}
+\item{pop}{Super-population to use as reference panel. Default = \code{"EUR"}.
+Options are \code{"EUR"}, \code{"SAS"}, \code{"EAS"}, \code{"AFR"}, \code{"AMR"}}
 
-\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data#' @return Data frame of only independent variants}
+\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data}
+}
+\value{
+Data frame of only independent variants
 }
 \description{
 Perform clumping on the chosen variants using through API

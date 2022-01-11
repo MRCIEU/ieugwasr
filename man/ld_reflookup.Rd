@@ -9,11 +9,15 @@ ld_reflookup(rsid, pop = "EUR")
 \arguments{
 \item{rsid}{Array of rsids to check}
 
-\item{pop}{Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR}
+\item{pop}{Super-population to use as reference panel. Default = \code{"EUR"}.
+Options are \code{"EUR"}, \code{"SAS"}, \code{"EAS"}, \code{"AFR"}, \code{"AMR"}}
 }
 \value{
 Array of rsids that are present in the LD reference panel
 }
 \description{
-Provide a list of rsids that you may want to perform LD operations on to check if they are present in the LD reference panel. If they are not then some functions e.g. ld_clump will exclude them from the analysis, so you may want to consider how to handle those variants in your data.
+Provide a list of rsids that you may want to perform LD operations on to
+check if they are present in the LD reference panel. If they are not then
+some functions e.g. \code{\link{ld_clump}} will exclude them from the analysis,
+so you may want to consider how to handle those variants in your data.
 }

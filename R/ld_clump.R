@@ -95,12 +95,15 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 
 #' Perform clumping on the chosen variants using through API
 #'
-#' @param dat Dataframe. Must have a variant name column ("variant") and pval column called "pval". If id is present then clumping will be done per unique id.
-#' @param clump_kb Clumping kb window. Default is very strict, 10000
-#' @param clump_r2 Clumping r2 threshold. Default is very strict, 0.001
-#' @param clump_p Clumping sig level for index variants. Default = 1 (i.e. no threshold)
-#' @param pop Super-population to use as reference panel. Default = "EUR". Options are EUR, SAS, EAS, AFR, AMR
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data#' @return Data frame of only independent variants
+#' @param dat Dataframe. Must have a variant name column (`variant`) and pval column called `pval`. 
+#' If `id` is present then clumping will be done per unique id.
+#' @param clump_kb Clumping kb window. Default is very strict, `10000`
+#' @param clump_r2 Clumping r2 threshold. Default is very strict, `0.001`
+#' @param clump_p Clumping sig level for index variants. Default = `1` (i.e. no threshold)
+#' @param pop Super-population to use as reference panel. Default = `"EUR"`. 
+#' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`
+#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data
+#' @return Data frame of only independent variants
 ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, pop="EUR", access_token=check_access_token())
 {
 	res <- api_query('ld/clump',

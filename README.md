@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R build status](https://github.com/MRCIEU/ieugwasr/workflows/R-CMD-check/badge.svg)](https://github.com/MRCIEU/ieugwasr/actions)
 [![codecov](https://codecov.io/github/mrcieu/ieugwasr/branch/master/graphs/badge.svg)](https://codecov.io/github/mrcieu/ieugwasr) 
 <!-- badges: end -->

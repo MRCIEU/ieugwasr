@@ -260,4 +260,3 @@ The OpenGWAS database contains a database of population annotations from the 100
     eas_example <- associations(snplist$rsid, "bbj-a-10")
     ieugwasr::infer_ancestry(eur_example, snplist)
     ```
-

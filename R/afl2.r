@@ -32,7 +32,7 @@ afl2_list <- function(variantlist=c("reduced", "hapmap3")[1])
 #' Look up allele frequencies and LD scores for 1000 genomes populations by rsid
 #'
 #' @param rsid Vector of rsids
-#' @param reference Default="1000g"
+#' @param reference Default=`"1000g"`
 #'
 #' @export
 #' @return data frame

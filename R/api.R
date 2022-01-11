@@ -1,6 +1,7 @@
 #' Toggle API address between development and release
 #'
-#' @param where Which API to use. Choice between "local", "release", "test". Default = "local"
+#' @param where Which API to use. Choice between `"public"`, `"private"`, `"dev1"`, `"dev2"`. 
+#' Default = `"public"`.
 #'
 #' @export
 #' @return NULL

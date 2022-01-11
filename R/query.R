@@ -296,12 +296,15 @@ fix_n <- function(d)
 
 #' Perform fast phewas of a specific variants against all available GWAS datasets
 #'
-#' This is faster than doing it manually through \code{associations}
+#' This is faster than doing it manually through [`associations`]
 #'
-#' @param variants Array of variants e.g. c("rs234", "7:105561135-105563135")
-#' @param pval p-value threshold. Default = 0.00001
-#' @param batch Vector of batch IDs to search across. If c() (default) then returns all batches
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
+#' @param variants Array of variants e.g. `c("rs234", "7:105561135-105563135")`
+#' @param pval p-value threshold. Default = `0.00001`
+#' @param batch Vector of batch IDs to search across. If `c()` (default) then returns all batches
+#' @param access_token Google OAuth2 access token. 
+#' Used to authenticate level of access to data. 
+#' By default, checks if already authenticated through [`get_access_token`] and 
+#' if not then does not perform authentication
 #'
 #' @export
 #' @return Dataframe

@@ -31,7 +31,7 @@ See https://github.com/MRCIEU/gwasglue for information about how to connect the 
 You can install the developer version of ieugwasr with:
 
 ``` r
-devtools::install_github("mrcieu/ieugwasr")
+remotes::install_github("mrcieu/ieugwasr")
 ```
 
 Browse the vignettes etc for information on how to use this package: [https://mrcieu.github.io/ieugwasr/](https://mrcieu.github.io/ieugwasr/)

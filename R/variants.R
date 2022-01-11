@@ -120,4 +120,3 @@ format_variants <- function(v)
 		SYN=v[["SYN"]]
 	)
 }
-

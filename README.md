@@ -34,5 +34,4 @@ You can install the developer version of ieugwasr with:
 remotes::install_github("mrcieu/ieugwasr")
 ```
 
-Browse the vignettes etc for information on how to use this package: [https://mrcieu.github.io/ieugwasr/](https://mrcieu.github.io/ieugwasr/)
-
+Browse the vignettes etc for information on how to use this package: https://mrcieu.github.io/ieugwasr/

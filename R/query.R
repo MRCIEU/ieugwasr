@@ -257,7 +257,7 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 
 #' Look up sample sizes when meta data is missing from associations
 #'
-#' @param d Output from \code{associations}
+#' @param d Output from [`associations`]
 #'
 #' @export
 #' @return Updated version of d

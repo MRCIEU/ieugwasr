@@ -8,8 +8,8 @@ Description: R interface to the IEU GWAS database API. Includes a wrapper
     to make generic calls to the API, plus convenience functions for
     specific queries.
 License: MIT + file LICENSE
-URL: https://github.com/mrcieu/ieugwasr
-BugReports: https://github.com/mrcieu/ieugwasr/issues
+URL: https://github.com/MRCIEU/ieugwasr
+BugReports: https://github.com/MRCIEU/ieugwasr/issues
 Imports:
     dplyr,
     googleAuthR,

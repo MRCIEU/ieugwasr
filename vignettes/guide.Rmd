@@ -65,6 +65,7 @@ The `api_query` function returns a `response` object from the `httr` package. Se
 ## Get API status
 
 ```r
+library(ieugwasr)
 api_status()
 ```
 

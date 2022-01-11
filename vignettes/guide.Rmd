@@ -52,7 +52,7 @@ To unauthenticate, simply delete the relevant file in the `ieugwasr_oauth` folde
 
 ## General API queries
 
-The API has a number of endpoints documented [here](http://ieu-db-interface.epi.bris.ac.uk:8082/docs/). A general way to access them in R is using the `api_query` function. There are two types of endpoints - `GET` and `POST`. 
+The API has a number of endpoints documented [here](http://gwas-api.mrcieu.ac.uk/docs/). A general way to access them in R is using the `api_query` function. There are two types of endpoints - `GET` and `POST`. 
 
 - `GET` - you provide a single URL which includes the endpoint and query. For example, for the `association` endpoint you can obtain some rsids in some studies, e.g.
     + `api_query("associations/ieu-a-2,ieu-a-7/rs234,rs123")`

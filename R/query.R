@@ -353,7 +353,8 @@ phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_acces
 #'
 #' @export
 #' @return Dataframe
-tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", force_server = FALSE, access_token=check_access_token())
+tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", 
+                    force_server = FALSE, access_token=check_access_token())
 {
 	id <- legacy_ids(id)
 	if(clump == 1 & r2 == 0.001 & kb == 10000 & pval == 5e-8)

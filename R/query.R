@@ -1,14 +1,18 @@
 #' Wrapper for sending queries and payloads to API
 #'
-#' There are a number of different GET and POST endpoints in the GWAS database API. This is a generic way to access them
+#' There are a number of different GET and POST endpoints in the GWAS database API. 
+#' This is a generic way to access them.
 #'
 #' @param path Either a full query path (e.g. for get) or an endpoint (e.g. for post) queries
-#' @param query If post query, provide a list of arguments as the payload. NULL by default
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
-#' @param method GET (default) or POST, DELETE etc
-#' @param silent TRUE/FALSE to be passed to httr call. TRUE by default
-#' @param encode Default = json, see httr::POST for options
-#' @param timeout Default = 300, avoid increasing this, preferentially simplify the query first.
+#' @param query If post query, provide a list of arguments as the payload. `NULL` by default
+#' @param access_token Google OAuth2 access token. 
+#' Used to authenticate level of access to data. By default, checks if already 
+#' authenticated through [`get_access_token`] and if not then does not perform authentication
+#' @param method `"GET"` (default) or `"POST"`, `"DELETE"` etc
+#' @param silent `TRUE`/`FALSE` to be passed to httr call. `TRUE` by default
+#' @param encode Default = `"json"`, see [`httr::POST`] for options
+#' @param timeout Default = `300`, avoid increasing this, preferentially 
+#' simplify the query first.
 #'
 #' @export
 #' @return httr response object

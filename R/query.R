@@ -209,16 +209,26 @@ batches <- function(access_token = check_access_token())
 
 #' Query specific variants from specific GWAS
 #'
-#' Every rsid is searched for against each requested GWAS id. To get a list of available GWAS ids, or to find their meta data, use \code{gwasinfo}. Can request LD proxies for instances when the requested rsid is not present in a particular GWAS dataset. This currently only uses an LD reference panel composed of Europeans in 1000 genomes version 3. It is also restricted to biallelic single nucleotide polymorphisms (no indels), with European MAF > 0.01.
+#' Every rsid is searched for against each requested GWAS id. To get a list of 
+#' available GWAS ids, or to find their meta data, use [`gwasinfo`]. 
+#' Can request LD proxies for instances when the requested rsid is not present 
+#' in a particular GWAS dataset. This currently only uses an LD reference panel 
+#' composed of Europeans in 1000 genomes version 3. 
+#' It is also restricted to biallelic single nucleotide polymorphisms (no indels), 
+#' with European MAF > 0.01.
 #'
-#' @param variants Array of variants e.g. c("rs234", "7:105561135-105563135")
-#' @param id Array of GWAS studies to query. See \code{gwasinfo} for available studies
-#' @param proxies 0 or (default) 1 - indicating whether to look for proxies
-#' @param r2 Minimum proxy LD rsq value. Default=0.8
-#' @param align_alleles Try to align tag alleles to target alleles (if proxies = 1). 1 = yes (default), 0 = no
-#' @param palindromes Allow palindromic SNPs (if proxies = 1). 1 = yes (default), 0 = no
-#' @param maf_threshold MAF threshold to try to infer palindromic SNPs. Default = 0.3.
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
+#' @param variants Array of variants e.g. `c("rs234", "7:105561135-105563135")`
+#' @param id Array of GWAS studies to query. See [`gwasinfo`] for available studies
+#' @param proxies `0` or (default) `1` - indicating whether to look for proxies
+#' @param r2 Minimum proxy LD rsq value. Default=`0.8`
+#' @param align_alleles Try to align tag alleles to target alleles (if `proxies = 1`). 
+#' `1` = yes (default), `0` = no
+#' @param palindromes Allow palindromic SNPs (if `proxies = 1`). `1` = yes (default), `0` = no
+#' @param maf_threshold MAF threshold to try to infer palindromic SNPs. Default = `0.3`.
+#' @param access_token Google OAuth2 access token. 
+#' Used to authenticate level of access to data. 
+#' By default, checks if already authenticated through [`get_access_token`] and 
+#' if not then does not perform authentication
 #'
 #' @export
 #' @return Dataframe

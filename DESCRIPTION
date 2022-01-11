@@ -1,5 +1,5 @@
 Package: ieugwasr
-Title: R interface to the IEU GWAS database API
+Title: R interface to the IEU GWAS Database API
 Version: 0.1.5
 Authors@R: 
     person("Gibran", "Hemani", , "g.hemani@bristol.ac.uk", role = c("aut", "cre"),

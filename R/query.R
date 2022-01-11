@@ -390,7 +390,10 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 #' Check datasets that are in process of being uploaded
 #'
 #' @param id ID
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data. By default, checks if already authenticated through \code{get_access_token} and if not then does not perform authentication
+#' @param access_token Google OAuth2 access token. 
+#' Used to authenticate level of access to data. 
+#' By default, checks if already authenticated through [`get_access_token`] 
+#' and if not then does not perform authentication
 #'
 #' @export
 #' @return Dataframe

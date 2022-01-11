@@ -16,7 +16,8 @@
 #'
 #' @export
 #' @return httr response object
-api_query <- function(path, query=NULL, access_token=check_access_token(), method="GET", silent=TRUE, encode="json", timeout=300)
+api_query <- function(path, query=NULL, access_token=check_access_token(), 
+                      method="GET", silent=TRUE, encode="json", timeout=300)
 {
 	ntry <- 0
 	ntries <- 5

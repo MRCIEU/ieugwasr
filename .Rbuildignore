@@ -5,8 +5,6 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-^doc$
-^Meta$
 ^\.github$
 ^.*\.Rproj$
 ^\.Rproj\.user$

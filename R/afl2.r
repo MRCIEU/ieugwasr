@@ -1,8 +1,12 @@
 #' Retrieve a allele frequency and LD scores for pre-defined lists of variants
 #'
-#' Data frame includes 1000 genomes metadata including sample sizes, allele frequency and LD score, separated by 5 super populations (EUR = European, AFR = African, EAS = East Asian, AMR = Admixed American, SAS = South Asian)
+#' Data frame includes 1000 genomes metadata including sample sizes, 
+#' allele frequency and LD score, separated by 5 super populations 
+#' (EUR = European, AFR = African, EAS = East Asian, AMR = Admixed American, 
+#' SAS = South Asian)
 #'
-#' @param variantlist Choose pre-defined list. reduced = ~20k SNPs that are common in all super populations (default). hapmap3 = ~1.3 million hm3 SNPs
+#' @param variantlist Choose pre-defined list. reduced = ~20k SNPs that are 
+#' common in all super populations (default). hapmap3 = ~1.3 million hm3 SNPs
 #'
 #' @export
 #' @return Data frame

@@ -59,7 +59,7 @@ b <- associations(chrpos, "ieu-a-7", proxies=0)
 rsid <- b$rsid
 ```
 
-This is a `r radius * 2` size window, which has `r length(rsid)` variants to lookup.
+This is a `r format(radius * 2, scientific = FALSE, big.mark = ",")` size window, which has `r length(rsid)` variants to lookup.
 
 ```{r}
 mbm <- microbenchmark("rsid" = {
@@ -83,7 +83,7 @@ b <- associations(chrpos, "ieu-a-7", proxies=0)
 rsid <- b$rsid
 ```
 
-This `r length(chrpos)` ranges of `r 20000` size window, which is covered by `r length(rsid)` variants to lookup.
+This `r length(chrpos)` ranges of `r format(20000, scientific = FALSE, big.mark = ",")` size window, which is covered by `r length(rsid)` variants to lookup.
 
 
 ```{r}

@@ -102,7 +102,7 @@ infer_ancestry <- function(d, snpinfo=NULL)
 
 #' Look up sample sizes when meta data is missing from associations
 #'
-#' @param d Output from \code{associations}
+#' @param d Output from [`associations`]
 #'
 #' @export
 #' @return Updated version of d

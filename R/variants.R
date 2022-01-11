@@ -52,8 +52,9 @@ variants_rsid <- function(rsid)
 #'
 #' For a list of chromosome and positions, finds all variants within a given radius
 #'
-#' @param chrpos list of <chr>:<pos> in build 37, e.g. c("3:46414943", "3:122991235"). Also allows ranges e.g "7:105561135-105563135"
-#' @param radius Radius around each chrpos, default = 0
+#' @param chrpos list of `<chr>:<pos>` in build 37, 
+#' e.g. `c("3:46414943", "3:122991235")`. Also allows ranges e.g. `"7:105561135-105563135"`
+#' @param radius Radius around each chrpos, default = `0`
 #'
 #' @export
 #' @return Data frame

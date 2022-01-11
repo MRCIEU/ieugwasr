@@ -8,10 +8,6 @@
 #'
 #' @export
 #' @return data frame with the following columns
-#' \describe{
-#' 	\item{}{}
-#' }
-
 variants_gene <- function(gene, radius=0)
 {
 	l <- list()

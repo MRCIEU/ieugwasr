@@ -278,7 +278,8 @@ associations_query <- function(variants=variants, id=id, proxies=proxies, r2=r2,
 		maf_threshold=maf_threshold
 	), access_token=access_token) %>% get_query_content()
 
-	if(class(out) == "response")
+	# if(class(out) == "response")
+	if(inherits(out, "response"))
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
@@ -348,7 +349,8 @@ phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_acces
 		pval=pval,
 		index_list=batch
 	), access_token=access_token) %>% get_query_content()
-	if(class(out) != "response")
+	# if(class(out) != "response")
+	if(!inherits(out, "response"))
 	{
 		out <- out %>% dplyr::as_tibble() %>% fix_n()
 		if(nrow(out) > 0)
@@ -409,7 +411,8 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 		kb=kb,
 		pop=pop
 	), access_token=access_token) %>% get_query_content()
-	if(class(out) == "response")
+	# if(class(out) == "response")
+	if(inherits(out, "response"))
 	{
 		return(out)
 	} else if(is.data.frame(out)) {

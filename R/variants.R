@@ -15,7 +15,8 @@ variants_gene <- function(gene, radius=0)
 	{
 		message("Looking up ", gene[i])
 		o <- api_query(paste0('variants/gene/', gene[i], "?radius=", format(radius, scientific=FALSE))) %>% get_query_content()
-		if(class(o) != "response")
+		# if(class(o) != "response")
+		if(!inherits(o, "response"))
 		{
 			l[[gene[i]]] <- o %>% dplyr::bind_rows() %>% format_variants()
 		}		

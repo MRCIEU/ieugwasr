@@ -233,7 +233,7 @@ batches <- function(access_token = check_access_token())
 #'
 #' @export
 #' @return Dataframe. If `gwasglue = TRUE` then returns a gwasglue2 object.
-associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, access_token=check_access_token(), gwasglue=FALSE, qc = FALSE){
+associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, access_token=check_access_token(), gwasglue=FALSE){
 
 	# Query specific variants from specific GWAS using associations_query internal function (old version)
 	out <- associations_query(variants=variants, id=id, proxies=proxies, r2=r2, align_alleles=align_alleles, palindromes=palindromes, maf_threshold=maf_threshold, access_token=access_token)

@@ -229,7 +229,7 @@ batches <- function(access_token = check_access_token())
 #' Used to authenticate level of access to data. 
 #' By default, checks if already authenticated through [`get_access_token`] and 
 #' if not then does not perform authentication
-#' @param gwasglue Returns a gwasglue2 SummarySet object  (if `gwasglue = TRUE``).  Only one GWAS id can be queried at a time. See [gwasglue2::create_dataset()].Default = `FALSE`.
+#' @param gwasglue Returns a gwasglue2 SummarySet object  (if `gwasglue = TRUE`).  Only one GWAS id can be queried at a time. See [gwasglue2::create_dataset()].Default = `FALSE`.
 #'
 #' @export
 #' @return Dataframe. If `gwasglue = TRUE` then returns a gwasglue2 object.

@@ -23,6 +23,7 @@ convert_variantid <- function(afl2_list){
 #' @param afl2_list A [ieugwasr::afl2_list] dataframe.
 #' @param pop A string with the population name. Default is "EUR".
 #' @param path_to_save A string with the path to save the ldscores. Default is the population name. 
+#' @export
 #' @return A directory with the compressed LD scores files.
 write_ldscores <- function(afl2_list, pop = "EUR", path_to_save = pop){
   

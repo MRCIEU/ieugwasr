@@ -1,10 +1,10 @@
 # Perform fast queries in R against a massive database of complete GWAS summary data
 
 <!-- badges: start -->
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R build status](https://github.com/MRCIEU/ieugwasr/workflows/R-CMD-check/badge.svg)](https://github.com/MRCIEU/ieugwasr/actions)
 [![codecov](https://codecov.io/github/mrcieu/ieugwasr/branch/master/graphs/badge.svg)](https://codecov.io/github/mrcieu/ieugwasr) 
+[![R-CMD-check](https://github.com/MRCIEU/ieugwasr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/MRCIEU/ieugwasr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The [IEU GWAS database](https://gwas.mrcieu.ac.uk/) comprises over 10,000 curated, QC'd and harmonised complete GWAS summary datasets and can be queried using an API. See [here](https://gwas-api.mrcieu.ac.uk/docs) for documentation on the API itself. This R package is a wrapper to make generic calls to the API, plus convenience functions for specific queries. 

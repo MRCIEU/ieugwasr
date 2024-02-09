@@ -6,8 +6,9 @@
 convert_variantid <- function(afl2_list){
   chr <- afl2_list$chr
   pos <- afl2_list$pos
-  a1 <- afl2_list$alt  # Check if the ALT is the effect allele
+  a1 <- afl2_list$alt
   a2 <- afl2_list$ref
+  # NOTE: It is indifferently if "alt" and "ref" are "a1" or "a2". The function will sort them alphabetically.
   
   # variantid <-  gwasglue2::create_variantid(chr,pos,a1,a2)
   # TODO: The gwasglue2 function create_variantid is not working, because is not being exported. For now I copied the function here, until the gwasglue2 package is fixed.
@@ -24,7 +25,7 @@ convert_variantid <- function(afl2_list){
 #' @param pop A string with the population name. Default is "EUR".
 #' @param path_to_save A string with the path to save the ldscores. Default is the population name. 
 #' @export
-#' @return A directory with the compressed LD scores files.
+#' @return A directory with the compressed LD scores files. Each file is named as the chromosome number, and contains the positions, variant IDs and LD scores.
 write_ldscores <- function(afl2_list, pop = "EUR", path_to_save = pop){
   
   # Check if there is a valid population name

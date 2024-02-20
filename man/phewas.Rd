@@ -4,12 +4,7 @@
 \alias{phewas}
 \title{Perform fast phewas of a specific variants against all available GWAS datasets}
 \usage{
-phewas(
-  variants,
-  pval = 1e-05,
-  batch = c(),
-  access_token = check_access_token()
-)
+phewas(variants, pval = 1e-05, batch = c(), opengwas_jwt = get_opengwas_jwt())
 }
 \arguments{
 \item{variants}{Array of variants e.g. \code{c("rs234", "7:105561135-105563135")}}
@@ -18,10 +13,7 @@ phewas(
 
 \item{batch}{Vector of batch IDs to search across. If \code{c()} (default) then returns all batches}
 
-\item{access_token}{Google OAuth2 access token.
-Used to authenticate level of access to data.
-By default, checks if already authenticated through \code{\link{get_access_token}} and
-if not then does not perform authentication}
+\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }
 \value{
 Dataframe

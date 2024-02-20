@@ -4,13 +4,13 @@
 \alias{gwasinfo}
 \title{Get list of studies with available GWAS summary statistics through API}
 \usage{
-gwasinfo(id = NULL, access_token = check_access_token())
+gwasinfo(id = NULL, opengwas_jwt = get_opengwas_jwt())
 }
 \arguments{
 \item{id}{List of MR-Base IDs to retrieve. If \code{NULL} (default) retrieves all
 available datasets}
 
-\item{access_token}{Google OAuth2 access token. Used to authenticate level of access to data}
+\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }
 \value{
 Dataframe of details for all available studies

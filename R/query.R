@@ -21,7 +21,7 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 	ntries <- 5
 	headers <- httr::add_headers(
 		# 'Content-Type'='application/json; charset=UTF-8',
-		'Authorization'=paste("Bearer", opengwas_jwt=get_opengwas_jwt()),
+		'Authorization'=paste("Bearer", opengwas_jwt=opengwas_jwt),
 		'X-Api-Source'=ifelse(is.null(options()$mrbase.environment), 'R/TwoSampleMR', 'mr-base-shiny')
 	)
 
@@ -162,9 +162,9 @@ gwasinfo <- function(id=NULL, opengwas_jwt=get_opengwas_jwt())
 	if(!is.null(id))
 	{
 		stopifnot(is.vector(id))
-		out <- api_query('gwasinfo', query = list(id=id), opengwas_jwt) %>% get_query_content()
+		out <- api_query('gwasinfo', query = list(id=id), opengwas_jwt=opengwas_jwt) %>% get_query_content()
 	} else {
-		out <- api_query('gwasinfo', opengwas_jwt) %>% get_query_content()
+		out <- api_query('gwasinfo', opengwas_jwt=opengwas_jwt) %>% get_query_content()
 	}
 	if(length(out) == 0)
 	{
@@ -201,7 +201,7 @@ batch_from_id <- function(id)
 #' @return data frame
 batches <- function(opengwas_jwt=get_opengwas_jwt())
 {
-	api_query('batches', opengwas_jwt) %>% get_query_content()
+	api_query('batches', opengwas_jwt=opengwas_jwt) %>% get_query_content()
 }
 
 #' Query specific variants from specific GWAS
@@ -240,7 +240,7 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 		align_alleles=align_alleles,
 		palindromes=palindromes,
 		maf_threshold=maf_threshold
-	), opengwas_jwt) %>% get_query_content()
+	), opengwas_jwt=opengwas_jwt) %>% get_query_content()
 
 	if(class(out) == "response")
 	{
@@ -308,7 +308,7 @@ phewas <- function(variants, pval = 0.00001, batch=c(), opengwas_jwt=get_opengwa
 		variant=variants,
 		pval=pval,
 		index_list=batch
-	), opengwas_jwt) %>% get_query_content()
+	), opengwas_jwt=opengwas_jwt) %>% get_query_content()
 	if(class(out) != "response")
 	{
 		out <- out %>% dplyr::as_tibble() %>% fix_n()
@@ -366,7 +366,7 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 		r2=r2,
 		kb=kb,
 		pop=pop
-	), opengwas_jwt) %>% get_query_content()
+	), opengwas_jwt=opengwas_jwt) %>% get_query_content()
 	if(class(out) == "response")
 	{
 		return(out)
@@ -389,7 +389,7 @@ editcheck <- function(id, opengwas_jwt=get_opengwas_jwt())
 {
 	api <- options()[["ieugwasr_api"]]
 	select_api("private")
-	out <- api_query(paste0("edit/check/", id), opengwas_jwt) %>%
+	out <- api_query(paste0("edit/check/", id), opengwas_jwt=opengwas_jwt) %>%
 		get_query_content()
 	options(ieugwasr_api=api)
 	return(out)

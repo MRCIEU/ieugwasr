@@ -23,32 +23,15 @@ The [IEU GWAS database](https://gwas.mrcieu.ac.uk/) comprises over 10,000 curate
 
 ## Authentication
 
-Most datasets in the database are public and don't need authentication. But if you want to access a private dataset that is linked to your (gmail) email address, you need to authenticate the query using a method known as Google OAuth2.0.
+User authentication is required to perform most OpenGWAS queries. To authenticate, you need to generate a token from the OpenGWAS website. The token behaves like a password, and it will be used to authorise the requests you make to the OpenGWAS API. Here are the steps to generate the token and then have `ieugwasr` automatically use it for your queries:
 
-Essentially - you run this command at the start of your session: 
+1. Login to https://api.opengwas.io
+2. Generate a new token
+3. Add `OPENGWAS_JWT=<token>` to your `.Renviron` file. This file could be either in your home directory or in the working directory of your R session. You can check the location of your `.Renviron` file by running `Sys.getenv("R_ENVIRON_USER")` in R.
+4. Restart your R session
+5. To check that your token is working, run `ieugwasr::get_opengwas_jwt()`. If it returns a long random string then you are authenticated.
 
-```r
-ieugwasr::get_access_token()
-```
-
-which will open up a web browser asking you to provide your google username and password, and upon doing so a directory will be created in your working directory called `ieugwasr_oauth`. This directory contains a file that looks like this: `<random_string>_<email@address>`. It is a binary file (not human readable), which contains your access token, and it acts as a convenient way to hold a randomly generated password.
-
-If you are using a server which doesn’t have a graphic user interface then the `ieugwasr::get_access_token()` method is not going to work. You need to generate the `ieugwasr_oauth` directory and token file on a computer that has a web browser, and then copy that directory (containing the token file) to your server (to the relevant work directory).
-
-If you are using R in a working directory that does not have write permissions then this command will fail, please navigate to a directory that does have write permissions.
-
-If you need to run this in a non-interactive script then you can generate the token file on an interactive computer, copy that file to the working directory that R will be running from, and then run a batch (non-interactive).
-
-You can test to see if you have authenticated using the function
-
-```r
-ieugwasr::check_access_token()
-```
-
-It will return `NULL` if you are not authenticated, or a long random token string if you are.
-
-To unauthenticate, simply delete the relevant file in the `ieugwasr_oauth` folder, or delete the folder entirely.
-
+Now any query to OpenGWAS will automatically include your token to authorise the request.
 
 ## General API queries
 

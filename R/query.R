@@ -144,6 +144,9 @@ api_status <- function()
 	return(o)
 }
 
+#' Print API status
+#' @export 
+#' @return Print out of API status
 print.ApiStatus <- function(x)
 {
 	lapply(names(x), function(y) cat(format(paste0(y, ":"), width=30, justify="right"), x[[y]], "\n"))
@@ -179,6 +182,9 @@ gwasinfo <- function(id=NULL, access_token = check_access_token())
 	return(out)
 }
 
+#' Print GWAS information
+#' @export
+#' @return Print out of GWAS information 
 print.GwasInfo <- function(x)
 {
 	dplyr::glimpse(x)

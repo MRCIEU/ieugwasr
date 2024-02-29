@@ -1,6 +1,6 @@
 #' Converter for gwasglue2 system variant IDs
 #' 
-#' @param afl2_list A [ieugwasr::afl2_list] dataframe
+#' @param afl2_list A `ieugwasr::afl2_list()` dataframe
 #' @return The same dataframe with the gwasglue2 variant IDs added
 #' @export 
 convert_variantid <- function(afl2_list){
@@ -11,7 +11,6 @@ convert_variantid <- function(afl2_list){
   # NOTE: It is indifferently if "alt" and "ref" are "a1" or "a2". The function will sort them alphabetically.
   
   # variantid <-  gwasglue2::create_variantid(chr,pos,a1,a2)
-  # TODO: The gwasglue2 function create_variantid is not working, because is not being exported. For now I copied the function here, until the gwasglue2 package is fixed.
   variantid <-  create_variantid(chr,pos,a1,a2)
 
   afl2_list[,"variantid"] <- variantid 
@@ -21,12 +20,12 @@ convert_variantid <- function(afl2_list){
 
 #' LD scores writer
 #' The LD scores are saved in compressed `.gz`files, split by chromosome name.
-#' @param afl2_list A [ieugwasr::afl2_list] dataframe.
+#' @param afl2_list A `ieugwasr::afl2_list()` dataframe.
 #' @param pop A string with the population name. Default is "EUR".
-#' @param path_to_save A string with the path to save the ldscores. Default is the population name. 
+#' @param path_to_save A string with the path to save the  LD scores. Default is 'ldsc/population_name'. 
 #' @export
 #' @return A directory with the compressed LD scores files. Each file is named as the chromosome number, and contains the positions, variant IDs and LD scores.
-write_ldscores <- function(afl2_list, pop = "EUR", path_to_save = pop){
+write_ldscores <- function(afl2_list, pop = "EUR", path_to_save = paste0("ldsc/",pop)){
   
   # Check if there is a valid population name
   pops <- c("AFR", "AMR", "EAS", "EUR", "SAS")
@@ -40,7 +39,7 @@ write_ldscores <- function(afl2_list, pop = "EUR", path_to_save = pop){
   }
   
   # Create a directory to save the ldscores
-  if (path_to_save == pop){
+  if (path_to_save == path_to_save){
     dir.create(pop, showWarnings = FALSE)
   } else{
     dir.create(path_to_save, showWarnings = FALSE)}
@@ -61,10 +60,8 @@ write_ldscores <- function(afl2_list, pop = "EUR", path_to_save = pop){
 }
 
 
-#  This function is a copy of the gwasglue2::create_variantid function, because the gwasglue2 package is not exporting the function. When the gwasglue2 package is fixed, this function should be removed.
+#  This function is a copy of the `gwasglue2::create_variantid()` function, because the gwasglue2 package is not exporting the function. When the gwasglue2 package is fixed, this function should be removed.
 create_variantid <-function(chr,pos,a1,a2) {
-  if (!requireNamespace("digest", quietly =TRUE)){
-    stop("The CRAN package `digest` needs to be installed.")}
   alleles_sorted <- t(apply(cbind(a1,a2),1,sort)) 
   #  create variantid
   variantid <- paste0(chr,":", pos,"_",alleles_sorted[,1],"_",alleles_sorted[,2])

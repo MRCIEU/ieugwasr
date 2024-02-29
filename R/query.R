@@ -238,10 +238,10 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 	# Query specific variants from specific GWAS using associations_query internal function (old version)
 	out <- associations_query(variants=variants, id=id, proxies=proxies, r2=r2, align_alleles=align_alleles, palindromes=palindromes, maf_threshold=maf_threshold, access_token=access_token)
 		
-	if(isTRUE(gwasglue))
+	if(gwasglue)
 	{
 		# check if it is a tibble (trying to avoid loading the tibble package)
-		if(any(class(out)=="tbl_df")){
+		if(inherits(out ,"tbl_df")){
     		# output gwasglue2 SummarySet object
 			if(id %>% length() != 1){
 				stop("Only one GWAS ID can be queried at a time when using `gwasglue = TRUE`.")
@@ -278,7 +278,6 @@ associations_query <- function(variants=variants, id=id, proxies=proxies, r2=r2,
 		maf_threshold=maf_threshold
 	), access_token=access_token) %>% get_query_content()
 
-	# if(class(out) == "response")
 	if(inherits(out, "response"))
 	{
 		return(out)
@@ -349,7 +348,7 @@ phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_acces
 		pval=pval,
 		index_list=batch
 	), access_token=access_token) %>% get_query_content()
-	# if(class(out) != "response")
+	
 	if(!inherits(out, "response"))
 	{
 		out <- out %>% dplyr::as_tibble() %>% fix_n()
@@ -384,9 +383,8 @@ phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_acces
 #' @param access_token Google OAuth2 access token. 
 #' Used to authenticate level of access to data. 
 #' By default, checks if already authenticated through [`get_access_token`] 
-#' and if not then does not perform authentication
+#' and if not then does not perform authentication.
 #' @param gwasglue Returns a gwasglue2 SummarySet object  (if `gwasglue = TRUE`).  Only one GWAS id can be queried at a time. See [gwasglue2::create_dataset()].Default = `FALSE`.
-#'
 #' @export
 #' @return Dataframe. If `gwasglue = TRUE` then returns a gwasglue2 object.
 tophits <- function(id, pval = 5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", force_server = FALSE, access_token = check_access_token(), gwasglue = FALSE)
@@ -454,7 +452,6 @@ tophits_query <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop=
 		kb=kb,
 		pop=pop
 	), access_token=access_token) %>% get_query_content()
-	# if(class(out) == "response")
 	if(inherits(out, "response"))
 	{
 		return(out)

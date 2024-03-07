@@ -27,4 +27,29 @@
 
 	invisible()
 
+	a <- suppressWarnings(try(readLines("https://raw.githubusercontent.com/MRCIEU/ieugwasr/master/DESCRIPTION"), silent=TRUE))
+
+	if(!inherits(a, 'try-error'))
+	{
+		latest <- gsub("Version: ", "", a[grep("Version", a)])
+		current = utils::packageDescription('ieugwasr')
+
+		test <- utils::compareVersion(latest, current$Version)
+		if(test == 1)
+		{
+			packageStartupMessage("\nWarning:\nYou are running an old version of the ieugwasr package.\n",
+				"This version:   ", current$Version, "\n",
+				"Latest version: ", latest, "\n",
+				"Please consider updating using remotes::install_github('MRCIEU/ieugwasr')")
+		}
+	}
+
+	b <- suppressWarnings(try(jsonlite::read_json("https://raw.githubusercontent.com/MRCIEU/opengwas/main/messages.json"), silent=TRUE))
+	if(length(b) > 0) {
+		packageStartupMessage("OpenGWAS updates:")
+	}
+	o <- lapply(b, \(x) {
+		packageStartupMessage("  Date: ", x[["date"]])
+		sapply(x[["message"]], \(j) packageStartupMessage(paste(" ", j)))
+	})
 }

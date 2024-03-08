@@ -425,15 +425,6 @@ tophits <- function(id, pval = 5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR
 
 
 
-
-
-
-
-
-
-
-
-
 # query top hits from GWAS dataset - tophits internal function to allow for gwasglue
 tophits_query <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", 
                     force_server = FALSE, access_token=check_access_token())

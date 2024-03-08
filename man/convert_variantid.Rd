@@ -7,7 +7,7 @@
 convert_variantid(afl2_list)
 }
 \arguments{
-\item{afl2_list}{A \link{afl2_list} dataframe}
+\item{afl2_list}{A \code{ieugwasr::afl2_list()} dataframe}
 }
 \value{
 The same dataframe with the gwasglue2 variant IDs added

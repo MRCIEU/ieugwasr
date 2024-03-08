@@ -5,17 +5,17 @@
 \title{LD scores writer
 The LD scores are saved in compressed \code{.gz}files, split by chromosome name.}
 \usage{
-write_ldscores(afl2_list, pop = "EUR", path_to_save = pop)
+write_ldscores(afl2_list, pop = "EUR", path_to_save = paste0("ldsc/", pop))
 }
 \arguments{
-\item{afl2_list}{A \link{afl2_list} dataframe.}
+\item{afl2_list}{A \code{ieugwasr::afl2_list()} dataframe.}
 
 \item{pop}{A string with the population name. Default is "EUR".}
 
-\item{path_to_save}{A string with the path to save the ldscores. Default is the population name.}
+\item{path_to_save}{A string with the path to save the  LD scores. Default is 'ldsc/population_name'.}
 }
 \value{
-A directory with the compressed LD scores files.
+A directory with the compressed LD scores files. Each file is named as the chromosome number, and contains the positions, variant IDs and LD scores.
 }
 \description{
 LD scores writer

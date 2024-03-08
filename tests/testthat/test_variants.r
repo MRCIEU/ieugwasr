@@ -1,5 +1,5 @@
 context("Variants")
-library(ieugwasr)
+
 
 o1 <- variants_gene("ENSG00000123374")
 o2 <- variants_gene("ENSG00000123374", 100000)

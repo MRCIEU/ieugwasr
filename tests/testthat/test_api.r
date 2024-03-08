@@ -1,5 +1,4 @@
 context("API")
-library(ieugwasr)
 
 test_that("status", 
 {

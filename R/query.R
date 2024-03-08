@@ -31,6 +31,7 @@ api_query <- function(path, query=NULL, access_token=check_access_token(),
 
 	while(ntry <= ntries)
 	{
+		Sys.sleep(2^ntry-1)
 		if(method == "DELETE")
 		{
 			r <- try(

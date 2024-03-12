@@ -1,4 +1,4 @@
-.onLoad <- function(libname, pkgname) {
+.onAttach <- function(libname, pkgname) {
 
 	op <- options()
 	op.googleAuthR <- list(

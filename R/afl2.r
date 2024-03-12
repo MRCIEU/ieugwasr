@@ -39,7 +39,7 @@ afl2_list <- function(variantlist=c("reduced", "hapmap3")[1])
 afl2_rsid <- function(rsid, reference="1000g")
 {
 	out <- api_query("variants/afl2", list(rsid=rsid)) %>% get_query_content()
-	if(class(out) == "response")
+	if(inherits(out, "response"))
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
@@ -60,7 +60,7 @@ afl2_rsid <- function(rsid, reference="1000g")
 afl2_chrpos <- function(chrpos, reference="1000g")
 {
 	out <- api_query("variants/afl2", list(chrpos=chrpos)) %>% get_query_content()
-	if(class(out) == "response")
+	if(inherits(out, "response"))
 	{
 		return(out)
 	} else if(is.data.frame(out)) {

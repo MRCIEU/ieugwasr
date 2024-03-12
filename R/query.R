@@ -63,14 +63,14 @@ api_query <- function(path, query=NULL, access_token=check_access_token(),
 				silent=TRUE
 			)			
 		}
-		if('try-error' %in% class(r))
+		if(inherits(r, 'try-error'))
 		{
 			if(grepl("Timeout", as.character(attributes(r)$condition)))
 			{
 				stop("The query to MR-Base exceeded ", timeout, " seconds and timed out. Please simplify the query")
 			}
 		}
-		if(! 'try-error' %in% class(r))
+		if(! inherits(r, 'try-error'))
 		{
 			if(r$status_code >= 500 & r$status_code < 600)
 			{
@@ -94,7 +94,7 @@ api_query <- function(path, query=NULL, access_token=check_access_token(),
 		message("Failed to retrieve results from server. See error status message in the returned object and contact the developers if the problem persists.")
 		return(r)
 	}
-	if('try-error' %in% class(r))
+	if(inherits(r, 'try-error'))
 	{
 		if(grepl("Could not resolve host", as.character(attributes(r)$condition)))
 		{
@@ -145,11 +145,6 @@ api_status <- function()
 	return(o)
 }
 
-print.ApiStatus <- function(x)
-{
-	lapply(names(x), function(y) cat(format(paste0(y, ":"), width=30, justify="right"), x[[y]], "\n"))
-}
-
 
 #' Get list of studies with available GWAS summary statistics through API
 #'
@@ -180,10 +175,6 @@ gwasinfo <- function(id=NULL, access_token = check_access_token())
 	return(out)
 }
 
-print.GwasInfo <- function(x)
-{
-	dplyr::glimpse(x)
-}
 
 #' Extract batch name from study ID
 #'
@@ -246,7 +237,7 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 		maf_threshold=maf_threshold
 	), access_token=access_token) %>% get_query_content()
 
-	if(class(out) == "response")
+	if(inherits(out, "response"))
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
@@ -316,7 +307,7 @@ phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_acces
 		pval=pval,
 		index_list=batch
 	), access_token=access_token) %>% get_query_content()
-	if(class(out) != "response")
+	if(!inherits(out, "response"))
 	{
 		out <- out %>% dplyr::as_tibble() %>% fix_n()
 		if(nrow(out) > 0)
@@ -377,7 +368,7 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 		kb=kb,
 		pop=pop
 	), access_token=access_token) %>% get_query_content()
-	if(class(out) == "response")
+	if(inherits(out, "response"))
 	{
 		return(out)
 	} else if(is.data.frame(out)) {

@@ -4,11 +4,13 @@
 \alias{select_api}
 \title{Toggle API address between development and release}
 \usage{
-select_api(where = "public")
+select_api(where = "public", silent = FALSE)
 }
 \arguments{
 \item{where}{Which API to use. Choice between \code{"public"}, \code{"private"}, \code{"dev1"}, \code{"dev2"}.
 Default = \code{"public"}.}
+
+\item{silent}{Silent? Default = FALSE}
 }
 \description{
 Toggle API address between development and release

@@ -39,7 +39,7 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes:
-    github::mrcieu/gwasglue2
+    mrcieu/gwasglue2
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1

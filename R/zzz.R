@@ -45,11 +45,14 @@
 	}
 
 	b <- suppressWarnings(try(jsonlite::read_json("https://raw.githubusercontent.com/MRCIEU/opengwas/main/messages.json"), silent=TRUE))
-	if(length(b) > 0) {
-		packageStartupMessage("OpenGWAS updates:")
+	if(!inherits(b, 'try-error'))
+	{
+		if(length(b) > 0) {
+			packageStartupMessage("OpenGWAS updates:")
+		}
+		o <- lapply(b, \(x) {
+			packageStartupMessage("  Date: ", x[["date"]])
+			sapply(x[["message"]], \(j) packageStartupMessage(paste(" ", j)))
+		})
 	}
-	o <- lapply(b, \(x) {
-		packageStartupMessage("  Date: ", x[["date"]])
-		sapply(x[["message"]], \(j) packageStartupMessage(paste(" ", j)))
-	})
 }

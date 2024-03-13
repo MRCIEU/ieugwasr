@@ -4,7 +4,12 @@
 \alias{print.ApiStatus}
 \title{Print API status}
 \usage{
-\method{print}{ApiStatus}(x)
+\method{print}{ApiStatus}(x, ...)
+}
+\arguments{
+\item{x}{Output from \code{\link{api_status}}}
+
+\item{...}{Unused, for extensibility}
 }
 \value{
 Print out of API status

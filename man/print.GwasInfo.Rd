@@ -4,7 +4,12 @@
 \alias{print.GwasInfo}
 \title{Print GWAS information}
 \usage{
-\method{print}{GwasInfo}(x)
+\method{print}{GwasInfo}(x, ...)
+}
+\arguments{
+\item{x}{Output from \code{\link{gwasinfo}}}
+
+\item{...}{Unused, for extensibility}
 }
 \value{
 Print out of GWAS information

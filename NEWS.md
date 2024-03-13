@@ -1,6 +1,8 @@
-# ieugwasr 0.1.6
+# ieugwasr 0.1.7
 * Added functions to write LD scores files into compressed `.gz` files for each super-population and divided by chromosomes.
 * Added argument to output [gwasglue2](https://mrcieu.github.io/gwasglue2/) objects in `ieugwasr::tophits()` and `ieugwasr::associations()`.
+
+# ieugwasr 0.1.6
 
 # ieugwasr 0.1.5
 

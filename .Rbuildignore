@@ -8,3 +8,5 @@
 ^\.github$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^cran-comments\.md$
+^codecov\.yml$

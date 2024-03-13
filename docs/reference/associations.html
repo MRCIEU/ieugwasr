@@ -23,7 +23,7 @@ with European MAF &amp;gt; 0.01."><!-- mathjax --><script src="https://cdnjs.clo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ieugwasr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.7</span>
       </span>
     </div>
 
@@ -89,8 +89,7 @@ with European MAF &gt; 0.01.</p>
 <span>  align_alleles <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  palindromes <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  maf_threshold <span class="op">=</span> <span class="fl">0.3</span>,</span>
-<span>  access_token <span class="op">=</span> <span class="fu"><a href="check_access_token.html">check_access_token</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  gwasglue <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  access_token <span class="op">=</span> <span class="fu"><a href="check_access_token.html">check_access_token</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -131,16 +130,12 @@ Used to authenticate level of access to data.
 By default, checks if already authenticated through <code><a href="get_access_token.html">get_access_token</a></code> and
 if not then does not perform authentication</p></dd>
 
-
-<dt>gwasglue</dt>
-<dd><p>Returns a gwasglue2 SummarySet object  (if <code>gwasglue = TRUE</code>).  Only one GWAS id can be queried at a time. See <code><a href="https://rdrr.io/pkg/gwasglue2/man/create_dataset.html" class="external-link">gwasglue2::create_dataset()</a></code>.Default = <code>FALSE</code>.</p></dd>
-
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>Dataframe. If <code>gwasglue = TRUE</code> then returns a gwasglue2 object.</p>
+<p>Dataframe</p>
     </div>
 
   </div>

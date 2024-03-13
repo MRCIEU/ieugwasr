@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ieugwasr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.7</span>
       </span>
     </div>
 
@@ -101,15 +101,13 @@ Hemani</h4>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rapporter.github.io/pander/" class="external-link">pander</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/joshuaulrich/microbenchmark/" class="external-link">microbenchmark</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/MRCIEU/ieugwasr" class="external-link">ieugwasr</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; API: public: http://gwas-api.mrcieu.ac.uk/</span></span></code></pre></div>
-<p>Get a set of SNPs too query:</p>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/MRCIEU/ieugwasr" class="external-link">ieugwasr</a></span><span class="op">)</span></span></code></pre></div>
+<p>Get a set of SNPs to query:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tophits.html">tophits</a></span><span class="op">(</span><span class="st">"ieu-a-2"</span><span class="op">)</span></span>
 <span><span class="va">rsid</span> <span class="op">&lt;-</span> <span class="va">a</span><span class="op">$</span><span class="va">rsid</span></span>
 <span><span class="va">chrpos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">a</span><span class="op">$</span><span class="va">chr</span>, <span class="st">":"</span>, <span class="va">a</span><span class="op">$</span><span class="va">position</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">rsid</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 79</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">rsid</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="comparison-of-rsid-lookup-vs-chromosomeposition">1. Comparison of rsid lookup vs chromosome:position<a class="anchor" aria-label="anchor" href="#comparison-of-rsid-lookup-vs-chromosomeposition"></a>
 </h2>
@@ -121,53 +119,7 @@ Hemani</h4>
 <span>        <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/associations.html">associations</a></span><span class="op">(</span><span class="va">chrpos</span>, <span class="st">"ieu-a-7"</span>, proxies<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
 <span>    <span class="op">}</span>, times<span class="op">=</span><span class="fl">10</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in microbenchmark(rsid = {: less accurate nanosecond times to avoid</span></span>
-<span><span class="co">#&gt; potential integer overflows</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mbm</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<table style="width:100%;" class="table">
-<colgroup>
-<col width="10%">
-<col width="11%">
-<col width="13%">
-<col width="14%">
-<col width="13%">
-<col width="13%">
-<col width="13%">
-<col width="8%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">expr</th>
-<th align="right">min</th>
-<th align="right">lq</th>
-<th align="right">mean</th>
-<th align="right">median</th>
-<th align="right">uq</th>
-<th align="right">max</th>
-<th align="right">neval</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">rsid</td>
-<td align="right">75.681</td>
-<td align="right">107.3962</td>
-<td align="right">902.0099</td>
-<td align="right">494.2979</td>
-<td align="right">1461.558</td>
-<td align="right">3512.133</td>
-<td align="right">10</td>
-</tr>
-<tr class="even">
-<td align="left">chrpos</td>
-<td align="right">148.840</td>
-<td align="right">282.4894</td>
-<td align="right">1582.1836</td>
-<td align="right">594.6462</td>
-<td align="right">1390.574</td>
-<td align="right">9296.395</td>
-<td align="right">10</td>
-</tr>
-</tbody>
-</table>
 </div>
 <div class="section level2">
 <h2 id="single-range-query">2. Single range query<a class="anchor" aria-label="anchor" href="#single-range-query"></a>
@@ -179,8 +131,12 @@ range</p>
 <span><span class="va">chrpos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">a</span><span class="op">$</span><span class="va">chr</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">":"</span>, <span class="va">a</span><span class="op">$</span><span class="va">position</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="fl">100000</span>, <span class="st">"-"</span>, <span class="va">a</span><span class="op">$</span><span class="va">position</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="fl">100000</span><span class="op">)</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/associations.html">associations</a></span><span class="op">(</span><span class="va">chrpos</span>, <span class="st">"ieu-a-7"</span>, proxies<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">rsid</span> <span class="op">&lt;-</span> <span class="va">b</span><span class="op">$</span><span class="va">rsid</span></span></code></pre></div>
-<p>This is a 200,000 size window, which has 586 variants to lookup.</p>
+<p>Window size</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">radius</span> <span class="op">*</span> <span class="fl">2</span>, scientific <span class="op">=</span> <span class="cn">FALSE</span>, big.mark <span class="op">=</span> <span class="st">","</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">rsid</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mbm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html" class="external-link">microbenchmark</a></span><span class="op">(</span><span class="st">"rsid"</span> <span class="op">=</span> <span class="op">{</span></span>
 <span>        <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/associations.html">associations</a></span><span class="op">(</span><span class="va">rsid</span>, <span class="st">"ieu-a-7"</span>, proxies<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
 <span>    <span class="op">}</span>,</span>
@@ -189,63 +145,26 @@ range</p>
 <span>    <span class="op">}</span>, times<span class="op">=</span><span class="fl">10</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mbm</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="10%">
-<col width="13%">
-<col width="13%">
-<col width="13%">
-<col width="13%">
-<col width="14%">
-<col width="13%">
-<col width="8%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">expr</th>
-<th align="right">min</th>
-<th align="right">lq</th>
-<th align="right">mean</th>
-<th align="right">median</th>
-<th align="right">uq</th>
-<th align="right">max</th>
-<th align="right">neval</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">rsid</td>
-<td align="right">227.6788</td>
-<td align="right">252.1875</td>
-<td align="right">881.5181</td>
-<td align="right">496.1831</td>
-<td align="right">726.6548</td>
-<td align="right">3210.358</td>
-<td align="right">10</td>
-</tr>
-<tr class="even">
-<td align="left">chrpos</td>
-<td align="right">159.7290</td>
-<td align="right">260.5227</td>
-<td align="right">937.6075</td>
-<td align="right">420.2040</td>
-<td align="right">1485.5964</td>
-<td align="right">2849.180</td>
-<td align="right">10</td>
-</tr>
-</tbody>
-</table>
 </div>
 <div class="section level2">
 <h2 id="multiple-range-queries">3. Multiple range queries<a class="anchor" aria-label="anchor" href="#multiple-range-queries"></a>
 </h2>
 <p>Specify multiple ranges, and then get the corresponding rsIDs across
 all those ranges</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chrpos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">a</span><span class="op">$</span><span class="va">chr</span>, <span class="st">":"</span>, <span class="va">a</span><span class="op">$</span><span class="va">position</span><span class="op">-</span><span class="fl">10000</span>, <span class="st">"-"</span>, <span class="va">a</span><span class="op">$</span><span class="va">position</span><span class="op">+</span><span class="fl">10000</span><span class="op">)</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/associations.html">associations</a></span><span class="op">(</span><span class="va">chrpos</span>, <span class="st">"ieu-a-7"</span>, proxies<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">rsid</span> <span class="op">&lt;-</span> <span class="va">b</span><span class="op">$</span><span class="va">rsid</span></span></code></pre></div>
-<p>This 79 ranges of 20,000 size window, which is covered by 4508
-variants to lookup.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">chrpos</span><span class="op">)</span></span></code></pre></div>
+<p>ranges of</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fl">20000</span>, scientific <span class="op">=</span> <span class="cn">FALSE</span>, big.mark <span class="op">=</span> <span class="st">","</span><span class="op">)</span></span></code></pre></div>
+<p>size window, which is covered by</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">rsid</span><span class="op">)</span></span></code></pre></div>
+<p>variants to lookup.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mbm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html" class="external-link">microbenchmark</a></span><span class="op">(</span><span class="st">"rsid"</span> <span class="op">=</span> <span class="op">{</span></span>
 <span>        <span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/associations.html">associations</a></span><span class="op">(</span><span class="va">rsid</span>, <span class="st">"ieu-a-7"</span>, proxies<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
 <span>    <span class="op">}</span>,</span>
@@ -254,50 +173,6 @@ variants to lookup.</p>
 <span>    <span class="op">}</span>, times<span class="op">=</span><span class="fl">5</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mbm</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="10%">
-<col width="13%">
-<col width="13%">
-<col width="13%">
-<col width="14%">
-<col width="13%">
-<col width="13%">
-<col width="8%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">expr</th>
-<th align="right">min</th>
-<th align="right">lq</th>
-<th align="right">mean</th>
-<th align="right">median</th>
-<th align="right">uq</th>
-<th align="right">max</th>
-<th align="right">neval</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">rsid</td>
-<td align="right">3.034648</td>
-<td align="right">9.193800</td>
-<td align="right">26.21005</td>
-<td align="right">15.671379</td>
-<td align="right">21.24709</td>
-<td align="right">81.90334</td>
-<td align="right">5</td>
-</tr>
-<tr class="even">
-<td align="left">chrpos</td>
-<td align="right">2.303980</td>
-<td align="right">5.153764</td>
-<td align="right">21.77656</td>
-<td align="right">6.611598</td>
-<td align="right">45.29050</td>
-<td align="right">49.52298</td>
-<td align="right">5</td>
-</tr>
-</tbody>
-</table>
 </div>
   </div>
 

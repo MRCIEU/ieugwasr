@@ -2,10 +2,11 @@
 #'
 #' @param where Which API to use. Choice between `"public"`, `"private"`, `"dev1"`, `"dev2"`. 
 #' Default = `"public"`.
+#' @param silent Silent? Default = FALSE
 #'
 #' @export
 #' @return NULL
-select_api <- function(where="public")
+select_api <- function(where="public", silent=FALSE)
 {
 	url <- switch(where,
 		public = "http://gwas-api.mrcieu.ac.uk/",
@@ -20,7 +21,9 @@ select_api <- function(where="public")
 	}
 
 	options(ieugwasr_api=url)
-	message("API: ", where, ": ", url)
+	if(!silent) {
+		message("API: ", where, ": ", url)
+	}
 }
 
 

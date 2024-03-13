@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ieugwasr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.7</span>
       </span>
     </div>
 
@@ -108,7 +108,11 @@ below.</p>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/MRCIEU/ieugwasr" class="external-link">ieugwasr</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; API: public: http://gwas-api.mrcieu.ac.uk/</span></span></code></pre></div>
+<span><span class="co">#&gt; OpenGWAS updates:</span></span>
+<span><span class="co">#&gt;   Date: 2024-03-07</span></span>
+<span><span class="co">#&gt;   [&gt;] There is exceptional load on the OpenGWAS servers.</span></span>
+<span><span class="co">#&gt;   [&gt;] Urgent infrastructure development being performed.</span></span>
+<span><span class="co">#&gt;   [&gt;] See local options for analysis: https://mrcieu.github.io/gwasvcf/.</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="ld-clumping">LD clumping<a class="anchor" aria-label="anchor" href="#ld-clumping"></a>
 </h2>
@@ -129,7 +133,7 @@ path to plink and a bed/bim/fam LD reference dataset.</p>
 <p>To get a path to plink you can do the following:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"explodecomputer/genetics.binaRies"</span><span class="op">)</span></span>
-<span><span class="fu">genetics.binaRies</span><span class="fu">::</span><span class="fu">get_plink_binary</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">genetics.binaRies</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genetics.binaRies/man/get_plink_binary.html" class="external-link">get_plink_binary</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>To get the same LD reference dataset that is used by the API, you can
 download it directly from here:</p>
 <p><a href="http://fileserve.mrcieu.ac.uk/ld/1kg.v3.tgz" class="external-link uri">http://fileserve.mrcieu.ac.uk/ld/1kg.v3.tgz</a></p>
@@ -152,7 +156,7 @@ following columns:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ld_clump.html">ld_clump</a></span><span class="op">(</span></span>
 <span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>rsid<span class="op">=</span><span class="va">dat</span><span class="op">$</span><span class="va">rsid</span>, pval<span class="op">=</span><span class="va">dat</span><span class="op">$</span><span class="va">pval</span>, id<span class="op">=</span><span class="va">dat</span><span class="op">$</span><span class="va">trait_id</span><span class="op">)</span>,</span>
-<span>    plink_bin <span class="op">=</span> <span class="fu">genetics.binaRies</span><span class="fu">::</span><span class="fu">get_plink_binary</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    plink_bin <span class="op">=</span> <span class="fu">genetics.binaRies</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genetics.binaRies/man/get_plink_binary.html" class="external-link">get_plink_binary</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    bfile <span class="op">=</span> <span class="st">"/path/to/reference/EUR"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -168,7 +172,7 @@ as in the <code>ld_clump</code> function, e.g.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ld_matrix.html">ld_matrix</a></span><span class="op">(</span></span>
 <span>    <span class="va">dat</span><span class="op">$</span><span class="va">rsid</span>,</span>
-<span>    plink_bin <span class="op">=</span> <span class="fu">genetics.binaRies</span><span class="fu">::</span><span class="fu">get_plink_binary</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    plink_bin <span class="op">=</span> <span class="fu">genetics.binaRies</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/genetics.binaRies/man/get_plink_binary.html" class="external-link">get_plink_binary</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    bfile <span class="op">=</span> <span class="st">"/path/to/reference/EUR"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>

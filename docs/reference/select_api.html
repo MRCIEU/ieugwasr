@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ieugwasr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.7</span>
       </span>
     </div>
 
@@ -69,7 +69,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">select_api</span><span class="op">(</span>where <span class="op">=</span> <span class="st">"public"</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">select_api</span><span class="op">(</span>where <span class="op">=</span> <span class="st">"public"</span>, silent <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -77,6 +77,10 @@
     <dl><dt>where</dt>
 <dd><p>Which API to use. Choice between <code>"public"</code>, <code>"private"</code>, <code>"dev1"</code>, <code>"dev2"</code>.
 Default = <code>"public"</code>.</p></dd>
+
+
+<dt>silent</dt>
+<dd><p>Silent? Default = FALSE</p></dd>
 
 </dl></div>
 

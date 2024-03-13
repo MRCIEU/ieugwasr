@@ -63,14 +63,14 @@ api_query <- function(path, query=NULL, access_token=check_access_token(),
 				silent=TRUE
 			)			
 		}
-		if('try-error' %in% class(r))
+		if(inherits(r, 'try-error'))
 		{
 			if(grepl("Timeout", as.character(attributes(r)$condition)))
 			{
 				stop("The query to MR-Base exceeded ", timeout, " seconds and timed out. Please simplify the query")
 			}
 		}
-		if(! 'try-error' %in% class(r))
+		if(! inherits(r, 'try-error'))
 		{
 			if(r$status_code >= 500 & r$status_code < 600)
 			{
@@ -94,7 +94,7 @@ api_query <- function(path, query=NULL, access_token=check_access_token(),
 		message("Failed to retrieve results from server. See error status message in the returned object and contact the developers if the problem persists.")
 		return(r)
 	}
-	if('try-error' %in% class(r))
+	if(inherits(r, 'try-error'))
 	{
 		if(grepl("Could not resolve host", as.character(attributes(r)$condition)))
 		{
@@ -290,6 +290,7 @@ associations_query <- function(variants=variants, id=id, proxies=proxies, r2=r2,
 	), access_token=access_token) %>% get_query_content()
 
 	if(inherits(out, "response"))
+	if(inherits(out, "response"))
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
@@ -454,6 +455,7 @@ tophits_query <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop=
 		kb=kb,
 		pop=pop
 	), access_token=access_token) %>% get_query_content()
+	if(inherits(out, "response"))
 	if(inherits(out, "response"))
 	{
 		return(out)

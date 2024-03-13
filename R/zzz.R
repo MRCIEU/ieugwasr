@@ -1,4 +1,4 @@
-.onLoad <- function(libname, pkgname) {
+.onAttach <- function(libname, pkgname) {
 
 	op <- options()
 	op.googleAuthR <- list(
@@ -23,7 +23,7 @@
 	# toset <- !(names(op.googleAuthR) %in% names(op))
 	# if(any(toset)) options(op.googleAuthR[toset])
 	options(op.googleAuthR)
-	select_api("public")
+	select_api("public", silent=TRUE)
 
 	invisible()
 
@@ -45,11 +45,14 @@
 	}
 
 	b <- suppressWarnings(try(jsonlite::read_json("https://raw.githubusercontent.com/MRCIEU/opengwas/main/messages.json"), silent=TRUE))
-	if(length(b) > 0) {
-		packageStartupMessage("OpenGWAS updates:")
+	if(!inherits(b, 'try-error'))
+	{
+		if(length(b) > 0) {
+			packageStartupMessage("OpenGWAS updates:")
+		}
+		o <- lapply(b, \(x) {
+			packageStartupMessage("  Date: ", x[["date"]])
+			sapply(x[["message"]], \(j) packageStartupMessage(paste(" ", j)))
+		})
 	}
-	o <- lapply(b, \(x) {
-		packageStartupMessage("  Date: ", x[["date"]])
-		sapply(x[["message"]], \(j) packageStartupMessage(paste(" ", j)))
-	})
 }

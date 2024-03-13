@@ -1,5 +1,4 @@
 context("LD functions")
-library(ieugwasr)
 
 a <- tophits("ieu-a-2")
 ap <- tophits("ieu-a-2", force_server=TRUE)

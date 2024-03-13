@@ -12,7 +12,8 @@ tophits(
   kb = 10000,
   pop = "EUR",
   force_server = FALSE,
-  access_token = check_access_token()
+  access_token = check_access_token(),
+  gwasglue = FALSE
 )
 }
 \arguments{
@@ -37,10 +38,12 @@ If force_server = \code{TRUE} then will recompute using server side LD reference
 \item{access_token}{Google OAuth2 access token.
 Used to authenticate level of access to data.
 By default, checks if already authenticated through \code{\link{get_access_token}}
-and if not then does not perform authentication}
+and if not then does not perform authentication.}
+
+\item{gwasglue}{Returns a gwasglue2 SummarySet object  (if \code{gwasglue = TRUE}).  Only one GWAS id can be queried at a time. See \code{\link[gwasglue2:create_dataset]{gwasglue2::create_dataset()}}.Default = \code{FALSE}.}
 }
 \value{
-Dataframe
+Dataframe. If \code{gwasglue = TRUE} then returns a gwasglue2 object.
 }
 \description{
 By default performs clumping on the server side.

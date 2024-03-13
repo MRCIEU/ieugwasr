@@ -145,6 +145,16 @@ api_status <- function()
 	return(o)
 }
 
+#' Print API status
+#' @param x Output from [`api_status`]
+#' @param ... Unused, for extensibility
+#' @export 
+#' @return Print out of API status
+print.ApiStatus <- function(x, ...)
+{
+	lapply(names(x), function(y) cat(format(paste0(y, ":"), width=30, justify="right"), x[[y]], "\n"))
+}
+
 
 #' Get list of studies with available GWAS summary statistics through API
 #'
@@ -175,6 +185,15 @@ gwasinfo <- function(id=NULL, access_token = check_access_token())
 	return(out)
 }
 
+#' Print GWAS information
+#' @param x Output from [`gwasinfo`]
+#' @param ... Unused, for extensibility
+#' @export
+#' @return Print out of GWAS information 
+print.GwasInfo <- function(x, ...)
+{
+	dplyr::glimpse(x)
+}
 
 #' Extract batch name from study ID
 #'
@@ -221,10 +240,43 @@ batches <- function(access_token = check_access_token())
 #' Used to authenticate level of access to data. 
 #' By default, checks if already authenticated through [`get_access_token`] and 
 #' if not then does not perform authentication
+#' @param gwasglue Returns a gwasglue2 SummarySet object  (if `gwasglue = TRUE`).  Only one GWAS id can be queried at a time. See [gwasglue2::create_dataset()].Default = `FALSE`.
 #'
 #' @export
-#' @return Dataframe
-associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, access_token=check_access_token())
+#' @return Dataframe. If `gwasglue = TRUE` then returns a gwasglue2 object.
+associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, access_token=check_access_token(), gwasglue=FALSE){
+
+	# Query specific variants from specific GWAS using associations_query internal function (old version)
+	out <- associations_query(variants=variants, id=id, proxies=proxies, r2=r2, align_alleles=align_alleles, palindromes=palindromes, maf_threshold=maf_threshold, access_token=access_token)
+		
+	if(gwasglue)
+	{
+		# check if it is a tibble (trying to avoid loading the tibble package)
+		if(inherits(out ,"tbl_df")){
+    		# output gwasglue2 SummarySet object
+			if(id %>% length() != 1){
+				stop("Only one GWAS ID can be queried at a time when using `gwasglue = TRUE`.")
+			} else {
+				# create gwasglue2 metadata 
+				m <- gwasglue2::create_metadata(gwasinfo(id))
+				# create gwasglue2 SummarySet object
+				s <- out %>% 
+					gwasglue2::create_summaryset(metadata=m, qc = TRUE) %>%
+					return()
+			}
+			
+		} else {
+			return(out)
+		}
+	}
+	else{
+		return(out)
+	}
+}
+
+
+# Query specific variants from specific GWAS - associations internal function to allow for gwasglue
+associations_query <- function(variants=variants, id=id, proxies=proxies, r2=r2, align_alleles=align_alleles, palindromes=palindromes, maf_threshold = maf_threshold, access_token=access_token)
 {
 	id <- legacy_ids(id)
 	out <- api_query("associations", query=list(
@@ -237,6 +289,7 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 		maf_threshold=maf_threshold
 	), access_token=access_token) %>% get_query_content()
 
+	if(inherits(out, "response"))
 	if(inherits(out, "response"))
 	{
 		return(out)
@@ -307,6 +360,7 @@ phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_acces
 		pval=pval,
 		index_list=batch
 	), access_token=access_token) %>% get_query_content()
+	
 	if(!inherits(out, "response"))
 	{
 		out <- out %>% dplyr::as_tibble() %>% fix_n()
@@ -341,11 +395,44 @@ phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_acces
 #' @param access_token Google OAuth2 access token. 
 #' Used to authenticate level of access to data. 
 #' By default, checks if already authenticated through [`get_access_token`] 
-#' and if not then does not perform authentication
-#'
+#' and if not then does not perform authentication.
+#' @param gwasglue Returns a gwasglue2 SummarySet object  (if `gwasglue = TRUE`).  Only one GWAS id can be queried at a time. See [gwasglue2::create_dataset()].Default = `FALSE`.
 #' @export
-#' @return Dataframe
-tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", 
+#' @return Dataframe. If `gwasglue = TRUE` then returns a gwasglue2 object.
+tophits <- function(id, pval = 5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", force_server = FALSE, access_token = check_access_token(), gwasglue = FALSE)
+{
+	# Query tophits from specific GWAS using tophits_query internal function (old version)
+	out <- tophits_query(id = id, pval = pval, clump = clump, r2 = r2, kb = kb, pop = pop, force_server = force_server, access_token = access_token)
+	
+	if(isTRUE(gwasglue))
+	{
+		# check if it is a tibble (trying to avoid loading the tibble package)
+		if(inherits(out, "tbl_df")){
+    		# output gwasglue2 SummarySet object
+			if(id %>% length() != 1){
+				stop("Only one GWAS ID can be queried at a time when using `gwasglue = TRUE`.")
+			} else {
+				# create gwasglue2 metadata 
+				m <- gwasglue2::create_metadata(gwasinfo(id))
+				# create gwasglue2 SummarySet object
+				s <- out %>% 
+					gwasglue2::create_summaryset(metadata=m, qc = TRUE) %>%
+					return()
+			}
+			
+		} else {
+			return(out)
+		}
+	}
+	else{
+		return(out)
+	}
+}
+
+
+
+# query top hits from GWAS dataset - tophits internal function to allow for gwasglue
+tophits_query <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", 
                     force_server = FALSE, access_token=check_access_token())
 {
 	id <- legacy_ids(id)
@@ -368,6 +455,7 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 		kb=kb,
 		pop=pop
 	), access_token=access_token) %>% get_query_content()
+	if(inherits(out, "response"))
 	if(inherits(out, "response"))
 	{
 		return(out)

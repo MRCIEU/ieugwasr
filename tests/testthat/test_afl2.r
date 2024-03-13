@@ -1,4 +1,3 @@
-library(ieugwasr)
 context("afl2")
 
 snpinfo1 <- afl2_list()

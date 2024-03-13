@@ -1,12 +1,10 @@
 # ieugwasr 0.1.7
-
-* Preparing for CRAN
+* Added functions to write LD scores files into compressed `.gz` files for each super-population and divided by chromosomes.
+* Added argument to output [gwasglue2](https://mrcieu.github.io/gwasglue2/) objects in `ieugwasr::tophits()` and `ieugwasr::associations()`.
 
 # ieugwasr 0.1.6
-
 * Adding messaging about package version
 * Adding messaging about OpenGWAS
-
 # ieugwasr 0.1.5
 
 * Added options to perform LD functions on different super-populations

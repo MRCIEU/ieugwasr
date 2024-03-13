@@ -1,5 +1,4 @@
 context("backwards compatibility")
-library(ieugwasr)
 
 test_that("backwards compatibility", 
 {

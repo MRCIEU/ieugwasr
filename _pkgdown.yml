@@ -1,1 +1,24 @@
-destination: docs
+url: ~
+template:
+  bootstrap: 5
+  # bootswatch: sandstone
+
+navbar:
+ structure:
+    left:  [reference, articles, news]
+    right: [search, github]
+ components:
+  articles:
+    text: Tutorials
+    menu:
+    - text: "Perform fast queries against a massive database of complete GWAS summary data"
+      href: articles/guide.html
+    - text: "Running local LD operations"
+      href: articles/local_ld.html
+    - text: "Comparison of rsid vs chr:pos lookup in ElasticSearch"
+      href: articles/timings.html
+  news:
+    text: Changelog
+    href: news/index.html
+
+

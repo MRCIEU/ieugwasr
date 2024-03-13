@@ -406,7 +406,7 @@ tophits <- function(id, pval = 5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR
 	if(isTRUE(gwasglue))
 	{
 		# check if it is a tibble (trying to avoid loading the tibble package)
-		if(any(class(out)=="tbl_df")){
+		if(inherits(out, "tbl_df")){
     		# output gwasglue2 SummarySet object
 			if(id %>% length() != 1){
 				stop("Only one GWAS ID can be queried at a time when using `gwasglue = TRUE`.")

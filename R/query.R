@@ -146,9 +146,11 @@ api_status <- function()
 }
 
 #' Print API status
+#' @param x Output from [`api_status`]
+#' @param ... Unused, for extensibility
 #' @export 
 #' @return Print out of API status
-print.ApiStatus <- function(x)
+print.ApiStatus <- function(x, ...)
 {
 	lapply(names(x), function(y) cat(format(paste0(y, ":"), width=30, justify="right"), x[[y]], "\n"))
 }
@@ -184,9 +186,11 @@ gwasinfo <- function(id=NULL, access_token = check_access_token())
 }
 
 #' Print GWAS information
+#' @param x Output from [`gwasinfo`]
+#' @param ... Unused, for extensibility
 #' @export
 #' @return Print out of GWAS information 
-print.GwasInfo <- function(x)
+print.GwasInfo <- function(x, ...)
 {
 	dplyr::glimpse(x)
 }

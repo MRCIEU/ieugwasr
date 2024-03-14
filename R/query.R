@@ -290,7 +290,6 @@ associations_query <- function(variants=variants, id=id, proxies=proxies, r2=r2,
 	), access_token=access_token) %>% get_query_content()
 
 	if(inherits(out, "response"))
-	if(inherits(out, "response"))
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
@@ -455,7 +454,6 @@ tophits_query <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop=
 		kb=kb,
 		pop=pop
 	), access_token=access_token) %>% get_query_content()
-	if(inherits(out, "response"))
 	if(inherits(out, "response"))
 	{
 		return(out)

@@ -1,5 +1,5 @@
 Package: ieugwasr
-Title: R Interface to the 'OpenGWAS' Database API
+Title: Interface to the 'OpenGWAS' Database API
 Version: 0.1.7
 Authors@R: c(
     person("Gibran", "Hemani", , "g.hemani@bristol.ac.uk", role = c("aut", "cre", "cph"),
@@ -11,7 +11,7 @@ Authors@R: c(
     person("Rita", "Rasteiro", , "rita.rasteiro@bristol.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0002-4217-3060"))
     )
-Description: Interface to the 'OpenGWAS' database API. Includes a wrapper
+Description: Interface to the 'OpenGWAS' database API <https://gwas-api.mrcieu.ac.uk/>. Includes a wrapper
     to make generic calls to the API, plus convenience functions for
     specific queries.
 License: MIT + file LICENSE
@@ -22,11 +22,9 @@ Depends:
 Imports:
     dplyr,
     googleAuthR,
-    gwasglue2,
     httr,
     jsonlite,
     magrittr,
-    readr,
     rlang,
     stats
 Suggests: 

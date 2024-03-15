@@ -76,7 +76,6 @@ variants_chrpos <- function(chrpos, radius=0)
 #'
 #' @param variants Array of variants e.g. `c("rs234", "7:105561135-105563135")`
 #'
-#' @importFrom magrittr %>%
 #' @export
 #' @return list of rsids
 variants_to_rsid <- function(variants)

@@ -162,7 +162,6 @@ print.ApiStatus <- function(x, ...)
 #' available datasets
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data
 #'
-#' @importFrom magrittr %>%
 #' @export
 #' @return Dataframe of details for all available studies
 gwasinfo <- function(id=NULL, access_token = check_access_token())

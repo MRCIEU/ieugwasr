@@ -12,6 +12,9 @@ Default = \code{"public"}.}
 
 \item{silent}{Silent? Default = FALSE}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 Toggle API address between development and release
 }

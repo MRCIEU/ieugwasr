@@ -94,7 +94,7 @@ ld_matrix_local <- function(variants, bfile, plink_bin, with_alleles=TRUE)
 	# Make textfile
 	shell <- ifelse(Sys.info()['sysname'] == "Windows", "cmd", "sh")
 	fn <- tempfile()
-	write.table(data.frame(variants), file=fn, row.names=F, col.names=F, quote=F)
+	write.table(data.frame(variants), file=fn, row.names=FALSE, col.names=FALSE, quote=FALSE)
 
 	
 	fun1 <- paste0(

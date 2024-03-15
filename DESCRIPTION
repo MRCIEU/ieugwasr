@@ -11,7 +11,7 @@ Authors@R: c(
     person("Rita", "Rasteiro", , "rita.rasteiro@bristol.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0002-4217-3060"))
     )
-Description: R interface to the 'OpenGWAS' database API. Includes a wrapper
+Description: Interface to the 'OpenGWAS' database API. Includes a wrapper
     to make generic calls to the API, plus convenience functions for
     specific queries.
 License: MIT + file LICENSE
@@ -20,7 +20,6 @@ BugReports: https://github.com/MRCIEU/ieugwasr/issues
 Depends:
     R (>= 4.0)
 Imports:
-    digest,
     dplyr,
     googleAuthR,
     gwasglue2,
@@ -38,8 +37,6 @@ Suggests:
     testthat
 VignetteBuilder: 
     knitr
-Remotes:
-    mrcieu/gwasglue2
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1

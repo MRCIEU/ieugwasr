@@ -40,7 +40,7 @@ if not then does not perform authentication}
 \item{gwasglue}{Returns a gwasglue2 SummarySet object  (if \code{gwasglue = TRUE}).  Only one GWAS id can be queried at a time. See \code{\link[gwasglue2:create_dataset]{gwasglue2::create_dataset()}}.Default = \code{FALSE}.}
 }
 \value{
-Dataframe. If \code{gwasglue = TRUE} then returns a gwasglue2 object.
+Dataframe
 }
 \description{
 Every rsid is searched for against each requested GWAS id. To get a list of

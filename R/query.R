@@ -241,19 +241,9 @@ batches <- function(access_token = check_access_token())
 #' if not then does not perform authentication
 #'
 #' @export
-#' @return Dataframe. If `gwasglue = TRUE` then returns a gwasglue2 object.
+#' @return Dataframe
 associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, access_token=check_access_token()){
 
-	# Query specific variants from specific GWAS using associations_query internal function (old version)
-	out <- associations_query(variants=variants, id=id, proxies=proxies, r2=r2, align_alleles=align_alleles, palindromes=palindromes, maf_threshold=maf_threshold, access_token=access_token)
-	
-	return(out)
-}
-
-
-# Query specific variants from specific GWAS - associations internal function to allow for future gwasglue2 integration
-associations_query <- function(variants=variants, id=id, proxies=proxies, r2=r2, align_alleles=align_alleles, palindromes=palindromes, maf_threshold = maf_threshold, access_token=access_token)
-{
 	id <- legacy_ids(id)
 	out <- api_query("associations", query=list(
 		variant=variants,
@@ -266,7 +256,6 @@ associations_query <- function(variants=variants, id=id, proxies=proxies, r2=r2,
 	), access_token=access_token) %>% get_query_content()
 
 	if(inherits(out, "response"))
-	if(inherits(out, "response"))
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
@@ -274,7 +263,10 @@ associations_query <- function(variants=variants, id=id, proxies=proxies, r2=r2,
 	} else {
 		return(dplyr::tibble())
 	}
+	
+	return(out)
 }
+
 
 #' Look up sample sizes when meta data is missing from associations
 #'
@@ -408,7 +400,6 @@ tophits_query <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop=
 		kb=kb,
 		pop=pop
 	), access_token=access_token) %>% get_query_content()
-	if(inherits(out, "response"))
 	if(inherits(out, "response"))
 	{
 		return(out)

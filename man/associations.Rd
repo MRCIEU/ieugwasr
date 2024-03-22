@@ -37,7 +37,7 @@ By default, checks if already authenticated through \code{\link{get_access_token
 if not then does not perform authentication}
 }
 \value{
-Dataframe. If \code{gwasglue = TRUE} then returns a gwasglue2 object.
+Dataframe
 }
 \description{
 Every rsid is searched for against each requested GWAS id. To get a list of

@@ -17,7 +17,7 @@
 										"https://www.googleapis.com/auth/userinfo.email"),
 		googleAuthR.ok_content_types=c("application/json; charset=UTF-8", ("text/html; charset=UTF-8")),
 		googleAuthR.securitycode = 
-			paste0(sample(c(1:9, LETTERS, letters), 20, replace = T), collapse=''),
+			paste0(sample(c(1:9, LETTERS, letters), 20, replace = TRUE), collapse=''),
 		googleAuthR.tryAttempts = 5
 	)
 	# toset <- !(names(op.googleAuthR) %in% names(op))

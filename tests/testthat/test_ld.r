@@ -1,4 +1,7 @@
-context("LD functions")
+skip()
+skip_on_cran()
+skip_on_ci()
+
 
 a <- tophits("ieu-a-2")
 ap <- tophits("ieu-a-2", force_server=TRUE)

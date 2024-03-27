@@ -1,8 +1,9 @@
-skip()
+# skip()
 skip_on_cran()
 skip_on_ci()
 
 snpinfo1 <- afl2_list()
+if(inherits(snpinfo1, "response")) skip("Server issues")
 snpinfo2 <- afl2_list("hapmap3")
 
 test_that("snplist", {

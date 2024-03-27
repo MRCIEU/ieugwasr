@@ -2,6 +2,15 @@ skip()
 skip_on_cran()
 skip_on_ci()
 
+a <- api_status()
+if(inherits(a, "response")) skip("Server issues")
+
+test_that("get_query_content", {
+	a <- api_query("FALSE_ENDPOINT")
+	expect_true(inherits(a, "response"))
+})
+
+
 test_that("gwasinfo", 
 {
 	expect_true(

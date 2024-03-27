@@ -4,6 +4,7 @@ skip_on_ci()
 
 
 a <- tophits("ieu-a-2")
+if(inherits(a, "response")) skip("Server issues")
 ap <- tophits("ieu-a-2", force_server=TRUE)
 au <- tophits("ieu-a-2", clump=1)
 b <- dplyr::tibble(rsid=au$rsid, pval=au$p, id=au$id, clump=0)

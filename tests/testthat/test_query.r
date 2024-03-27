@@ -1,6 +1,6 @@
-skip()
-skip_on_cran()
-skip_on_ci()
+# skip()
+# skip_on_cran()
+# skip_on_ci()
 
 a <- api_status()
 if(inherits(a, "response")) skip("Server issues")

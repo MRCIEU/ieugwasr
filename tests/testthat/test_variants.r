@@ -1,6 +1,6 @@
 # skip()
-skip_on_cran()
-skip_on_ci()
+# skip_on_cran()
+# skip_on_ci()
 
 
 o1 <- variants_gene("ENSG00000123374")

@@ -1,6 +1,6 @@
-skip()
-skip_on_cran()
-skip_on_ci()
+# skip()
+# skip_on_cran()
+# skip_on_ci()
 
 
 a <- tophits("ieu-a-2")

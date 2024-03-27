@@ -54,9 +54,9 @@
 		if(length(b) > 0) {
 			packageStartupMessage("OpenGWAS updates:")
 		}
-		o <- lapply(b, \(x) {
+		o <- lapply(b, function(x) {
 			packageStartupMessage("  Date: ", x[["date"]])
-			sapply(x[["message"]], \(j) packageStartupMessage(paste(" ", j)))
+			sapply(x[["message"]], function(j) packageStartupMessage(paste(" ", j)))
 		})
 	}
 

@@ -146,7 +146,7 @@ ld_clump_local <- function(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin)
 	# Make textfile
 	shell <- ifelse(Sys.info()['sysname'] == "Windows", "cmd", "sh")
 	fn <- tempfile()
-	write.table(data.frame(SNP=dat[["rsid"]], P=dat[["pval"]]), file=fn, row.names=F, col.names=T, quote=F)
+	write.table(data.frame(SNP=dat[["rsid"]], P=dat[["pval"]]), file=fn, row.names=FALSE, col.names=TRUE, quote=FALSE)
 
 	fun2 <- paste0(
 		shQuote(plink_bin, type=shell),
@@ -158,7 +158,7 @@ ld_clump_local <- function(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin)
 		" --out ", shQuote(fn, type=shell)
 	)
 	system(fun2)
-	res <- read.table(paste(fn, ".clumped", sep=""), header=T)
+	res <- read.table(paste(fn, ".clumped", sep=""), header=TRUE)
 	unlink(paste(fn, "*", sep=""))
 	y <- subset(dat, !dat[["rsid"]] %in% res[["SNP"]])
 	if(nrow(y) > 0)

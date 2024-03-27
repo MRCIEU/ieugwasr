@@ -12,7 +12,7 @@ fill_n(d)
 \item{d}{Output from \code{\link{associations}}}
 }
 \value{
-Updated version of d
+Data frame which is an updated version of the input but with sample sizes inferred where missing
 
 Updated version of d
 }

@@ -162,7 +162,6 @@ print.ApiStatus <- function(x, ...)
 #' available datasets
 #' @param access_token Google OAuth2 access token. Used to authenticate level of access to data
 #'
-#' @importFrom magrittr %>%
 #' @export
 #' @return Dataframe of details for all available studies
 gwasinfo <- function(id=NULL, access_token = check_access_token())
@@ -240,7 +239,6 @@ batches <- function(access_token = check_access_token())
 #' Used to authenticate level of access to data. 
 #' By default, checks if already authenticated through [`get_access_token`] and 
 #' if not then does not perform authentication
-#' @param gwasglue Returns a gwasglue2 SummarySet object  (if `gwasglue = TRUE`).  Only one GWAS id can be queried at a time. See [gwasglue2::create_dataset()].Default = `FALSE`.
 #'
 #' @export
 #' @return Dataframe
@@ -366,42 +364,19 @@ phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_acces
 #' Used to authenticate level of access to data. 
 #' By default, checks if already authenticated through [`get_access_token`] 
 #' and if not then does not perform authentication.
-#' @param gwasglue Returns a gwasglue2 SummarySet object  (if `gwasglue = TRUE`).  Only one GWAS id can be queried at a time. See [gwasglue2::create_dataset()].Default = `FALSE`.
 #' @export
 #' @return Dataframe. If `gwasglue = TRUE` then returns a gwasglue2 object.
-tophits <- function(id, pval = 5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", force_server = FALSE, access_token = check_access_token(), gwasglue = FALSE)
+tophits <- function(id, pval = 5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", force_server = FALSE, access_token = check_access_token())
 {
 	# Query tophits from specific GWAS using tophits_query internal function (old version)
 	out <- tophits_query(id = id, pval = pval, clump = clump, r2 = r2, kb = kb, pop = pop, force_server = force_server, access_token = access_token)
 	
-	if(isTRUE(gwasglue))
-	{
-		# check if it is a tibble (trying to avoid loading the tibble package)
-		if(inherits(out, "tbl_df")){
-    		# output gwasglue2 SummarySet object
-			if(id %>% length() != 1){
-				stop("Only one GWAS ID can be queried at a time when using `gwasglue = TRUE`.")
-			} else {
-				# create gwasglue2 metadata 
-				m <- gwasglue2::create_metadata(gwasinfo(id))
-				# create gwasglue2 SummarySet object
-				s <- out %>% 
-					gwasglue2::create_summaryset(metadata=m, qc = TRUE) %>%
-					return()
-			}
-			
-		} else {
-			return(out)
-		}
-	}
-	else{
-		return(out)
-	}
+	return(out)
 }
 
 
 
-# query top hits from GWAS dataset - tophits internal function to allow for gwasglue
+# query top hits from GWAS dataset - tophits internal function to allow for future gwasglue2 integration
 tophits_query <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", 
                     force_server = FALSE, access_token=check_access_token())
 {
@@ -431,7 +406,7 @@ tophits_query <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop=
 	} else if(is.data.frame(out)) {
 		out %>% dplyr::as_tibble() %>% fix_n() %>% return()
 	} else {
-		return(dplyr::tibble())
+		stop("There was an error, please contact the developers")
 	}
 }
 

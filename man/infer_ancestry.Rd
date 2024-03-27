@@ -14,7 +14,7 @@ e.g. output from associations}
 If \code{NULL} then \code{\link[=afl2_list]{afl2_list()}} is used by default}
 }
 \value{
-data frame ordered by most likely ancestry
+data frame ordered by most likely ancestry, each row represents a super population and cor column represents the correlation between the GWAS dataset and the 1000 genomes super population allele frequencies
 }
 \description{
 Uses ~20k SNPs selected for common frequency across 5 major super populations

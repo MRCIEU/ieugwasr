@@ -9,7 +9,7 @@
 #' common in all super populations (default). hapmap3 = ~1.3 million hm3 SNPs
 #'
 #' @export
-#' @return Data frame
+#' @return Data frame containing ancestry specific LD scores and allele frequencies for each variant
 afl2_list <- function(variantlist=c("reduced", "hapmap3")[1])
 {
 	if(variantlist == "reduced")
@@ -35,7 +35,7 @@ afl2_list <- function(variantlist=c("reduced", "hapmap3")[1])
 #' @param reference Default=`"1000g"`
 #'
 #' @export
-#' @return data frame
+#' @return Data frame containing ancestry specific LD scores and allele frequencies for each variant
 afl2_rsid <- function(rsid, reference="1000g")
 {
 	out <- api_query("variants/afl2", list(rsid=rsid)) %>% get_query_content()
@@ -56,7 +56,7 @@ afl2_rsid <- function(rsid, reference="1000g")
 #' @param reference Default=`"1000g"`
 #'
 #' @export
-#' @return data frame
+#' @return Data frame containing ancestry specific LD scores and allele frequencies for each variant
 afl2_chrpos <- function(chrpos, reference="1000g")
 {
 	out <- api_query("variants/afl2", list(chrpos=chrpos)) %>% get_query_content()
@@ -81,7 +81,7 @@ afl2_chrpos <- function(chrpos, reference="1000g")
 #' If `NULL` then [`afl2_list()`] is used by default
 #'
 #' @export
-#' @return data frame ordered by most likely ancestry
+#' @return data frame ordered by most likely ancestry, each row represents a super population and cor column represents the correlation between the GWAS dataset and the 1000 genomes super population allele frequencies
 infer_ancestry <- function(d, snpinfo=NULL)
 {
 	if(is.null(snpinfo))
@@ -94,7 +94,7 @@ infer_ancestry <- function(d, snpinfo=NULL)
 	nom <- grep("^AF\\.", names(snpinfo), value=TRUE)
 	out <- sapply(nom, function(x)
 	{
-		cor(snpinfo$eaf, snpinfo[[x]], use="pair")
+		stats::cor(snpinfo$eaf, snpinfo[[x]], use="pair")
 	}) %>% sort(decreasing=TRUE)
 	out <- dplyr::tibble(pop=gsub("AF\\.", "", names(out)), cor=out)
 	return(out)
@@ -105,7 +105,7 @@ infer_ancestry <- function(d, snpinfo=NULL)
 #' @param d Output from [`associations`]
 #'
 #' @export
-#' @return Updated version of d
+#' @return Data frame which is an updated version of the input but with sample sizes inferred where missing
 fill_n <- function(d)
 {
 	id <- d$id[1]

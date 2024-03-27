@@ -26,6 +26,10 @@
 	select_api("public", silent=TRUE)
 
 	invisible()
+}
+
+
+.onAttach <- function(libname, pkgname) {
 
 	a <- suppressWarnings(try(readLines("https://raw.githubusercontent.com/MRCIEU/ieugwasr/master/DESCRIPTION"), silent=TRUE))
 
@@ -55,4 +59,7 @@
 			sapply(x[["message"]], \(j) packageStartupMessage(paste(" ", j)))
 		})
 	}
+
+
+	invisible()
 }

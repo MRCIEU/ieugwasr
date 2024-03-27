@@ -6,6 +6,9 @@
 \usage{
 logging_info()
 }
+\value{
+No return value, called for side effects
+}
 \description{
 Details of how access token logs are used
 }

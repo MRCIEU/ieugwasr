@@ -5,7 +5,7 @@
 #' @param silent Silent? Default = FALSE
 #'
 #' @export
-#' @return NULL
+#' @return No return value, called for side effects
 select_api <- function(where="public", silent=FALSE)
 {
 	url <- switch(where,
@@ -75,7 +75,7 @@ check_access_token <- function()
 #' Revoke access token for MR Base
 #'
 #' @export
-#' @return NULL
+#' @return No return value, called for side effects
 revoke_access_token <- function()
 {
 	a <- googleAuthR::gar_auth("mrbase.oauth")
@@ -86,7 +86,7 @@ revoke_access_token <- function()
 #' Details of how access token logs are used
 #'
 #' @export
-#' @return NULL
+#' @return No return value, called for side effects
 logging_info <- function()
 {
 	message(

@@ -6,6 +6,9 @@
 \usage{
 revoke_access_token()
 }
+\value{
+No return value, called for side effects
+}
 \description{
 Revoke access token for MR Base
 }

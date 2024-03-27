@@ -1,3 +1,12 @@
+# ieugwasr 0.2.2
+* Reinstating https://api.opengwas.org/api/ as the API server address
+* Fixing issues with tests failing when server load is an issue
+
+# ieugwasr 0.2.1
+* Updating API server address temporarily
+* Modifying tests to manage API server load
+* Fixes to load/attach behaviour
+
 # ieugwasr 0.2.0
 * Moving API address to https://api.opengwas.org/api/
 * Fixing issues for CRAN release

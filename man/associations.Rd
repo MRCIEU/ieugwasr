@@ -12,8 +12,7 @@ associations(
   align_alleles = 1,
   palindromes = 1,
   maf_threshold = 0.3,
-  access_token = check_access_token(),
-  gwasglue = FALSE
+  access_token = check_access_token()
 )
 }
 \arguments{
@@ -36,8 +35,6 @@ associations(
 Used to authenticate level of access to data.
 By default, checks if already authenticated through \code{\link{get_access_token}} and
 if not then does not perform authentication}
-
-\item{gwasglue}{Returns a gwasglue2 SummarySet object  (if \code{gwasglue = TRUE}).  Only one GWAS id can be queried at a time. See \code{\link[gwasglue2:create_dataset]{gwasglue2::create_dataset()}}.Default = \code{FALSE}.}
 }
 \value{
 Dataframe

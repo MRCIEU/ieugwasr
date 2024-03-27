@@ -1,3 +1,7 @@
+# ieugwasr 0.2.3
+* Fixing issue with anonymous functions and backwards compatibility
+
+
 # ieugwasr 0.2.2
 * Reinstating https://api.opengwas.org/api/ as the API server address
 * Fixing issues with tests failing when server load is an issue

@@ -53,8 +53,10 @@ test_that("fill_n",
 test_that("phewas",
 {
 	a <- phewas("rs977747", 0.01)
+	if(inherits(a, "response")) skip("Server issues")
 	expect_true(nrow(a)>100)
 	b <- phewas("rs977747", 0.01, batch=c("ieu-a"))
+	if(inherits(b, "response")) skip("Server issues")
 	expect_true(nrow(b) < nrow(a))
 	expect_true(nrow(b) > 0)
 })

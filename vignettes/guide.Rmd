@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The [IEU GWAS database](https://gwas.mrcieu.ac.uk/) comprises over 10,000 curated, QC'd and harmonised complete GWAS summary datasets and can be queried using an API. See [here](http://gwasapi.mrcieu.ac.uk/docs/) for documentation on the API itself. This R package is a wrapper to make generic calls to the API, plus convenience functions for specific queries. 
+The [OpenGWAS database](https://gwas.mrcieu.ac.uk/) comprises over 50,000 curated, QC'd and harmonised complete GWAS summary datasets and can be queried using an API. See [here](https://api.opengwas.io/api/) for documentation on the API itself. This R package is a wrapper to make generic calls to the API, plus convenience functions for specific queries. 
 
 
 ## Authentication
@@ -52,7 +52,7 @@ To unauthenticate, simply delete the relevant file in the `ieugwasr_oauth` folde
 
 ## General API queries
 
-The API has a number of endpoints documented [here](http://gwas-api.mrcieu.ac.uk/docs/). A general way to access them in R is using the `api_query` function. There are two types of endpoints - `GET` and `POST`. 
+The API has a number of endpoints documented [here](https://api.opengwas.io/api/). A general way to access them in R is using the `api_query` function. There are two types of endpoints - `GET` and `POST`. 
 
 - `GET` - you provide a single URL which includes the endpoint and query. For example, for the `association` endpoint you can obtain some rsids in some studies, e.g.
     + `api_query("associations/ieu-a-2,ieu-a-7/rs234,rs123")`

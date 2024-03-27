@@ -58,6 +58,9 @@
     <loc>/reference/check_access_token.html</loc>
   </url>
   <url>
+    <loc>/reference/convert_variantid.html</loc>
+  </url>
+  <url>
     <loc>/reference/cor.html</loc>
   </url>
   <url>
@@ -118,6 +121,12 @@
     <loc>/reference/pipe.html</loc>
   </url>
   <url>
+    <loc>/reference/print.ApiStatus.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.GwasInfo.html</loc>
+  </url>
+  <url>
     <loc>/reference/revoke_access_token.html</loc>
   </url>
   <url>
@@ -143,5 +152,8 @@
   </url>
   <url>
     <loc>/reference/variants_to_rsid.html</loc>
+  </url>
+  <url>
+    <loc>/reference/write_ldscores.html</loc>
   </url>
 </urlset>

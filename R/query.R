@@ -405,6 +405,8 @@ tophits_query <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop=
 		return(out)
 	} else if(is.data.frame(out)) {
 		out %>% dplyr::as_tibble() %>% fix_n() %>% return()
+	} else if(out == "[]") {
+		return(dplyr::tibble())
 	} else {
 		stop("There was an error, please contact the developers")
 	}

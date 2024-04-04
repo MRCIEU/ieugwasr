@@ -1,7 +1,6 @@
-url: ~
+url: https://mrcieu.github.io/ieugwasr/
 template:
   bootstrap: 5
-  # bootswatch: sandstone
 
 navbar:
  structure:
@@ -21,4 +20,5 @@ navbar:
     text: Changelog
     href: news/index.html
 
-
+development:
+  mode: auto

@@ -1,6 +1,7 @@
 # ieugwasr 0.2.3
 * Fixing issue with anonymous functions and backwards compatibility
-
+* Bug in tophits when result is empty
+* Removing version check at startup
 
 # ieugwasr 0.2.2
 * Reinstating https://api.opengwas.org/api/ as the API server address

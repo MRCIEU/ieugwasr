@@ -25,7 +25,6 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 		'X-Api-Source'=ifelse(is.null(options()$mrbase.environment), 'R/TwoSampleMR', 'mr-base-shiny'),
 		'X-TEST-MODE-KEY'=Sys.getenv("OPENGWAS_X_TEST_MODE_KEY")
 	)
-	print(headers)
 	retry_flag <- FALSE
 	while(ntry <= ntries)
 	{

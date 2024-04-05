@@ -85,7 +85,7 @@ with European MAF &gt; 0.01.</p>
 <span>  align_alleles <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  palindromes <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  maf_threshold <span class="op">=</span> <span class="fl">0.3</span>,</span>
-<span>  access_token <span class="op">=</span> <span class="fu"><a href="check_access_token.html">check_access_token</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  opengwas_jwt <span class="op">=</span> <span class="fu"><a href="get_opengwas_jwt.html">get_opengwas_jwt</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -120,11 +120,8 @@ with European MAF &gt; 0.01.</p>
 <dd><p>MAF threshold to try to infer palindromic SNPs. Default = <code>0.3</code>.</p></dd>
 
 
-<dt>access_token</dt>
-<dd><p>Google OAuth2 access token.
-Used to authenticate level of access to data.
-By default, checks if already authenticated through <code><a href="get_access_token.html">get_access_token</a></code> and
-if not then does not perform authentication</p></dd>
+<dt>opengwas_jwt</dt>
+<dd><p>Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.</p></dd>
 
 </dl></div>
     <div class="section level2">

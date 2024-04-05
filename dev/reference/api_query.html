@@ -65,7 +65,7 @@ This is a generic way to access them.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">api_query</span><span class="op">(</span></span>
 <span>  <span class="va">path</span>,</span>
 <span>  query <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  access_token <span class="op">=</span> <span class="fu"><a href="check_access_token.html">check_access_token</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  opengwas_jwt <span class="op">=</span> <span class="fu"><a href="get_opengwas_jwt.html">get_opengwas_jwt</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"GET"</span>,</span>
 <span>  silent <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  encode <span class="op">=</span> <span class="st">"json"</span>,</span>
@@ -83,10 +83,8 @@ This is a generic way to access them.</p>
 <dd><p>If post query, provide a list of arguments as the payload. <code>NULL</code> by default</p></dd>
 
 
-<dt>access_token</dt>
-<dd><p>Google OAuth2 access token.
-Used to authenticate level of access to data. By default, checks if already
-authenticated through <code><a href="get_access_token.html">get_access_token</a></code> and if not then does not perform authentication</p></dd>
+<dt>opengwas_jwt</dt>
+<dd><p>Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.</p></dd>
 
 
 <dt>method</dt>

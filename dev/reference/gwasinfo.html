@@ -59,7 +59,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gwasinfo</span><span class="op">(</span>id <span class="op">=</span> <span class="cn">NULL</span>, access_token <span class="op">=</span> <span class="fu"><a href="check_access_token.html">check_access_token</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gwasinfo</span><span class="op">(</span>id <span class="op">=</span> <span class="cn">NULL</span>, opengwas_jwt <span class="op">=</span> <span class="fu"><a href="get_opengwas_jwt.html">get_opengwas_jwt</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -69,8 +69,8 @@
 available datasets</p></dd>
 
 
-<dt>access_token</dt>
-<dd><p>Google OAuth2 access token. Used to authenticate level of access to data</p></dd>
+<dt>opengwas_jwt</dt>
+<dd><p>Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.</p></dd>
 
 </dl></div>
     <div class="section level2">

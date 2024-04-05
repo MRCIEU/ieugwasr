@@ -1,4 +1,6 @@
-# ieugwasr 0.2.3
+# ieugwasr 1.0.0
+* Introducing JWT authorisation for the API
+* Added user() function to get user information
 * Fixing issue with anonymous functions and backwards compatibility
 * Bug in tophits when result is empty
 * Removing version check at startup

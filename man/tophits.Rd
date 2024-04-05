@@ -12,7 +12,7 @@ tophits(
   kb = 10000,
   pop = "EUR",
   force_server = FALSE,
-  access_token = check_access_token()
+  opengwas_jwt = get_opengwas_jwt()
 )
 }
 \arguments{
@@ -34,13 +34,10 @@ p-value threshold 5e-8, with r2 threshold 0.001 and kb threshold 10000,
 using only SNPs with MAF > 0.01 in the European samples in 1000 genomes.
 If force_server = \code{TRUE} then will recompute using server side LD reference panel.}
 
-\item{access_token}{Google OAuth2 access token.
-Used to authenticate level of access to data.
-By default, checks if already authenticated through \code{\link{get_access_token}}
-and if not then does not perform authentication.}
+\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }
 \value{
-Dataframe. If \code{gwasglue = TRUE} then returns a gwasglue2 object.
+Dataframe
 }
 \description{
 By default performs clumping on the server side.

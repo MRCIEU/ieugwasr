@@ -27,7 +27,7 @@
 #' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`. 
 #' `'legacy'` also available - which is a previously used verison of the EUR 
 #' panel with a slightly different set of markers
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.#' 
 #' @param bfile If this is provided then will use the API. Default = `NULL`
 #' @param plink_bin If `NULL` and `bfile` is not `NULL` then will detect 
 #' packaged plink binary for specific OS. Otherwise specify path to plink binary. 
@@ -36,7 +36,7 @@
 #' @export
 #' @return Data frame
 ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99, 
-                     pop = "EUR", access_token=NULL, bfile=NULL, plink_bin=NULL)
+                     pop = "EUR", opengwas_jwt=get_opengwas_jwt(), bfile=NULL, plink_bin=NULL)
 {
 
 	stopifnot("rsid" %in% names(dat))
@@ -64,11 +64,6 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 		dat$id <- random_string(1)
 	}
 
-	if(is.null(bfile))
-	{
-		access_token = check_access_token()
-	}
-
 	ids <- unique(dat[["id"]])
 	res <- list()
 	for(i in 1:length(ids))
@@ -82,7 +77,7 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 			message("Clumping ", ids[i], ", ", nrow(x), " variants, using ", pop, " population reference")
 			if(is.null(bfile))
 			{
-				res[[i]] <- ld_clump_api(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, pop=pop, access_token=access_token)
+				res[[i]] <- ld_clump_api(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, pop=pop, opengwas_jwt=opengwas_jwt)
 			} else {
 				res[[i]] <- ld_clump_local(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, bfile=bfile, plink_bin=plink_bin)
 			}
@@ -102,9 +97,9 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 #' @param clump_p Clumping sig level for index variants. Default = `1` (i.e. no threshold)
 #' @param pop Super-population to use as reference panel. Default = `"EUR"`. 
 #' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.#' @param bfile If this is provided then will use the API. Default = `NULL`
 #' @return Data frame of only independent variants
-ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, pop="EUR", access_token=check_access_token())
+ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, pop="EUR", opengwas_jwt=get_opengwas_jwt())
 {
 	res <- api_query('ld/clump',
 			query = list(
@@ -115,7 +110,7 @@ ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, pop="EUR", 
 				kb = clump_kb,
 				pop = pop
 			),
-			access_token=access_token
+			opengwas_jwt=opengwas_jwt
 		) %>% get_query_content()
 	y <- subset(dat, !dat[["rsid"]] %in% res)
 	if(nrow(y) > 0)
@@ -191,16 +186,18 @@ random_string <- function(n=1, len=6)
 #' @param rsid Array of rsids to check
 #' @param pop Super-population to use as reference panel. Default = `"EUR"`. 
 #' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.#' @param bfile If this is provided then will use the API. Default = `NULL`
 #'
 #' @export
 #' @return Array of rsids that are present in the LD reference panel
-ld_reflookup <- function(rsid, pop='EUR')
+ld_reflookup <- function(rsid, pop='EUR', opengwas_jwt=get_opengwas_jwt())
 {
 	res <- api_query('ld/reflookup',
 			query = list(
 				rsid = rsid,
 				pop = pop
-			)
+			),
+			opengwas_jwt=opengwas_jwt
 		) %>% get_query_content()
 	if(length(res) == 0)
 	{

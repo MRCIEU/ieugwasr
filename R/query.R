@@ -5,9 +5,7 @@
 #'
 #' @param path Either a full query path (e.g. for get) or an endpoint (e.g. for post) queries
 #' @param query If post query, provide a list of arguments as the payload. `NULL` by default
-#' @param access_token Google OAuth2 access token. 
-#' Used to authenticate level of access to data. By default, checks if already 
-#' authenticated through [`get_access_token`] and if not then does not perform authentication
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #' @param method `"GET"` (default) or `"POST"`, `"DELETE"` etc
 #' @param silent `TRUE`/`FALSE` to be passed to httr call. `TRUE` by default
 #' @param encode Default = `"json"`, see [`httr::POST`] for options
@@ -16,19 +14,19 @@
 #'
 #' @export
 #' @return httr response object
-api_query <- function(path, query=NULL, access_token=check_access_token(), 
+api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(), 
                       method="GET", silent=TRUE, encode="json", timeout=300)
 {
 	ntry <- 0
 	ntries <- 5
 	headers <- httr::add_headers(
 		# 'Content-Type'='application/json; charset=UTF-8',
-		'X-Api-Token'=access_token,
-		'X-Api-Source'=ifelse(is.null(options()$mrbase.environment), 'R/TwoSampleMR', 'mr-base-shiny')
+		'Authorization'=paste("Bearer", opengwas_jwt=opengwas_jwt),
+		'X-Api-Source'=ifelse(is.null(options()$mrbase.environment), 'R/TwoSampleMR', 'mr-base-shiny'),
+		'X-TEST-MODE-KEY'=Sys.getenv("OPENGWAS_X_TEST_MODE_KEY")
 	)
-
+	print(headers)
 	retry_flag <- FALSE
-
 	while(ntry <= ntries)
 	{
 		Sys.sleep(2^ntry-1)
@@ -160,19 +158,19 @@ print.ApiStatus <- function(x, ...)
 #'
 #' @param id List of MR-Base IDs to retrieve. If `NULL` (default) retrieves all 
 #' available datasets
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return Dataframe of details for all available studies
-gwasinfo <- function(id=NULL, access_token = check_access_token())
+gwasinfo <- function(id=NULL, opengwas_jwt=get_opengwas_jwt())
 {
 	id <- legacy_ids(id)
 	if(!is.null(id))
 	{
 		stopifnot(is.vector(id))
-		out <- api_query('gwasinfo', query = list(id=id), access_token=access_token) %>% get_query_content()
+		out <- api_query('gwasinfo', query = list(id=id), opengwas_jwt=opengwas_jwt) %>% get_query_content()
 	} else {
-		out <- api_query('gwasinfo', access_token=access_token) %>% get_query_content()
+		out <- api_query('gwasinfo', opengwas_jwt=opengwas_jwt) %>% get_query_content()
 	}
 	if(length(out) == 0)
 	{
@@ -208,13 +206,13 @@ batch_from_id <- function(id)
 #' Get list of data batches in IEU GWAS database
 #'
 #'
-#' @param access_token Google OAuth2 access token. Used to authenticate level of access to data
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return data frame
-batches <- function(access_token = check_access_token())
+batches <- function(opengwas_jwt=get_opengwas_jwt())
 {
-	api_query('batches', access_token=access_token) %>% get_query_content()
+	api_query('batches', opengwas_jwt=opengwas_jwt) %>% get_query_content()
 }
 
 #' Query specific variants from specific GWAS
@@ -235,15 +233,11 @@ batches <- function(access_token = check_access_token())
 #' `1` = yes (default), `0` = no
 #' @param palindromes Allow palindromic SNPs (if `proxies = 1`). `1` = yes (default), `0` = no
 #' @param maf_threshold MAF threshold to try to infer palindromic SNPs. Default = `0.3`.
-#' @param access_token Google OAuth2 access token. 
-#' Used to authenticate level of access to data. 
-#' By default, checks if already authenticated through [`get_access_token`] and 
-#' if not then does not perform authentication
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return Dataframe
-associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, access_token=check_access_token()){
-
+associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, opengwas_jwt=get_opengwas_jwt()) {
 	id <- legacy_ids(id)
 	out <- api_query("associations", query=list(
 		variant=variants,
@@ -253,7 +247,7 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 		align_alleles=align_alleles,
 		palindromes=palindromes,
 		maf_threshold=maf_threshold
-	), access_token=access_token) %>% get_query_content()
+	), opengwas_jwt=opengwas_jwt) %>% get_query_content()
 
 	if(inherits(out, "response"))
 	{
@@ -314,23 +308,19 @@ fix_n <- function(d)
 #' @param variants Array of variants e.g. `c("rs234", "7:105561135-105563135")`
 #' @param pval p-value threshold. Default = `0.00001`
 #' @param batch Vector of batch IDs to search across. If `c()` (default) then returns all batches
-#' @param access_token Google OAuth2 access token. 
-#' Used to authenticate level of access to data. 
-#' By default, checks if already authenticated through [`get_access_token`] and 
-#' if not then does not perform authentication
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return Dataframe
-phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_access_token())
+phewas <- function(variants, pval = 0.00001, batch=c(), opengwas_jwt=get_opengwas_jwt())
 {
 	out <- api_query("phewas", query=list(
 		variant=variants,
 		pval=pval,
 		index_list=batch
-	), access_token=access_token) %>% get_query_content()
+	), opengwas_jwt=opengwas_jwt) %>% get_query_content()
 	
-	if(!inherits(out, "response"))
-	{
+	if(!inherits(out, "response")) {
 		out <- out %>% dplyr::as_tibble() %>% fix_n()
 		if(nrow(out) > 0)
 		{
@@ -360,26 +350,12 @@ phewas <- function(variants, pval = 0.00001, batch=c(), access_token=check_acces
 #' If force_server = `TRUE` then will recompute using server side LD reference panel.
 #' @param pop Super-population to use as reference panel. Default = `"EUR"`. 
 #' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`
-#' @param access_token Google OAuth2 access token. 
-#' Used to authenticate level of access to data. 
-#' By default, checks if already authenticated through [`get_access_token`] 
-#' and if not then does not perform authentication.
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#'
 #' @export
-#' @return Dataframe. If `gwasglue = TRUE` then returns a gwasglue2 object.
-tophits <- function(id, pval = 5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", force_server = FALSE, access_token = check_access_token())
-{
-	# Query tophits from specific GWAS using tophits_query internal function (old version)
-	out <- tophits_query(id = id, pval = pval, clump = clump, r2 = r2, kb = kb, pop = pop, force_server = force_server, access_token = access_token)
-	
-	return(out)
-}
-
-
-
-# query top hits from GWAS dataset - tophits internal function to allow for future gwasglue2 integration
-tophits_query <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", 
-                    force_server = FALSE, access_token=check_access_token())
-{
+#' @return Dataframe
+tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", 
+                    force_server = FALSE, opengwas_jwt=get_opengwas_jwt()) {
 	id <- legacy_ids(id)
 	if(clump == 1 & r2 == 0.001 & kb == 10000 & pval == 5e-8)
 	{
@@ -399,7 +375,7 @@ tophits_query <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop=
 		r2=r2,
 		kb=kb,
 		pop=pop
-	), access_token=access_token) %>% get_query_content()
+	), opengwas_jwt=opengwas_jwt) %>% get_query_content()
 	if(inherits(out, "response"))
 	{
 		return(out)
@@ -416,18 +392,15 @@ tophits_query <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop=
 #' Check datasets that are in process of being uploaded
 #'
 #' @param id ID
-#' @param access_token Google OAuth2 access token. 
-#' Used to authenticate level of access to data. 
-#' By default, checks if already authenticated through [`get_access_token`] 
-#' and if not then does not perform authentication
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return Dataframe
-editcheck <- function(id, access_token=check_access_token())
+editcheck <- function(id, opengwas_jwt=get_opengwas_jwt())
 {
 	api <- options()[["ieugwasr_api"]]
 	select_api("private")
-	out <- api_query(paste0("edit/check/", id), access_token=access_token) %>%
+	out <- api_query(paste0("edit/check/", id), opengwas_jwt=opengwas_jwt) %>%
 		get_query_content()
 	options(ieugwasr_api=api)
 	return(out)

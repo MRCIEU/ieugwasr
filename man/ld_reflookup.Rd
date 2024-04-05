@@ -4,13 +4,15 @@
 \alias{ld_reflookup}
 \title{Check which rsids are present in a remote LD reference panel}
 \usage{
-ld_reflookup(rsid, pop = "EUR")
+ld_reflookup(rsid, pop = "EUR", opengwas_jwt = get_opengwas_jwt())
 }
 \arguments{
 \item{rsid}{Array of rsids to check}
 
 \item{pop}{Super-population to use as reference panel. Default = \code{"EUR"}.
 Options are \code{"EUR"}, \code{"SAS"}, \code{"EAS"}, \code{"AFR"}, \code{"AMR"}}
+
+\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.#' @param bfile If this is provided then will use the API. Default = \code{NULL}}
 }
 \value{
 Array of rsids that are present in the LD reference panel

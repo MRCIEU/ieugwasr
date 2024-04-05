@@ -21,7 +21,6 @@ Depends:
     R (>= 4.0)
 Imports:
     dplyr,
-    googleAuthR,
     httr,
     jsonlite,
     magrittr,

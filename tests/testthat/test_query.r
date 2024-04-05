@@ -14,7 +14,7 @@ test_that("get_query_content", {
 test_that("gwasinfo", 
 {
 	expect_true(
-		nrow(api_query('gwasinfo/ieu-a-2',access_token=NULL) %>% get_query_content()) == 1
+		nrow(api_query('gwasinfo/ieu-a-2') %>% get_query_content()) == 1
 	)
 	expect_equal(
 		nrow(api_query('gwasinfo', query=list(id=c("ieu-a-2","ieu-a-1001"))) %>% get_query_content()), 

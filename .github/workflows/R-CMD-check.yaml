@@ -55,6 +55,11 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
+      
+      - name: Create and populate .Renviron file
+        run: |
+          echo OPENGWAS_X_TEST_MODE_KEY="$OPENGWAS_X_TEST_MODE_KEY" >> ~/.Renviron
+        shell: bash
 
       - uses: r-lib/actions/check-r-package@v2
         with:

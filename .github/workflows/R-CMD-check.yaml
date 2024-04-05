@@ -38,6 +38,7 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      OPENGWAS_X_TEST_MODE_KEY: ${{ secrets.OPENGWAS_X_TEST_MODE_KEY }}
       R_KEEP_PKG_SOURCE: yes
 
     steps:

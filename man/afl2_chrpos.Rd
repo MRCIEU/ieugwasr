@@ -13,7 +13,7 @@ Also allows ranges e.g \code{"7:105561135-105563135"}}
 \item{reference}{Default=\code{"1000g"}}
 }
 \value{
-data frame
+Data frame containing ancestry specific LD scores and allele frequencies for each variant
 }
 \description{
 Look up allele frequencies and LD scores for 1000 genomes populations by chrpos

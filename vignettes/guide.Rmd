@@ -18,24 +18,29 @@ knitr::opts_chunk$set(
 )
 ```
 
-The [IEU GWAS database](https://gwas.mrcieu.ac.uk/) comprises over 10,000 curated, QC'd and harmonised complete GWAS summary datasets and can be queried using an API. See [here](http://gwasapi.mrcieu.ac.uk/docs/) for documentation on the API itself. This R package is a wrapper to make generic calls to the API, plus convenience functions for specific queries. 
+The [OpenGWAS database](https://gwas.mrcieu.ac.uk/) comprises over 50,000 curated, QC'd and harmonised complete GWAS summary datasets and can be queried using an API. See [here](https://api.opengwas.io/api/) for documentation on the API itself. This R package is a wrapper to make generic calls to the API, plus convenience functions for specific queries. 
 
 
 ## Authentication
 
 User authentication is required to perform most OpenGWAS queries. To authenticate, you need to generate a token from the OpenGWAS website. The token behaves like a password, and it will be used to authorise the requests you make to the OpenGWAS API. Here are the steps to generate the token and then have `ieugwasr` automatically use it for your queries:
 
-1. Login to https://api.opengwas.io
+1. Login to https://api.opengwas.io/profile
 2. Generate a new token
 3. Add `OPENGWAS_JWT=<token>` to your `.Renviron` file. This file could be either in your home directory or in the working directory of your R session. You can check the location of your `.Renviron` file by running `Sys.getenv("R_ENVIRON_USER")` in R.
 4. Restart your R session
-5. To check that your token is working, run `ieugwasr::get_opengwas_jwt()`. If it returns a long random string then you are authenticated.
+5. To check that your token is being recognised, run `ieugwasr::get_opengwas_jwt()`. If it returns a long random string then you are authenticated.
+6. To check that your token is working, run `user()`. It will make a request to the API for your user information using your token. It should return a list with your user information. If it returns an error, then your token is not working.
 
 Now any query to OpenGWAS will automatically include your token to authorise the request.
 
+## Allowance
+
+Due to very high usage, we have had to limit the number of queries that can be made in a given time period. Every user has an allowance that is reset periodically, and is used based on the queries that you submit. If this is posing an issue do get in touch and we can discuss how to manage this. See here for full details on the allowance system: https://api.opengwas.io/api/#allowance. 
+
 ## General API queries
 
-The API has a number of endpoints documented [here](http://gwas-api.mrcieu.ac.uk/docs/). A general way to access them in R is using the `api_query` function. There are two types of endpoints - `GET` and `POST`. 
+The API has a number of endpoints documented [here](https://api.opengwas.io/api/). A general way to access them in R is using the `api_query` function. There are two types of endpoints - `GET` and `POST`. 
 
 - `GET` - you provide a single URL which includes the endpoint and query. For example, for the `association` endpoint you can obtain some rsids in some studies, e.g.
     + `api_query("associations/ieu-a-2,ieu-a-7/rs234,rs123")`

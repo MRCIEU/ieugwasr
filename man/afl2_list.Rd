@@ -11,7 +11,7 @@ afl2_list(variantlist = c("reduced", "hapmap3")[1])
 common in all super populations (default). hapmap3 = ~1.3 million hm3 SNPs}
 }
 \value{
-Data frame
+Data frame containing ancestry specific LD scores and allele frequencies for each variant
 }
 \description{
 Data frame includes 1000 genomes metadata including sample sizes,

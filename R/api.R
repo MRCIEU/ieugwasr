@@ -2,10 +2,11 @@
 #'
 #' @param where Which API to use. Choice between `"public"`, `"private"`, `"dev1"`, `"dev2"`. 
 #' Default = `"public"`.
+#' @param silent Silent? Default = FALSE
 #'
 #' @export
-#' @return NULL
-select_api <- function(where="public")
+#' @return No return value, called for side effects
+select_api <- function(where="public", silent=FALSE)
 {
 	url <- switch(where,
 		public = "https://api.opengwas.io/api/",
@@ -20,7 +21,9 @@ select_api <- function(where="public")
 	}
 
 	options(ieugwasr_api=url)
-	message("API: ", where, ": ", url)
+	if(!silent) {
+		message("API: ", where, ": ", url)
+	}
 }
 
 #' Retrieve OpenGWAS JSON Web Token from .Renviron file
@@ -35,11 +38,21 @@ get_opengwas_jwt <- function() {
 	return(key)
 }
 
+#' Get user details
+#' 
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' 
+#' @export
+#' @return user information
+user <- function(opengwas_jwt=get_opengwas_jwt()) {
+	api_query('user', opengwas_jwt=opengwas_jwt) %>% get_query_content()
+}
+
 
 #' Details of how access token logs are used
 #'
 #' @export
-#' @return NULL
+#' @return No return value, called for side effects
 logging_info <- function()
 {
 	message(

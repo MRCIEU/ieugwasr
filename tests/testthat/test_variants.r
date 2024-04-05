@@ -1,7 +1,11 @@
-context("Variants")
-library(ieugwasr)
+# skip()
+# skip_on_cran()
+# skip_on_ci()
+
 
 o1 <- variants_gene("ENSG00000123374")
+if(inherits(o1, "response")) skip("Server issues")
+
 o2 <- variants_gene("ENSG00000123374", 100000)
 
 test_that("genes",

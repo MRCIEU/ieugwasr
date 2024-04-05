@@ -45,7 +45,7 @@ Note that you can perform the same operation locally if you provide a path to pl
 
 To get a path to plink you can do the following:
 
-``` r
+```r
 devtools::install_github("explodecomputer/genetics.binaRies")
 genetics.binaRies::get_plink_binary()
 ```
@@ -68,7 +68,7 @@ Now supposing in R you have a dataframe, `dat`, with the following columns:
 
 to perform clumping, just do the following:
 
-``` r
+```r
 ld_clump(
     dplyr::tibble(rsid=dat$rsid, pval=dat$pval, id=dat$trait_id),
     plink_bin = genetics.binaRies::get_plink_binary(),
@@ -80,13 +80,13 @@ ld_clump(
 
 Similarly, a matrix of LD r values can be generated using
 
-``` r
+```r
 ld_matrix(b$variant)
 ```
 
 This uses the API by default but is limited to only 500 variants. You can use, instead, local plink and LD reference data in the same manner as in the `ld_clump` function, e.g.
 
-``` r
+```r
 ld_matrix(
 	dat$rsid,
 	plink_bin = genetics.binaRies::get_plink_binary(),

@@ -15,7 +15,7 @@ variants_gene <- function(gene, radius=0)
 	{
 		message("Looking up ", gene[i])
 		o <- api_query(paste0('variants/gene/', gene[i], "?radius=", format(radius, scientific=FALSE))) %>% get_query_content()
-		if(class(o) != "response")
+		if(! inherits(o, "response"))
 		{
 			l[[gene[i]]] <- o %>% dplyr::bind_rows() %>% format_variants()
 		}		
@@ -35,7 +35,7 @@ variants_gene <- function(gene, radius=0)
 variants_rsid <- function(rsid)
 {
 	o <- api_query("variants/rsid", list(rsid = rsid)) %>% get_query_content()
-	if(! class(o) %in% "response")
+	if(! inherits(o, "response"))
 	{
 		if(!is.data.frame(o) & is.list(o))
 		{
@@ -62,7 +62,7 @@ variants_chrpos <- function(chrpos, radius=0)
 {
 	o <- api_query("variants/chrpos", list(chrpos = chrpos, radius=radius)) %>% get_query_content() 
 
-	if(! class(o) %in% "response")
+	if(! inherits(o, "response"))
 	{
 		o %>% dplyr::bind_rows() %>% format_variants() %>% return()
 	} else {
@@ -76,7 +76,6 @@ variants_chrpos <- function(chrpos, radius=0)
 #'
 #' @param variants Array of variants e.g. `c("rs234", "7:105561135-105563135")`
 #'
-#' @importFrom magrittr %>%
 #' @export
 #' @return list of rsids
 variants_to_rsid <- function(variants)

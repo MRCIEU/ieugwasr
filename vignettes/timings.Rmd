@@ -14,7 +14,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = FALSE
 )
 ```
 
@@ -25,7 +26,7 @@ library(microbenchmark)
 library(ieugwasr)
 ```
 
-Get a set of SNPs too query:
+Get a set of SNPs to query:
 
 ```{r}
 a <- tophits("ieu-a-2")
@@ -59,7 +60,16 @@ b <- associations(chrpos, "ieu-a-7", proxies=0)
 rsid <- b$rsid
 ```
 
-This is a `r format(radius * 2, scientific = FALSE, big.mark = ",")` size window, which has `r length(rsid)` variants to lookup.
+
+Window size
+
+```{r}
+format(radius * 2, scientific = FALSE, big.mark = ",")
+```
+
+```{r}
+length(rsid)
+```
 
 ```{r}
 mbm <- microbenchmark("rsid" = {
@@ -83,7 +93,23 @@ b <- associations(chrpos, "ieu-a-7", proxies=0)
 rsid <- b$rsid
 ```
 
-This `r length(chrpos)` ranges of `r format(20000, scientific = FALSE, big.mark = ",")` size window, which is covered by `r length(rsid)` variants to lookup.
+```{r}
+length(chrpos)
+``` 
+
+ranges of 
+
+```{r}
+format(20000, scientific = FALSE, big.mark = ",")
+``` 
+
+size window, which is covered by 
+
+```{r}
+length(rsid)
+```
+
+variants to lookup.
 
 
 ```{r}

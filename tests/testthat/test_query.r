@@ -1,11 +1,20 @@
-context("Queries")
-library(ieugwasr)
+# skip()
+# skip_on_cran()
+# skip_on_ci()
+
+a <- api_status()
+if(inherits(a, "response")) skip("Server issues")
+
+test_that("get_query_content", {
+	a <- api_query("FALSE_ENDPOINT")
+	expect_true(inherits(a, "response"))
+})
 
 
 test_that("gwasinfo", 
 {
 	expect_true(
-		nrow(api_query('gwasinfo/ieu-a-2',access_token=NULL) %>% get_query_content()) == 1
+		nrow(api_query('gwasinfo/ieu-a-2') %>% get_query_content()) == 1
 	)
 	expect_equal(
 		nrow(api_query('gwasinfo', query=list(id=c("ieu-a-2","ieu-a-1001"))) %>% get_query_content()), 
@@ -44,8 +53,10 @@ test_that("fill_n",
 test_that("phewas",
 {
 	a <- phewas("rs977747", 0.01)
+	if(inherits(a, "response")) skip("Server issues")
 	expect_true(nrow(a)>100)
 	b <- phewas("rs977747", 0.01, batch=c("ieu-a"))
+	if(inherits(b, "response")) skip("Server issues")
 	expect_true(nrow(b) < nrow(a))
 	expect_true(nrow(b) > 0)
 })

@@ -17,14 +17,32 @@
 										"https://www.googleapis.com/auth/userinfo.email"),
 		googleAuthR.ok_content_types=c("application/json; charset=UTF-8", ("text/html; charset=UTF-8")),
 		googleAuthR.securitycode = 
-			paste0(sample(c(1:9, LETTERS, letters), 20, replace = T), collapse=''),
+			paste0(sample(c(1:9, LETTERS, letters), 20, replace = TRUE), collapse=''),
 		googleAuthR.tryAttempts = 5
 	)
 	# toset <- !(names(op.googleAuthR) %in% names(op))
 	# if(any(toset)) options(op.googleAuthR[toset])
 	options(op.googleAuthR)
-	select_api("public")
+	select_api("public", silent=TRUE)
 
 	invisible()
+}
 
+
+.onAttach <- function(libname, pkgname) {
+
+	b <- suppressWarnings(try(jsonlite::read_json("https://raw.githubusercontent.com/MRCIEU/opengwas/main/messages.json"), silent=TRUE))
+	if(!inherits(b, 'try-error'))
+	{
+		if(length(b) > 0) {
+			packageStartupMessage("OpenGWAS updates:")
+		}
+		o <- lapply(b, function(x) {
+			packageStartupMessage("  Date: ", x[["date"]])
+			sapply(x[["message"]], function(j) packageStartupMessage(paste(" ", j)))
+		})
+	}
+
+
+	invisible()
 }

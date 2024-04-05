@@ -1,6 +1,3 @@
-context("backwards compatibility")
-library(ieugwasr)
-
 test_that("backwards compatibility", 
 {
 	a <- c("2", "UKB-a:3", "IEU-a:4", "ieu-a-5")

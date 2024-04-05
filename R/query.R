@@ -22,12 +22,14 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 	headers <- httr::add_headers(
 		# 'Content-Type'='application/json; charset=UTF-8',
 		'Authorization'=paste("Bearer", opengwas_jwt=opengwas_jwt),
-		'X-Api-Source'=ifelse(is.null(options()$mrbase.environment), 'R/TwoSampleMR', 'mr-base-shiny')
+		'X-Api-Source'=ifelse(is.null(options()$mrbase.environment), 'R/TwoSampleMR', 'mr-base-shiny'),
+		'X-TEST-MODE-KEY'=Sys.getenv("OPENGWAS_X_TEST_MODE_KEY")
 	)
-
+	print(headers)
 	retry_flag <- FALSE
 	while(ntry <= ntries)
 	{
+		Sys.sleep(2^ntry-1)
 		if(method == "DELETE")
 		{
 			r <- try(
@@ -59,14 +61,14 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 				silent=TRUE
 			)			
 		}
-		if('try-error' %in% class(r))
+		if(inherits(r, 'try-error'))
 		{
 			if(grepl("Timeout", as.character(attributes(r)$condition)))
 			{
 				stop("The query to MR-Base exceeded ", timeout, " seconds and timed out. Please simplify the query")
 			}
 		}
-		if(! 'try-error' %in% class(r))
+		if(! inherits(r, 'try-error'))
 		{
 			if(r$status_code >= 500 & r$status_code < 600)
 			{
@@ -90,7 +92,7 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 		message("Failed to retrieve results from server. See error status message in the returned object and contact the developers if the problem persists.")
 		return(r)
 	}
-	if('try-error' %in% class(r))
+	if(inherits(r, 'try-error'))
 	{
 		if(grepl("Could not resolve host", as.character(attributes(r)$condition)))
 		{
@@ -141,7 +143,12 @@ api_status <- function()
 	return(o)
 }
 
-print.ApiStatus <- function(x)
+#' Print API status
+#' @param x Output from [`api_status`]
+#' @param ... Unused, for extensibility
+#' @export 
+#' @return Print out of API status
+print.ApiStatus <- function(x, ...)
 {
 	lapply(names(x), function(y) cat(format(paste0(y, ":"), width=30, justify="right"), x[[y]], "\n"))
 }
@@ -153,7 +160,6 @@ print.ApiStatus <- function(x)
 #' available datasets
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
-#' @importFrom magrittr %>%
 #' @export
 #' @return Dataframe of details for all available studies
 gwasinfo <- function(id=NULL, opengwas_jwt=get_opengwas_jwt())
@@ -176,7 +182,12 @@ gwasinfo <- function(id=NULL, opengwas_jwt=get_opengwas_jwt())
 	return(out)
 }
 
-print.GwasInfo <- function(x)
+#' Print GWAS information
+#' @param x Output from [`gwasinfo`]
+#' @param ... Unused, for extensibility
+#' @export
+#' @return Print out of GWAS information 
+print.GwasInfo <- function(x, ...)
 {
 	dplyr::glimpse(x)
 }
@@ -223,14 +234,10 @@ batches <- function(opengwas_jwt=get_opengwas_jwt())
 #' @param palindromes Allow palindromic SNPs (if `proxies = 1`). `1` = yes (default), `0` = no
 #' @param maf_threshold MAF threshold to try to infer palindromic SNPs. Default = `0.3`.
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
-#' Used to authenticate level of access to data. 
-#' By default, checks if already authenticated through [`get_access_token`] and 
-#' if not then does not perform authentication
 #'
 #' @export
 #' @return Dataframe
-associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, opengwas_jwt=get_opengwas_jwt())
-{
+associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, opengwas_jwt=get_opengwas_jwt()) {
 	id <- legacy_ids(id)
 	out <- api_query("associations", query=list(
 		variant=variants,
@@ -242,7 +249,7 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 		maf_threshold=maf_threshold
 	), opengwas_jwt=opengwas_jwt) %>% get_query_content()
 
-	if(class(out) == "response")
+	if(inherits(out, "response"))
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
@@ -250,7 +257,10 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 	} else {
 		return(dplyr::tibble())
 	}
+	
+	return(out)
 }
+
 
 #' Look up sample sizes when meta data is missing from associations
 #'
@@ -309,8 +319,8 @@ phewas <- function(variants, pval = 0.00001, batch=c(), opengwas_jwt=get_opengwa
 		pval=pval,
 		index_list=batch
 	), opengwas_jwt=opengwas_jwt) %>% get_query_content()
-	if(class(out) != "response")
-	{
+	
+	if(!inherits(out, "response")) {
 		out <- out %>% dplyr::as_tibble() %>% fix_n()
 		if(nrow(out) > 0)
 		{
@@ -345,8 +355,7 @@ phewas <- function(variants, pval = 0.00001, batch=c(), opengwas_jwt=get_opengwa
 #' @export
 #' @return Dataframe
 tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", 
-                    force_server = FALSE, opengwas_jwt=get_opengwas_jwt())
-{
+                    force_server = FALSE, opengwas_jwt=get_opengwas_jwt()) {
 	id <- legacy_ids(id)
 	if(clump == 1 & r2 == 0.001 & kb == 10000 & pval == 5e-8)
 	{
@@ -367,13 +376,15 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 		kb=kb,
 		pop=pop
 	), opengwas_jwt=opengwas_jwt) %>% get_query_content()
-	if(class(out) == "response")
+	if(inherits(out, "response"))
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
 		out %>% dplyr::as_tibble() %>% fix_n() %>% return()
-	} else {
+	} else if(out == "[]") {
 		return(dplyr::tibble())
+	} else {
+		stop("There was an error, please contact the developers")
 	}
 }
 

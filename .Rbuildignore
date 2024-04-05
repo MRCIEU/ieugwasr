@@ -1,10 +1,12 @@
 ^LICENSE\.md$
 ^mrbase\.oauth$
-^ieugwasr_oauth$
-.travis.yml
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
 ^\.github$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^cran-comments\.md$
+^CRAN-SUBMISSION$
+^codecov\.yml$
+^ieugwasr_oauth$

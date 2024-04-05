@@ -34,7 +34,11 @@ User authentication is required to perform most OpenGWAS queries. To authenticat
 
 Now any query to OpenGWAS will automatically include your token to authorise the request.
 
-## Allowance
+### Deprecated Google authentication
+
+Note that previously we used Google OAuth2 for authentication, in order for users to access private datasets to which they had specific access. This authentication method is no longer supported, and all users should now use the JWT token method described above. You can delete the `ieugwasr_oauth2` directory as it will no longer be needed.
+
+### Allowance
 
 Due to very high usage, we have had to limit the number of queries that can be made in a given time period. Every user has an allowance that is reset periodically, and is used based on the queries that you submit. If this is posing an issue do get in touch and we can discuss how to manage this. See here for full details on the allowance system: https://api.opengwas.io/api/#allowance. 
 

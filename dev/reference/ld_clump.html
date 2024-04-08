@@ -12,7 +12,7 @@ The SNP with the lowest p-value is retained."><meta name="robots" content="noind
     
     <a class="navbar-brand me-2" href="../index.html">ieugwasr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.2-9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.2-9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,6 +68,7 @@ The SNP with the lowest p-value is retained.</p>
 <span>  clump_r2 <span class="op">=</span> <span class="fl">0.001</span>,</span>
 <span>  clump_p <span class="op">=</span> <span class="fl">0.99</span>,</span>
 <span>  pop <span class="op">=</span> <span class="st">"EUR"</span>,</span>
+<span>  access_token <span class="op">=</span> <span class="fu">check_access_token</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  opengwas_jwt <span class="op">=</span> <span class="fu"><a href="get_opengwas_jwt.html">get_opengwas_jwt</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  bfile <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  plink_bin <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -98,6 +99,11 @@ If <code>id</code> is present then clumping will be done per unique id.</p></dd>
 Options are <code>"EUR"</code>, <code>"SAS"</code>, <code>"EAS"</code>, <code>"AFR"</code>, <code>"AMR"</code>.
 <code>'legacy'</code> also available - which is a previously used verison of the EUR
 panel with a slightly different set of markers</p></dd>
+
+
+<dt>access_token</dt>
+<dd><p>Google OAuth2 access token.
+Used to authenticate level of access to data. By default, checks if already</p></dd>
 
 
 <dt>opengwas_jwt</dt>

@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ieugwasr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.2-9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.2-9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,6 +67,7 @@
 <span>  kb <span class="op">=</span> <span class="fl">10000</span>,</span>
 <span>  pop <span class="op">=</span> <span class="st">"EUR"</span>,</span>
 <span>  force_server <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  access_token <span class="op">=</span> <span class="fu">check_access_token</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  opengwas_jwt <span class="op">=</span> <span class="fu"><a href="get_opengwas_jwt.html">get_opengwas_jwt</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -103,6 +104,11 @@ Options are <code>"EUR"</code>, <code>"SAS"</code>, <code>"EAS"</code>, <code>"A
 p-value threshold 5e-8, with r2 threshold 0.001 and kb threshold 10000,
 using only SNPs with MAF &gt; 0.01 in the European samples in 1000 genomes.
 If force_server = <code>TRUE</code> then will recompute using server side LD reference panel.</p></dd>
+
+
+<dt>access_token</dt>
+<dd><p>Google OAuth2 access token.
+Used to authenticate level of access to data. By default, checks if already</p></dd>
 
 
 <dt>opengwas_jwt</dt>

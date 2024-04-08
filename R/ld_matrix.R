@@ -26,6 +26,8 @@
 #' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`. 
 #' `'legacy'` also available - which is a previously used verison of the EUR 
 #' panel with a slightly different set of markers
+#' @param access_token Google OAuth2 access token. 
+#' Used to authenticate level of access to data. By default, checks if already 
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.#' @param bfile If this is provided then will use the API. Default = `NULL`
 #' @param bfile If this is provided then will use the API. Default = `NULL`
 #' @param plink_bin If `NULL` and bfile is not `NULL` then will detect packaged 
@@ -33,7 +35,7 @@
 #'
 #' @export
 #' @return Matrix of LD r values
-ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_opengwas_jwt(), bfile=NULL, plink_bin=NULL) {
+ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", access_token=check_access_token(), opengwas_jwt=get_opengwas_jwt(), bfile=NULL, plink_bin=NULL) {
 	if(length(variants) > 500 & is.null(bfile))
 	{
 		stop("SNP list must be smaller than 500. Try running locally by providing local ld reference with bfile argument. See vignettes for a guide on how to do this.")
@@ -50,7 +52,7 @@ ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_o
 		return(ld_matrix_local(variants, bfile=bfile, plink_bin=plink_bin, with_alleles=with_alleles))
 	}
 
-	res <- api_query('ld/matrix', query = list(rsid=variants, pop=pop), opengwas_jwt=opengwas_jwt) %>% get_query_content()
+	res <- api_query('ld/matrix', query = list(rsid=variants, pop=pop), access_token=access_token, opengwas_jwt=opengwas_jwt) %>% get_query_content()
 
 	if(all(is.na(res))) stop("None of the requested variants were found")
 	variants2 <- res$snplist

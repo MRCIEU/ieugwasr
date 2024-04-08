@@ -4,10 +4,17 @@
 \alias{editcheck}
 \title{Check datasets that are in process of being uploaded}
 \usage{
-editcheck(id, opengwas_jwt = get_opengwas_jwt())
+editcheck(
+  id,
+  access_token = check_access_token(),
+  opengwas_jwt = get_opengwas_jwt()
+)
 }
 \arguments{
 \item{id}{ID}
+
+\item{access_token}{Google OAuth2 access token.
+Used to authenticate level of access to data. By default, checks if already}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }

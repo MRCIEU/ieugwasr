@@ -7,6 +7,7 @@
 api_query(
   path,
   query = NULL,
+  access_token = check_access_token(),
   opengwas_jwt = get_opengwas_jwt(),
   method = "GET",
   silent = TRUE,
@@ -18,6 +19,9 @@ api_query(
 \item{path}{Either a full query path (e.g. for get) or an endpoint (e.g. for post) queries}
 
 \item{query}{If post query, provide a list of arguments as the payload. \code{NULL} by default}
+
+\item{access_token}{Google OAuth2 access token.
+Used to authenticate level of access to data. By default, checks if already}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 

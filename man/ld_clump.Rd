@@ -10,6 +10,7 @@ ld_clump(
   clump_r2 = 0.001,
   clump_p = 0.99,
   pop = "EUR",
+  access_token = check_access_token(),
   opengwas_jwt = get_opengwas_jwt(),
   bfile = NULL,
   plink_bin = NULL
@@ -29,6 +30,9 @@ If \code{id} is present then clumping will be done per unique id.}
 Options are \code{"EUR"}, \code{"SAS"}, \code{"EAS"}, \code{"AFR"}, \code{"AMR"}.
 \code{'legacy'} also available - which is a previously used verison of the EUR
 panel with a slightly different set of markers}
+
+\item{access_token}{Google OAuth2 access token.
+Used to authenticate level of access to data. By default, checks if already}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.#'}
 

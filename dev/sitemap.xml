@@ -52,6 +52,9 @@
     <loc>https://mrcieu.github.io/ieugwasr/dev/reference/batches.html</loc>
   </url>
   <url>
+    <loc>https://mrcieu.github.io/ieugwasr/dev/reference/check_access_token.html</loc>
+  </url>
+  <url>
     <loc>https://mrcieu.github.io/ieugwasr/dev/reference/dot-data.html</loc>
   </url>
   <url>
@@ -59,6 +62,9 @@
   </url>
   <url>
     <loc>https://mrcieu.github.io/ieugwasr/dev/reference/fill_n.html</loc>
+  </url>
+  <url>
+    <loc>https://mrcieu.github.io/ieugwasr/dev/reference/get_access_token.html</loc>
   </url>
   <url>
     <loc>https://mrcieu.github.io/ieugwasr/dev/reference/get_opengwas_jwt.html</loc>
@@ -110,6 +116,9 @@
   </url>
   <url>
     <loc>https://mrcieu.github.io/ieugwasr/dev/reference/print.GwasInfo.html</loc>
+  </url>
+  <url>
+    <loc>https://mrcieu.github.io/ieugwasr/dev/reference/revoke_access_token.html</loc>
   </url>
   <url>
     <loc>https://mrcieu.github.io/ieugwasr/dev/reference/select_api.html</loc>

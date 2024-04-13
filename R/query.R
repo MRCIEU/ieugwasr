@@ -24,7 +24,7 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), openg
 	headers <- httr::add_headers(
 		# 'Content-Type'='application/json; charset=UTF-8',
 		'X-Api-Token'=access_token,
-		'Authorization'=paste("Bearer", opengwas_jwt=opengwas_jwt),
+		# 'Authorization'=paste("Bearer", opengwas_jwt=opengwas_jwt),
 		'X-Api-Source'=ifelse(is.null(options()$mrbase.environment), 'R/TwoSampleMR', 'mr-base-shiny'),
 		'X-TEST-MODE-KEY'=Sys.getenv("OPENGWAS_X_TEST_MODE_KEY")
 	)

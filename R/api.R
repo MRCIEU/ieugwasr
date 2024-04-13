@@ -32,9 +32,9 @@ select_api <- function(where="public", silent=FALSE)
 #' @return JWT string
 get_opengwas_jwt <- function() {
 	key <- Sys.getenv("OPENGWAS_JWT")
-	if(key == "") {
-		message("OPENGWAS_JWT=<token> needs to be set in your .Renviron file. You can obtain a token from https://api.opengwas.io")
-	}
+	# if(key == "") {
+	# 	message("OPENGWAS_JWT=<token> needs to be set in your .Renviron file. You can obtain a token from https://api.opengwas.io")
+	# }
 	return(key)
 }
 

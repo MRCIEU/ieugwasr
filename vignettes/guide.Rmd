@@ -34,6 +34,8 @@ User authentication is required to perform most OpenGWAS queries. To authenticat
 
 Now any query to OpenGWAS will automatically include your token to authorise the request.
 
+**IMPORTANT NOTE**: Do not share this token with others as it is equivalent to a password. If you think your token has been compromised, you can generate a new one from the OpenGWAS website.
+
 ### Deprecated Google authentication
 
 Note that previously we used Google OAuth2 for authentication, in order for users to access private datasets to which they had specific access. This authentication method is no longer supported, and all users should now use the JWT token method described above. You can delete the `ieugwasr_oauth2` directory as it will no longer be needed.

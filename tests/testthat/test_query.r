@@ -26,6 +26,13 @@ test_that("gwasinfo",
 	)
 })
 
+test_that("gwasinfo without token", {
+	a1 <- gwasinfo("ieu-a-2", opengwas_jwt="")
+	a2 <- gwasinfo("ieu-a-2")
+	expect_true(all(a1 == a2, na.rm=TRUE))
+})
+
+
 test_that("associations",
 {
 	expect_true(

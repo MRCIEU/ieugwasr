@@ -92,7 +92,7 @@ test_that("user", {
 
 	# with no key
 	u1 <- user(opengwas_jwt="")
-	expect_true(inherits(u, "response"))
+	expect_true(inherits(u1, "response"))
 
 	skip_on_cran()
 	skip_on_ci()

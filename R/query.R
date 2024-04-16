@@ -109,6 +109,13 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), openg
 		}
 	}
 
+	if(r$status_code >= 500 & r$status_code < 600)
+	{
+		message("Server error: ", r$status_code)
+		message("Failed to retrieve results from server. See error status message in the returned object and contact the developers if the problem persists.")
+		return(r)
+	}
+
 	return(r)
 }
 

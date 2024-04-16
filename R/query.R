@@ -21,13 +21,22 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), openg
 {
 	ntry <- 0
 	ntries <- 5
-	headers <- httr::add_headers(
-		# 'Content-Type'='application/json; charset=UTF-8',
-		'X-Api-Token'=access_token,
-		# 'Authorization'=paste("Bearer", opengwas_jwt=opengwas_jwt),
-		'X-Api-Source'=ifelse(is.null(options()$mrbase.environment), 'R/TwoSampleMR', 'mr-base-shiny'),
-		'X-TEST-MODE-KEY'=Sys.getenv("OPENGWAS_X_TEST_MODE_KEY")
-	)
+	if(opengwas_jwt == "") {
+		headers <- httr::add_headers(
+			# 'Content-Type'='application/json; charset=UTF-8',
+			'X-Api-Token'=access_token,
+			'X-Api-Source'=ifelse(is.null(options()$mrbase.environment), 'R/TwoSampleMR', 'mr-base-shiny'),
+			'X-TEST-MODE-KEY'=Sys.getenv("OPENGWAS_X_TEST_MODE_KEY")
+		)
+	} else {
+		headers <- httr::add_headers(
+			# 'Content-Type'='application/json; charset=UTF-8',
+			'X-Api-Token'=access_token,
+			'X-Api-Source'=ifelse(is.null(options()$mrbase.environment), 'R/TwoSampleMR', 'mr-base-shiny'),
+			'X-TEST-MODE-KEY'=Sys.getenv("OPENGWAS_X_TEST_MODE_KEY"),
+			'Authorization'=paste("Bearer", opengwas_jwt=opengwas_jwt)
+		)
+	}
 	retry_flag <- FALSE
 	while(ntry <= ntries)
 	{
@@ -88,12 +97,6 @@ api_query <- function(path, query=NULL, access_token=check_access_token(), openg
 		ntry <- ntry + 1
 	}
 
-	if(r$status_code >= 500 & r$status_code < 600)
-	{
-		message("Server error: ", r$status_code)
-		message("Failed to retrieve results from server. See error status message in the returned object and contact the developers if the problem persists.")
-		return(r)
-	}
 	if(inherits(r, 'try-error'))
 	{
 		if(grepl("Could not resolve host", as.character(attributes(r)$condition)))

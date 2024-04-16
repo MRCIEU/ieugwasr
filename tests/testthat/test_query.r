@@ -88,3 +88,20 @@ test_that("batch", {
 	expect_true(all(b == c("ieu-a", "ukb-b")))
 })
 
+test_that("user", {
+
+	# with no key
+	u1 <- user(opengwas_jwt="")
+	expect_true(inherits(u, "response"))
+
+	skip_on_cran()
+	skip_on_ci()
+
+	# make sure valid jwt is in .Renviron
+	key <- get_opengwas_jwt()
+	expect_true(nchar(key) > 0)
+	
+	u2 <- user()
+	expect_false(inherits(u2, "response"))
+})
+

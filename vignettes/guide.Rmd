@@ -20,10 +20,11 @@ knitr::opts_chunk$set(
 
 The [OpenGWAS database](https://gwas.mrcieu.ac.uk/) comprises over 50,000 curated, QC'd and harmonised complete GWAS summary datasets and can be queried using an API. See [here](https://api.opengwas.io/api/) for documentation on the API itself. This R package is a wrapper to make generic calls to the API, plus convenience functions for specific queries. 
 
-
 ## Authentication
 
-User authentication is required to perform most OpenGWAS queries. To authenticate, you need to generate a token from the OpenGWAS website. The token behaves like a password, and it will be used to authorise the requests you make to the OpenGWAS API. Here are the steps to generate the token and then have `ieugwasr` automatically use it for your queries:
+From 1st May 2024, most queries to the OpenGWAS API will require user authentication. For more information on why this is necessary, see this [blog post](https://blog.opengwas.io/posts/user-auth-spring-2024/).
+
+To authenticate, you need to generate a token from the OpenGWAS website. The token behaves like a password, and it will be used to authorise the requests you make to the OpenGWAS API. Here are the steps to generate the token and then have `ieugwasr` automatically use it for your queries:
 
 1. Login to https://api.opengwas.io/profile
 2. Generate a new token

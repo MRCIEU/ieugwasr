@@ -12,7 +12,6 @@ associations(
   align_alleles = 1,
   palindromes = 1,
   maf_threshold = 0.3,
-  access_token = check_access_token(),
   opengwas_jwt = get_opengwas_jwt()
 )
 }
@@ -31,9 +30,6 @@ associations(
 \item{palindromes}{Allow palindromic SNPs (if \code{proxies = 1}). \code{1} = yes (default), \code{0} = no}
 
 \item{maf_threshold}{MAF threshold to try to infer palindromic SNPs. Default = \code{0.3}.}
-
-\item{access_token}{Google OAuth2 access token.
-Used to authenticate level of access to data. By default, checks if already}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }

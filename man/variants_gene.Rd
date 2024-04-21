@@ -4,13 +4,15 @@
 \alias{variants_gene}
 \title{Obtain variants around a gene}
 \usage{
-variants_gene(gene, radius = 0)
+variants_gene(gene, radius = 0, opengwas_jwt = get_opengwas_jwt())
 }
 \arguments{
 \item{gene}{Vector of genes, either Ensembl or Entrez,
 e.g. \code{c("ENSG00000123374", "ENSG00000160791")} or \code{1017}}
 
 \item{radius}{Radius around the gene region to include. Default = \code{0}}
+
+\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }
 \value{
 data frame with the following columns

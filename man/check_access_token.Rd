@@ -2,7 +2,7 @@
 % Please edit documentation in R/api.R
 \name{check_access_token}
 \alias{check_access_token}
-\title{Check if authentication has been made}
+\title{Check if authentication has been maded}
 \usage{
 check_access_token()
 }
@@ -10,6 +10,5 @@ check_access_token()
 NULL or access_token depending on current authentication state
 }
 \description{
-If a call to \code{\link[=get_access_token]{get_access_token()}} has been made then it will have generated \code{mrbase.oauth}.
-Pass the token if it is present, if not, return \code{NULL} and do not authenticate.
+Deprectated. Use \code{get_opengwas_jwt()} instead. See https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication for more information.
 }

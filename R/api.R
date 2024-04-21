@@ -67,57 +67,14 @@ logging_info <- function()
 }
 
 
-#' Get access token for OAuth2 access to MR Base
+#' Check if authentication has been maded
 #'
-#'
-#' @export
-#' @return access token string
-get_access_token <- function()
-{
-	message("Using access token. For info on how this is used see logging_info()")
-	tf <- basename(tempfile())
-	check <- suppressWarnings(file.create(tf))
-	if(!check)
-	{
-		stop("You are currently in a directory which doesn't have write access.\n",
-			"  In order to authenticate we need to store the credentials in a file called '.httr-oauth'.\n",
-			"  Please setwd() to a different directory where you have write access.")
-	} else {
-		unlink(tf)
-	}
-	a <- googleAuthR::gar_auth(email=TRUE)
-	if(! a$validate())
-	{
-		a$refresh()
-	}
-	return(a$credentials$access_token)
-}
-
-
-#' Check if authentication has been made
-#'
-#' If a call to [`get_access_token()`] has been made then it will have generated `mrbase.oauth`. 
-#' Pass the token if it is present, if not, return `NULL` and do not authenticate.
+#' Deprectated. Use `get_opengwas_jwt()` instead. See https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication for more information.
 #'
 #' @export
 #' @return NULL or access_token depending on current authentication state
 check_access_token <- function()
 {
-	if(file.exists("ieugwasr_oauth"))
-	{
-		return(get_access_token())
-	} else {
-		return(NULL)
-	}
+	message("Deprectated. Use `get_opengwas_jwt()` instead. See https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication for more information.")
 }
 
-
-#' Revoke access token for MR Base
-#'
-#' @export
-#' @return No return value, called for side effects
-revoke_access_token <- function()
-{
-	a <- googleAuthR::gar_auth("mrbase.oauth")
-	a$revoke()
-}

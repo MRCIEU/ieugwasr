@@ -4,13 +4,15 @@
 \alias{variants_chrpos}
 \title{Obtain information about chr pos and surrounding region}
 \usage{
-variants_chrpos(chrpos, radius = 0)
+variants_chrpos(chrpos, radius = 0, opengwas_jwt = get_opengwas_jwt())
 }
 \arguments{
 \item{chrpos}{list of \verb{<chr>:<pos>} in build 37,
 e.g. \code{c("3:46414943", "3:122991235")}. Also allows ranges e.g. \code{"7:105561135-105563135"}}
 
 \item{radius}{Radius around each chrpos, default = \code{0}}
+
+\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }
 \value{
 Data frame

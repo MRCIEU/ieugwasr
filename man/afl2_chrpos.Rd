@@ -4,13 +4,15 @@
 \alias{afl2_chrpos}
 \title{Look up allele frequencies and LD scores for 1000 genomes populations by chrpos}
 \usage{
-afl2_chrpos(chrpos, reference = "1000g")
+afl2_chrpos(chrpos, reference = "1000g", opengwas_jwt = get_opengwas_jwt())
 }
 \arguments{
 \item{chrpos}{list of \verb{<chr>:<pos>} in build 37, e.g. \code{c("3:46414943", "3:122991235")}.
 Also allows ranges e.g \code{"7:105561135-105563135"}}
 
 \item{reference}{Default=\code{"1000g"}}
+
+\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }
 \value{
 Data frame containing ancestry specific LD scores and allele frequencies for each variant

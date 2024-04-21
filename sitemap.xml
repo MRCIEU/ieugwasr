@@ -19,9 +19,6 @@
     <loc>https://mrcieu.github.io/ieugwasr/articles/local_ld.html</loc>
   </url>
   <url>
-    <loc>https://mrcieu.github.io/ieugwasr/articles/timings.html</loc>
-  </url>
-  <url>
     <loc>https://mrcieu.github.io/ieugwasr/authors.html</loc>
   </url>
   <url>
@@ -56,9 +53,6 @@
   </url>
   <url>
     <loc>https://mrcieu.github.io/ieugwasr/reference/check_access_token.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/dot-data.html</loc>
   </url>
   <url>
     <loc>https://mrcieu.github.io/ieugwasr/reference/editcheck.html</loc>
@@ -107,9 +101,6 @@
   </url>
   <url>
     <loc>https://mrcieu.github.io/ieugwasr/reference/phewas.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/pipe.html</loc>
   </url>
   <url>
     <loc>https://mrcieu.github.io/ieugwasr/reference/print.ApiStatus.html</loc>

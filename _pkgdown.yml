@@ -14,8 +14,6 @@ navbar:
       href: articles/guide.html
     - text: "Running local LD operations"
       href: articles/local_ld.html
-    - text: "Comparison of rsid vs chr:pos lookup in ElasticSearch"
-      href: articles/timings.html
   news:
     text: Changelog
     href: news/index.html

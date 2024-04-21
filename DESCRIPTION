@@ -23,13 +23,10 @@ Imports:
     dplyr,
     httr,
     jsonlite,
-    magrittr,
-    rlang,
     stats
 Suggests: 
     knitr,
-    microbenchmark,
-    pander,
+    utils,
     rmarkdown,
     testthat
 VignetteBuilder: 

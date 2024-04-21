@@ -6,6 +6,7 @@
 * Bug in tophits when result is empty
 * Removing version check at startup
 * Bug in querying when errors returned
+* Removing unnecessary dependancies and vignettes
 
 # ieugwasr 0.2.2
 * Reinstating https://api.opengwas.org/api/ as the API server address

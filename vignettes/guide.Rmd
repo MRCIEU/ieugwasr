@@ -26,7 +26,7 @@ From 1st May 2024, most queries to the OpenGWAS API will require user authentica
 
 To authenticate, you need to generate a token from the OpenGWAS website. The token behaves like a password, and it will be used to authorise the requests you make to the OpenGWAS API. Here are the steps to generate the token and then have `ieugwasr` automatically use it for your queries:
 
-1. Login to https://api.opengwas.io/profile
+1. Login to https://api.opengwas.io/profile/
 2. Generate a new token
 3. Add `OPENGWAS_JWT=<token>` to your `.Renviron` file. This file could be either in your home directory or in the working directory of your R session. You can check the location of your `.Renviron` file by running `Sys.getenv("R_ENVIRON_USER")` in R.
 4. Restart your R session

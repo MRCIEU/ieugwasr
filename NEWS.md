@@ -1,3 +1,7 @@
+# ieugwasr 1.0.1
+
+* Import the magrittr pipe (thanks @Bhashitha2014)
+
 # ieugwasr 1.0.0
 * Introducing JWT authorisation for the API
 * Phasing out Google Oauth2 authorisation

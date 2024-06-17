@@ -23,6 +23,7 @@ Imports:
     dplyr,
     httr,
     jsonlite,
+    magrittr,
     stats
 Suggests: 
     knitr,

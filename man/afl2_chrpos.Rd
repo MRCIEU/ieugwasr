@@ -12,7 +12,7 @@ Also allows ranges e.g \code{"7:105561135-105563135"}}
 
 \item{reference}{Default=\code{"1000g"}}
 
-\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }
 \value{
 Data frame containing ancestry specific LD scores and allele frequencies for each variant

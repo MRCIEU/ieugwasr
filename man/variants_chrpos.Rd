@@ -12,7 +12,7 @@ e.g. \code{c("3:46414943", "3:122991235")}. Also allows ranges e.g. \code{"7:105
 
 \item{radius}{Radius around each chrpos, default = \code{0}}
 
-\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }
 \value{
 Data frame

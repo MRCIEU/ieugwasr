@@ -13,7 +13,7 @@ afl2_list(
 \item{variantlist}{Choose pre-defined list. reduced = ~20k SNPs that are
 common in all super populations (default). hapmap3 = ~1.3 million hm3 SNPs}
 
-\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }
 \value{
 Data frame containing ancestry specific LD scores and allele frequencies for each variant

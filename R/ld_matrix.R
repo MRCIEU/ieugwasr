@@ -26,7 +26,7 @@
 #' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`. 
 #' `'legacy'` also available - which is a previously used verison of the EUR 
 #' panel with a slightly different set of markers
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.#' @param bfile If this is provided then will use the API. Default = `NULL`
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.#' @param bfile If this is provided then will use the API. Default = `NULL`
 #' @param bfile If this is provided then will use the API. Default = `NULL`
 #' @param plink_bin If `NULL` and bfile is not `NULL` then will detect packaged 
 #' plink binary for specific OS. Otherwise specify path to plink binary. Default = `NULL`

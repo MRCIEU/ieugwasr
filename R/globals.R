@@ -1,1 +1,1 @@
-utils::globalVariables(c(".", "%>%", ".data"))
+utils::globalVariables(c(".", ".data"))

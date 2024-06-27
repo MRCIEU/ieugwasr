@@ -1,3 +1,7 @@
+# ieugwasr 1.0.1
+
+* Import the magrittr pipe (thanks @Bhashitha2014)
+
 # ieugwasr 1.0.0
 * Introducing JWT authorisation for the API
 * Phasing out Google Oauth2 authorisation
@@ -6,7 +10,7 @@
 * Bug in tophits when result is empty
 * Removing version check at startup
 * Bug in querying when errors returned
-* Removing unnecessary dependancies and vignettes
+* Removing unnecessary dependencies and vignettes
 
 # ieugwasr 0.2.2
 * Reinstating https://api.opengwas.org/api/ as the API server address

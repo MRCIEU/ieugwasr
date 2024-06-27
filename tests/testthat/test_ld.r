@@ -2,6 +2,7 @@
 skip_on_cran()
 # skip_on_ci()
 
+library(dplyr)
 
 a <- tophits("ieu-a-2")
 if(inherits(a, "response")) skip("Server issues")

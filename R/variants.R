@@ -5,7 +5,7 @@
 #' @param gene Vector of genes, either Ensembl or Entrez, 
 #' e.g. `c("ENSG00000123374", "ENSG00000160791")` or `1017`
 #' @param radius Radius around the gene region to include. Default = `0`
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return data frame with the following columns
@@ -30,7 +30,7 @@ variants_gene <- function(gene, radius=0, opengwas_jwt=get_opengwas_jwt())
 #'
 #'
 #' @param rsid Vector of rsids
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return data frame
@@ -57,7 +57,7 @@ variants_rsid <- function(rsid, opengwas_jwt=get_opengwas_jwt())
 #' @param chrpos list of `<chr>:<pos>` in build 37, 
 #' e.g. `c("3:46414943", "3:122991235")`. Also allows ranges e.g. `"7:105561135-105563135"`
 #' @param radius Radius around each chrpos, default = `0`
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return Data frame
@@ -78,7 +78,7 @@ variants_chrpos <- function(chrpos, radius=0, opengwas_jwt=get_opengwas_jwt())
 #' Convert mixed array of rsid and chrpos to list of rsid
 #'
 #' @param variants Array of variants e.g. `c("rs234", "7:105561135-105563135")`
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return list of rsids

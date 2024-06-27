@@ -2,6 +2,8 @@
 skip_on_cran()
 # skip_on_ci()
 
+library(dplyr)
+
 a <- api_status()
 if(inherits(a, "response")) skip("Server issues")
 

@@ -19,7 +19,7 @@ api_query(
 
 \item{query}{If post query, provide a list of arguments as the payload. \code{NULL} by default}
 
-\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 
 \item{method}{\code{"GET"} (default) or \code{"POST"}, \code{"DELETE"} etc}
 

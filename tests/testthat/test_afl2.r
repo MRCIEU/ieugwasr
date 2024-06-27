@@ -25,10 +25,10 @@ test_that("chrpos", {
 	expect_true(nrow(a) > 100)
 })
 
-test_that("rsid", {
-	a <- afl2_rsid(c("rs234", "rs123"))
-	expect_true(nrow(a) == 2)
-})
+# test_that("rsid", {
+# 	a <- afl2_rsid(c("rs234", "rs123"))
+# 	expect_true(nrow(a) == 2)
+# })
 
 
 

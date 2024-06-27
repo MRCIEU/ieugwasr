@@ -55,6 +55,9 @@
     <loc>https://mrcieu.github.io/ieugwasr/reference/check_access_token.html</loc>
   </url>
   <url>
+    <loc>https://mrcieu.github.io/ieugwasr/reference/check_reset.html</loc>
+  </url>
+  <url>
     <loc>https://mrcieu.github.io/ieugwasr/reference/editcheck.html</loc>
   </url>
   <url>
@@ -113,6 +116,9 @@
   </url>
   <url>
     <loc>https://mrcieu.github.io/ieugwasr/reference/select_api.html</loc>
+  </url>
+  <url>
+    <loc>https://mrcieu.github.io/ieugwasr/reference/set_reset.html</loc>
   </url>
   <url>
     <loc>https://mrcieu.github.io/ieugwasr/reference/tophits.html</loc>

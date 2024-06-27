@@ -13,7 +13,7 @@ phewas(variants, pval = 1e-05, batch = c(), opengwas_jwt = get_opengwas_jwt())
 
 \item{batch}{Vector of batch IDs to search across. If \code{c()} (default) then returns all batches}
 
-\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }
 \value{
 Dataframe

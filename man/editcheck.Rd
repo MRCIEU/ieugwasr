@@ -9,7 +9,7 @@ editcheck(id, opengwas_jwt = get_opengwas_jwt())
 \arguments{
 \item{id}{ID}
 
-\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }
 \value{
 Dataframe

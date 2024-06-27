@@ -1,5 +1,6 @@
 # ieugwasr 1.0.1
 
+* Checking for allowance depletion, and erroring until the allowance is reset
 * Import the magrittr pipe (thanks @Bhashitha2014)
 
 # ieugwasr 1.0.0

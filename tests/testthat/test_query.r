@@ -105,6 +105,7 @@ test_that("user", {
 
 	skip_on_cran()
 	skip_on_ci()
+	skip_if(Sys.getenv('OPENGWAS_X_TEST_MODE_KEY') != "")
 
 	# make sure valid jwt is in .Renviron
 	key <- get_opengwas_jwt()

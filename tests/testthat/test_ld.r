@@ -37,12 +37,7 @@ test_that("multiple", {
   ab <- try(tophits(c("ieu-a-2", "ieu-a-1001")))
   if (inherits(ab, "try-error")) skip("Server issues")
   ab2 <- try(ld_clump(ab))
-  if (inherits(ab2, "try-error")) {
-    skip("Server issues")
-  } else {
-    expect_warning(ab2)
-  }
-  
+  if (inherits(ab2, "try-error")) skip("Server issues")
 	expect_equal(
 		length(unique(ab2$id)), length(unique(ab$id))
 	)

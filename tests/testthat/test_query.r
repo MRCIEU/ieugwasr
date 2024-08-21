@@ -66,7 +66,6 @@ test_that("fill_n",
 
 test_that("phewas",
 {
-  skip("Investigate b in this test later")
 	a <- try(phewas("rs977747", 0.01))
 	if (inherits(a, c("try-error", "response"))) skip("Server issues")
 	expect_true(nrow(a)>100)

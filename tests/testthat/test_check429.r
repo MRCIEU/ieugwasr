@@ -2,7 +2,7 @@ skip_on_cran()
 if(Sys.getenv("OPENGWAS_X_TEST_MODE_KEY") == "") {
     test_that("no allowance", {
         a <- try(api_query("tophits", query=list(id="ieu-a-2"), override_429=TRUE))
-        if (inherits(a, c("try-error", "repsonse"))) skip("Server issues")
+        if (inherits(a, c("try-error", "response"))) skip("Server issues")
 
         expect_warning(set_reset(a))
         expect_error(check_reset())

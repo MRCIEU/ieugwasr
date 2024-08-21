@@ -4,10 +4,10 @@ skip_on_cran()
 
 
 o1 <- try(variants_gene("ENSG00000123374"))
-if (inherits(o1, c("try-error", "repsonse"))) skip("Server issues")
+if (inherits(o1, c("try-error", "response"))) skip("Server issues")
 
 o2 <- try(variants_gene("ENSG00000123374", 100000))
-if (inherits(o2, c("try-error", "repsonse"))) skip("Server issues")
+if (inherits(o2, c("try-error", "response"))) skip("Server issues")
 
 test_that("genes",
 {
@@ -19,11 +19,11 @@ test_that("genes",
 test_that("chrpos",
 {
 	o <- try(variants_chrpos("7:105561135-105563135"))
-	if (inherits(o, c("try-error", "repsonse"))) skip("Server issues")
+	if (inherits(o, c("try-error", "response"))) skip("Server issues")
 	expect_true(nrow(o) > 1)
 
 	o <- try(variants_chrpos("7:105561135"))
-	if (inherits(o, c("try-error", "repsonse"))) skip("Server issues")
+	if (inherits(o, c("try-error", "response"))) skip("Server issues")
 	expect_true(nrow(o) == 1)
 
 	o <- try(variants_chrpos("nonsense"))
@@ -35,9 +35,9 @@ test_that("chrpos",
 test_that("rsid", 
 {
 	o <- try(variants_chrpos("7:105561135-105563135"))
-	if (inherits(o, c("try-error", "repsonse"))) skip("Server issues")
+	if (inherits(o, c("try-error", "response"))) skip("Server issues")
 	p <- try(variants_rsid(o$name))
-	if (inherits(p, c("try-error", "repsonse"))) skip("Server issues")
+	if (inherits(p, c("try-error", "response"))) skip("Server issues")
 	expect_true(all(nrow(o) == nrow(p)))
 	expect_true(all(o$name == p$name))
 })
@@ -46,15 +46,15 @@ test_that("rsid",
 test_that("conversion",
 {
 	o <- try(variants_to_rsid(c("rs1205", "7:105561135")))
-	if (inherits(o, c("try-error", "repsonse"))) skip("Server issues")
+	if (inherits(o, c("try-error", "response"))) skip("Server issues")
 	expect_true(length(o) == 2)
 
 	o <- try(variants_to_rsid(c("rs234", "7:105561135")))
-	if (inherits(o, c("try-error", "repsonse"))) skip("Server issues")
+	if (inherits(o, c("try-error", "response"))) skip("Server issues")
 	expect_true(length(o) == 1)
 
 	o <- try(variants_to_rsid(c("rs234")))
-	if (inherits(o, c("try-error", "repsonse"))) skip("Server issues")
+	if (inherits(o, c("try-error", "response"))) skip("Server issues")
 	expect_true(length(o) == 1)
 })
 

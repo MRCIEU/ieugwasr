@@ -2,8 +2,8 @@
 # skip_on_cran()
 # skip_on_ci()
 
-stat <- api_status()
-if(inherits(stat, "response")) skip("Server issues")
+stat <- try(api_status())
+if (inherits(stat, "try-error")) skip("Server issues")
 
 test_that("status", 
 {

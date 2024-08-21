@@ -11,7 +11,8 @@ if (inherits(ap, c("try-error", "repsonse"))) skip("Server issues")
 au <- try(tophits("ieu-a-2", clump=1))
 if (inherits(au, c("try-error", "repsonse"))) skip("Server issues")
 b <- dplyr::tibble(rsid=au$rsid, pval=au$p, id=au$id, clump=0)
-bc <- ld_clump(b)
+bc <- try(ld_clump(b))
+if (inherits(bc, c("try-error", "repsonse"))) skip("Server issues")
 # bcl <- ld_clump(b, bfile="/Users/gh13047/data/ld_files/data_maf0.01_rs", plink_bin="plink")
 
 test_that("preclumped", {

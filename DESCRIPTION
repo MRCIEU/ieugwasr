@@ -11,7 +11,7 @@ Authors@R: c(
     person("Rita", "Rasteiro", , "rita.rasteiro@bristol.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0002-4217-3060"))
     )
-Description: Interface to the 'OpenGWAS' database API <https://gwas-api.mrcieu.ac.uk/>. Includes a wrapper
+Description: Interface to the 'OpenGWAS' database API <https://api.opengwas.io/api/>. Includes a wrapper
     to make generic calls to the API, plus convenience functions for
     specific queries.
 License: MIT + file LICENSE

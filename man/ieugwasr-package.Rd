@@ -6,7 +6,7 @@
 \alias{ieugwasr-package}
 \title{ieugwasr: Interface to the 'OpenGWAS' Database API}
 \description{
-Interface to the 'OpenGWAS' database API \url{https://gwas-api.mrcieu.ac.uk/}. Includes a wrapper to make generic calls to the API, plus convenience functions for specific queries.
+Interface to the 'OpenGWAS' database API \url{https://api.opengwas.io/api/}. Includes a wrapper to make generic calls to the API, plus convenience functions for specific queries.
 }
 \seealso{
 Useful links:

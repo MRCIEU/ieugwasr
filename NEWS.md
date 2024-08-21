@@ -1,5 +1,6 @@
 # ieugwasr 1.0.2
 
+* Bump roxygen2 version
 # ieugwasr 1.0.1
 
 * Checking for allowance depletion, and erroring until the allowance is reset

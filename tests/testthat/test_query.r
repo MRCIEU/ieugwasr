@@ -5,11 +5,11 @@ skip_on_cran()
 library(dplyr)
 
 a <- try(api_status())
-if (inherits(a, "try-error")) skip("Server issues")
+if (inherits(a, c("try-error", "repsonse"))) skip("Server issues")
 
 test_that("get_query_content", {
 	a <- try(api_query("FALSE_ENDPOINT"))
-	if (inherits(a, "try-error")) skip("Server issues")
+	if (inherits(a, c("try-error", "repsonse"))) skip("Server issues")
 	expect_true(inherits(a, "response"))
 })
 
@@ -68,10 +68,10 @@ test_that("phewas",
 {
   skip("Investigate b in this test later")
 	a <- try(phewas("rs977747", 0.01))
-	if (inherits(a, "try-error")) skip("Server issues")
+	if (inherits(a, c("try-error", "repsonse"))) skip("Server issues")
 	expect_true(nrow(a)>100)
 	b <- try(phewas("rs977747", 0.01, batch=c("ieu-a")))
-	if (inherits(b, "try-error")) skip("Server issues")
+	if (inherits(b, c("try-error", "repsonse"))) skip("Server issues")
 	expect_true(nrow(b) < nrow(a))
 	expect_true(nrow(b) > 0)
 })
@@ -87,7 +87,7 @@ test_that("phewas",
 test_that("phewas",
 {
 	a <- try(phewas("1:1850428", 0.001))
-	if (inherits(a, "try-error")) skip("Server issues")
+	if (inherits(a, c("try-error", "repsonse"))) skip("Server issues")
 	expect_true(nrow(a)>10)
 })
 
@@ -95,17 +95,17 @@ test_that("phewas",
 test_that("tophits",
 {
   a <- try(tophits("ieu-a-2"))
-  if (inherits(a, "try-error")) skip("Server issues")
+  if (inherits(a, c("try-error", "repsonse"))) skip("Server issues")
 	expect_equal(nrow(a), 79)
 	b <- try(tophits("ieu-a-2", clump=0))
-	if (inherits(b, "try-error")) skip("Server issues")
+	if (inherits(b, c("try-error", "repsonse"))) skip("Server issues")
 	expect_true(nrow(b)>79)
 })
 
 
 test_that("batch", {
 	b <- try(batch_from_id(c("ieu-a-1", "ukb-b-100-10")))
-	if (inherits(b, "try-error")) skip("Server issues")
+	if (inherits(b, c("try-error", "repsonse"))) skip("Server issues")
 	expect_true(all(b == c("ieu-a", "ukb-b")))
 })
 

@@ -47,6 +47,7 @@ test_that("rsid",
 
 test_that("conversion",
 {
+  skip_on_ci()
 	o <- NULL
   o <- try(variants_to_rsid(c("rs1205", "7:105561135")))
 	if (inherits(o, c("try-error", "response"))) skip("Server issues")

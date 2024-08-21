@@ -27,7 +27,7 @@ test_that("chrpos",
 	expect_true(nrow(o) == 1)
 
 	o <- try(variants_chrpos("nonsense"))
-	if (inherits(o, c("try-error", "repsonse"))) skip("Server issues")
+	if (inherits(o, "try-error")) skip("Server issues")
 	expect_true(class(o) == "response")
 })
 

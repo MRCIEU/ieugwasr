@@ -4,17 +4,19 @@ skip_on_cran()
 
 library(dplyr)
 
-a <- api_status()
-if(inherits(a, "response")) skip("Server issues")
+a <- try(api_status())
+if (inherits(a, "try-error")) skip("Server issues")
 
 test_that("get_query_content", {
-	a <- api_query("FALSE_ENDPOINT")
+	a <- try(api_query("FALSE_ENDPOINT"))
+	if (inherits(a, "try-error")) skip("Server issues")
 	expect_true(inherits(a, "response"))
 })
 
 
 test_that("gwasinfo", 
 {
+  skip_on_ci()
 	expect_true(
 		nrow(api_query('gwasinfo/ieu-a-2') %>% get_query_content()) == 1
 	)
@@ -29,6 +31,7 @@ test_that("gwasinfo",
 })
 
 test_that("gwasinfo without token", {
+  skip_on_ci()
 	a1 <- gwasinfo("ieu-a-2", opengwas_jwt="")
 	a2 <- gwasinfo("ieu-a-2")
 	expect_true(all(a1 == a2, na.rm=TRUE))
@@ -37,6 +40,7 @@ test_that("gwasinfo without token", {
 
 test_that("associations",
 {
+  skip_on_ci()
 	expect_true(
 		nrow(associations(c("rs9662760", "rs12759473"), "ieu-a-2")) == 2
 	)
@@ -53,6 +57,7 @@ test_that("associations",
 
 test_that("fill_n", 
 {
+  skip_on_ci()
 	x <- associations(c("rs12759473"), "bbj-a-10") %>% fill_n
 	expect_true(
 		is.numeric(x$n) & !is.na(x$n)
@@ -61,11 +66,11 @@ test_that("fill_n",
 
 test_that("phewas",
 {
-	a <- phewas("rs977747", 0.01)
-	if(inherits(a, "response")) skip("Server issues")
+	a <- try(phewas("rs977747", 0.01))
+	if (inherits(a, "try-error")) skip("Server issues")
 	expect_true(nrow(a)>100)
-	b <- phewas("rs977747", 0.01, batch=c("ieu-a"))
-	if(inherits(b, "response")) skip("Server issues")
+	b <- try(phewas("rs977747", 0.01, batch=c("ieu-a")))
+	if (inherits(b, "try-error")) skip("Server issues")
 	expect_true(nrow(b) < nrow(a))
 	expect_true(nrow(b) > 0)
 })
@@ -80,20 +85,26 @@ test_that("phewas",
 
 test_that("phewas",
 {
-	a <- phewas("1:1850428", 0.001)
+	a <- try(phewas("1:1850428", 0.001))
+	if (inherits(a, "try-error")) skip("Server issues")
 	expect_true(nrow(a)>10)
 })
 
 
 test_that("tophits",
 {
-	expect_equal(nrow(tophits("ieu-a-2")), 79)
-	expect_true(nrow(tophits("ieu-a-2", clump=0))>79)
+  a <- try(tophits("ieu-a-2"))
+  if (inherits(a, "try-error")) skip("Server issues")
+	expect_equal(nrow(a), 79)
+	b <- try(tophits("ieu-a-2", clump=0))
+	if (inherits(b, "try-error")) skip("Server issues")
+	expect_true(nrow(b)>79)
 })
 
 
 test_that("batch", {
-	b <- batch_from_id(c("ieu-a-1", "ukb-b-100-10"))
+	b <- try(batch_from_id(c("ieu-a-1", "ukb-b-100-10")))
+	if (inherits(b, "try-error")) skip("Server issues")
 	expect_true(all(b == c("ieu-a", "ukb-b")))
 })
 

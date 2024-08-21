@@ -2,9 +2,10 @@
 skip_on_cran()
 # skip_on_ci()
 
-snpinfo1 <- afl2_list()
-if(inherits(snpinfo1, "response")) skip("Server issues")
-snpinfo2 <- afl2_list("hapmap3")
+snpinfo1 <- try(afl2_list())
+if (inherits(snpinfo1, "try-error")) skip("Server issues")
+snpinfo2 <- try(afl2_list("hapmap3"))
+if (inherits(snpinfo2, "try-error")) skip("Server issues")
 
 test_that("snplist", {
 	expect_true(nrow(snpinfo2) > 1000000)
@@ -15,13 +16,15 @@ test_that("snplist", {
 })
 
 test_that("ancestry", {
-	a <- associations(snpinfo1$rsid, "bbj-a-10", prox=FALSE)
+	a <- try(associations(snpinfo1$rsid, "bbj-a-10", prox=FALSE))
+	if (inherits(a, "try-error")) skip("Server issues")
 	res <- infer_ancestry(a, snpinfo1)
 	expect_true(res$pop[1] == "EAS")
 })
 
 test_that("chrpos", {
-	a <- afl2_chrpos("1:100000-900000")
+	a <- try(afl2_chrpos("1:100000-900000"))
+	if (inherits(a, "try-error")) skip("Server issues")
 	expect_true(nrow(a) > 100)
 })
 

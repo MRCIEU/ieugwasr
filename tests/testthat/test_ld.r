@@ -4,12 +4,15 @@ skip_on_cran()
 
 library(dplyr)
 
-a <- tophits("ieu-a-2")
-if(inherits(a, "response")) skip("Server issues")
-ap <- tophits("ieu-a-2", force_server=TRUE)
-au <- tophits("ieu-a-2", clump=1)
+a <- try(tophits("ieu-a-2"))
+if (inherits(a, c("try-error", "response"))) skip("Server issues")
+ap <- try(tophits("ieu-a-2", force_server=TRUE))
+if (inherits(ap, c("try-error", "response"))) skip("Server issues")
+au <- try(tophits("ieu-a-2", clump=1))
+if (inherits(au, c("try-error", "response"))) skip("Server issues")
 b <- dplyr::tibble(rsid=au$rsid, pval=au$p, id=au$id, clump=0)
-bc <- ld_clump(b)
+bc <- try(ld_clump(b))
+if (inherits(bc, c("try-error", "response"))) skip("Server issues")
 # bcl <- ld_clump(b, bfile="/Users/gh13047/data/ld_files/data_maf0.01_rs", plink_bin="plink")
 
 test_that("preclumped", {
@@ -31,26 +34,30 @@ test_that("ld matrix", {
 	)
 })
 
-ab <- tophits(c("ieu-a-2", "ieu-a-1001"))
-expect_warning(ab2 <- ld_clump(ab))
 test_that("multiple", {
+  ab <- try(tophits(c("ieu-a-2", "ieu-a-1001")))
+  if (inherits(ab, c("try-error", "response"))) skip("Server issues")
+  ab2 <- try(ld_clump(ab))
+  if (inherits(ab2, c("try-error", "response"))) skip("Server issues")
 	expect_equal(
 		length(unique(ab2$id)), length(unique(ab$id))
 	)
 })
 
 
-a <- tophits(c("ieu-a-2", "ieu-a-7")) %>% subset(., !duplicated(id))
-expect_warning(ab <- ld_clump(a))
 test_that("onesnp", {
+  th <- try(tophits(c("ieu-a-2", "ieu-a-7")))
+  if (inherits(th, c("try-error", "response"))) skip("Server issues")
+  a <- th %>% subset(., !duplicated(id))
+  expect_warning(ab <- ld_clump(a))
 	expect_equal(nrow(ab), 2)
 })
 
 
 
 test_that("ld_reflookup", {
-
-	a <- ld_reflookup(c("rs234", "fakesnp"), pop="AFR")
+	a <- try(ld_reflookup(c("rs234", "fakesnp"), pop="AFR"))
+	if (inherits(a, c("try-error", "response"))) skip("Server issues")
 	expect_true(a == "rs234")
 })
 

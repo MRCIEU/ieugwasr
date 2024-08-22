@@ -1,3 +1,8 @@
+# ieugwasr 1.0.2
+
+* Bump roxygen2 version
+* Update OpenGWAS API URL
+
 # ieugwasr 1.0.1
 
 * Checking for allowance depletion, and erroring until the allowance is reset

@@ -1,141 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/404.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/articles/guide.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/articles/local_ld.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/index.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/afl2_chrpos.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/afl2_list.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/afl2_rsid.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/api_query.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/api_status.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/associations.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/batch_from_id.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/batches.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/check_access_token.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/check_reset.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/editcheck.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/fill_n.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/get_opengwas_jwt.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/get_query_content.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/gwasinfo.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/ieugwasr-package.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/infer_ancestry.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/ld_clump.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/ld_clump_api.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/ld_clump_local.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/ld_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/ld_matrix_local.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/ld_reflookup.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/legacy_ids.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/logging_info.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/phewas.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/print.ApiStatus.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/print.GwasInfo.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/select_api.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/set_reset.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/tophits.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/user.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/variants_chrpos.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/variants_gene.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/variants_rsid.html</loc>
-  </url>
-  <url>
-    <loc>https://mrcieu.github.io/ieugwasr/reference/variants_to_rsid.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://mrcieu.github.io/ieugwasr/404.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/LICENSE-text.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/LICENSE.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/articles/guide.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/articles/index.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/articles/local_ld.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/authors.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/index.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/news/index.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/afl2_chrpos.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/afl2_list.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/afl2_rsid.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/api_query.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/api_status.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/associations.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/batch_from_id.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/batches.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/check_access_token.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/check_reset.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/editcheck.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/fill_n.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/get_opengwas_jwt.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/get_query_content.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/gwasinfo.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/ieugwasr-package.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/index.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/infer_ancestry.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/ld_clump.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/ld_clump_api.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/ld_clump_local.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/ld_matrix.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/ld_matrix_local.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/ld_reflookup.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/legacy_ids.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/logging_info.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/phewas.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/print.ApiStatus.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/print.GwasInfo.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/select_api.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/set_reset.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/tophits.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/user.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/variants_chrpos.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/variants_gene.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/variants_rsid.html</loc></url>
+<url><loc>https://mrcieu.github.io/ieugwasr/reference/variants_to_rsid.html</loc></url>
 </urlset>
+

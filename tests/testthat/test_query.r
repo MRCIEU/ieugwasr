@@ -126,3 +126,33 @@ test_that("user", {
 	expect_false(inherits(u2, "response"))
 })
 
+test_that("gwasinfo/files", {
+  skip_on_cran()
+  skip_on_ci()
+  test <- try(api_query('gwasinfo/files', query = list(id='ieu-a-2'), opengwas_jwt = get_opengwas_jwt()) %>% get_query_content())
+  if (inherits(test, c("try-error", "response"))) skip("Server issues")
+  expect_equal(test %>% length(), 1)
+  expect_equal(test$`ieu-a-2` %>% length(), 3)
+})
+
+test_that("Test gwasinfo_files()", {
+  skip_on_cran()
+  skip_on_ci()
+  urls <- try(gwasinfo_files(id = 'ieu-a-2'))
+  if (inherits(urls, c("try-error", "response"))) skip("Server issues")
+  expect_equal(urls %>% ncol(), 1)
+  expect_equal(urls %>% nrow(), 3)
+  expect_is(urls, "data.frame")
+  expect_equal(urls %>% colnames(), "ieu-a-2")
+})
+
+test_that("Test gwasinfo_files()", {
+  skip_on_cran()
+  skip_on_ci()
+  urls2 <- try(gwasinfo_files(id = c('ieu-a-2', 'ieu-a-31')))
+  if (inherits(urls2, c("try-error", "response"))) skip("Server issues")
+  expect_equal(urls2 %>% ncol(), 2)
+  expect_equal(urls2 %>% nrow(), 3)
+  expect_is(urls2, "data.frame")
+  expect_equal(urls2 %>% colnames(), c("ieu-a-2", "ieu-a-31"))
+})

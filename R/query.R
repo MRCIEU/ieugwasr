@@ -257,6 +257,32 @@ print.GwasInfo <- function(x, ...)
 	dplyr::glimpse(x)
 }
 
+
+#' Get list of download URLs each file (.vcf.gz, .vcf.gz.tbi, _report.html) associated with the dataset. 
+#' The URLs will expire in 2 hours. 
+#' If a dataset is missing from the results, 
+#' that means the dataset doesn't exist or you don't have access to it.
+#' If a dataset is in the results but some/all links are missing, that means the files are unavailable.
+#'
+#' @param id List of MR-Base IDs to retrieve.
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a JWT. Provide the JWT string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#'
+#' @export
+#' @return Dataframe of details for requested studies
+gwasinfo_files <- function(id, opengwas_jwt=get_opengwas_jwt()) {
+  if (is.null(id)) stop("List of study ids must be provided.")
+  id <- legacy_ids(id)
+  stopifnot(is.vector(id))
+  out <- api_query('gwasinfo/files', query = list(id=id), opengwas_jwt=opengwas_jwt) %>% get_query_content()
+  if(length(out) == 0) {
+    return(dplyr::tibble())
+  }
+  else {
+    return(dplyr::bind_rows(out))
+  }
+}
+
+
 #' Extract batch name from study ID
 #'
 #' @param id Array of study IDs

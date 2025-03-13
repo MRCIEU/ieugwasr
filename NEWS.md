@@ -1,3 +1,7 @@
+# ieugwasr 1.0.3
+
+* Add gwasinfo_files() function to return for each dataset specified the download URL for each file (.vcf.gz, .vcf.gz.tbi, _report.html) associated with the dataset. The URLs will expire in 2 hours.
+
 # ieugwasr 1.0.2
 
 * Bump roxygen2 version

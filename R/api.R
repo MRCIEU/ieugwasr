@@ -67,7 +67,7 @@ logging_info <- function()
 }
 
 
-#' Check if authentication has been maded
+#' Check if authentication has been made
 #'
 #' Deprecated. Use `get_opengwas_jwt()` instead. See https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication for more information.
 #'

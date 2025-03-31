@@ -1,3 +1,10 @@
+# ieugwasr 1.0.4
+
+* Improved warning messages in `ld_clump()` (thanks @DarwinAwardWinner).
+* `ld_clump()` and `ld_matrix()` now search for the plink binary as documented (thanks @DarwinAwardWinner).
+* Fixed some typos in the documentation including .
+* Made some minor amends in the helpfiles and vignettes inclduing: fixing typos, replacing all references to MR-Base with OpenGWAS, and improving the `gwasinfo_files()` helpfile.
+
 # ieugwasr 1.0.3
 
 * Add gwasinfo_files() function to return for each dataset specified the download URL for each file (.vcf.gz, .vcf.gz.tbi, _report.html) associated with the dataset. The URLs will expire in 2 hours.

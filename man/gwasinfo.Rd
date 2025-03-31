@@ -7,7 +7,7 @@
 gwasinfo(id = NULL, opengwas_jwt = get_opengwas_jwt())
 }
 \arguments{
-\item{id}{List of MR-Base IDs to retrieve. If \code{NULL} (default) retrieves all
+\item{id}{List of OpenGWAS IDs to retrieve. If \code{NULL} (default) retrieves all
 available datasets}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}

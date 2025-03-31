@@ -69,12 +69,11 @@ logging_info <- function()
 
 #' Check if authentication has been maded
 #'
-#' Deprectated. Use `get_opengwas_jwt()` instead. See https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication for more information.
+#' Deprecated. Use `get_opengwas_jwt()` instead. See https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication for more information.
 #'
 #' @export
 #' @return NULL or access_token depending on current authentication state
 check_access_token <- function()
 {
-	message("Deprectated. Use `get_opengwas_jwt()` instead. See https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication for more information.")
+	message("Deprecated. Use `get_opengwas_jwt()` instead. See https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication for more information.")
 }
-

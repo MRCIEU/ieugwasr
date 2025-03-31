@@ -25,7 +25,7 @@
 #' @param clump_p Clumping sig level for index variants. Default = `1` (i.e. no threshold)
 #' @param pop Super-population to use as reference panel. Default = `"EUR"`. 
 #' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`. 
-#' `'legacy'` also available - which is a previously used verison of the EUR 
+#' `'legacy'` also available - which is a previously used version of the EUR 
 #' panel with a slightly different set of markers
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.#' 
 #' @param bfile If this is provided then will use the API. Default = `NULL`

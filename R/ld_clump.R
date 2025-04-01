@@ -74,11 +74,12 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 			message("Only one SNP for ", ids[i])
 			res[[i]] <- x
 		} else {
-			message("Clumping ", ids[i], ", ", nrow(x), " variants, using ", pop, " population reference")
 			if(is.null(bfile))
 			{
-				res[[i]] <- ld_clump_api(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, pop=pop, opengwas_jwt=opengwas_jwt)
+			  message("Clumping ", ids[i], ", ", nrow(x), " variants, using ", pop, " population reference")
+			  res[[i]] <- ld_clump_api(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, pop=pop, opengwas_jwt=opengwas_jwt)
 			} else {
+			  message("Clumping ", ids[i], ", ", nrow(x), " variants, using: ", bfile)
 				res[[i]] <- ld_clump_local(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, bfile=bfile, plink_bin=plink_bin)
 			}
 		}

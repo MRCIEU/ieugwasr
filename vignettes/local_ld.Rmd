@@ -87,7 +87,7 @@ ld_matrix(b$variant)
 This uses the API by default but is limited to only 500 variants. You can use, instead, local plink and LD reference data in the same manner as in the `ld_clump` function, e.g.
 
 ```r
-ld_matrix(
+ieugwasr::ld_matrix(
 	dat$rsid,
 	plink_bin = genetics.binaRies::get_plink_binary(),
   bfile = "/path/to/reference/EUR"

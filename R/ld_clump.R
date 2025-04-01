@@ -47,6 +47,13 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 		message("Please look at vignettes for options on running this locally if you need to run many instances of this command.")
 	}
 
+	if (!is.null(bfile) && is.null(plink_bin)) {
+	  plink_bin <- Sys.which("plink")
+	  if (plink_bin == "" || is.na(plink_bin)) {
+	    stop("Could not find PLINK executable. Please set plink_bin to the path of the PLINK executable.")
+	  }
+	}
+	
 	if(! "pval" %in% names(dat))
 	{
 		if( "p" %in% names(dat))

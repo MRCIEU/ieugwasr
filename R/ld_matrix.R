@@ -44,6 +44,12 @@ ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_o
 		message("Please look at vignettes for options on running this locally if you need to run many instances of this command.")
 	}
 
+  if (!is.null(bfile) && is.null(plink_bin)) {
+    plink_bin <- Sys.which("plink")
+    if (plink_bin == "" || is.na(plink_bin)) {
+      stop("Could not find PLINK executable. Please set plink_bin to the path of the PLINK executable.")
+    }
+  }
 
 	if(!is.null(bfile))
 	{

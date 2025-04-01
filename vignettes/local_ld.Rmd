@@ -35,7 +35,7 @@ The API has a wrapper around [plink version 1.90](https://www.cog-genomics.org/p
 ``` r
 a <- tophits(id="ieu-a-2", clump = 0)
 b <- ld_clump(
-    dplyr::tibble(rsid=a$name, pval=a$p, id=a$id)
+    dplyr::tibble(rsid = a$rsid, pval = a$p, id = a$id)
 )
 ```
 

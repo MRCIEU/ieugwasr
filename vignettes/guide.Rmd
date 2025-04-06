@@ -111,7 +111,7 @@ Lookup association of specified variants across every study, returning at a part
 phewas(variants = "rs1205", pval = 1e-5)
 ```
 
-PheWAS can also be performed in only specific subsets of the data. The datasets in the IGD are organised by batch, you can see info about it here: https://gwas.mrcieu.ac.uk/datasets/ or get a list of batches and their descriptions using:
+PheWAS can also be performed in only specific subsets of the data. The datasets in the OpenGWAS database are organised by batch, you can see info about it here: https://gwas.mrcieu.ac.uk/datasets/ or get a list of batches and their descriptions using:
 
 ```r
 batches()

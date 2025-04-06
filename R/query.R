@@ -258,10 +258,12 @@ print.GwasInfo <- function(x, ...)
 }
 
 
-#' Get list of download URLs each file (.vcf.gz, .vcf.gz.tbi, _report.html) associated with the dataset. 
+#' Get list of download URLs for each file associated with a dataset through API
+#' 
+#' `gwasinfo_files()` returns a list of download URLs for each file (.vcf.gz, .vcf.gz.tbi, _report.html) associated with a dataset. 
 #' The URLs will expire in 2 hours. 
 #' If a dataset is missing from the results, 
-#' that means the dataset doesn't exist or you don't have access to it.
+#' that means either the dataset doesn't exist or you don't have access to it.
 #' If a dataset is in the results but some/all links are missing, that means the files are unavailable.
 #'
 #' @param id List of MR-Base IDs to retrieve.

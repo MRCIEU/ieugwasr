@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ieugwasr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,7 +70,7 @@
 Hemani</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/v1.0.3/vignettes/guide.Rmd" class="external-link"><code>vignettes/guide.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/master/vignettes/guide.Rmd" class="external-link"><code>vignettes/guide.Rmd</code></a></small>
       <div class="d-none name"><code>guide.Rmd</code></div>
     </div>
 
@@ -191,7 +191,7 @@ convenient.</p>
 </h2>
 <p>Provide a list of variants to be obtained from a list of studies:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/associations.html">associations</a></span><span class="op">(</span>variants<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rs123"</span>, <span class="st">"7:105561135"</span><span class="op">)</span>, id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ieu-a-2"</span>, <span class="st">"ieu-a-7"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/associations.html">associations</a></span><span class="op">(</span>variants<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rs123"</span>, <span class="st">"7:105561135"</span><span class="op">)</span>, id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ieu-a-2"</span>, <span class="st">"ieu-a-7"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>By default this will look for LD proxies using 1000 genomes reference
 data (Europeans only, the reference panel has INDELs removed and only
 retains SNPs with MAF &gt; 0.01). This behaviour can be turned off using
@@ -200,14 +200,14 @@ retains SNPs with MAF &gt; 0.01). This behaviour can be turned off using
 values will be automatically converted. A range query can be done using
 e.g.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/associations.html">associations</a></span><span class="op">(</span>variants<span class="op">=</span><span class="st">"7:105561135-105563135"</span>, id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ieu-a-2"</span><span class="op">)</span>, proxies<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/associations.html">associations</a></span><span class="op">(</span>variants <span class="op">=</span> <span class="st">"7:105561135-105563135"</span>, id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ieu-a-2"</span><span class="op">)</span>, proxies <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="get-the-tophits-from-a-study">Get the tophits from a study<a class="anchor" aria-label="anchor" href="#get-the-tophits-from-a-study"></a>
 </h2>
 <p>The tophits can be obtained using</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/tophits.html">tophits</a></span><span class="op">(</span>id<span class="op">=</span><span class="st">"ieu-a-2"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/tophits.html">tophits</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"ieu-a-2"</span><span class="op">)</span></span></code></pre></div>
 <p>Note that it will perform strict clumping by default (r2 = 0.001 and
 radius = 10000kb). This can be turned off with <code>clump=0</code>.</p>
 </div>
@@ -218,16 +218,16 @@ radius = 10000kb). This can be turned off with <code>clump=0</code>.</p>
 returning at a particular threshold. Note that no LD proxy lookups are
 made here.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/phewas.html">phewas</a></span><span class="op">(</span>variants<span class="op">=</span><span class="st">"rs1205"</span>, pval<span class="op">=</span><span class="fl">1e-5</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/phewas.html">phewas</a></span><span class="op">(</span>variants <span class="op">=</span> <span class="st">"rs1205"</span>, pval <span class="op">=</span> <span class="fl">1e-5</span><span class="op">)</span></span></code></pre></div>
 <p>PheWAS can also be performed in only specific subsets of the data.
-The datasets in the IGD are organised by batch, you can see info about
-it here: <a href="https://gwas.mrcieu.ac.uk/datasets/" class="external-link uri">https://gwas.mrcieu.ac.uk/datasets/</a> or get a list of
+The datasets in the OpenGWAS database are organised by batch, you can
+see info about it here: <a href="https://gwas.mrcieu.ac.uk/datasets/" class="external-link uri">https://gwas.mrcieu.ac.uk/datasets/</a> or get a list of
 batches and their descriptions using:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/batches.html">batches</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>You can perform PheWAS in only specified batches using:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/phewas.html">phewas</a></span><span class="op">(</span>variants<span class="op">=</span><span class="st">"rs1205"</span>, pval<span class="op">=</span><span class="fl">1e-5</span>, batch<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'ieu-a'</span>, <span class="st">'ukb-b'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/phewas.html">phewas</a></span><span class="op">(</span>variants <span class="op">=</span> <span class="st">"rs1205"</span>, pval <span class="op">=</span> <span class="fl">1e-5</span>, batch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'ieu-a'</span>, <span class="st">'ukb-b'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>By default PheWAS is performed in all batches (which is of course
 somewhat slower).</p>
 </div>
@@ -238,9 +238,9 @@ somewhat slower).</p>
 can use it to perform clumping with an LD reference panel from 1000
 genomes reference data.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tophits.html">tophits</a></span><span class="op">(</span>id<span class="op">=</span><span class="st">"ieu-a-2"</span>, clump<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tophits.html">tophits</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"ieu-a-2"</span>, clump <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ld_clump.html">ld_clump</a></span><span class="op">(</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>rsid<span class="op">=</span><span class="va">a</span><span class="op">$</span><span class="va">name</span>, pval<span class="op">=</span><span class="va">a</span><span class="op">$</span><span class="va">p</span>, id<span class="op">=</span><span class="va">a</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>rsid <span class="op">=</span> <span class="va">a</span><span class="op">$</span><span class="va">rsid</span>, pval <span class="op">=</span> <span class="va">a</span><span class="op">$</span><span class="va">p</span>, id <span class="op">=</span> <span class="va">a</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>There are 5 super-populations that can be requested via the
 <code>pop</code> argument. By default this will use the Europeans subset
@@ -250,7 +250,7 @@ retains SNPs with MAF &gt; 0.01 in the selected population.</p>
 path to plink and a bed/bim/fam LD reference dataset. e.g.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ld_clump.html">ld_clump</a></span><span class="op">(</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>rsid<span class="op">=</span><span class="va">a</span><span class="op">$</span><span class="va">name</span>, pval<span class="op">=</span><span class="va">a</span><span class="op">$</span><span class="va">p</span>, id<span class="op">=</span><span class="va">a</span><span class="op">$</span><span class="va">id</span><span class="op">)</span>,</span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>rsid <span class="op">=</span> <span class="va">a</span><span class="op">$</span><span class="va">rsid</span>, pval <span class="op">=</span> <span class="va">a</span><span class="op">$</span><span class="va">p</span>, id <span class="op">=</span> <span class="va">a</span><span class="op">$</span><span class="va">id</span><span class="op">)</span>,</span>
 <span>    plink_bin <span class="op">=</span> <span class="st">"/path/to/plink"</span>,</span>
 <span>    bfile <span class="op">=</span> <span class="st">"/path/to/reference_data"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -314,7 +314,7 @@ from a BMI dataset (ieu-a-2)</p>
 bioconductor package to query the <a href="https://mygene.info/" class="external-link">mygene.info</a> API.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">mygene</span><span class="op">)</span></span>
-<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">mygene</span><span class="fu">::</span><span class="fu">getGene</span><span class="op">(</span><span class="st">"1017"</span>, fields<span class="op">=</span><span class="st">"genomic_pos_hg19"</span><span class="op">)</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu">mygene</span><span class="fu">::</span><span class="fu">getGene</span><span class="op">(</span><span class="st">"1017"</span>, fields <span class="op">=</span> <span class="st">"genomic_pos_hg19"</span><span class="op">)</span></span>
 <span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">a</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">genomic_pos_hg19</span><span class="op">$</span><span class="va">chr</span>, <span class="st">":"</span>, <span class="va">a</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">genomic_pos_hg19</span><span class="op">$</span><span class="va">start</span>, <span class="st">"-"</span>, <span class="va">a</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">genomic_pos_hg19</span><span class="op">$</span><span class="va">end</span><span class="op">)</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="../reference/associations.html">associations</a></span><span class="op">(</span><span class="va">r</span>, <span class="st">"ieu-a-2"</span><span class="op">)</span></span></code></pre></div>
 </div>

@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ieugwasr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@
       <h1>Running local LD operations</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/v1.0.3/vignettes/local_ld.Rmd" class="external-link"><code>vignettes/local_ld.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/master/vignettes/local_ld.Rmd" class="external-link"><code>vignettes/local_ld.Rmd</code></a></small>
       <div class="d-none name"><code>local_ld.Rmd</code></div>
     </div>
 
@@ -101,9 +101,9 @@ below.</p>
 can use it to perform clumping with an LD reference panel from 1000
 genomes reference data.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tophits.html">tophits</a></span><span class="op">(</span>id<span class="op">=</span><span class="st">"ieu-a-2"</span>, clump<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tophits.html">tophits</a></span><span class="op">(</span>id<span class="op">=</span><span class="st">"ieu-a-2"</span>, clump <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ld_clump.html">ld_clump</a></span><span class="op">(</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>rsid<span class="op">=</span><span class="va">a</span><span class="op">$</span><span class="va">name</span>, pval<span class="op">=</span><span class="va">a</span><span class="op">$</span><span class="va">p</span>, id<span class="op">=</span><span class="va">a</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>rsid <span class="op">=</span> <span class="va">a</span><span class="op">$</span><span class="va">rsid</span>, pval <span class="op">=</span> <span class="va">a</span><span class="op">$</span><span class="va">p</span>, id <span class="op">=</span> <span class="va">a</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>There are 5 super-populations that can be requested via the
 <code>pop</code> argument. By default this will use the Europeans subset
@@ -113,7 +113,7 @@ retains SNPs with MAF &gt; 0.01 in the selected population.</p>
 path to plink and a bed/bim/fam LD reference dataset.</p>
 <p>To get a path to plink you can do the following:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"explodecomputer/genetics.binaRies"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"MRCIEU/genetics.binaRies"</span><span class="op">)</span></span>
 <span><span class="fu">genetics.binaRies</span><span class="fu">::</span><span class="fu">get_plink_binary</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>To get the same LD reference dataset that is used by the API, you can
 download it directly from here:</p>
@@ -136,7 +136,7 @@ following columns:</p>
 <p>to perform clumping, just do the following:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ld_clump.html">ld_clump</a></span><span class="op">(</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>rsid<span class="op">=</span><span class="va">dat</span><span class="op">$</span><span class="va">rsid</span>, pval<span class="op">=</span><span class="va">dat</span><span class="op">$</span><span class="va">pval</span>, id<span class="op">=</span><span class="va">dat</span><span class="op">$</span><span class="va">trait_id</span><span class="op">)</span>,</span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>rsid <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">rsid</span>, pval <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">pval</span>, id <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">trait_id</span><span class="op">)</span>,</span>
 <span>    plink_bin <span class="op">=</span> <span class="fu">genetics.binaRies</span><span class="fu">::</span><span class="fu">get_plink_binary</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    bfile <span class="op">=</span> <span class="st">"/path/to/reference/EUR"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -151,10 +151,10 @@ following columns:</p>
 can use, instead, local plink and LD reference data in the same manner
 as in the <code>ld_clump</code> function, e.g.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/ld_matrix.html">ld_matrix</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu">ieugwasr</span><span class="fu">::</span><span class="fu"><a href="../reference/ld_matrix.html">ld_matrix</a></span><span class="op">(</span></span>
 <span>    <span class="va">dat</span><span class="op">$</span><span class="va">rsid</span>,</span>
 <span>    plink_bin <span class="op">=</span> <span class="fu">genetics.binaRies</span><span class="fu">::</span><span class="fu">get_plink_binary</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    bfile <span class="op">=</span> <span class="st">"/path/to/reference/EUR"</span></span>
+<span>  bfile <span class="op">=</span> <span class="st">"/path/to/reference/EUR"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">

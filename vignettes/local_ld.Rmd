@@ -46,7 +46,7 @@ Note that you can perform the same operation locally if you provide a path to pl
 To get a path to plink you can do the following:
 
 ```r
-remotes::install_github("explodecomputer/genetics.binaRies")
+remotes::install_github("MRCIEU/genetics.binaRies")
 genetics.binaRies::get_plink_binary()
 ```
 

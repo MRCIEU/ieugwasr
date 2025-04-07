@@ -25,9 +25,9 @@
 #' @param clump_p Clumping sig level for index variants. Default = `1` (i.e. no threshold)
 #' @param pop Super-population to use as reference panel. Default = `"EUR"`. 
 #' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`. 
-#' `'legacy'` also available - which is a previously used verison of the EUR 
+#' `'legacy'` also available - which is a previously used version of the EUR 
 #' panel with a slightly different set of markers
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.#' 
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #' @param bfile If this is provided then will use the API. Default = `NULL`
 #' @param plink_bin If `NULL` and `bfile` is not `NULL` then will detect 
 #' packaged plink binary for specific OS. Otherwise specify path to plink binary. 
@@ -47,6 +47,13 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 		message("Please look at vignettes for options on running this locally if you need to run many instances of this command.")
 	}
 
+	if (!is.null(bfile) && is.null(plink_bin)) {
+	  plink_bin <- Sys.which("plink")
+	  if (plink_bin == "" || is.na(plink_bin)) {
+	    stop("Could not find PLINK executable. Please set plink_bin to the path of the PLINK executable.")
+	  }
+	}
+	
 	if(! "pval" %in% names(dat))
 	{
 		if( "p" %in% names(dat))
@@ -74,11 +81,12 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 			message("Only one SNP for ", ids[i])
 			res[[i]] <- x
 		} else {
-			message("Clumping ", ids[i], ", ", nrow(x), " variants, using ", pop, " population reference")
 			if(is.null(bfile))
 			{
-				res[[i]] <- ld_clump_api(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, pop=pop, opengwas_jwt=opengwas_jwt)
+			  message("Clumping ", ids[i], ", ", nrow(x), " variants, using ", pop, " population reference")
+			  res[[i]] <- ld_clump_api(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, pop=pop, opengwas_jwt=opengwas_jwt)
 			} else {
+			  message("Clumping ", ids[i], ", ", nrow(x), " variants, using: ", bfile)
 				res[[i]] <- ld_clump_local(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, bfile=bfile, plink_bin=plink_bin)
 			}
 		}

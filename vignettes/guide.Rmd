@@ -81,7 +81,7 @@ gwasinfo("ieu-a-2")
 Provide a list of variants to be obtained from a list of studies:
 
 ```r
-associations(variants=c("rs123", "7:105561135"), id=c("ieu-a-2", "ieu-a-7"))
+associations(variants=c("rs123", "7:105561135"), id = c("ieu-a-2", "ieu-a-7"))
 ```
 
 By default this will look for LD proxies using 1000 genomes reference data (Europeans only, the reference panel has INDELs removed and only retains SNPs with MAF > 0.01). This behaviour can be turned off using `proxies=0` as an argument.
@@ -89,7 +89,7 @@ By default this will look for LD proxies using 1000 genomes reference data (Euro
 Note that the queries are performed on rsids, but chromosome:position values will be automatically converted. A range query can be done using e.g.
 
 ```r
-associations(variants="7:105561135-105563135", id=c("ieu-a-2"), proxies=0)
+associations(variants = "7:105561135-105563135", id = c("ieu-a-2"), proxies = 0)
 ```
 
 ## Get the tophits from a study
@@ -97,7 +97,7 @@ associations(variants="7:105561135-105563135", id=c("ieu-a-2"), proxies=0)
 The tophits can be obtained using
 
 ```r
-tophits(id="ieu-a-2")
+tophits(id = "ieu-a-2")
 ```
 
 Note that it will perform strict clumping by default (r2 = 0.001 and radius = 10000kb). This can be turned off with `clump=0`.
@@ -108,10 +108,10 @@ Note that it will perform strict clumping by default (r2 = 0.001 and radius = 10
 Lookup association of specified variants across every study, returning at a particular threshold. Note that no LD proxy lookups are made here.
 
 ```r
-phewas(variants="rs1205", pval=1e-5)
+phewas(variants = "rs1205", pval = 1e-5)
 ```
 
-PheWAS can also be performed in only specific subsets of the data. The datasets in the IGD are organised by batch, you can see info about it here: https://gwas.mrcieu.ac.uk/datasets/ or get a list of batches and their descriptions using:
+PheWAS can also be performed in only specific subsets of the data. The datasets in the OpenGWAS database are organised by batch, you can see info about it here: https://gwas.mrcieu.ac.uk/datasets/ or get a list of batches and their descriptions using:
 
 ```r
 batches()
@@ -120,7 +120,7 @@ batches()
 You can perform PheWAS in only specified batches using:
 
 ```r
-phewas(variants="rs1205", pval=1e-5, batch=c('ieu-a', 'ukb-b'))
+phewas(variants = "rs1205", pval = 1e-5, batch = c('ieu-a', 'ukb-b'))
 ```
 
 By default PheWAS is performed in all batches (which is of course somewhat slower).
@@ -131,9 +131,9 @@ By default PheWAS is performed in all batches (which is of course somewhat slowe
 The API has a wrapper around [plink version 1.90](https://www.cog-genomics.org/plink/1.9) and can use it to perform clumping with an LD reference panel from 1000 genomes reference data.
 
 ```r
-a <- tophits(id="ieu-a-2", clump=0)
+a <- tophits(id = "ieu-a-2", clump = 0)
 b <- ld_clump(
-    dplyr::tibble(rsid=a$name, pval=a$p, id=a$id)
+    dplyr::tibble(rsid = a$rsid, pval = a$p, id = a$id)
 )
 ```
 
@@ -143,7 +143,7 @@ Note that you can perform the same operation locally if you provide a path to pl
 
 ```r
 ld_clump(
-    dplyr::tibble(rsid=a$name, pval=a$p, id=a$id),
+    dplyr::tibble(rsid = a$rsid, pval = a$p, id = a$id),
     plink_bin = "/path/to/plink",
     bfile = "/path/to/reference_data"
 )
@@ -213,7 +213,7 @@ Use the [mygene](https://bioconductor.org/packages/release/bioc/html/mygene.html
 
 ```r
 library(mygene)
-a <- mygene::getGene("1017", fields="genomic_pos_hg19")
+a <- mygene::getGene("1017", fields = "genomic_pos_hg19")
 r <- paste0(a[[1]]$genomic_pos_hg19$chr, ":", a[[1]]$genomic_pos_hg19$start, "-", a[[1]]$genomic_pos_hg19$end)
 b <- ieugwasr::associations(r, "ieu-a-2")
 ```

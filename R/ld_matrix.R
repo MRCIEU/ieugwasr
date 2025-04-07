@@ -24,9 +24,9 @@
 #' @param with_alleles Whether to append the allele names to the SNP names. Default: `TRUE`
 #' @param pop Super-population to use as reference panel. Default = `"EUR"`. 
 #' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`. 
-#' `'legacy'` also available - which is a previously used verison of the EUR 
+#' `'legacy'` also available - which is a previously used version of the EUR 
 #' panel with a slightly different set of markers
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.#' @param bfile If this is provided then will use the API. Default = `NULL`
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #' @param bfile If this is provided then will use the API. Default = `NULL`
 #' @param plink_bin If `NULL` and bfile is not `NULL` then will detect packaged 
 #' plink binary for specific OS. Otherwise specify path to plink binary. Default = `NULL`
@@ -44,6 +44,12 @@ ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_o
 		message("Please look at vignettes for options on running this locally if you need to run many instances of this command.")
 	}
 
+  if (!is.null(bfile) && is.null(plink_bin)) {
+    plink_bin <- Sys.which("plink")
+    if (plink_bin == "" || is.na(plink_bin)) {
+      stop("Could not find PLINK executable. Please set plink_bin to the path of the PLINK executable.")
+    }
+  }
 
 	if(!is.null(bfile))
 	{

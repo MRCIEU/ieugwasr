@@ -2,7 +2,7 @@
 % Please edit documentation in R/api.R
 \name{check_access_token}
 \alias{check_access_token}
-\title{Check if authentication has been maded}
+\title{Check if authentication has been made}
 \usage{
 check_access_token()
 }
@@ -10,5 +10,5 @@ check_access_token()
 NULL or access_token depending on current authentication state
 }
 \description{
-Deprectated. Use \code{get_opengwas_jwt()} instead. See https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication for more information.
+Deprecated. Use \code{get_opengwas_jwt()} instead. See https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication for more information.
 }

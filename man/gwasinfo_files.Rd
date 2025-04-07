@@ -2,16 +2,12 @@
 % Please edit documentation in R/query.R
 \name{gwasinfo_files}
 \alias{gwasinfo_files}
-\title{Get list of download URLs each file (.vcf.gz, .vcf.gz.tbi, _report.html) associated with the dataset.
-The URLs will expire in 2 hours.
-If a dataset is missing from the results,
-that means the dataset doesn't exist or you don't have access to it.
-If a dataset is in the results but some/all links are missing, that means the files are unavailable.}
+\title{Get list of download URLs for each file associated with a dataset through API}
 \usage{
 gwasinfo_files(id, opengwas_jwt = get_opengwas_jwt())
 }
 \arguments{
-\item{id}{List of MR-Base IDs to retrieve.}
+\item{id}{List of OpenGWAS IDs to retrieve.}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a JWT. Provide the JWT string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }
@@ -19,9 +15,9 @@ gwasinfo_files(id, opengwas_jwt = get_opengwas_jwt())
 Dataframe of details for requested studies
 }
 \description{
-Get list of download URLs each file (.vcf.gz, .vcf.gz.tbi, _report.html) associated with the dataset.
+\code{gwasinfo_files()} returns a list of download URLs for each file (.vcf.gz, .vcf.gz.tbi, _report.html) associated with a dataset.
 The URLs will expire in 2 hours.
 If a dataset is missing from the results,
-that means the dataset doesn't exist or you don't have access to it.
+that means either the dataset doesn't exist or you don't have access to it.
 If a dataset is in the results but some/all links are missing, that means the files are unavailable.
 }

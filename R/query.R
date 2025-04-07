@@ -76,7 +76,7 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 		{
 			if(grepl("Timeout", as.character(attributes(r)$condition)))
 			{
-				stop("The query to MR-Base exceeded ", timeout, " seconds and timed out. Potential reasons:
+				stop("The query to OpenGWAS exceeded ", timeout, " seconds and timed out. Potential reasons:
 				- You have a bad internet connection
 				- The query was very large and it timed out
 				- You have maxed out your allowance, and kept submitting requests, which led to your IP address being temporarily blocked. See here for details: https://api.opengwas.io/api/#allowance")
@@ -109,9 +109,9 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 	{
 		if(grepl("Could not resolve host", as.character(attributes(r)$condition)))
 		{
-			stop("The MR-Base server appears to be down, the following error was received:\n", as.character(attributes(r)$condition))
+			stop("The OpenGWAS server appears to be down, the following error was received:\n", as.character(attributes(r)$condition))
 		} else {
-			stop("The following error was encountered in trying to query the MR-Base server:\n",
+			stop("The following error was encountered in trying to query the OpenGWAS server:\n",
 				as.character(attributes(r)$condition)
 			)
 		}
@@ -197,7 +197,7 @@ get_query_content <- function(response)
 }
 
 
-#' MR-Base server status
+#' OpenGWAS server status
 #'
 #' @export
 #' @return list of values regarding status
@@ -221,7 +221,7 @@ print.ApiStatus <- function(x, ...)
 
 #' Get list of studies with available GWAS summary statistics through API
 #'
-#' @param id List of MR-Base IDs to retrieve. If `NULL` (default) retrieves all 
+#' @param id List of OpenGWAS IDs to retrieve. If `NULL` (default) retrieves all 
 #' available datasets
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
@@ -258,13 +258,15 @@ print.GwasInfo <- function(x, ...)
 }
 
 
-#' Get list of download URLs each file (.vcf.gz, .vcf.gz.tbi, _report.html) associated with the dataset. 
+#' Get list of download URLs for each file associated with a dataset through API
+#' 
+#' `gwasinfo_files()` returns a list of download URLs for each file (.vcf.gz, .vcf.gz.tbi, _report.html) associated with a dataset. 
 #' The URLs will expire in 2 hours. 
 #' If a dataset is missing from the results, 
-#' that means the dataset doesn't exist or you don't have access to it.
+#' that means either the dataset doesn't exist or you don't have access to it.
 #' If a dataset is in the results but some/all links are missing, that means the files are unavailable.
 #'
-#' @param id List of MR-Base IDs to retrieve.
+#' @param id List of OpenGWAS IDs to retrieve.
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a JWT. Provide the JWT string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export

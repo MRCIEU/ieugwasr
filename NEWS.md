@@ -1,8 +1,7 @@
 # ieugwasr 1.0.4
 
 * Improved warning messages in `ld_clump()` (thanks @DarwinAwardWinner).
-* `ld_clump()` and `ld_matrix()` now search for the plink binary as documented (thanks @DarwinAwardWinner).
-* Fixed some typos in the documentation including .
+* `ld_clump()` and `ld_matrix()` now search for the plink binary as documented (thanks @DarwinAwardWinner). 
 * Made some minor amends in the helpfiles and vignettes inclduing: fixing typos, replacing all references to MR-Base with OpenGWAS, and improving the `gwasinfo_files()` helpfile.
 
 # ieugwasr 1.0.3

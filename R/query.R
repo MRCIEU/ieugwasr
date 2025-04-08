@@ -11,7 +11,7 @@
 #' @param encode Default = `"json"`, see [`httr::POST`] for options
 #' @param timeout Default = `300`, avoid increasing this, preferentially 
 #' simplify the query first.
-#' @param override_429 Default=FALSE. If allowance is exceeded then the query will error before submitting a request to avoid getting blocked. If you are sure you want to submit the request then set this to TRUE.
+#' @param override_429 Default=`FALSE`. If allowance is exceeded then the query will error before submitting a request to avoid getting blocked. If you are sure you want to submit the request then set this to TRUE.
 #'
 #' @export
 #' @return httr response object

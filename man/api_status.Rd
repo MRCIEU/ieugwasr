@@ -7,7 +7,7 @@
 api_status()
 }
 \value{
-list of values regarding status
+List of values regarding status
 }
 \description{
 OpenGWAS server status

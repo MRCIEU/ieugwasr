@@ -34,7 +34,7 @@ p-value threshold 5e-8, with r2 threshold 0.001 and kb threshold 10000,
 using only SNPs with MAF > 0.01 in the European samples in 1000 genomes.
 If force_server = \code{TRUE} then will recompute using server side LD reference panel.}
 
-\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }
 \value{
 Dataframe

@@ -19,7 +19,7 @@ If \code{id} is present then clumping will be done per unique id.}
 \item{bfile}{If this is provided then will use the API. Default = \code{NULL}}
 
 \item{plink_bin}{Specify path to plink binary. Default = \code{NULL}.
-See \url{https://github.com/explodecomputer/plinkbinr} for convenient access to plink binaries}
+See \url{https://github.com/MRCIEU/genetics.binaRies} for convenient access to plink binaries}
 }
 \value{
 data frame of clumped variants

@@ -10,7 +10,7 @@ legacy_ids(x)
 \item{x}{Vector of ids}
 }
 \value{
-vector of back compatible ids
+Vector of back compatible ids
 }
 \description{
 Convert current IDs to legacy IDs

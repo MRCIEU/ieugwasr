@@ -10,5 +10,5 @@ check_access_token()
 NULL or access_token depending on current authentication state
 }
 \description{
-Deprecated. Use \code{get_opengwas_jwt()} instead. See https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication for more information.
+Deprecated. Use \code{get_opengwas_jwt()} instead. See \url{https://mrcieu.github.io/ieugwasr/articles/guide.html#authentication} for more information.
 }

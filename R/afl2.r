@@ -5,13 +5,13 @@
 #' (EUR = European, AFR = African, EAS = East Asian, AMR = Admixed American, 
 #' SAS = South Asian)
 #'
-#' @param variantlist Choose pre-defined list. reduced = ~20k SNPs that are 
-#' common in all super populations (default). hapmap3 = ~1.3 million hm3 SNPs
+#' @param variantlist Choose pre-defined list. `"reduced"` = ~20k SNPs that are 
+#' common in all super populations (default). `"hapmap3"` = ~1.3 million hm3 SNPs
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return Data frame containing ancestry specific LD scores and allele frequencies for each variant
-afl2_list <- function(variantlist=c("reduced", "hapmap3")[1], opengwas_jwt=get_opengwas_jwt())
+afl2_list <- function(variantlist="reduced", opengwas_jwt=get_opengwas_jwt())
 {
 	if(variantlist == "reduced")
 	{

@@ -200,7 +200,7 @@ get_query_content <- function(response)
 #' OpenGWAS server status
 #'
 #' @export
-#' @return list of values regarding status
+#' @return List of values regarding status
 api_status <- function()
 {
 	o <- api_query('status', override_429=TRUE) %>% get_query_content

@@ -2,7 +2,7 @@
 #'
 #' @param where Which API to use. Choice between `"public"`, `"private"`, `"dev1"`, `"dev2"`. 
 #' Default = `"public"`.
-#' @param silent Silent? Default = FALSE
+#' @param silent Silent? Default = `FALSE`
 #'
 #' @export
 #' @return No return value, called for side effects

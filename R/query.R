@@ -149,7 +149,7 @@ set_reset <- function(r) {
 #' If the allowance has been used up, it displays a message indicating the time when the allowance will be reset.
 #' By default, the function will throw an error if the allowance has been used up, but this behavior can be overridden by setting `override_429` to `TRUE`.
 #'
-#' @param override_429 Logical value indicating whether to override the allowance reset check (default: FALSE)
+#' @param override_429 Logical value indicating whether to override the allowance reset check (default: `FALSE`)
 #'
 #' @return NULL
 check_reset <- function(override_429=FALSE) {

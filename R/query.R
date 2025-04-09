@@ -174,7 +174,7 @@ check_reset <- function(override_429=FALSE) {
 
 #' Parse out json response from httr object
 #'
-#' @param response Output from httr
+#' @param response Output from [api_query()]
 #'
 #' @export
 #' @return Parsed json output from query, often in form of data frame. 

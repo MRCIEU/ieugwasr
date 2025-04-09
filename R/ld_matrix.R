@@ -89,7 +89,7 @@ ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_o
 #' @param variants List of variants (rsids)
 #' @param bfile Path to bed/bim/fam ld reference panel
 #' @param plink_bin Specify path to plink binary. Default = `NULL`. 
-#' See \url{https://github.com/explodecomputer/plinkbinr} for convenient access to plink binaries
+#' See \url{https://github.com/MRCIEU/genetics.binaRies} for convenient access to plink binaries
 #' @param with_alleles Whether to append the allele names to the SNP names. 
 #' Default: `TRUE`
 #'

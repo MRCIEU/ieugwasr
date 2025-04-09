@@ -50,10 +50,14 @@ Due to very high usage, we have had to limit the number of queries that can be m
 The API has a number of endpoints documented [here](https://api.opengwas.io/api/). A general way to access them in R is using the `api_query` function. There are two types of endpoints - `GET` and `POST`. 
 
 - `GET` - you provide a single URL which includes the endpoint and query. For example, for the `association` endpoint you can obtain some rsids in some studies, e.g.
-    + `api_query("associations/ieu-a-2,ieu-a-7/rs234,rs123")`
+  ```r
+  api_query("associations/ieu-a-2,ieu-a-7/rs234,rs123")
+  ```
 
 - `POST` - Here you send a "payload" to the endpoint. So, the path specifies the endpoint and you add a list of query specifications. This is useful for long lists of rsids being queried, for example
-    + `api_query("associations", query=list(rsid=c("rs234", "rs123"), id=c("ieu-a-2", "ieu-a-7")))`
+  ```r
+  api_query("associations", query = list(rsid = c("rs234", "rs123"), id = c("ieu-a-2", "ieu-a-7")))
+  ```
 
 The `api_query` function returns a `response` object from the `httr` package. See below for a list of functions that make the input and output to `api_query` more convenient.
 
@@ -81,7 +85,7 @@ gwasinfo("ieu-a-2")
 Provide a list of variants to be obtained from a list of studies:
 
 ```r
-associations(variants=c("rs123", "7:105561135"), id = c("ieu-a-2", "ieu-a-7"))
+associations(variants = c("rs123", "7:105561135"), id = c("ieu-a-2", "ieu-a-7"))
 ```
 
 By default this will look for LD proxies using 1000 genomes reference data (Europeans only, the reference panel has INDELs removed and only retains SNPs with MAF > 0.01). This behaviour can be turned off using `proxies=0` as an argument.
@@ -225,33 +229,33 @@ The OpenGWAS database contains a database of population annotations from the 100
 1. Look up a particular set of rsids
 
     ```r
-    ieugwasr::afl2_rsid(c("rs234", "rs123"))
+    afl2_rsid(c("rs234", "rs123"))
     ```
 
 2. Look up a set of positions or regions
 
     ```r
-    ieugwasr::afl2_chrpos("1:100000-900000")
+    afl2_chrpos("1:100000-900000")
     ```
 
 3. Extract annotations for a list of 20k variants that are common in all super populations, and evenly spaced across the genome
 
     ```r
-    ieugwasr::afl2_list()
+    afl2_list()
     ```
 
 3. Extract annotations for a 1.3 million HapMap3 variants
 
     ```r
-    ieugwasr::afl2_list("hapmap3")
+    afl2_list("hapmap3")
     ```
 
 4. Infer the ancestry of a particular study by comparing the allele frequencies with different super population reference frequencies
 
     ```r
-    snplist <- ieugwasr::afl2_list()
+    snplist <- afl2_list()
     eur_example <- associations(snplist$rsid, "ieu-a-2")
-    ieugwasr::infer_ancestry(eur_example, snplist)
+    infer_ancestry(eur_example, snplist)
     eas_example <- associations(snplist$rsid, "bbj-a-10")
-    ieugwasr::infer_ancestry(eur_example, snplist)
+    infer_ancestry(eur_example, snplist)
     ```

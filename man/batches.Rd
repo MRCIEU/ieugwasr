@@ -2,16 +2,16 @@
 % Please edit documentation in R/query.R
 \name{batches}
 \alias{batches}
-\title{Get list of data batches in IEU GWAS database}
+\title{Get list of data batches in IEU OpenGWAS database}
 \usage{
 batches(opengwas_jwt = get_opengwas_jwt())
 }
 \arguments{
-\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+\item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }
 \value{
 data frame
 }
 \description{
-Get list of data batches in IEU GWAS database
+Get list of data batches in IEU OpenGWAS database
 }

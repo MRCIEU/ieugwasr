@@ -4,14 +4,11 @@
 \alias{afl2_list}
 \title{Retrieve a allele frequency and LD scores for pre-defined lists of variants}
 \usage{
-afl2_list(
-  variantlist = c("reduced", "hapmap3")[1],
-  opengwas_jwt = get_opengwas_jwt()
-)
+afl2_list(variantlist = "reduced", opengwas_jwt = get_opengwas_jwt())
 }
 \arguments{
-\item{variantlist}{Choose pre-defined list. reduced = ~20k SNPs that are
-common in all super populations (default). hapmap3 = ~1.3 million hm3 SNPs}
+\item{variantlist}{Choose pre-defined list. \code{"reduced"} = ~20k SNPs that are
+common in all super populations (default). \code{"hapmap3"} = ~1.3 million hm3 SNPs}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
 }

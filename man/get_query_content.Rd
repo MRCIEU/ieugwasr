@@ -7,7 +7,7 @@
 get_query_content(response)
 }
 \arguments{
-\item{response}{Output from httr}
+\item{response}{Output from \code{\link[=api_query]{api_query()}}}
 }
 \value{
 Parsed json output from query, often in form of data frame.

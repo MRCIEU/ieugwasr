@@ -5,13 +5,13 @@
 #'
 #' @param path Either a full query path (e.g. for get) or an endpoint (e.g. for post) queries
 #' @param query If post query, provide a list of arguments as the payload. `NULL` by default
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #' @param method `"GET"` (default) or `"POST"`, `"DELETE"` etc
 #' @param silent `TRUE`/`FALSE` to be passed to httr call. `TRUE` by default
 #' @param encode Default = `"json"`, see [`httr::POST`] for options
 #' @param timeout Default = `300`, avoid increasing this, preferentially 
 #' simplify the query first.
-#' @param override_429 Default=FALSE. If allowance is exceeded then the query will error before submitting a request to avoid getting blocked. If you are sure you want to submit the request then set this to TRUE.
+#' @param override_429 Default=`FALSE`. If allowance is exceeded then the query will error before submitting a request to avoid getting blocked. If you are sure you want to submit the request then set this to TRUE.
 #'
 #' @export
 #' @return httr response object
@@ -149,7 +149,7 @@ set_reset <- function(r) {
 #' If the allowance has been used up, it displays a message indicating the time when the allowance will be reset.
 #' By default, the function will throw an error if the allowance has been used up, but this behavior can be overridden by setting `override_429` to `TRUE`.
 #'
-#' @param override_429 Logical value indicating whether to override the allowance reset check (default: FALSE)
+#' @param override_429 Logical value indicating whether to override the allowance reset check (default: `FALSE`)
 #'
 #' @return NULL
 check_reset <- function(override_429=FALSE) {
@@ -174,7 +174,7 @@ check_reset <- function(override_429=FALSE) {
 
 #' Parse out json response from httr object
 #'
-#' @param response Output from httr
+#' @param response Output from [api_query()]
 #'
 #' @export
 #' @return Parsed json output from query, often in form of data frame. 
@@ -200,7 +200,7 @@ get_query_content <- function(response)
 #' OpenGWAS server status
 #'
 #' @export
-#' @return list of values regarding status
+#' @return List of values regarding status
 api_status <- function()
 {
 	o <- api_query('status', override_429=TRUE) %>% get_query_content
@@ -223,7 +223,7 @@ print.ApiStatus <- function(x, ...)
 #'
 #' @param id List of OpenGWAS IDs to retrieve. If `NULL` (default) retrieves all 
 #' available datasets
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return Dataframe of details for all available studies
@@ -267,7 +267,7 @@ print.GwasInfo <- function(x, ...)
 #' If a dataset is in the results but some/all links are missing, that means the files are unavailable.
 #'
 #' @param id List of OpenGWAS IDs to retrieve.
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a JWT. Provide the JWT string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a JWT. Provide the JWT string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return Dataframe of details for requested studies
@@ -296,9 +296,9 @@ batch_from_id <- function(id)
 	sapply(strsplit(id, "-"), function(x) paste(x[1], x[2], sep="-"))
 }
 
-#' Get list of data batches in IEU GWAS database
+#' Get list of data batches in IEU OpenGWAS database
 #'
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return data frame
@@ -325,7 +325,7 @@ batches <- function(opengwas_jwt=get_opengwas_jwt())
 #' `1` = yes (default), `0` = no
 #' @param palindromes Allow palindromic SNPs (if `proxies = 1`). `1` = yes (default), `0` = no
 #' @param maf_threshold MAF threshold to try to infer palindromic SNPs. Default = `0.3`.
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return Dataframe
@@ -356,7 +356,7 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 #' Look up sample sizes when meta data is missing from associations
 #'
 #' @param d Output from [`associations`]
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return Updated version of d
@@ -400,7 +400,7 @@ fix_n <- function(d)
 #' @param variants Array of variants e.g. `c("rs234", "7:105561135-105563135")`
 #' @param pval p-value threshold. Default = `0.00001`
 #' @param batch Vector of batch IDs to search across. If `c()` (default) then returns all batches
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return Dataframe
@@ -442,7 +442,7 @@ phewas <- function(variants, pval = 0.00001, batch=c(), opengwas_jwt=get_opengwa
 #' If force_server = `TRUE` then will recompute using server side LD reference panel.
 #' @param pop Super-population to use as reference panel. Default = `"EUR"`. 
 #' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return Dataframe
@@ -484,7 +484,7 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 #' Check datasets that are in process of being uploaded
 #'
 #' @param id ID
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return Dataframe

@@ -105,7 +105,7 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 #' @param clump_p Clumping sig level for index variants. Default = `1` (i.e. no threshold)
 #' @param pop Super-population to use as reference panel. Default = `"EUR"`. 
 #' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.#' @param bfile If this is provided then will use the API. Default = `NULL`
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #' @return Data frame of only independent variants
 ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, pop="EUR", opengwas_jwt=get_opengwas_jwt())
 {
@@ -138,7 +138,7 @@ ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, pop="EUR", 
 #' @param clump_p Clumping sig level for index variants. Default = `1` (i.e. no threshold)
 #' @param bfile If this is provided then will use the API. Default = `NULL`
 #' @param plink_bin Specify path to plink binary. Default = `NULL`. 
-#' See \url{https://github.com/explodecomputer/plinkbinr} for convenient access to plink binaries
+#' See \url{https://github.com/MRCIEU/genetics.binaRies} for convenient access to plink binaries
 #' @importFrom utils read.table
 #' @importFrom utils write.table
 #' @export
@@ -194,7 +194,7 @@ random_string <- function(n=1, len=6)
 #' @param rsid Array of rsids to check
 #' @param pop Super-population to use as reference panel. Default = `"EUR"`. 
 #' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`
-#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.#' @param bfile If this is provided then will use the API. Default = `NULL`
+#' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'
 #' @export
 #' @return Array of rsids that are present in the LD reference panel

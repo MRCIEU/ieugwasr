@@ -7,7 +7,7 @@
 check_reset(override_429 = FALSE)
 }
 \arguments{
-\item{override_429}{Logical value indicating whether to override the allowance reset check (default: FALSE)}
+\item{override_429}{Logical value indicating whether to override the allowance reset check (default: \code{FALSE})}
 }
 \description{
 This function checks if a recent query indicated that the OpenGWAS allowance has been used up. To prevent the IP being blocked, it will error if the new query is being submitted before the reset time.

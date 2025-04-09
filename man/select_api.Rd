@@ -10,7 +10,7 @@ select_api(where = "public", silent = FALSE)
 \item{where}{Which API to use. Choice between \code{"public"}, \code{"private"}, \code{"dev1"}, \code{"dev2"}.
 Default = \code{"public"}.}
 
-\item{silent}{Silent? Default = FALSE}
+\item{silent}{Silent? Default = \code{FALSE}}
 }
 \value{
 No return value, called for side effects

@@ -296,7 +296,7 @@ batch_from_id <- function(id)
 	sapply(strsplit(id, "-"), function(x) paste(x[1], x[2], sep="-"))
 }
 
-#' Get list of data batches in IEU GWAS database
+#' Get list of data batches in IEU OpenGWAS database
 #'
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to https://api.opengwas.io to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #'

@@ -3,7 +3,7 @@
 #' @param x Vector of ids
 #'
 #' @export
-#' @return vector of back compatible ids
+#' @return Vector of back compatible ids
 legacy_ids <- function(x)
 {
 	if(is.null(x)) return(NULL)

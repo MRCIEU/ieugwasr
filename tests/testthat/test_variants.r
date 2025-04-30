@@ -65,5 +65,3 @@ test_that("conversion",
 	if (inherits(o, c("try-error", "response"))) skip("Server issues")
 	expect_true(length(o) == 1)
 })
-
-

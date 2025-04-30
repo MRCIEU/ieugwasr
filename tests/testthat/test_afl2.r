@@ -32,6 +32,3 @@ test_that("chrpos", {
 # 	a <- afl2_rsid(c("rs234", "rs123"))
 # 	expect_true(nrow(a) == 2)
 # })
-
-
-

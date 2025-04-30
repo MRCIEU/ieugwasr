@@ -10,5 +10,3 @@ test_that("status",
 	expect_true(is.list(stat))
 	expect_gte(length(stat), 2)
 })
-
-

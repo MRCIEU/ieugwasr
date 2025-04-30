@@ -60,4 +60,3 @@ test_that("ld_reflookup", {
 	if (inherits(a, c("try-error", "response"))) skip("Server issues")
 	expect_true(a == "rs234")
 })
-

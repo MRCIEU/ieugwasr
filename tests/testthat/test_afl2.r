@@ -1,6 +1,6 @@
 # skip()
 skip_on_cran()
-# skip_on_ci()
+skip_on_ci()
 
 snpinfo1 <- try(afl2_list())
 if (inherits(snpinfo1, c("try-error", "response"))) skip("Server issues")

@@ -1,4 +1,5 @@
 skip_on_cran()
+skip_on_ci()
 if(Sys.getenv("OPENGWAS_X_TEST_MODE_KEY") == "") {
     test_that("no allowance", {
         a <- try(api_query("tophits", query=list(id="ieu-a-2"), override_429=TRUE))

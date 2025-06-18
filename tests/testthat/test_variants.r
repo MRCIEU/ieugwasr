@@ -20,6 +20,8 @@ test_that("genes",
 
 test_that("chrpos",
 {
+	skip()
+	# This is currently being redeveloped on the API side.
 	o <- try(variants_chrpos("7:105561135-105563135"))
 	if (inherits(o, c("try-error", "response"))) skip("Server issues")
 	expect_true(nrow(o) > 1)
@@ -36,6 +38,8 @@ test_that("chrpos",
 
 test_that("rsid", 
 {
+	skip()
+	# This is currently being redeveloped on the API side.
 	o <- try(variants_chrpos("7:105561135-105563135"))
 	if (inherits(o, c("try-error", "response"))) skip("Server issues")
 	p <- try(variants_rsid(o$name))
@@ -48,6 +52,8 @@ test_that("rsid",
 test_that("conversion",
 {
   skip_on_ci()
+  skip()
+  # This is currently being redeveloped on the API side.
 	o <- NULL
   o <- try(variants_to_rsid(c("rs1205", "7:105561135")))
 	if (inherits(o, c("try-error", "response"))) skip("Server issues")

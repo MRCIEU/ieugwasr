@@ -34,7 +34,7 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 			# 'Content-Type'='application/json; charset=UTF-8',
 			'X-Api-Source'=ifelse(is.null(options()$mrbase.environment), 'R/TwoSampleMR', 'mr-base-shiny'),
 			'X-TEST-MODE-KEY'=Sys.getenv("OPENGWAS_X_TEST_MODE_KEY"),
-			'Authorization'=paste("Bearer", opengwas_jwt=opengwas_jwt)
+			'Authorization'=paste("Bearer", opengwas_jwt)
 		)
 	}
 	retry_flag <- FALSE

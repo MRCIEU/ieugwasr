@@ -12,7 +12,8 @@ associations(
   align_alleles = 1,
   palindromes = 1,
   maf_threshold = 0.3,
-  opengwas_jwt = get_opengwas_jwt()
+  opengwas_jwt = get_opengwas_jwt(),
+  ...
 )
 }
 \arguments{
@@ -32,6 +33,8 @@ associations(
 \item{maf_threshold}{MAF threshold to try to infer palindromic SNPs. Default = \code{0.3}.}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+
+\item{...}{Unused, for extensibility}
 }
 \value{
 Dataframe

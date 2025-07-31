@@ -4,10 +4,12 @@
 \alias{batches}
 \title{Get list of data batches in IEU OpenGWAS database}
 \usage{
-batches(opengwas_jwt = get_opengwas_jwt())
+batches(opengwas_jwt = get_opengwas_jwt(), ...)
 }
 \arguments{
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+
+\item{...}{Unused, for extensibility}
 }
 \value{
 data frame

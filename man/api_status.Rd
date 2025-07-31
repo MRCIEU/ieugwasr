@@ -4,7 +4,10 @@
 \alias{api_status}
 \title{OpenGWAS server status}
 \usage{
-api_status()
+api_status(...)
+}
+\arguments{
+\item{...}{Unused, for extensibility}
 }
 \value{
 List of values regarding status

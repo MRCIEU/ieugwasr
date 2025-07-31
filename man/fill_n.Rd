@@ -4,12 +4,14 @@
 \alias{fill_n}
 \title{Look up sample sizes when meta data is missing from associations}
 \usage{
-fill_n(d, opengwas_jwt = get_opengwas_jwt())
+fill_n(d, opengwas_jwt = get_opengwas_jwt(), ...)
 }
 \arguments{
 \item{d}{Output from \code{\link{associations}}}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+
+\item{...}{Unused, for extensibility}
 }
 \value{
 Updated version of d

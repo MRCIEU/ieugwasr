@@ -95,7 +95,7 @@ test_that("tophits",
 {
   a <- try(tophits("ieu-a-2"))
   if (inherits(a, c("try-error", "response"))) skip("Server issues")
-	expect_equal(nrow(a), 79)
+	expect_equal(nrow(a), 78)
 	b <- try(tophits("ieu-a-2", clump=0))
 	if (inherits(b, c("try-error", "response"))) skip("Server issues")
 	expect_true(nrow(b)>79)

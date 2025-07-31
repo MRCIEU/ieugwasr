@@ -4,13 +4,15 @@
 \alias{gwasinfo}
 \title{Get list of studies with available GWAS summary statistics through API}
 \usage{
-gwasinfo(id = NULL, opengwas_jwt = get_opengwas_jwt())
+gwasinfo(id = NULL, opengwas_jwt = get_opengwas_jwt(), ...)
 }
 \arguments{
 \item{id}{List of OpenGWAS IDs to retrieve. If \code{NULL} (default) retrieves all
 available datasets}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+
+\item{...}{Unused, for extensibility}
 }
 \value{
 Dataframe of details for all available studies

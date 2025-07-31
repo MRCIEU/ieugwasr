@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ieugwasr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Look up allele frequencies and LD scores for 1000 genomes populations by chrpos</h1>
-      <small class="dont-index">Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/v1.0.4/R/afl2.r" class="external-link"><code>R/afl2.r</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/master/R/afl2.r" class="external-link"><code>R/afl2.r</code></a></small>
       <div class="d-none name"><code>afl2_chrpos.Rd</code></div>
     </div>
 
@@ -50,7 +50,12 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">afl2_chrpos</span><span class="op">(</span><span class="va">chrpos</span>, reference <span class="op">=</span> <span class="st">"1000g"</span>, opengwas_jwt <span class="op">=</span> <span class="fu"><a href="get_opengwas_jwt.html">get_opengwas_jwt</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">afl2_chrpos</span><span class="op">(</span></span>
+<span>  <span class="va">chrpos</span>,</span>
+<span>  reference <span class="op">=</span> <span class="st">"1000g"</span>,</span>
+<span>  opengwas_jwt <span class="op">=</span> <span class="fu"><a href="get_opengwas_jwt.html">get_opengwas_jwt</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -68,6 +73,10 @@ Also allows ranges e.g <code>"7:105561135-105563135"</code></p></dd>
 
 <dt id="arg-opengwas-jwt">opengwas_jwt<a class="anchor" aria-label="anchor" href="#arg-opengwas-jwt"></a></dt>
 <dd><p>Used to authenticate protected endpoints. Login to <a href="https://api.opengwas.io" class="external-link">https://api.opengwas.io</a> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Additional arguments passed to <code><a href="api_query.html">api_query()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

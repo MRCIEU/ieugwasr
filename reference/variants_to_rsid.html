@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ieugwasr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Convert mixed array of rsid and chrpos to list of rsid</h1>
-      <small class="dont-index">Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/v1.0.4/R/variants.R" class="external-link"><code>R/variants.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/master/R/variants.R" class="external-link"><code>R/variants.R</code></a></small>
       <div class="d-none name"><code>variants_to_rsid.Rd</code></div>
     </div>
 
@@ -50,7 +50,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">variants_to_rsid</span><span class="op">(</span><span class="va">variants</span>, opengwas_jwt <span class="op">=</span> <span class="fu"><a href="get_opengwas_jwt.html">get_opengwas_jwt</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">variants_to_rsid</span><span class="op">(</span><span class="va">variants</span>, opengwas_jwt <span class="op">=</span> <span class="fu"><a href="get_opengwas_jwt.html">get_opengwas_jwt</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -63,6 +63,10 @@
 
 <dt id="arg-opengwas-jwt">opengwas_jwt<a class="anchor" aria-label="anchor" href="#arg-opengwas-jwt"></a></dt>
 <dd><p>Used to authenticate protected endpoints. Login to <a href="https://api.opengwas.io" class="external-link">https://api.opengwas.io</a> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Additional arguments passed to API.</p></dd>
 
 </dl></div>
     <div class="section level2">

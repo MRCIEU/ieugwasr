@@ -9,7 +9,7 @@ The SNP with the lowest p-value is retained."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ieugwasr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +42,7 @@ The SNP with the lowest p-value is retained."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Perform LD clumping on SNP data</h1>
-      <small class="dont-index">Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/v1.0.4/R/ld_clump.R" class="external-link"><code>R/ld_clump.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/master/R/ld_clump.R" class="external-link"><code>R/ld_clump.R</code></a></small>
       <div class="d-none name"><code>ld_clump.Rd</code></div>
     </div>
 
@@ -61,7 +61,8 @@ The SNP with the lowest p-value is retained.</p>
 <span>  pop <span class="op">=</span> <span class="st">"EUR"</span>,</span>
 <span>  opengwas_jwt <span class="op">=</span> <span class="fu"><a href="get_opengwas_jwt.html">get_opengwas_jwt</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  bfile <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  plink_bin <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  plink_bin <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -104,7 +105,11 @@ panel with a slightly different set of markers</p></dd>
 <dt id="arg-plink-bin">plink_bin<a class="anchor" aria-label="anchor" href="#arg-plink-bin"></a></dt>
 <dd><p>If <code>NULL</code> and <code>bfile</code> is not <code>NULL</code> then will detect
 packaged plink binary for specific OS. Otherwise specify path to plink binary.
-Default = <code>NULL</code></p></dd>
+Default = <code>NULL</code>,</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Additional arguments passed to <code><a href="ld_clump_local.html">ld_clump_local()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

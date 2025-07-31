@@ -19,7 +19,7 @@ with European MAF &amp;gt; 0.01."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ieugwasr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,7 +52,7 @@ with European MAF &amp;gt; 0.01."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Query specific variants from specific GWAS</h1>
-      <small class="dont-index">Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/v1.0.4/R/query.R" class="external-link"><code>R/query.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/master/R/query.R" class="external-link"><code>R/query.R</code></a></small>
       <div class="d-none name"><code>associations.Rd</code></div>
     </div>
 
@@ -76,7 +76,10 @@ with European MAF &gt; 0.01.</p>
 <span>  align_alleles <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  palindromes <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  maf_threshold <span class="op">=</span> <span class="fl">0.3</span>,</span>
-<span>  opengwas_jwt <span class="op">=</span> <span class="fu"><a href="get_opengwas_jwt.html">get_opengwas_jwt</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  opengwas_jwt <span class="op">=</span> <span class="fu"><a href="get_opengwas_jwt.html">get_opengwas_jwt</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  assocs_per_request <span class="op">=</span> <span class="fl">64</span>,</span>
+<span>  max_ids_per_request <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -115,6 +118,18 @@ with European MAF &gt; 0.01.</p>
 
 <dt id="arg-opengwas-jwt">opengwas_jwt<a class="anchor" aria-label="anchor" href="#arg-opengwas-jwt"></a></dt>
 <dd><p>Used to authenticate protected endpoints. Login to <a href="https://api.opengwas.io" class="external-link">https://api.opengwas.io</a> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.</p></dd>
+
+
+<dt id="arg-assocs-per-request">assocs_per_request<a class="anchor" aria-label="anchor" href="#arg-assocs-per-request"></a></dt>
+<dd><p>Number of associations to request per API call. Default=64 to avoid query being rejected by the API.</p></dd>
+
+
+<dt id="arg-max-ids-per-request">max_ids_per_request<a class="anchor" aria-label="anchor" href="#arg-max-ids-per-request"></a></dt>
+<dd><p>Maximum number of IDs to query per API call. Default=10 to avoid timeouts.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Unused, for extensibility</p></dd>
 
 </dl></div>
     <div class="section level2">

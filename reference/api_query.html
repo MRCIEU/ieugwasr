@@ -9,7 +9,7 @@ This is a generic way to access them."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">ieugwasr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +42,7 @@ This is a generic way to access them."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Wrapper for sending queries and payloads to API</h1>
-      <small class="dont-index">Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/v1.0.4/R/query.R" class="external-link"><code>R/query.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/master/R/query.R" class="external-link"><code>R/query.R</code></a></small>
       <div class="d-none name"><code>api_query.Rd</code></div>
     </div>
 
@@ -61,7 +61,8 @@ This is a generic way to access them.</p>
 <span>  silent <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  encode <span class="op">=</span> <span class="st">"json"</span>,</span>
 <span>  timeout <span class="op">=</span> <span class="fl">300</span>,</span>
-<span>  override_429 <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  override_429 <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  x_api_source <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"ieugwasr/"</span>, <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"ieugwasr"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -100,6 +101,10 @@ simplify the query first.</p></dd>
 
 <dt id="arg-override-">override_429<a class="anchor" aria-label="anchor" href="#arg-override-"></a></dt>
 <dd><p>Default=<code>FALSE</code>. If allowance is exceeded then the query will error before submitting a request to avoid getting blocked. If you are sure you want to submit the request then set this to TRUE.</p></dd>
+
+
+<dt id="arg-x-api-source">x_api_source<a class="anchor" aria-label="anchor" href="#arg-x-api-source"></a></dt>
+<dd><p>Default = <code>paste0("ieugwasr/", utils::packageVersion("ieugwasr"))</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

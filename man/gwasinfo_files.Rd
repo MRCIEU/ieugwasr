@@ -4,12 +4,14 @@
 \alias{gwasinfo_files}
 \title{Get list of download URLs for each file associated with a dataset through API}
 \usage{
-gwasinfo_files(id, opengwas_jwt = get_opengwas_jwt())
+gwasinfo_files(id, opengwas_jwt = get_opengwas_jwt(), ...)
 }
 \arguments{
 \item{id}{List of OpenGWAS IDs to retrieve.}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a JWT. Provide the JWT string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+
+\item{...}{Unused, for extensibility}
 }
 \value{
 Dataframe of details for requested studies

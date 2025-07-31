@@ -4,12 +4,14 @@
 \alias{editcheck}
 \title{Check datasets that are in process of being uploaded}
 \usage{
-editcheck(id, opengwas_jwt = get_opengwas_jwt())
+editcheck(id, opengwas_jwt = get_opengwas_jwt(), ...)
 }
 \arguments{
 \item{id}{ID}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+
+\item{...}{Unused, for extensibility}
 }
 \value{
 Dataframe

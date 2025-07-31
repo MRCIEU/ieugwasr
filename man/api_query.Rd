@@ -12,7 +12,8 @@ api_query(
   silent = TRUE,
   encode = "json",
   timeout = 300,
-  override_429 = FALSE
+  override_429 = FALSE,
+  x_api_source = paste0("ieugwasr/", utils::packageVersion("ieugwasr"))
 )
 }
 \arguments{
@@ -32,6 +33,8 @@ api_query(
 simplify the query first.}
 
 \item{override_429}{Default=\code{FALSE}. If allowance is exceeded then the query will error before submitting a request to avoid getting blocked. If you are sure you want to submit the request then set this to TRUE.}
+
+\item{x_api_source}{Default = \code{paste0("ieugwasr/", utils::packageVersion("ieugwasr"))}.}
 }
 \value{
 httr response object

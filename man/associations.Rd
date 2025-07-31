@@ -12,7 +12,10 @@ associations(
   align_alleles = 1,
   palindromes = 1,
   maf_threshold = 0.3,
-  opengwas_jwt = get_opengwas_jwt()
+  opengwas_jwt = get_opengwas_jwt(),
+  assocs_per_request = 64,
+  max_ids_per_request = 10,
+  ...
 )
 }
 \arguments{
@@ -32,6 +35,12 @@ associations(
 \item{maf_threshold}{MAF threshold to try to infer palindromic SNPs. Default = \code{0.3}.}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+
+\item{assocs_per_request}{Number of associations to request per API call. Default=64 to avoid query being rejected by the API.}
+
+\item{max_ids_per_request}{Maximum number of IDs to query per API call. Default=10 to avoid timeouts.}
+
+\item{...}{Unused, for extensibility}
 }
 \value{
 Dataframe

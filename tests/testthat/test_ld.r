@@ -37,7 +37,7 @@ test_that("ld matrix", {
 test_that("multiple", {
   ab <- try(tophits(c("ieu-a-2", "ieu-a-1001")))
   if (inherits(ab, c("try-error", "response"))) skip("Server issues")
-  ab2 <- try(ld_clump(ab))
+  expect_warning(ab2 <- ld_clump(ab))
   if (inherits(ab2, c("try-error", "response"))) skip("Server issues")
 	expect_equal(
 		length(unique(ab2$id)), length(unique(ab$id))

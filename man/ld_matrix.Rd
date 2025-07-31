@@ -10,7 +10,8 @@ ld_matrix(
   pop = "EUR",
   opengwas_jwt = get_opengwas_jwt(),
   bfile = NULL,
-  plink_bin = NULL
+  plink_bin = NULL,
+  ...
 )
 }
 \arguments{
@@ -29,6 +30,8 @@ panel with a slightly different set of markers}
 
 \item{plink_bin}{If \code{NULL} and bfile is not \code{NULL} then will detect packaged
 plink binary for specific OS. Otherwise specify path to plink binary. Default = \code{NULL}}
+
+\item{...}{Additional arguments passed to \code{ld_matrix_api()}.}
 }
 \value{
 Matrix of LD r values

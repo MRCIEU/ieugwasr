@@ -10,7 +10,8 @@ ld_clump_api(
   clump_r2 = 0.1,
   clump_p,
   pop = "EUR",
-  opengwas_jwt = get_opengwas_jwt()
+  opengwas_jwt = get_opengwas_jwt(),
+  ...
 )
 }
 \arguments{
@@ -27,6 +28,8 @@ If \code{id} is present then clumping will be done per unique id.}
 Options are \code{"EUR"}, \code{"SAS"}, \code{"EAS"}, \code{"AFR"}, \code{"AMR"}}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+
+\item{...}{Additional arguments passed to \code{api_query()}.}
 }
 \value{
 Data frame of only independent variants

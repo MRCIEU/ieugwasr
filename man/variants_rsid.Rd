@@ -4,12 +4,14 @@
 \alias{variants_rsid}
 \title{Obtain information about rsid}
 \usage{
-variants_rsid(rsid, opengwas_jwt = get_opengwas_jwt())
+variants_rsid(rsid, opengwas_jwt = get_opengwas_jwt(), ...)
 }
 \arguments{
 \item{rsid}{Vector of rsids}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+
+\item{...}{Additional arguments passed to \code{api_query()}.}
 }
 \value{
 data frame

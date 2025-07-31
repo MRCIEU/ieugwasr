@@ -12,7 +12,8 @@ tophits(
   kb = 10000,
   pop = "EUR",
   force_server = FALSE,
-  opengwas_jwt = get_opengwas_jwt()
+  opengwas_jwt = get_opengwas_jwt(),
+  ...
 )
 }
 \arguments{
@@ -35,6 +36,8 @@ using only SNPs with MAF > 0.01 in the European samples in 1000 genomes.
 If force_server = \code{TRUE} then will recompute using server side LD reference panel.}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+
+\item{...}{Unused, for extensibility}
 }
 \value{
 Dataframe

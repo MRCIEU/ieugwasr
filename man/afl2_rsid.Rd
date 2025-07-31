@@ -4,7 +4,7 @@
 \alias{afl2_rsid}
 \title{Look up allele frequencies and LD scores for 1000 genomes populations by rsid}
 \usage{
-afl2_rsid(rsid, reference = "1000g", opengwas_jwt = get_opengwas_jwt())
+afl2_rsid(rsid, reference = "1000g", opengwas_jwt = get_opengwas_jwt(), ...)
 }
 \arguments{
 \item{rsid}{Vector of rsids}
@@ -12,6 +12,8 @@ afl2_rsid(rsid, reference = "1000g", opengwas_jwt = get_opengwas_jwt())
 \item{reference}{Default=\code{"1000g"}}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+
+\item{...}{Additional arguments passed to \code{api_query()}.}
 }
 \value{
 Data frame containing ancestry specific LD scores and allele frequencies for each variant

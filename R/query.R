@@ -312,6 +312,7 @@ batches <- function(opengwas_jwt=get_opengwas_jwt(), ...)
 	api_query('batches', opengwas_jwt=opengwas_jwt, override_429=TRUE, ...) %>% get_query_content()
 }
 
+
 #' Query specific variants from specific GWAS
 #'
 #' Every rsid is searched for against each requested GWAS id. To get a list of 
@@ -331,21 +332,41 @@ batches <- function(opengwas_jwt=get_opengwas_jwt(), ...)
 #' @param palindromes Allow palindromic SNPs (if `proxies = 1`). `1` = yes (default), `0` = no
 #' @param maf_threshold MAF threshold to try to infer palindromic SNPs. Default = `0.3`.
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param assocs_per_request Number of associations to request per API call. Default=64 to avoid query being rejected by the API.
+#' @param max_ids_per_request Maximum number of IDs to query per API call. Default=10 to avoid timeouts.
 #' @param ... Unused, for extensibility
 #'
 #' @export
 #' @return Dataframe
-associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, opengwas_jwt=get_opengwas_jwt(), ...) {
+associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, opengwas_jwt=get_opengwas_jwt(), assocs_per_request=64, max_ids_per_request=10, ...) {
 	id <- legacy_ids(id)
-	out <- api_query("associations", query=list(
-		variant=variants,
-		id=id,
-		proxies=proxies,
-		r2=r2,
-		align_alleles=align_alleles,
-		palindromes=palindromes,
-		maf_threshold=maf_threshold
-	), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
+
+
+	id_chunks <- split(id, ceiling(seq_along(id) / max_ids_per_request))
+
+	max_chunk_size <- max(sapply(id_chunks, length))
+	max_variants_per_request <- floor(assocs_per_request / max_chunk_size)
+	max_variants_per_request <- ceiling(min(max_variants_per_request, length(variants)))
+	var_chunks <- split(variants, ceiling(seq_along(variants) / max_variants_per_request))
+	
+	out <- lapply(1:length(id_chunks), function(chunk_id) {
+		message("Querying id chunk ", chunk_id, " of ", length(id_chunks))
+		lapply(1:length(var_chunks), function(chunk_variant) {
+			variants <- var_chunks[[chunk_variant]]
+			message("Querying variant chunk ", chunk_variant, " of ", length(var_chunks))			
+		
+			out <- api_query("associations", query=list(
+				variant=var_chunks[[chunk_variant]],
+				id=id_chunks[[chunk_id]],
+				proxies=proxies,
+				r2=r2,
+				align_alleles=align_alleles,
+				palindromes=palindromes,
+				maf_threshold=maf_threshold
+			), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
+		}) %>% dplyr::bind_rows()
+	}) %>%
+	dplyr::bind_rows()
 
 	if(inherits(out, "response"))
 	{
@@ -355,7 +376,7 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 	} else {
 		return(dplyr::tibble())
 	}
-	
+
 	return(out)
 }
 

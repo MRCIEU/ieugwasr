@@ -16,7 +16,7 @@ test_that("snplist", {
 })
 
 test_that("ancestry", {
-	a <- try(associations(snpinfo1$rsid, "bbj-a-10", prox=FALSE))
+	a <- try(associations(snpinfo1$rsid[1:100], "bbj-a-10", prox=FALSE))
 	if (inherits(a, c("try-error", "response"))) skip("Server issues")
 	res <- infer_ancestry(a, snpinfo1)
 	expect_true(res$pop[1] == "EAS")

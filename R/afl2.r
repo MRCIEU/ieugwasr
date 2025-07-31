@@ -8,14 +8,15 @@
 #' @param variantlist Choose pre-defined list. `"reduced"` = ~20k SNPs that are 
 #' common in all super populations (default). `"hapmap3"` = ~1.3 million hm3 SNPs
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param ... Additional arguments passed to `api_query()`.
 #'
 #' @export
 #' @return Data frame containing ancestry specific LD scores and allele frequencies for each variant
-afl2_list <- function(variantlist="reduced", opengwas_jwt=get_opengwas_jwt())
+afl2_list <- function(variantlist="reduced", opengwas_jwt=get_opengwas_jwt(), ...)
 {
 	if(variantlist == "reduced")
 	{
-		api_query("variants/afl2/snplist", opengwas_jwt=opengwas_jwt) %>% 
+		api_query("variants/afl2/snplist", opengwas_jwt=opengwas_jwt, ...) %>% 
 			get_query_content() %>%
 			dplyr::as_tibble() %>%
 			return()
@@ -35,12 +36,13 @@ afl2_list <- function(variantlist="reduced", opengwas_jwt=get_opengwas_jwt())
 #' @param rsid Vector of rsids
 #' @param reference Default=`"1000g"`
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param ... Additional arguments passed to `api_query()`.
 #'
 #' @export
 #' @return Data frame containing ancestry specific LD scores and allele frequencies for each variant
-afl2_rsid <- function(rsid, reference="1000g", opengwas_jwt=get_opengwas_jwt())
+afl2_rsid <- function(rsid, reference="1000g", opengwas_jwt=get_opengwas_jwt(), ...)
 {
-	out <- api_query("variants/afl2", list(rsid=rsid), opengwas_jwt=opengwas_jwt) %>% get_query_content()
+	out <- api_query("variants/afl2", list(rsid=rsid), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
 	if(inherits(out, "response"))
 	{
 		return(out)
@@ -57,12 +59,13 @@ afl2_rsid <- function(rsid, reference="1000g", opengwas_jwt=get_opengwas_jwt())
 #' Also allows ranges e.g `"7:105561135-105563135"`
 #' @param reference Default=`"1000g"`
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param ... Additional arguments passed to `api_query()`.
 #'
 #' @export
 #' @return Data frame containing ancestry specific LD scores and allele frequencies for each variant
-afl2_chrpos <- function(chrpos, reference="1000g", opengwas_jwt=get_opengwas_jwt())
+afl2_chrpos <- function(chrpos, reference="1000g", opengwas_jwt=get_opengwas_jwt(), ...)
 {
-	out <- api_query("variants/afl2", list(chrpos=chrpos), opengwas_jwt=opengwas_jwt) %>% get_query_content()
+	out <- api_query("variants/afl2", list(chrpos=chrpos), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
 	if(inherits(out, "response"))
 	{
 		return(out)
@@ -83,14 +86,15 @@ afl2_chrpos <- function(chrpos, reference="1000g", opengwas_jwt=get_opengwas_jwt
 #' @param snpinfo Output from [`afl2_list`], [`afl2_rsid`] or [`afl2_chrpos`]. 
 #' If `NULL` then [`afl2_list()`] is used by default
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param ... Additional arguments passed to `afl2_list()`
 #'
 #' @export
 #' @return data frame ordered by most likely ancestry, each row represents a super population and cor column represents the correlation between the GWAS dataset and the 1000 genomes super population allele frequencies
-infer_ancestry <- function(d, snpinfo=NULL, opengwas_jwt=get_opengwas_jwt())
+infer_ancestry <- function(d, snpinfo=NULL, opengwas_jwt=get_opengwas_jwt(), ...)
 {
 	if(is.null(snpinfo))
 	{
-		snpinfo <- afl2_list(opengwas_jwt=opengwas_jwt)
+		snpinfo <- afl2_list(opengwas_jwt=opengwas_jwt, ...)
 	}
 	snpinfo <- snpinfo %>%
 		dplyr::inner_join(., d, by="rsid")

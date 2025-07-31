@@ -4,12 +4,14 @@
 \alias{variants_to_rsid}
 \title{Convert mixed array of rsid and chrpos to list of rsid}
 \usage{
-variants_to_rsid(variants, opengwas_jwt = get_opengwas_jwt())
+variants_to_rsid(variants, opengwas_jwt = get_opengwas_jwt(), ...)
 }
 \arguments{
 \item{variants}{Array of variants e.g. \code{c("rs234", "7:105561135-105563135")}}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+
+\item{...}{Additional arguments passed to API.}
 }
 \value{
 list of rsids

@@ -30,10 +30,11 @@
 #' @param bfile If this is provided then will use the API. Default = `NULL`
 #' @param plink_bin If `NULL` and bfile is not `NULL` then will detect packaged 
 #' plink binary for specific OS. Otherwise specify path to plink binary. Default = `NULL`
+#' @param ... Additional arguments passed to `ld_matrix_api()`.
 #'
 #' @export
 #' @return Matrix of LD r values
-ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_opengwas_jwt(), bfile=NULL, plink_bin=NULL) {
+ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_opengwas_jwt(), bfile=NULL, plink_bin=NULL, ...) {
 	if(length(variants) > 500 & is.null(bfile))
 	{
 		stop("SNP list must be smaller than 500. Try running locally by providing local ld reference with bfile argument. See vignettes for a guide on how to do this.")
@@ -56,7 +57,7 @@ ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_o
 		return(ld_matrix_local(variants, bfile=bfile, plink_bin=plink_bin, with_alleles=with_alleles))
 	}
 
-	res <- api_query('ld/matrix', query = list(rsid=variants, pop=pop), opengwas_jwt=opengwas_jwt) %>% get_query_content()
+	res <- api_query('ld/matrix', query = list(rsid=variants, pop=pop), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
 
 	if(all(is.na(res))) stop("None of the requested variants were found")
 	variants2 <- res$snplist

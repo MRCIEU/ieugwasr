@@ -4,7 +4,7 @@
 \alias{infer_ancestry}
 \title{Infer ancestry of GWAS dataset by matching against 1000 genomes allele frequencies}
 \usage{
-infer_ancestry(d, snpinfo = NULL, opengwas_jwt = get_opengwas_jwt())
+infer_ancestry(d, snpinfo = NULL, opengwas_jwt = get_opengwas_jwt(), ...)
 }
 \arguments{
 \item{d}{Data frame containing at least \code{rsid} and \code{eaf} columns.
@@ -14,6 +14,8 @@ e.g. output from associations}
 If \code{NULL} then \code{\link[=afl2_list]{afl2_list()}} is used by default}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+
+\item{...}{Additional arguments passed to \code{afl2_list()}}
 }
 \value{
 data frame ordered by most likely ancestry, each row represents a super population and cor column represents the correlation between the GWAS dataset and the 1000 genomes super population allele frequencies

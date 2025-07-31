@@ -4,7 +4,13 @@
 \alias{phewas}
 \title{Perform fast phewas of a specific variants against all available GWAS datasets}
 \usage{
-phewas(variants, pval = 1e-05, batch = c(), opengwas_jwt = get_opengwas_jwt())
+phewas(
+  variants,
+  pval = 1e-05,
+  batch = c(),
+  opengwas_jwt = get_opengwas_jwt(),
+  ...
+)
 }
 \arguments{
 \item{variants}{Array of variants e.g. \code{c("rs234", "7:105561135-105563135")}}
@@ -14,6 +20,8 @@ phewas(variants, pval = 1e-05, batch = c(), opengwas_jwt = get_opengwas_jwt())
 \item{batch}{Vector of batch IDs to search across. If \code{c()} (default) then returns all batches}
 
 \item{opengwas_jwt}{Used to authenticate protected endpoints. Login to \url{https://api.opengwas.io} to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.}
+
+\item{...}{Unused, for extensibility}
 }
 \value{
 Dataframe

@@ -12,11 +12,12 @@
 #' @param timeout Default = `300`, avoid increasing this, preferentially 
 #' simplify the query first.
 #' @param override_429 Default=`FALSE`. If allowance is exceeded then the query will error before submitting a request to avoid getting blocked. If you are sure you want to submit the request then set this to TRUE.
+#' @param x_api_source Default = `paste0("ieugwasr/", utils::packageVersion("ieugwasr"))`.
 #'
 #' @export
 #' @return httr response object
 api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(), 
-                      method="GET", silent=TRUE, encode="json", timeout=300, override_429=FALSE)
+                      method="GET", silent=TRUE, encode="json", timeout=300, override_429=FALSE, x_api_source=paste0("ieugwasr/", utils::packageVersion("ieugwasr")))
 {
 	# check if previous query gave 429 error, and allowance was maxed out
 	check_reset(override_429)
@@ -26,13 +27,13 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 	if(opengwas_jwt == "") {
 		headers <- httr::add_headers(
 			# 'Content-Type'='application/json; charset=UTF-8',
-			'X-Api-Source'=ifelse(is.null(options()$mrbase.environment), 'R/TwoSampleMR', 'mr-base-shiny'),
+			'X-Api-Source'=x_api_source,
 			'X-TEST-MODE-KEY'=Sys.getenv("OPENGWAS_X_TEST_MODE_KEY")
 		)
 	} else {
 		headers <- httr::add_headers(
 			# 'Content-Type'='application/json; charset=UTF-8',
-			'X-Api-Source'=ifelse(is.null(options()$mrbase.environment), 'R/TwoSampleMR', 'mr-base-shiny'),
+			'X-Api-Source'=x_api_source,
 			'X-TEST-MODE-KEY'=Sys.getenv("OPENGWAS_X_TEST_MODE_KEY"),
 			'Authorization'=paste("Bearer", opengwas_jwt)
 		)
@@ -199,11 +200,12 @@ get_query_content <- function(response)
 
 #' OpenGWAS server status
 #'
+#' @param ... Unused, for extensibility
 #' @export
 #' @return List of values regarding status
-api_status <- function()
+api_status <- function(...)
 {
-	o <- api_query('status', override_429=TRUE) %>% get_query_content
+	o <- api_query('status', override_429=TRUE, ...) %>% get_query_content
 	class(o) <- "ApiStatus"
 	return(o)
 }
@@ -224,18 +226,19 @@ print.ApiStatus <- function(x, ...)
 #' @param id List of OpenGWAS IDs to retrieve. If `NULL` (default) retrieves all 
 #' available datasets
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param ... Unused, for extensibility
 #'
 #' @export
 #' @return Dataframe of details for all available studies
-gwasinfo <- function(id=NULL, opengwas_jwt=get_opengwas_jwt())
+gwasinfo <- function(id=NULL, opengwas_jwt=get_opengwas_jwt(), ...)
 {
 	id <- legacy_ids(id)
 	if(!is.null(id))
 	{
 		stopifnot(is.vector(id))
-		out <- api_query('gwasinfo', query = list(id=id), opengwas_jwt=opengwas_jwt) %>% get_query_content()
+		out <- api_query('gwasinfo', query = list(id=id), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
 	} else {
-		out <- api_query('gwasinfo', opengwas_jwt=opengwas_jwt) %>% get_query_content()
+		out <- api_query('gwasinfo', opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
 	}
 	if(length(out) == 0)
 	{
@@ -268,14 +271,15 @@ print.GwasInfo <- function(x, ...)
 #'
 #' @param id List of OpenGWAS IDs to retrieve.
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a JWT. Provide the JWT string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param ... Unused, for extensibility
 #'
 #' @export
 #' @return Dataframe of details for requested studies
-gwasinfo_files <- function(id, opengwas_jwt=get_opengwas_jwt()) {
+gwasinfo_files <- function(id, opengwas_jwt=get_opengwas_jwt(), ...) {
   if (is.null(id)) stop("List of study ids must be provided.")
   id <- legacy_ids(id)
   stopifnot(is.vector(id))
-  out <- api_query('gwasinfo/files', query = list(id=id), opengwas_jwt=opengwas_jwt) %>% get_query_content()
+  out <- api_query('gwasinfo/files', query = list(id=id), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
   if(length(out) == 0) {
     return(dplyr::tibble())
   }
@@ -299,12 +303,13 @@ batch_from_id <- function(id)
 #' Get list of data batches in IEU OpenGWAS database
 #'
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param ... Unused, for extensibility
 #'
 #' @export
 #' @return data frame
-batches <- function(opengwas_jwt=get_opengwas_jwt())
+batches <- function(opengwas_jwt=get_opengwas_jwt(), ...)
 {
-	api_query('batches', opengwas_jwt=opengwas_jwt, override_429=TRUE) %>% get_query_content()
+	api_query('batches', opengwas_jwt=opengwas_jwt, override_429=TRUE, ...) %>% get_query_content()
 }
 
 #' Query specific variants from specific GWAS
@@ -326,10 +331,11 @@ batches <- function(opengwas_jwt=get_opengwas_jwt())
 #' @param palindromes Allow palindromic SNPs (if `proxies = 1`). `1` = yes (default), `0` = no
 #' @param maf_threshold MAF threshold to try to infer palindromic SNPs. Default = `0.3`.
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param ... Unused, for extensibility
 #'
 #' @export
 #' @return Dataframe
-associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, opengwas_jwt=get_opengwas_jwt()) {
+associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palindromes=1, maf_threshold = 0.3, opengwas_jwt=get_opengwas_jwt(), ...) {
 	id <- legacy_ids(id)
 	out <- api_query("associations", query=list(
 		variant=variants,
@@ -339,7 +345,7 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 		align_alleles=align_alleles,
 		palindromes=palindromes,
 		maf_threshold=maf_threshold
-	), opengwas_jwt=opengwas_jwt) %>% get_query_content()
+	), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
 
 	if(inherits(out, "response"))
 	{
@@ -357,10 +363,11 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 #'
 #' @param d Output from [`associations`]
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param ... Unused, for extensibility
 #'
 #' @export
 #' @return Updated version of d
-fill_n <- function(d, opengwas_jwt=get_opengwas_jwt())
+fill_n <- function(d, opengwas_jwt=get_opengwas_jwt(), ...)
 {
 	id <- d$id[1]
 	if(! "n" %in% names(d))
@@ -370,7 +377,7 @@ fill_n <- function(d, opengwas_jwt=get_opengwas_jwt())
 	d$n <- as.numeric(d$n)
 	if(any(is.na(d$n)))
 	{
-		info <- gwasinfo(id, opengwas_jwt=opengwas_jwt)
+		info <- gwasinfo(id, opengwas_jwt=opengwas_jwt, ...)
 		if(!is.na(info$sample_size))
 		{
 			d$n <- info$sample_size
@@ -401,16 +408,17 @@ fix_n <- function(d)
 #' @param pval p-value threshold. Default = `0.00001`
 #' @param batch Vector of batch IDs to search across. If `c()` (default) then returns all batches
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param ... Unused, for extensibility
 #'
 #' @export
 #' @return Dataframe
-phewas <- function(variants, pval = 0.00001, batch=c(), opengwas_jwt=get_opengwas_jwt())
+phewas <- function(variants, pval = 0.00001, batch=c(), opengwas_jwt=get_opengwas_jwt(), ...)
 {
 	out <- api_query("phewas", query=list(
 		variant=variants,
 		pval=pval,
 		index_list=batch
-	), opengwas_jwt=opengwas_jwt) %>% get_query_content()
+	), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
 	
 	if(!inherits(out, "response")) {
 		out <- out %>% dplyr::as_tibble() %>% fix_n()
@@ -443,11 +451,12 @@ phewas <- function(variants, pval = 0.00001, batch=c(), opengwas_jwt=get_opengwa
 #' @param pop Super-population to use as reference panel. Default = `"EUR"`. 
 #' Options are `"EUR"`, `"SAS"`, `"EAS"`, `"AFR"`, `"AMR"`
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param ... Unused, for extensibility
 #'
 #' @export
 #' @return Dataframe
 tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR", 
-                    force_server = FALSE, opengwas_jwt=get_opengwas_jwt()) {
+                    force_server = FALSE, opengwas_jwt=get_opengwas_jwt(), ...) {
 	id <- legacy_ids(id)
 	if(clump == 1 & r2 == 0.001 & kb == 10000 & pval == 5e-8)
 	{
@@ -467,7 +476,7 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 		r2=r2,
 		kb=kb,
 		pop=pop
-	), opengwas_jwt=opengwas_jwt) %>% get_query_content()
+	), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
 	if(inherits(out, "response"))
 	{
 		return(out)
@@ -485,14 +494,15 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 #'
 #' @param id ID
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
+#' @param ... Unused, for extensibility
 #'
 #' @export
 #' @return Dataframe
-editcheck <- function(id, opengwas_jwt=get_opengwas_jwt())
+editcheck <- function(id, opengwas_jwt=get_opengwas_jwt(), ...)
 {
 	api <- options()[["ieugwasr_api"]]
 	select_api("private")
-	out <- api_query(paste0("edit/check/", id), opengwas_jwt=opengwas_jwt) %>%
+	out <- api_query(paste0("edit/check/", id), opengwas_jwt=opengwas_jwt, ...) %>%
 		get_query_content()
 	options(ieugwasr_api=api)
 	return(out)

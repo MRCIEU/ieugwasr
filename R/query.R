@@ -124,7 +124,6 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 		message("Failed to retrieve results from server. See error status message in the returned object and contact the developers if the problem persists.")
 		return(r)
 	}
-
 	return(r)
 }
 
@@ -191,10 +190,8 @@ get_query_content <- function(response)
 		}
 		return(o)
 	} else {
-		return(response)
-		# stop("error code: ", httr::status_code(response), "\n  message: ", jsonlite::fromJSON(httr::content(response, "text", encoding='UTF-8')))
+		stop("\nStatus code from OpenGWAS API: ", httr::status_code(response), "\n\nMessage: ", jsonlite::fromJSON(httr::content(response, "text", encoding='UTF-8')))
 	}
-	return(NULL)
 }
 
 

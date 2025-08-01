@@ -1,3 +1,9 @@
+# ieugwasr 1.1.0
+
+* Improved error handling
+* Managing new API limits on associations endpoint
+* Updated header info passed to API
+
 # ieugwasr 1.0.4
 
 * Improved warning messages in `ld_clump()` (thanks @DarwinAwardWinner).

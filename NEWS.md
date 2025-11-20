@@ -1,3 +1,9 @@
+# ieugwasr 1.1.0.9000
+
+* Update some GitHub Actions workflows, including no longer testing on R before R 4.1 due to the new testthat requirements
+* Tweak an API test
+* Bump version of roxygen2
+
 # ieugwasr 1.1.0
 
 * Improved error handling

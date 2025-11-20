@@ -17,11 +17,17 @@ test_that("get_query_content", {
 test_that("gwasinfo", 
 {
   skip_on_ci()
+  
+  a <- try(api_query('gwasinfo/ieu-a-2'))
+  if (inherits(a, c("try-error", "response"))) skip("Server issues")
 	expect_true(
-		nrow(api_query('gwasinfo/ieu-a-2') %>% get_query_content()) == 1
+		nrow(a %>% get_query_content()) == 1
 	)
+	
+	a <- try(api_query('gwasinfo', query=list(id=c("ieu-a-2","ieu-a-1001"))))
+	if (inherits(a, c("try-error", "response"))) skip("Server issues")
 	expect_equal(
-		nrow(api_query('gwasinfo', query=list(id=c("ieu-a-2","ieu-a-1001"))) %>% get_query_content()), 
+		nrow(a %>% get_query_content()), 
 		2
 	)
 	expect_gt(

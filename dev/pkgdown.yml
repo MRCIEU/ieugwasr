@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   guide: guide.html
   local_ld: local_ld.html
-last_built: 2025-11-20T07:32Z
+last_built: 2025-11-28T14:57Z
 urls:
   reference: https://mrcieu.github.io/ieugwasr/reference
   article: https://mrcieu.github.io/ieugwasr/articles

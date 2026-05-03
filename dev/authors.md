@@ -16,14 +16,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/MRCIEU/ieugwasr/blob/master/DESCRIPTION)
 
-Hemani G, Elsworth B, Palmer T, Rasteiro R (2025). *ieugwasr: Interface
+Hemani G, Elsworth B, Palmer T, Rasteiro R (2026). *ieugwasr: Interface
 to the 'OpenGWAS' Database API*. R package version 1.1.0.9000,
 <https://github.com/MRCIEU/ieugwasr>.
 
     @Manual{,
       title = {ieugwasr: Interface to the 'OpenGWAS' Database API},
       author = {Gibran Hemani and Ben Elsworth and Tom Palmer and Rita Rasteiro},
-      year = {2025},
+      year = {2026},
       note = {R package version 1.1.0.9000},
       url = {https://github.com/MRCIEU/ieugwasr},
     }

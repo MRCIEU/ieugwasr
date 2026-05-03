@@ -1,9 +1,9 @@
 # Perform fast queries against a massive database of complete GWAS summary data
 
-The [OpenGWAS database](https://gwas.mrcieu.ac.uk/) comprises over
-50,000 curated, QC’d and harmonised complete GWAS summary datasets and
-can be queried using an API. See [here](https://api.opengwas.io/api/)
-for documentation on the API itself. This R package is a wrapper to make
+The [OpenGWAS database](https://opengwas.io/) comprises over 50,000
+curated, QC’d and harmonised complete GWAS summary datasets and can be
+queried using an API. See [here](https://api.opengwas.io/api/) for
+documentation on the API itself. This R package is a wrapper to make
 generic calls to the API, plus convenience functions for specific
 queries.
 
@@ -71,6 +71,7 @@ is using the `api_query` function. There are two types of endpoints -
   rsids in some studies, e.g.
 
   ``` r
+
   api_query("associations/ieu-a-2,ieu-a-7/rs234,rs123")
   ```
 
@@ -79,6 +80,7 @@ is using the `api_query` function. There are two types of endpoints -
   This is useful for long lists of rsids being queried, for example
 
   ``` r
+
   api_query("associations", query = list(rsid = c("rs234", "rs123"), id = c("ieu-a-2", "ieu-a-7")))
   ```
 
@@ -89,6 +91,7 @@ output to `api_query` more convenient.
 ## Get API status
 
 ``` r
+
 library(ieugwasr)
 api_status()
 ```
@@ -96,12 +99,14 @@ api_status()
 ## Get list of all available studies
 
 ``` r
+
 gwasinfo()
 ```
 
 ## Get list of a specific study
 
 ``` r
+
 gwasinfo("ieu-a-2")
 ```
 
@@ -110,6 +115,7 @@ gwasinfo("ieu-a-2")
 Provide a list of variants to be obtained from a list of studies:
 
 ``` r
+
 associations(variants = c("rs123", "7:105561135"), id = c("ieu-a-2", "ieu-a-7"))
 ```
 
@@ -123,6 +129,7 @@ values will be automatically converted. A range query can be done using
 e.g.
 
 ``` r
+
 associations(variants = "7:105561135-105563135", id = c("ieu-a-2"), proxies = 0)
 ```
 
@@ -131,6 +138,7 @@ associations(variants = "7:105561135-105563135", id = c("ieu-a-2"), proxies = 0)
 The tophits can be obtained using
 
 ``` r
+
 tophits(id = "ieu-a-2")
 ```
 
@@ -143,21 +151,24 @@ Lookup association of specified variants across every study, returning
 at a particular threshold. Note that no LD proxy lookups are made here.
 
 ``` r
+
 phewas(variants = "rs1205", pval = 1e-5)
 ```
 
 PheWAS can also be performed in only specific subsets of the data. The
 datasets in the OpenGWAS database are organised by batch, you can see
-info about it here: <https://gwas.mrcieu.ac.uk/datasets/> or get a list
-of batches and their descriptions using:
+info about it here: <https://opengwas.io/datasets/> or get a list of
+batches and their descriptions using:
 
 ``` r
+
 batches()
 ```
 
 You can perform PheWAS in only specified batches using:
 
 ``` r
+
 phewas(variants = "rs1205", pval = 1e-5, batch = c('ieu-a', 'ukb-b'))
 ```
 
@@ -171,6 +182,7 @@ The API has a wrapper around [plink version
 clumping with an LD reference panel from 1000 genomes reference data.
 
 ``` r
+
 a <- tophits(id = "ieu-a-2", clump = 0)
 b <- ld_clump(
     dplyr::tibble(rsid = a$rsid, pval = a$p, id = a$id)
@@ -186,6 +198,7 @@ Note that you can perform the same operation locally if you provide a
 path to plink and a bed/bim/fam LD reference dataset. e.g.
 
 ``` r
+
 ld_clump(
     dplyr::tibble(rsid = a$rsid, pval = a$p, id = a$id),
     plink_bin = "/path/to/plink",
@@ -201,6 +214,7 @@ operations](https://mrcieu.github.io/ieugwasr/dev/articles/local_ld.md)
 Similarly, a matrix of LD r values can be generated using
 
 ``` r
+
 ld_matrix(b$variant)
 ```
 
@@ -209,6 +223,7 @@ can use, instead, local plink and LD reference data in the same manner
 as in the `ld_clump` function, e.g.
 
 ``` r
+
 ld_matrix(b$variant, plink_bin = "/path/to/plink", bfile = "/path/to/reference_data")
 ```
 
@@ -241,6 +256,7 @@ The `chrpos` argument can accept the following
 For example
 
 ``` r
+
 a <- variants_chrpos(c("7:105561135-105563135", "10:44865737"))
 ```
 
@@ -248,6 +264,7 @@ This provides a table with dbSNP variant IDs, gene info, and various
 other metadata. Similar data can be obtained from searching by rsid
 
 ``` r
+
 b <- variants_rsid(c("rs234", "rs333"))
 ```
 
@@ -256,6 +273,7 @@ found. Provide a ensembl or entrez gene ID (e.g. ENSG00000123374 or
 1017) to the following:
 
 ``` r
+
 c <- variants_gene("ENSG00000123374")
 ```
 
@@ -265,12 +283,11 @@ Here is an example of how to obtain summary data for some datasets for a
 gene region. As an example, we’ll extract CDK2 (HGNC number 1017) from a
 BMI dataset (ieu-a-2)
 
-Use the
-[mygene](https://bioconductor.org/packages/release/bioc/html/mygene.html)
-bioconductor package to query the [mygene.info](https://mygene.info/)
-API.
+Use the [mygene](https://bioconductor.org/packages/mygene) bioconductor
+package to query the [mygene.info](https://docs.mygene.info) API.
 
 ``` r
+
 library(mygene)
 a <- mygene::getGene("1017", fields = "genomic_pos_hg19")
 r <- paste0(a[[1]]$genomic_pos_hg19$chr, ":", a[[1]]$genomic_pos_hg19$start, "-", a[[1]]$genomic_pos_hg19$end)
@@ -288,12 +305,14 @@ one super population. You can access this info in different ways
 1.  Look up a particular set of rsids
 
     ``` r
+
     afl2_rsid(c("rs234", "rs123"))
     ```
 
 2.  Look up a set of positions or regions
 
     ``` r
+
     afl2_chrpos("1:100000-900000")
     ```
 
@@ -301,12 +320,14 @@ one super population. You can access this info in different ways
     all super populations, and evenly spaced across the genome
 
     ``` r
+
     afl2_list()
     ```
 
 4.  Extract annotations for a 1.3 million HapMap3 variants
 
     ``` r
+
     afl2_list("hapmap3")
     ```
 
@@ -314,6 +335,7 @@ one super population. You can access this info in different ways
     frequencies with different super population reference frequencies
 
     ``` r
+
     snplist <- afl2_list()
     eur_example <- associations(snplist$rsid, "ieu-a-2")
     infer_ancestry(eur_example, snplist)

@@ -21,6 +21,9 @@ Useful links:
 
 Authors:
 
+- Gibran Hemani <g.hemani@bristol.ac.uk>
+  ([ORCID](https://orcid.org/0000-0003-0920-1055)) \[copyright holder\]
+
 - Ben Elsworth <Ben.Elsworth@bristol.ac.uk>
   ([ORCID](https://orcid.org/0000-0001-7328-4233))
 

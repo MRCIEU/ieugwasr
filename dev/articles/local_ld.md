@@ -14,6 +14,7 @@ LD operations available on the OpenGWAS API
 - Looking for LD proxies
 
 ``` r
+
 library(ieugwasr)
 #> OpenGWAS updates:
 #>   Date: 2024-05-17
@@ -30,6 +31,7 @@ The API has a wrapper around [plink version
 clumping with an LD reference panel from 1000 genomes reference data.
 
 ``` r
+
 a <- tophits(id="ieu-a-2", clump = 0)
 b <- ld_clump(
     dplyr::tibble(rsid = a$rsid, pval = a$p, id = a$id)
@@ -47,6 +49,7 @@ path to plink and a bed/bim/fam LD reference dataset.
 To get a path to plink you can do the following:
 
 ``` r
+
 remotes::install_github("MRCIEU/genetics.binaRies")
 genetics.binaRies::get_plink_binary()
 ```
@@ -74,6 +77,7 @@ columns:
 to perform clumping, just do the following:
 
 ``` r
+
 ld_clump(
     dplyr::tibble(rsid = dat$rsid, pval = dat$pval, id = dat$trait_id),
     plink_bin = genetics.binaRies::get_plink_binary(),
@@ -86,6 +90,7 @@ ld_clump(
 Similarly, a matrix of LD r values can be generated using
 
 ``` r
+
 ld_matrix(b$variant)
 ```
 
@@ -94,6 +99,7 @@ can use, instead, local plink and LD reference data in the same manner
 as in the `ld_clump` function, e.g.
 
 ``` r
+
 ieugwasr::ld_matrix(
     dat$rsid,
     plink_bin = genetics.binaRies::get_plink_binary(),

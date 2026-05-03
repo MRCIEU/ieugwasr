@@ -10,3 +10,5 @@
 ^CRAN-SUBMISSION$
 ^codecov\.yml$
 ^ieugwasr_oauth$
+^\.positai$
+^\.claude$

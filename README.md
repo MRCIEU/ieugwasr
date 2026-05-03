@@ -9,7 +9,7 @@
 [![r-universe](https://mrcieu.r-universe.dev/badges/ieugwasr)](https://mrcieu.r-universe.dev/ieugwasr)
 <!-- badges: end -->
 
-The [OpenGWAS database](https://gwas.mrcieu.ac.uk/) comprises over 50,000 curated, QC'd and harmonised complete GWAS summary datasets and can be queried using an API. See [here](https://api.opengwas.io/api/) for documentation on the API itself. This R package is a wrapper to make generic calls to the API, plus convenience functions for specific queries. 
+The [OpenGWAS database](https://opengwas.io/) comprises over 50,000 curated, QC'd and harmonised complete GWAS summary datasets and can be queried using an API. See [here](https://api.opengwas.io/api/) for documentation on the API itself. This R package is a wrapper to make generic calls to the API, plus convenience functions for specific queries. 
 
 Methods currently implemented:
 

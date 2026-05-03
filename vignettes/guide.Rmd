@@ -212,7 +212,7 @@ c <- variants_gene("ENSG00000123374")
 
 Here is an example of how to obtain summary data for some datasets for a gene region. As an example, we'll extract CDK2 (HGNC number 1017) from a BMI dataset (ieu-a-2)
 
-Use the [mygene](https://bioconductor.org/packages/release/bioc/html/mygene.html) bioconductor package to query the [mygene.info](https://mygene.info/) API.
+Use the [mygene](https://bioconductor.org/packages/mygene) bioconductor package to query the [mygene.info](https://docs.mygene.info) API.
 
 
 ```r

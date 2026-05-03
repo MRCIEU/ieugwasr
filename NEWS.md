@@ -5,6 +5,7 @@
 * Bump version of roxygen2
 * Fix a typo in the documentation for `ld_clump()`
 * Bump minimum required version of R to 4.1
+* Update some URLs in the package
 
 # ieugwasr 1.1.0
 

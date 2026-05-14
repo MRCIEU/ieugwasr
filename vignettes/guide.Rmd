@@ -244,13 +244,13 @@ The OpenGWAS database contains a database of population annotations from the 100
     afl2_list()
     ```
 
-3. Extract annotations for a 1.3 million HapMap3 variants
+4. Extract annotations for a 1.3 million HapMap3 variants
 
     ```r
     afl2_list("hapmap3")
     ```
 
-4. Infer the ancestry of a particular study by comparing the allele frequencies with different super population reference frequencies
+5. Infer the ancestry of a particular study by comparing the allele frequencies with different super population reference frequencies
 
     ```r
     snplist <- afl2_list()

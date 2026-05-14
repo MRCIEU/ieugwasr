@@ -97,7 +97,7 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 }
 
 
-#' Perform clumping on the chosen variants using through API
+#' Perform clumping on the chosen variants using the API
 #'
 #' @param dat Dataframe. Must have a variant name column (`variant`) and pval column called `pval`. 
 #' If `id` is present then clumping will be done per unique id.

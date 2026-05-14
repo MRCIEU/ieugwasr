@@ -156,7 +156,7 @@ check_reset <- function(override_429=FALSE) {
 	if(! is.null(options()$ieugwasr_reset)) {
 		if(as.numeric(Sys.time()) < options()$ieugwasr_reset) {
 			rt <- as.POSIXct(options()$ieugwasr_reset)
-			msg <- paste0("You have used up your OpenGWAS allowance. Please wait until ", rt, "to submit another query. See https://api.opengwas.io/api/#allowance for more details. This check is in place to prevent your IP address from being temporarily blocked, but you can override it at your own risk by setting override_429=TRUE.")
+			msg <- paste0("You have used up your OpenGWAS allowance. Please wait until ", rt, " to submit another query. See https://api.opengwas.io/api/#allowance for more details. This check is in place to prevent your IP address from being temporarily blocked, but you can override it at your own risk by setting override_429=TRUE.")
 			if(!override_429) {
 				stop(msg)
 			} else {

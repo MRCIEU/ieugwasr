@@ -1,6 +1,6 @@
-# Perform clumping on the chosen variants using through API
+# Perform clumping on the chosen variants using the API
 
-Perform clumping on the chosen variants using through API
+Perform clumping on the chosen variants using the API
 
 ## Usage
 

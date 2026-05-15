@@ -10,6 +10,7 @@
   [`ld_clump()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_clump.md)
 - Bump minimum required version of R to 4.1
 - Update some URLs in the package
+- Fix some typos in the docs
 
 ## ieugwasr 1.1.0
 

@@ -269,7 +269,7 @@ b <- variants_rsid(c("rs234", "rs333"))
 ```
 
 And a list of variants within a particular gene region can also be
-found. Provide a ensembl or entrez gene ID (e.g. ENSG00000123374 or
+found. Provide an Ensembl or Entrez gene ID (e.g. ENSG00000123374 or
 1017) to the following:
 
 ``` r

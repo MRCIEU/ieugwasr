@@ -43,7 +43,7 @@ install.packages("ieugwasr")
 
 or install the developer version of ieugwasr from either our [MRCIEU
 r-universe](https://mrcieu.r-universe.dev/builds) or from the GitHub
-repository with, either:
+repository, either:
 
 ``` r
 
@@ -107,7 +107,7 @@ Browse the vignettes etc for information on how to use this package:
 - [`ld_clump()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_clump.md)
   : Perform LD clumping on SNP data
 - [`ld_clump_api()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_clump_api.md)
-  : Perform clumping on the chosen variants using through API
+  : Perform clumping on the chosen variants using the API
 - [`ld_clump_local()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_clump_local.md)
   : Wrapper for clump function using local plink binary and ld reference
   dataset

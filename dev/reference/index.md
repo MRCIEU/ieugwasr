@@ -45,7 +45,7 @@
 - [`ld_clump()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_clump.md)
   : Perform LD clumping on SNP data
 - [`ld_clump_api()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_clump_api.md)
-  : Perform clumping on the chosen variants using through API
+  : Perform clumping on the chosen variants using the API
 - [`ld_clump_local()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_clump_local.md)
   : Wrapper for clump function using local plink binary and ld reference
   dataset

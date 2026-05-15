@@ -43,7 +43,7 @@ install.packages("ieugwasr")
 
 or install the developer version of ieugwasr from either our [MRCIEU
 r-universe](https://mrcieu.r-universe.dev/builds) or from the GitHub
-repository with, either:
+repository, either:
 
 ``` r
 

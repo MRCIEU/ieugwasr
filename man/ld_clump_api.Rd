@@ -2,7 +2,7 @@
 % Please edit documentation in R/ld_clump.R
 \name{ld_clump_api}
 \alias{ld_clump_api}
-\title{Perform clumping on the chosen variants using through API}
+\title{Perform clumping on the chosen variants using the API}
 \usage{
 ld_clump_api(
   dat,
@@ -35,5 +35,5 @@ Options are \code{"EUR"}, \code{"SAS"}, \code{"EAS"}, \code{"AFR"}, \code{"AMR"}
 Data frame of only independent variants
 }
 \description{
-Perform clumping on the chosen variants using through API
+Perform clumping on the chosen variants using the API
 }

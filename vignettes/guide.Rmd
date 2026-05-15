@@ -202,7 +202,7 @@ This provides a table with dbSNP variant IDs, gene info, and various other metad
 b <- variants_rsid(c("rs234", "rs333"))
 ```
 
-And a list of variants within a particular gene region can also be found. Provide a ensembl or entrez gene ID (e.g. ENSG00000123374 or 1017) to the following:
+And a list of variants within a particular gene region can also be found. Provide an Ensembl or Entrez gene ID (e.g. ENSG00000123374 or 1017) to the following:
 
 ```r
 c <- variants_gene("ENSG00000123374")
@@ -244,13 +244,13 @@ The OpenGWAS database contains a database of population annotations from the 100
     afl2_list()
     ```
 
-3. Extract annotations for a 1.3 million HapMap3 variants
+4. Extract annotations for a 1.3 million HapMap3 variants
 
     ```r
     afl2_list("hapmap3")
     ```
 
-4. Infer the ancestry of a particular study by comparing the allele frequencies with different super population reference frequencies
+5. Infer the ancestry of a particular study by comparing the allele frequencies with different super population reference frequencies
 
     ```r
     snplist <- afl2_list()

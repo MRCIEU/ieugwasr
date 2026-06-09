@@ -6,7 +6,7 @@ template:
 navbar:
  structure:
     left:  [reference, articles, news]
-    right: [search, github, lightswitch]
+    right: [search, cran, github, lightswitch]
  components:
   articles:
     text: Tutorials
@@ -18,6 +18,10 @@ navbar:
   news:
     text: Changelog
     href: news/index.html
+  cran:
+    icon: fab fa-r-project
+    href: https://cran.r-project.org/package=ieugwasr
+    aria-label: View on CRAN
 
 development:
   mode: auto

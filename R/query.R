@@ -349,8 +349,7 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 	out <- lapply(1:length(id_chunks), function(chunk_id) {
 		message("Querying id chunk ", chunk_id, " of ", length(id_chunks))
 		lapply(1:length(var_chunks), function(chunk_variant) {
-			variants <- var_chunks[[chunk_variant]]
-			message("Querying variant chunk ", chunk_variant, " of ", length(var_chunks))			
+			message("Querying variant chunk ", chunk_variant, " of ", length(var_chunks))
 		
 			out <- api_query("associations", query=list(
 				variant=var_chunks[[chunk_variant]],

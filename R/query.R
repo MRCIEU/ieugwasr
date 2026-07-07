@@ -46,7 +46,7 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 		{
 			r <- try(
 				httr::DELETE(
-					paste0(options()$ieugwasr_api, path),
+					paste0(getOption("ieugwasr_api"), path),
 					headers,
 					httr::timeout(timeout)
 				),
@@ -55,7 +55,7 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 		} else if(!is.null(query)) {
 			r <- try(
 				httr::POST(
-					paste0(options()$ieugwasr_api, path),
+					paste0(getOption("ieugwasr_api"), path),
 					body = query, 
 					headers,
 					encode=encode,
@@ -66,7 +66,7 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 		} else {
 			r <- try(
 				httr::GET(
-					paste0(options()$ieugwasr_api, path),
+					paste0(getOption("ieugwasr_api"), path),
 					headers,
 					httr::timeout(timeout)
 				),
@@ -153,9 +153,9 @@ set_reset <- function(r) {
 #'
 #' @return NULL
 check_reset <- function(override_429=FALSE) {
-	if(! is.null(options()$ieugwasr_reset)) {
-		if(as.numeric(Sys.time()) < options()$ieugwasr_reset) {
-			rt <- as.POSIXct(options()$ieugwasr_reset)
+	if(! is.null(getOption("ieugwasr_reset"))) {
+		if(as.numeric(Sys.time()) < getOption("ieugwasr_reset")) {
+			rt <- as.POSIXct(getOption("ieugwasr_reset"))
 			msg <- paste0("You have used up your OpenGWAS allowance. Please wait until ", rt, " to submit another query. See https://api.opengwas.io/api/#allowance for more details. This check is in place to prevent your IP address from being temporarily blocked, but you can override it at your own risk by setting override_429=TRUE.")
 			if(!override_429) {
 				stop(msg)
@@ -521,7 +521,7 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 #' @return Dataframe
 editcheck <- function(id, opengwas_jwt=get_opengwas_jwt(), ...)
 {
-	api <- options()[["ieugwasr_api"]]
+	api <- getOption("ieugwasr_api")
 	select_api("private")
 	out <- api_query(paste0("edit/check/", id), opengwas_jwt=opengwas_jwt, ...) %>%
 		get_query_content()

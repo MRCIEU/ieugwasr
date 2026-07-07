@@ -74,7 +74,7 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 
 	ids <- unique(dat[["id"]])
 	res <- list()
-	for(i in 1:length(ids))
+	for(i in seq_along(ids))
 	{
 		x <- subset(dat, dat[["id"]] == ids[i])
 		if(nrow(x) == 1)
@@ -175,8 +175,8 @@ ld_clump_local <- function(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin)
 
 random_string <- function(n=1, len=6)
 {
-	randomString <- c(1:n)
-	for (i in 1:n)
+	randomString <- character(n)
+	for (i in seq_len(n))
 	{
 		randomString[i] <- paste(sample(c(0:9, letters, LETTERS),
 		len, replace=TRUE),

@@ -13,7 +13,7 @@
 variants_gene <- function(gene, radius=0, opengwas_jwt=get_opengwas_jwt(), ...)
 {
 	l <- list()
-	for(i in 1:length(gene))
+	for(i in seq_along(gene))
 	{
 		message("Looking up ", gene[i])
 		o <- api_query(paste0('variants/gene/', gene[i], "?radius=", format(radius, scientific=FALSE)), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()

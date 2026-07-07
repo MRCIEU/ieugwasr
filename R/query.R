@@ -346,9 +346,9 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 	max_variants_per_request <- max(1, ceiling(min(max_variants_per_request, length(variants))))
 	var_chunks <- split(variants, ceiling(seq_along(variants) / max_variants_per_request))
 	
-	out <- lapply(1:length(id_chunks), function(chunk_id) {
+	out <- lapply(seq_along(id_chunks), function(chunk_id) {
 		message("Querying id chunk ", chunk_id, " of ", length(id_chunks))
-		lapply(1:length(var_chunks), function(chunk_variant) {
+		lapply(seq_along(var_chunks), function(chunk_variant) {
 			message("Querying variant chunk ", chunk_variant, " of ", length(var_chunks))
 		
 			out <- api_query("associations", query=list(

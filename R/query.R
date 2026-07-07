@@ -181,16 +181,20 @@ check_reset <- function(override_429=FALSE) {
 #' If status code is not successful then return the actual response
 get_query_content <- function(response)
 {
-	if(httr::status_code(response) >= 200 & httr::status_code(response) < 300)
+	code <- httr::status_code(response)
+	txt <- httr::content(response, "text", encoding='UTF-8')
+	if(code >= 200 & code < 300)
 	{
-		o <- jsonlite::fromJSON(httr::content(response, "text", encoding='UTF-8'))
-		if('eaf' %in% names(o)) 
+		o <- jsonlite::fromJSON(txt)
+		if('eaf' %in% names(o))
 		{
 			o[["eaf"]] <- as.numeric(o[["eaf"]])
 		}
 		return(o)
 	} else {
-		stop("\nStatus code from OpenGWAS API: ", httr::status_code(response), "\n\nMessage: ", jsonlite::fromJSON(httr::content(response, "text", encoding='UTF-8')))
+		msg <- tryCatch(jsonlite::fromJSON(txt), error = function(e) txt)
+		if(!is.character(msg)) msg <- jsonlite::toJSON(msg, auto_unbox=TRUE)
+		stop("\nStatus code from OpenGWAS API: ", code, "\n\nMessage: ", msg)
 	}
 }
 

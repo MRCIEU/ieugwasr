@@ -396,11 +396,14 @@ fill_n <- function(d, opengwas_jwt=get_opengwas_jwt(), ...)
 	if(any(is.na(d$n)))
 	{
 		info <- gwasinfo(id, opengwas_jwt=opengwas_jwt, ...)
-		if(!is.na(info$sample_size))
+		if(nrow(info) == 0)
 		{
-			d$n <- info$sample_size
+			warning("No metadata found for id ", id, "; sample sizes left as NA")
+		} else if(!is.na(info$sample_size[1]))
+		{
+			d$n <- info$sample_size[1]
 		} else {
-			d$n <- info$ncase + info$ncontrol
+			d$n <- info$ncase[1] + info$ncontrol[1]
 		}
 	}
 	return(d)	

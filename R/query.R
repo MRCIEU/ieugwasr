@@ -343,7 +343,7 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 
 	max_chunk_size <- max(sapply(id_chunks, length))
 	max_variants_per_request <- floor(assocs_per_request / max_chunk_size)
-	max_variants_per_request <- ceiling(min(max_variants_per_request, length(variants)))
+	max_variants_per_request <- max(1, ceiling(min(max_variants_per_request, length(variants))))
 	var_chunks <- split(variants, ceiling(seq_along(variants) / max_variants_per_request))
 	
 	out <- lapply(1:length(id_chunks), function(chunk_id) {

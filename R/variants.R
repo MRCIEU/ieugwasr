@@ -13,7 +13,7 @@
 variants_gene <- function(gene, radius=0, opengwas_jwt=get_opengwas_jwt(), ...)
 {
 	l <- list()
-	for(i in 1:length(gene))
+	for(i in seq_along(gene))
 	{
 		message("Looking up ", gene[i])
 		o <- api_query(paste0('variants/gene/', gene[i], "?radius=", format(radius, scientific=FALSE)), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
@@ -66,7 +66,7 @@ variants_rsid <- function(rsid, opengwas_jwt=get_opengwas_jwt(), ...)
 #' @return Data frame
 variants_chrpos <- function(chrpos, radius=0, opengwas_jwt=get_opengwas_jwt(), ...)
 {
-	o <- api_query("variants/chrpos", list(chrpos = chrpos, radius=radius), opengwas_jwt=opengwas_jwt) %>% get_query_content() 
+	o <- api_query("variants/chrpos", list(chrpos = chrpos, radius=radius), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
 
 	if(! inherits(o, "response"))
 	{

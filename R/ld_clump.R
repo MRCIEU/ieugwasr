@@ -74,7 +74,7 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 
 	ids <- unique(dat[["id"]])
 	res <- list()
-	for(i in 1:length(ids))
+	for(i in seq_along(ids))
 	{
 		x <- subset(dat, dat[["id"]] == ids[i])
 		if(nrow(x) == 1)
@@ -109,7 +109,7 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 #' @param opengwas_jwt Used to authenticate protected endpoints. Login to <https://api.opengwas.io> to obtain a jwt. Provide the jwt string here, or store in .Renviron under the keyname OPENGWAS_JWT.
 #' @param ... Additional arguments passed to `api_query()`.
 #' @return Data frame of only independent variants
-ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.1, clump_p, pop="EUR", opengwas_jwt=get_opengwas_jwt(), ...)
+ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.001, clump_p=1, pop="EUR", opengwas_jwt=get_opengwas_jwt(), ...)
 {
 	res <- api_query('ld/clump',
 			query = list(
@@ -175,8 +175,8 @@ ld_clump_local <- function(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin)
 
 random_string <- function(n=1, len=6)
 {
-	randomString <- c(1:n)
-	for (i in 1:n)
+	randomString <- character(n)
+	for (i in seq_len(n))
 	{
 		randomString[i] <- paste(sample(c(0:9, letters, LETTERS),
 		len, replace=TRUE),

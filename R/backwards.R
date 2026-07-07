@@ -13,7 +13,7 @@ legacy_ids <- function(x)
 	)
 
 	y <- x
-	for(i in 1:nrow(changes))
+	for(i in seq_len(nrow(changes)))
 	{
 		index <- grepl(changes$old[i], x)
 		if(changes$old[i] == "\\D")

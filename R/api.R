@@ -16,7 +16,7 @@ select_api <- function(where="public", silent=FALSE)
 	)
 	if(is.null(url))
 	{
-		url <- options()$ieugwasr_api
+		url <- getOption("ieugwasr_api")
 		warning("A valid API was not selected. No change")
 	}
 

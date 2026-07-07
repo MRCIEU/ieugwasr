@@ -1,4 +1,4 @@
-# ieugwasr 1.1.0.9000
+# ieugwasr (development version)
 
 * Update some GitHub Actions workflows, including no longer testing on R before R 4.1 due to the new testthat requirements
 * Tweak an API test
@@ -7,6 +7,18 @@
 * Bump minimum required version of R to 4.1
 * Update some URLs in the package
 * Fix some typos in the docs
+* Forward `...` to `api_query()` in `variants_chrpos()`
+* Prevent divide-by-zero chunking in `associations()`
+* Handle `NULL` `opengwas_jwt` in `api_query()`
+* Close connection in `afl2_list()` hapmap3 branch
+* Harden `fill_n()` against empty or multi-row `gwasinfo()` results
+* Use `getOption()` instead of copying the full options list
+* Remove dead shadowing assignment in `associations()`
+* Use `seq_along()`/`seq_len()` instead of `1:length()` loop bounds
+* Align `ld_clump_api()` defaults with its documentation
+* Make `get_query_content()` error path robust to non-JSON bodies
+* Fix empty-result check in `tophits()` (closes #76)
+* Supply `origin` to `as.POSIXct()` in allowance reset handling (closes #103)
 
 # ieugwasr 1.1.0
 

@@ -24,7 +24,7 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 
 	ntry <- 0
 	ntries <- 5
-	if(opengwas_jwt == "") {
+	if(is.null(opengwas_jwt) || !nzchar(opengwas_jwt)) {
 		headers <- httr::add_headers(
 			# 'Content-Type'='application/json; charset=UTF-8',
 			'X-Api-Source'=x_api_source,
@@ -46,7 +46,7 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 		{
 			r <- try(
 				httr::DELETE(
-					paste0(options()$ieugwasr_api, path),
+					paste0(getOption("ieugwasr_api"), path),
 					headers,
 					httr::timeout(timeout)
 				),
@@ -55,7 +55,7 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 		} else if(!is.null(query)) {
 			r <- try(
 				httr::POST(
-					paste0(options()$ieugwasr_api, path),
+					paste0(getOption("ieugwasr_api"), path),
 					body = query, 
 					headers,
 					encode=encode,
@@ -66,7 +66,7 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 		} else {
 			r <- try(
 				httr::GET(
-					paste0(options()$ieugwasr_api, path),
+					paste0(getOption("ieugwasr_api"), path),
 					headers,
 					httr::timeout(timeout)
 				),
@@ -139,7 +139,7 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 set_reset <- function(r) {
 	ret <- as.numeric(Sys.time()) + as.numeric(r$headers$`retry-after`)
 	options(ieugwasr_reset=ret)
-	warning("You have used up your OpenGWAS allowance. Your allowance will reset at ", as.POSIXct(ret), ". See https://api.opengwas.io/api/#allowance for more details.")
+	warning("You have used up your OpenGWAS allowance. Your allowance will reset at ", as.POSIXct(ret, origin="1970-01-01"), ". See https://api.opengwas.io/api/#allowance for more details.")
 }
 
 
@@ -153,9 +153,9 @@ set_reset <- function(r) {
 #'
 #' @return NULL
 check_reset <- function(override_429=FALSE) {
-	if(! is.null(options()$ieugwasr_reset)) {
-		if(as.numeric(Sys.time()) < options()$ieugwasr_reset) {
-			rt <- as.POSIXct(options()$ieugwasr_reset)
+	if(! is.null(getOption("ieugwasr_reset"))) {
+		if(as.numeric(Sys.time()) < getOption("ieugwasr_reset")) {
+			rt <- as.POSIXct(getOption("ieugwasr_reset"), origin="1970-01-01")
 			msg <- paste0("You have used up your OpenGWAS allowance. Please wait until ", rt, " to submit another query. See https://api.opengwas.io/api/#allowance for more details. This check is in place to prevent your IP address from being temporarily blocked, but you can override it at your own risk by setting override_429=TRUE.")
 			if(!override_429) {
 				stop(msg)
@@ -181,16 +181,20 @@ check_reset <- function(override_429=FALSE) {
 #' If status code is not successful then return the actual response
 get_query_content <- function(response)
 {
-	if(httr::status_code(response) >= 200 & httr::status_code(response) < 300)
+	code <- httr::status_code(response)
+	txt <- httr::content(response, "text", encoding='UTF-8')
+	if(code >= 200 & code < 300)
 	{
-		o <- jsonlite::fromJSON(httr::content(response, "text", encoding='UTF-8'))
-		if('eaf' %in% names(o)) 
+		o <- jsonlite::fromJSON(txt)
+		if('eaf' %in% names(o))
 		{
 			o[["eaf"]] <- as.numeric(o[["eaf"]])
 		}
 		return(o)
 	} else {
-		stop("\nStatus code from OpenGWAS API: ", httr::status_code(response), "\n\nMessage: ", jsonlite::fromJSON(httr::content(response, "text", encoding='UTF-8')))
+		msg <- tryCatch(jsonlite::fromJSON(txt), error = function(e) txt)
+		if(!is.character(msg)) msg <- jsonlite::toJSON(msg, auto_unbox=TRUE)
+		stop("\nStatus code from OpenGWAS API: ", code, "\n\nMessage: ", msg)
 	}
 }
 
@@ -343,14 +347,13 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 
 	max_chunk_size <- max(sapply(id_chunks, length))
 	max_variants_per_request <- floor(assocs_per_request / max_chunk_size)
-	max_variants_per_request <- ceiling(min(max_variants_per_request, length(variants)))
+	max_variants_per_request <- max(1, ceiling(min(max_variants_per_request, length(variants))))
 	var_chunks <- split(variants, ceiling(seq_along(variants) / max_variants_per_request))
 	
-	out <- lapply(1:length(id_chunks), function(chunk_id) {
+	out <- lapply(seq_along(id_chunks), function(chunk_id) {
 		message("Querying id chunk ", chunk_id, " of ", length(id_chunks))
-		lapply(1:length(var_chunks), function(chunk_variant) {
-			variants <- var_chunks[[chunk_variant]]
-			message("Querying variant chunk ", chunk_variant, " of ", length(var_chunks))			
+		lapply(seq_along(var_chunks), function(chunk_variant) {
+			message("Querying variant chunk ", chunk_variant, " of ", length(var_chunks))
 		
 			out <- api_query("associations", query=list(
 				variant=var_chunks[[chunk_variant]],
@@ -396,11 +399,14 @@ fill_n <- function(d, opengwas_jwt=get_opengwas_jwt(), ...)
 	if(any(is.na(d$n)))
 	{
 		info <- gwasinfo(id, opengwas_jwt=opengwas_jwt, ...)
-		if(!is.na(info$sample_size))
+		if(nrow(info) == 0)
 		{
-			d$n <- info$sample_size
+			warning("No metadata found for id ", id, "; sample sizes left as NA")
+		} else if(!is.na(info$sample_size[1]))
+		{
+			d$n <- info$sample_size[1]
 		} else {
-			d$n <- info$ncase + info$ncontrol
+			d$n <- info$ncase[1] + info$ncontrol[1]
 		}
 	}
 	return(d)	
@@ -500,7 +506,7 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 		return(out)
 	} else if(is.data.frame(out)) {
 		out %>% dplyr::as_tibble() %>% fix_n() %>% return()
-	} else if(out == "[]") {
+	} else if(length(out) == 0) {
 		return(dplyr::tibble())
 	} else {
 		stop("There was an error, please contact the developers")
@@ -518,7 +524,7 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 #' @return Dataframe
 editcheck <- function(id, opengwas_jwt=get_opengwas_jwt(), ...)
 {
-	api <- options()[["ieugwasr_api"]]
+	api <- getOption("ieugwasr_api")
 	select_api("private")
 	out <- api_query(paste0("edit/check/", id), opengwas_jwt=opengwas_jwt, ...) %>%
 		get_query_content()

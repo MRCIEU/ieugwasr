@@ -24,7 +24,7 @@ api_query <- function(path, query=NULL, opengwas_jwt=get_opengwas_jwt(),
 
 	ntry <- 0
 	ntries <- 5
-	if(opengwas_jwt == "") {
+	if(is.null(opengwas_jwt) || !nzchar(opengwas_jwt)) {
 		headers <- httr::add_headers(
 			# 'Content-Type'='application/json; charset=UTF-8',
 			'X-Api-Source'=x_api_source,

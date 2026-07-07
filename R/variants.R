@@ -66,7 +66,7 @@ variants_rsid <- function(rsid, opengwas_jwt=get_opengwas_jwt(), ...)
 #' @return Data frame
 variants_chrpos <- function(chrpos, radius=0, opengwas_jwt=get_opengwas_jwt(), ...)
 {
-	o <- api_query("variants/chrpos", list(chrpos = chrpos, radius=radius), opengwas_jwt=opengwas_jwt) %>% get_query_content() 
+	o <- api_query("variants/chrpos", list(chrpos = chrpos, radius=radius), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
 
 	if(! inherits(o, "response"))
 	{

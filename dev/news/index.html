@@ -45,7 +45,7 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.1.0.9000" id="ieugwasr-1109000">ieugwasr 1.1.0.9000<a class="anchor" aria-label="anchor" href="#ieugwasr-1109000"></a></h2>
+<h2 class="pkg-version" data-toc-text="development version" id="ieugwasr-development-version">ieugwasr (development version)<a class="anchor" aria-label="anchor" href="#ieugwasr-development-version"></a></h2>
 <ul><li>Update some GitHub Actions workflows, including no longer testing on R before R 4.1 due to the new testthat requirements</li>
 <li>Tweak an API test</li>
 <li>Bump version of roxygen2</li>
@@ -54,6 +54,22 @@
 <li>Bump minimum required version of R to 4.1</li>
 <li>Update some URLs in the package</li>
 <li>Fix some typos in the docs</li>
+<li>Forward <code>...</code> to <code><a href="../reference/api_query.html">api_query()</a></code> in <code><a href="../reference/variants_chrpos.html">variants_chrpos()</a></code>
+</li>
+<li>Prevent divide-by-zero chunking in <code><a href="../reference/associations.html">associations()</a></code>
+</li>
+<li>Handle <code>NULL</code> <code>opengwas_jwt</code> in <code><a href="../reference/api_query.html">api_query()</a></code>
+</li>
+<li>Close connection in <code><a href="../reference/afl2_list.html">afl2_list()</a></code> hapmap3 branch</li>
+<li>Harden <code><a href="../reference/fill_n.html">fill_n()</a></code> against empty or multi-row <code><a href="../reference/gwasinfo.html">gwasinfo()</a></code> results</li>
+<li>Use <code><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption()</a></code> instead of copying the full options list</li>
+<li>Remove dead shadowing assignment in <code><a href="../reference/associations.html">associations()</a></code>
+</li>
+<li>Use <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along()</a></code>/<code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len()</a></code> instead of <code>1:length()</code> loop bounds</li>
+<li>Align <code><a href="../reference/ld_clump_api.html">ld_clump_api()</a></code> defaults with its documentation</li>
+<li>Make <code><a href="../reference/get_query_content.html">get_query_content()</a></code> error path robust to non-JSON bodies</li>
+<li>Fix empty-result check in <code><a href="../reference/tophits.html">tophits()</a></code> (closes <a href="https://github.com/MRCIEU/ieugwasr/issues/76" class="external-link">#76</a>)</li>
+<li>Supply <code>origin</code> to <code><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct()</a></code> in allowance reset handling (closes <a href="https://github.com/MRCIEU/ieugwasr/issues/103" class="external-link">#103</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.0" id="ieugwasr-110">ieugwasr 1.1.0<a class="anchor" aria-label="anchor" href="#ieugwasr-110"></a></h2><p class="text-muted">CRAN release: 2025-07-31</p>

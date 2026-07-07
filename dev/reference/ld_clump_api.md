@@ -8,8 +8,8 @@ Perform clumping on the chosen variants using the API
 ld_clump_api(
   dat,
   clump_kb = 10000,
-  clump_r2 = 0.1,
-  clump_p,
+  clump_r2 = 0.001,
+  clump_p = 1,
   pop = "EUR",
   opengwas_jwt = get_opengwas_jwt(),
   ...

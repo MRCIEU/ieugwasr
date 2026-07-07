@@ -1,6 +1,6 @@
 # Changelog
 
-## ieugwasr 1.1.0.9000
+## ieugwasr (development version)
 
 - Update some GitHub Actions workflows, including no longer testing on R
   before R 4.1 due to the new testthat requirements
@@ -11,6 +11,42 @@
 - Bump minimum required version of R to 4.1
 - Update some URLs in the package
 - Fix some typos in the docs
+- Forward `...` to
+  [`api_query()`](https://mrcieu.github.io/ieugwasr/dev/reference/api_query.md)
+  in
+  [`variants_chrpos()`](https://mrcieu.github.io/ieugwasr/dev/reference/variants_chrpos.md)
+- Prevent divide-by-zero chunking in
+  [`associations()`](https://mrcieu.github.io/ieugwasr/dev/reference/associations.md)
+- Handle `NULL` `opengwas_jwt` in
+  [`api_query()`](https://mrcieu.github.io/ieugwasr/dev/reference/api_query.md)
+- Close connection in
+  [`afl2_list()`](https://mrcieu.github.io/ieugwasr/dev/reference/afl2_list.md)
+  hapmap3 branch
+- Harden
+  [`fill_n()`](https://mrcieu.github.io/ieugwasr/dev/reference/fill_n.md)
+  against empty or multi-row
+  [`gwasinfo()`](https://mrcieu.github.io/ieugwasr/dev/reference/gwasinfo.md)
+  results
+- Use [`getOption()`](https://rdrr.io/r/base/options.html) instead of
+  copying the full options list
+- Remove dead shadowing assignment in
+  [`associations()`](https://mrcieu.github.io/ieugwasr/dev/reference/associations.md)
+- Use
+  [`seq_along()`](https://rdrr.io/r/base/seq.html)/[`seq_len()`](https://rdrr.io/r/base/seq.html)
+  instead of `1:length()` loop bounds
+- Align
+  [`ld_clump_api()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_clump_api.md)
+  defaults with its documentation
+- Make
+  [`get_query_content()`](https://mrcieu.github.io/ieugwasr/dev/reference/get_query_content.md)
+  error path robust to non-JSON bodies
+- Fix empty-result check in
+  [`tophits()`](https://mrcieu.github.io/ieugwasr/dev/reference/tophits.md)
+  (closes [\#76](https://github.com/MRCIEU/ieugwasr/issues/76))
+- Supply `origin` to
+  [`as.POSIXct()`](https://rdrr.io/r/base/as.POSIXlt.html) in allowance
+  reset handling (closes
+  [\#103](https://github.com/MRCIEU/ieugwasr/issues/103))
 
 ## ieugwasr 1.1.0
 

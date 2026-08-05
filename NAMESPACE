@@ -34,5 +34,7 @@ export(variants_gene)
 export(variants_rsid)
 export(variants_to_rsid)
 importFrom(magrittr,"%>%")
-importFrom(utils,read.table)
-importFrom(utils,write.table)
+importFrom(utils,
+  read.table,
+  write.table
+)

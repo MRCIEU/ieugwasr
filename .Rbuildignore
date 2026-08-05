@@ -12,3 +12,4 @@
 ^ieugwasr_oauth$
 ^\.positai$
 ^\.claude$
+^justfile$

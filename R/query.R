@@ -372,12 +372,10 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
-		out %>% dplyr::as_tibble() %>% fix_n() %>% return()
+		return(out %>% dplyr::as_tibble() %>% fix_n())
 	} else {
 		return(dplyr::tibble())
 	}
-
-	return(out)
 }
 
 #' Look up sample sizes when meta data is missing from associations
@@ -418,9 +416,6 @@ fix_n <- function(d)
 	{
 		d[["n"]] <- as.numeric(d[["n"]])
 	}
-	# Issue with the ukb-e batch - need to flip alleles until it is fixed
-	index <- grepl("ukb-e", d[["id"]])
-	d[["beta"]][index] <- d[["beta"]][index] * -1
 	return(d)
 }
 
@@ -505,7 +500,7 @@ tophits <- function(id, pval=5e-8, clump = 1, r2 = 0.001, kb = 10000, pop="EUR",
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
-		out %>% dplyr::as_tibble() %>% fix_n() %>% return()
+		return(out %>% dplyr::as_tibble() %>% fix_n())
 	} else if(length(out) == 0) {
 		return(dplyr::tibble())
 	} else {

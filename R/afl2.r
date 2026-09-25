@@ -47,7 +47,7 @@ afl2_rsid <- function(rsid, reference="1000g", opengwas_jwt=get_opengwas_jwt(), 
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
-		out %>% dplyr::as_tibble() %>% return()
+		return(out %>% dplyr::as_tibble())
 	} else {
 		return(dplyr::tibble())
 	}
@@ -70,7 +70,7 @@ afl2_chrpos <- function(chrpos, reference="1000g", opengwas_jwt=get_opengwas_jwt
 	{
 		return(out)
 	} else if(is.data.frame(out)) {
-		out %>% dplyr::as_tibble() %>% return()
+		return(out %>% dplyr::as_tibble())
 	} else {
 		return(dplyr::tibble())
 	}

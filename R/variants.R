@@ -45,7 +45,7 @@ variants_rsid <- function(rsid, opengwas_jwt=get_opengwas_jwt(), ...)
 		{
 			o <- dplyr::bind_rows(o)
 		}
-		cbind(o[["_id"]], o[["_source"]]) %>% dplyr::rename(query=1) %>% format_variants() %>% return()
+		return(cbind(o[["_id"]], o[["_source"]]) %>% dplyr::rename(query=1) %>% format_variants())
 	} else {
 		return(o)
 	}
@@ -70,7 +70,7 @@ variants_chrpos <- function(chrpos, radius=0, opengwas_jwt=get_opengwas_jwt(), .
 
 	if(! inherits(o, "response"))
 	{
-		o %>% dplyr::bind_rows() %>% format_variants() %>% return()
+		return(o %>% dplyr::bind_rows() %>% format_variants())
 	} else {
 		return(o)
 	}

@@ -1,4 +1,4 @@
-# ieugwasr (development version)
+# ieugwasr 1.2.0
 
 * `associations()` now returns the processed tibble. Previously its `... %>% return()` inside a pipe did not return from the function (since magrittr 2.0), so the raw server data frame was returned instead, with `n` as character.
 * Remove the flipping of `beta` for `ukb-e` datasets in `associations()`, `tophits()` and `phewas()`. The flip was never applied in `associations()` (see above), and the OpenGWAS server is the right place to correct these datasets.

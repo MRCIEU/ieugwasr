@@ -63,6 +63,7 @@
   [`as.POSIXct()`](https://rdrr.io/r/base/as.POSIXlt.html) in allowance
   reset handling (closes
   [\#103](https://github.com/MRCIEU/ieugwasr/issues/103))
+- Remove **utils** from Suggests, since it’s a Base package
 
 ## ieugwasr 1.1.0
 

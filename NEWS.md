@@ -22,6 +22,7 @@
 * Make `get_query_content()` error path robust to non-JSON bodies
 * Fix empty-result check in `tophits()` (closes #76)
 * Supply `origin` to `as.POSIXct()` in allowance reset handling (closes #103)
+* Remove **utils** from Suggests, since it's a Base package
 
 # ieugwasr 1.1.0
 

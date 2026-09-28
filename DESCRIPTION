@@ -27,7 +27,6 @@ Imports:
     stats
 Suggests: 
     knitr,
-    utils,
     rmarkdown,
     testthat
 VignetteBuilder: 

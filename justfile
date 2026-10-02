@@ -6,3 +6,5 @@ install: docs
     Rscript -e "devtools::install(build_vignettes = TRUE)"
 dev:
     Rscript -e "pak::local_install_dev_deps()"
+build:
+    Rscript -e "devtools::build()"

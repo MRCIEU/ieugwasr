@@ -18,13 +18,13 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Gibran Hemani \email{g.hemani@bristol.ac.uk} (\href{https://orcid.org/0000-0003-0920-1055}{ORCID}) [copyright holder]
+\strong{Maintainer}: Tom Palmer \email{remlapmot@hotmail.com} (\href{https://orcid.org/0000-0003-4655-4511}{ORCID})
 
 Authors:
 \itemize{
+  \item Tom Palmer \email{remlapmot@hotmail.com} (\href{https://orcid.org/0000-0003-4655-4511}{ORCID})
   \item Gibran Hemani \email{g.hemani@bristol.ac.uk} (\href{https://orcid.org/0000-0003-0920-1055}{ORCID}) [copyright holder]
   \item Ben Elsworth \email{Ben.Elsworth@bristol.ac.uk} (\href{https://orcid.org/0000-0001-7328-4233}{ORCID})
-  \item Tom Palmer \email{tom.palmer@bristol.ac.uk} (\href{https://orcid.org/0000-0003-4655-4511}{ORCID})
   \item Rita Rasteiro \email{rita.rasteiro@bristol.ac.uk} (\href{https://orcid.org/0000-0002-4217-3060}{ORCID})
 }
 

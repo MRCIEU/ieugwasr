@@ -16,19 +16,19 @@ Useful links:
 
 ## Author
 
-**Maintainer**: Gibran Hemani <g.hemani@bristol.ac.uk>
-([ORCID](https://orcid.org/0000-0003-0920-1055)) \[copyright holder\]
+**Maintainer**: Tom Palmer <remlapmot@hotmail.com>
+([ORCID](https://orcid.org/0000-0003-4655-4511))
 
 Authors:
+
+- Tom Palmer <remlapmot@hotmail.com>
+  ([ORCID](https://orcid.org/0000-0003-4655-4511))
 
 - Gibran Hemani <g.hemani@bristol.ac.uk>
   ([ORCID](https://orcid.org/0000-0003-0920-1055)) \[copyright holder\]
 
 - Ben Elsworth <Ben.Elsworth@bristol.ac.uk>
   ([ORCID](https://orcid.org/0000-0001-7328-4233))
-
-- Tom Palmer <tom.palmer@bristol.ac.uk>
-  ([ORCID](https://orcid.org/0000-0003-4655-4511))
 
 - Rita Rasteiro <rita.rasteiro@bristol.ac.uk>
   ([ORCID](https://orcid.org/0000-0002-4217-3060))

@@ -2,12 +2,13 @@
 
 ## Authors
 
-- **Gibran Hemani**. Author, maintainer, copyright holder.
+- **Gibran Hemani**. Author, copyright holder.
   [](https://orcid.org/0000-0003-0920-1055)
 
 - **Ben Elsworth**. Author. [](https://orcid.org/0000-0001-7328-4233)
 
-- **Tom Palmer**. Author. [](https://orcid.org/0000-0003-4655-4511)
+- **Tom Palmer**. Author, maintainer.
+  [](https://orcid.org/0000-0003-4655-4511)
 
 - **Rita Rasteiro**. Author. [](https://orcid.org/0000-0002-4217-3060)
 

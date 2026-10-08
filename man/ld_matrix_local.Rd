@@ -4,7 +4,13 @@
 \alias{ld_matrix_local}
 \title{Get LD matrix using local plink binary and reference dataset}
 \usage{
-ld_matrix_local(variants, bfile, plink_bin, with_alleles = TRUE)
+ld_matrix_local(
+  variants,
+  bfile,
+  plink_bin,
+  with_alleles = TRUE,
+  tmpdir = tempdir()
+)
 }
 \arguments{
 \item{variants}{List of variants (rsids)}
@@ -16,6 +22,8 @@ See \url{https://github.com/MRCIEU/genetics.binaRies} for convenient access to p
 
 \item{with_alleles}{Whether to append the allele names to the SNP names.
 Default: \code{TRUE}}
+
+\item{tmpdir}{Directory in which to write the temporary files used by plink. Default = \code{\link[=tempdir]{tempdir()}}}
 }
 \value{
 data frame

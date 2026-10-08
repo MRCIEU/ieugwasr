@@ -32,12 +32,13 @@
 #' @param plink_bin If `NULL` and `bfile` is not `NULL` then will detect 
 #' packaged plink binary for specific OS. Otherwise specify path to plink binary. 
 #' Default = `NULL`,
+#' @param tmpdir Directory in which to write the temporary files used by plink when `bfile` is provided. Default = [`tempdir()`]
 #' @param ... Additional arguments passed to [`ld_clump_api()`].
 #'
 #' @export
 #' @return Data frame
 ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99, 
-                     pop = "EUR", opengwas_jwt=get_opengwas_jwt(), bfile=NULL, plink_bin=NULL, ...)
+                     pop = "EUR", opengwas_jwt=get_opengwas_jwt(), bfile=NULL, plink_bin=NULL, tmpdir=tempdir(), ...)
 {
 
 	stopifnot("rsid" %in% names(dat))
@@ -88,7 +89,7 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 			  res[[i]] <- ld_clump_api(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, pop=pop, opengwas_jwt=opengwas_jwt, ...)
 			} else {
 			  message("Clumping ", ids[i], ", ", nrow(x), " variants, using: ", bfile)
-				res[[i]] <- ld_clump_local(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, bfile=bfile, plink_bin=plink_bin)
+				res[[i]] <- ld_clump_local(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, bfile=bfile, plink_bin=plink_bin, tmpdir=tmpdir)
 			}
 		}
 	}
@@ -141,16 +142,18 @@ ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.001, clump_p=1, pop="EU
 #' @param bfile If this is provided then will use the API. Default = `NULL`
 #' @param plink_bin Specify path to plink binary. Default = `NULL`. 
 #' See \url{https://github.com/MRCIEU/genetics.binaRies} for convenient access to plink binaries
+#' @param tmpdir Directory in which to write the temporary files used by plink. Default = [`tempdir()`]
 #' @importFrom utils read.table
 #' @importFrom utils write.table
 #' @export
 #' @return data frame of clumped variants
-ld_clump_local <- function(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin)
+ld_clump_local <- function(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin, tmpdir=tempdir())
 {
+	if(!dir.exists(tmpdir)) stop("tmpdir does not exist: ", tmpdir)
 
 	# Make textfile
 	shell <- ifelse(Sys.info()['sysname'] == "Windows", "cmd", "sh")
-	fn <- tempfile()
+	fn <- tempfile(tmpdir=tmpdir)
 	write.table(data.frame(SNP=dat[["rsid"]], P=dat[["pval"]]), file=fn, row.names=FALSE, col.names=TRUE, quote=FALSE)
 
 	fun2 <- paste0(

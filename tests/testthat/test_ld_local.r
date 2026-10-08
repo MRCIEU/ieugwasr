@@ -5,11 +5,13 @@ skip_on_os("windows")
 #   "ok": write a .clumped file containing the first variant
 #   "none": log plink's no significant results warning and write no .clumped file
 #   "fail": log an error and exit with status 1
+# Each call appends its --out path to the file in attr(exe, "outs")
 fake_plink <- function(bim_lines=character(0), clump=c("ok", "none", "fail")) {
 	clump <- match.arg(clump)
 	bim <- tempfile(fileext=".bim")
 	writeLines(bim_lines, bim)
 	exe <- tempfile()
+	outs <- tempfile()
 	writeLines(c(
 		"#!/bin/sh",
 		"while [ $# -gt 0 ]; do",
@@ -21,6 +23,7 @@ fake_plink <- function(bim_lines=character(0), clump=c("ok", "none", "fail")) {
 		"  esac",
 		"  shift",
 		"done",
+		paste0("echo \"$out\" >> '", outs, "'"),
 		paste0("if [ \"$mode\" = bim ]; then cp '", bim, "' \"$out.bim\"; fi"),
 		paste0("if [ \"$mode\" = ld ]; then printf '1\\t0.5\\t0.1\\n0.5\\t1\\t0.2\\n0.1\\t0.2\\t1\\n' > \"$out.ld\"; fi"),
 		"if [ \"$mode\" = clump ]; then",
@@ -32,6 +35,7 @@ fake_plink <- function(bim_lines=character(0), clump=c("ok", "none", "fail")) {
 		"fi"
 	), exe)
 	Sys.chmod(exe, "755")
+	attr(exe, "outs") <- outs
 	exe
 }
 
@@ -70,4 +74,21 @@ test_that("ld_clump with local plink returns no rows when no variants pass clump
 	plink <- fake_plink(clump="none")
 	expect_message(res <- ld_clump(dat, clump_p=5e-8, bfile="fake", plink_bin=plink), "Removing all 3 variants")
 	expect_equal(nrow(res), 0)
+})
+
+test_that("ld_clump and ld_matrix write plink files to tmpdir (#37)", {
+	tmpdir <- tempfile()
+	dir.create(tmpdir)
+	plink <- fake_plink(c("1\trs1\t0\t1\tA\tG", "1\trs2\t0\t2\tC\tT", "1\trs3\t0\t3\tA\tC"))
+	expect_message(ld_clump(dat, bfile="fake", plink_bin=plink, tmpdir=tmpdir))
+	ld_matrix(dat$rsid, bfile="fake", plink_bin=plink, tmpdir=tmpdir)
+	outs <- readLines(attr(plink, "outs"))
+	expect_length(outs, 3)
+	expect_equal(normalizePath(dirname(outs)), rep(normalizePath(tmpdir), 3))
+})
+
+test_that("ld_clump_local and ld_matrix_local error if tmpdir does not exist (#37)", {
+	plink <- fake_plink()
+	expect_error(ld_clump_local(dat, 10000, 0.001, 1, bfile="fake", plink_bin=plink, tmpdir="does/not/exist"), "tmpdir does not exist")
+	expect_error(ld_matrix_local(dat$rsid, bfile="fake", plink_bin=plink, tmpdir="does/not/exist"), "tmpdir does not exist")
 })

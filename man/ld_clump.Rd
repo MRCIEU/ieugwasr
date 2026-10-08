@@ -13,6 +13,7 @@ ld_clump(
   opengwas_jwt = get_opengwas_jwt(),
   bfile = NULL,
   plink_bin = NULL,
+  tmpdir = tempdir(),
   ...
 )
 }
@@ -38,6 +39,8 @@ panel with a slightly different set of markers}
 \item{plink_bin}{If \code{NULL} and \code{bfile} is not \code{NULL} then will detect
 packaged plink binary for specific OS. Otherwise specify path to plink binary.
 Default = \code{NULL},}
+
+\item{tmpdir}{Directory in which to write the temporary files used by plink when \code{bfile} is provided. Default = \code{\link[=tempdir]{tempdir()}}}
 
 \item{...}{Additional arguments passed to \code{\link[=ld_clump_api]{ld_clump_api()}}.}
 }

@@ -30,11 +30,12 @@
 #' @param bfile If this is provided then will use the API. Default = `NULL`
 #' @param plink_bin If `NULL` and bfile is not `NULL` then will detect packaged 
 #' plink binary for specific OS. Otherwise specify path to plink binary. Default = `NULL`
+#' @param tmpdir Directory in which to write the temporary files used by plink when `bfile` is provided. Default = [`tempdir()`]
 #' @param ... Additional arguments passed to `ld_matrix_api()`.
 #'
 #' @export
 #' @return Matrix of LD r values
-ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_opengwas_jwt(), bfile=NULL, plink_bin=NULL, ...) {
+ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_opengwas_jwt(), bfile=NULL, plink_bin=NULL, tmpdir=tempdir(), ...) {
 	if(length(variants) > 500 & is.null(bfile))
 	{
 		stop("SNP list must be smaller than 500. Try running locally by providing local ld reference with bfile argument. See vignettes for a guide on how to do this.")
@@ -54,7 +55,7 @@ ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_o
 
 	if(!is.null(bfile))
 	{
-		return(ld_matrix_local(variants, bfile=bfile, plink_bin=plink_bin, with_alleles=with_alleles))
+		return(ld_matrix_local(variants, bfile=bfile, plink_bin=plink_bin, with_alleles=with_alleles, tmpdir=tmpdir))
 	}
 
 	res <- api_query('ld/matrix', query = list(rsid=variants, pop=pop), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
@@ -93,13 +94,15 @@ ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_o
 #' See \url{https://github.com/MRCIEU/genetics.binaRies} for convenient access to plink binaries
 #' @param with_alleles Whether to append the allele names to the SNP names. 
 #' Default: `TRUE`
+#' @param tmpdir Directory in which to write the temporary files used by plink. Default = [`tempdir()`]
 #'
 #' @export
 #' @return data frame
-ld_matrix_local <- function(variants, bfile, plink_bin, with_alleles=TRUE) {
+ld_matrix_local <- function(variants, bfile, plink_bin, with_alleles=TRUE, tmpdir=tempdir()) {
+	if(!dir.exists(tmpdir)) stop("tmpdir does not exist: ", tmpdir)
 	# Make textfile
 	shell <- ifelse(Sys.info()['sysname'] == "Windows", "cmd", "sh")
-	fn <- tempfile()
+	fn <- tempfile(tmpdir=tmpdir)
 	write.table(data.frame(variants), file=fn, row.names=FALSE, col.names=FALSE, quote=FALSE)
 
 	

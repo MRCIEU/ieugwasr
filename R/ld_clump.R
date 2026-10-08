@@ -162,7 +162,24 @@ ld_clump_local <- function(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin)
 		" --clump-kb ", clump_kb, 
 		" --out ", shQuote(fn, type=shell)
 	)
-	system(fun2)
+	status <- system(fun2)
+	# plink writes no .clumped file if no variants pass clumping, or if it fails
+	if(!file.exists(paste(fn, ".clumped", sep="")))
+	{
+		log <- paste(fn, ".log", sep="")
+		log <- if(file.exists(log)) readLines(log) else character(0)
+		unlink(paste(fn, "*", sep=""))
+		if(any(grepl("No significant --clump results", log)))
+		{
+			message("Removing all ", nrow(dat), " variants: none had a p-value below clump_p and were present in the LD reference panel")
+			return(dat[0, ])
+		}
+		stop(
+			"plink clumping failed (exit status ", status, "). ",
+			"Check that bfile is the path to the .bed/.bim/.fam files without the extension, and that plink_bin is a working plink 1.9 binary.",
+			if(length(log) > 0) paste0("\nEnd of plink log:\n", paste(utils::tail(log, 10), collapse="\n"))
+		)
+	}
 	res <- read.table(paste(fn, ".clumped", sep=""), header=TRUE)
 	unlink(paste(fn, "*", sep=""))
 	y <- subset(dat, !dat[["rsid"]] %in% res[["SNP"]])

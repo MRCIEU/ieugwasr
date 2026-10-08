@@ -1,6 +1,7 @@
 # ieugwasr (development version)
 
 * `ld_matrix_local()` now reads the alleles in the `.bim` file as character. Previously a column of all `T` alleles was read as logical, so the row and column names contained `TRUE` instead of `T` (#38).
+* `ld_clump_local()`, and so `ld_clump()` with a local `bfile`, no longer errors with "cannot open the connection" when plink writes no `.clumped` file. If no variants pass clumping it now returns no rows with a message, and if plink fails it gives an informative error including the end of the plink log (#30, #34, #44).
 
 # ieugwasr 1.2.0
 

@@ -1,3 +1,7 @@
+# ieugwasr (development version)
+
+* `ld_matrix_local()` now reads the alleles in the `.bim` file as character. Previously a column of all `T` alleles was read as logical, so the row and column names contained `TRUE` instead of `T` (#38).
+
 # ieugwasr 1.2.0
 
 * `associations()` now returns the processed tibble. Previously its `... %>% return()` inside a pipe did not return from the function (since magrittr 2.0), so the raw server data frame was returned instead, with `n` as character.

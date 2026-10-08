@@ -113,7 +113,9 @@ ld_matrix_local <- function(variants, bfile, plink_bin, with_alleles=TRUE) {
 	)
 	system(fun1)
 
-	bim <- read.table(paste0(fn, ".bim"), stringsAsFactors=FALSE)
+	# Read alleles as character, otherwise e.g. a column of all "T" is read as logical
+	bim <- read.table(paste0(fn, ".bim"), stringsAsFactors=FALSE,
+		colClasses=c("character", "character", "numeric", "numeric", "character", "character"))
 
 	fun2 <- paste0(
 		shQuote(plink_bin, type=shell),

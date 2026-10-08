@@ -15,7 +15,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/MRCIEU/ieugwasr/blob/v1.2.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/MRCIEU/ieugwasr/blob/master/DESCRIPTION)
 
 Hemani G, Elsworth B, Palmer T, Rasteiro R (2026). *ieugwasr: Interface
 to the 'OpenGWAS' Database API*. R package version 1.2.0,

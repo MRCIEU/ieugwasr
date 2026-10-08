@@ -2,6 +2,8 @@
 
 ## ieugwasr 1.2.0
 
+CRAN release: 2026-10-07
+
 - [`associations()`](https://mrcieu.github.io/ieugwasr/reference/associations.md)
   now returns the processed tibble. Previously its `... %>% return()`
   inside a pipe did not return from the function (since magrittr 2.0),

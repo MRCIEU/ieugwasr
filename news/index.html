@@ -41,11 +41,11 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/v1.2.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/MRCIEU/ieugwasr/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.2.0" id="ieugwasr-120">ieugwasr 1.2.0<a class="anchor" aria-label="anchor" href="#ieugwasr-120"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.2.0" id="ieugwasr-120">ieugwasr 1.2.0<a class="anchor" aria-label="anchor" href="#ieugwasr-120"></a></h2><p class="text-muted">CRAN release: 2026-10-07</p>
 <ul><li>
 <code><a href="../reference/associations.html">associations()</a></code> now returns the processed tibble. Previously its <code>... %&gt;% return()</code> inside a pipe did not return from the function (since magrittr 2.0), so the raw server data frame was returned instead, with <code>n</code> as character.</li>
 <li>Remove the flipping of <code>beta</code> for <code>ukb-e</code> datasets in <code><a href="../reference/associations.html">associations()</a></code>, <code><a href="../reference/tophits.html">tophits()</a></code> and <code><a href="../reference/phewas.html">phewas()</a></code>. The flip was never applied in <code><a href="../reference/associations.html">associations()</a></code> (see above), and the OpenGWAS server is the right place to correct these datasets.</li>

@@ -83,6 +83,7 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 			message("Only one SNP for ", ids[i])
 			res[[i]] <- x
 		} else {
+			warn_tied_pval(x[["pval"]], clump_p, ids[i])
 			if(is.null(bfile))
 			{
 			  message("Clumping ", ids[i], ", ", nrow(x), " variants, using ", pop, " population reference")
@@ -191,6 +192,25 @@ ld_clump_local <- function(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin, t
 		message("Removing ", length(y[["rsid"]]), " of ", nrow(dat), " variants due to LD with other variants or absence from LD reference panel")
 	}
 	return(subset(dat, dat[["rsid"]] %in% res[["SNP"]]))
+}
+
+# Warn if the smallest p-value is shared by several variants, e.g. because of
+# numerical underflow or p-values capped by other software, since plink then
+# chooses the lead variant among them arbitrarily (#39)
+warn_tied_pval <- function(pval, clump_p, id)
+{
+	if(all(is.na(pval))) return(invisible())
+	p <- min(pval, na.rm=TRUE)
+	n <- sum(pval == p, na.rm=TRUE)
+	if(n > 1 && p <= clump_p)
+	{
+		warning(
+			n, " variants for ", id, " share the smallest p-value (", format(p), "), ",
+			"e.g. because of numerical underflow or p-values capped by other software. ",
+			"The lead variant among them will be chosen arbitrarily, not by strength of association."
+		)
+	}
+	invisible()
 }
 
 random_string <- function(n=1, len=6)

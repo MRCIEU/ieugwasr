@@ -101,3 +101,25 @@ test_that("ld_clump_local and ld_matrix_local remove their temporary files", {
 	ld_matrix_local(dat$rsid, bfile="fake", plink_bin=plink, tmpdir=tmpdir)
 	expect_length(list.files(tmpdir), 0)
 })
+
+test_that("ld_clump warns when the smallest p-value is tied (#39)", {
+	plink <- fake_plink()
+	tied <- data.frame(rsid=c("rs1", "rs2", "rs3"), pval=c(0, 0, 1e-8))
+	expect_warning(
+		expect_message(ld_clump(tied, bfile="fake", plink_bin=plink)),
+		"2 variants for .* share the smallest p-value \\(0\\)"
+	)
+	tied$pval <- c(1e-200, 1e-200, 1e-8)
+	expect_warning(
+		expect_message(ld_clump(tied, bfile="fake", plink_bin=plink)),
+		"share the smallest p-value \\(1e-200\\)"
+	)
+})
+
+test_that("ld_clump does not warn about ties that do not matter (#39)", {
+	plink <- fake_plink()
+	expect_no_warning(expect_message(ld_clump(dat, bfile="fake", plink_bin=plink)))
+	# Ties above clump_p cannot be lead variants
+	tied <- data.frame(rsid=c("rs1", "rs2", "rs3"), pval=c(0.5, 0.5, 0.6))
+	expect_no_warning(expect_message(ld_clump(tied, clump_p=0.1, bfile="fake", plink_bin=plink)))
+})

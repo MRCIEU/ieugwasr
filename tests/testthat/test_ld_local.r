@@ -112,7 +112,7 @@ test_that("ld_clump warns when the smallest p-value is tied (#39)", {
 	tied$pval <- c(1e-200, 1e-200, 1e-8)
 	expect_warning(
 		expect_message(ld_clump(tied, bfile="fake", plink_bin=plink)),
-		"share the smallest p-value \\(1e-200\\)"
+		"share the smallest p-value \\(1e-200\\).*min_pval.*1e-300"
 	)
 })
 

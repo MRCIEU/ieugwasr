@@ -4,7 +4,7 @@
 * `ld_clump_local()`, and so `ld_clump()` with a local `bfile`, no longer errors with "cannot open the connection" when plink writes no `.clumped` file. If no variants pass clumping it now returns no rows with a message, and if plink fails it gives an informative error including the end of the plink log (#30, #34, #44).
 * `ld_clump()`, `ld_clump_local()`, `ld_matrix()` and `ld_matrix_local()` gain a `tmpdir` argument, the directory in which the temporary files used by plink are written. The default, `tempdir()`, keeps the previous behaviour (#37).
 * `ld_matrix_local()` now removes its temporary plink files when it exits.
-* `ld_clump()` now warns if several variants share the smallest p-value, e.g. because p-values smaller than R can represent underflow to 0, or because other software has capped them. Plink then chooses the lead variant among them arbitrarily (#39).
+* `ld_clump()` now warns if several variants share the smallest p-value, e.g. because p-values smaller than R can represent underflow to 0, or because other software has capped them. Plink then chooses the lead variant among them arbitrarily. The warning suggests lowering any cap, e.g. setting `min_pval = 1e-300` in `TwoSampleMR::format_data()` (#39).
 
 # ieugwasr 1.2.0
 

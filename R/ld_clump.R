@@ -207,7 +207,8 @@ warn_tied_pval <- function(pval, clump_p, id)
 		warning(
 			n, " variants for ", id, " share the smallest p-value (", format(p), "), ",
 			"e.g. because of numerical underflow or p-values capped by other software. ",
-			"The lead variant among them will be chosen arbitrarily, not by strength of association."
+			"The lead variant among them will be chosen arbitrarily, not by strength of association. ",
+			"If the p-values were capped, e.g. by TwoSampleMR::format_data() (min_pval = 1e-200 by default), consider lowering the cap, e.g. to 1e-300."
 		)
 	}
 	invisible()

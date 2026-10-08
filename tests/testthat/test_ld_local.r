@@ -92,3 +92,12 @@ test_that("ld_clump_local and ld_matrix_local error if tmpdir does not exist (#3
 	expect_error(ld_clump_local(dat, 10000, 0.001, 1, bfile="fake", plink_bin=plink, tmpdir="does/not/exist"), "tmpdir does not exist")
 	expect_error(ld_matrix_local(dat$rsid, bfile="fake", plink_bin=plink, tmpdir="does/not/exist"), "tmpdir does not exist")
 })
+
+test_that("ld_clump_local and ld_matrix_local remove their temporary files", {
+	tmpdir <- tempfile()
+	dir.create(tmpdir)
+	plink <- fake_plink(c("1\trs1\t0\t1\tA\tG", "1\trs2\t0\t2\tC\tT", "1\trs3\t0\t3\tA\tC"))
+	expect_message(ld_clump_local(dat, 10000, 0.001, 1, bfile="fake", plink_bin=plink, tmpdir=tmpdir))
+	ld_matrix_local(dat$rsid, bfile="fake", plink_bin=plink, tmpdir=tmpdir)
+	expect_length(list.files(tmpdir), 0)
+})

@@ -2,6 +2,61 @@
 
 ## ieugwasr (development version)
 
+- [`ld_matrix_local()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_matrix_local.md)
+  now reads the alleles in the `.bim` file as character. Previously a
+  column of all `T` alleles was read as logical, so the row and column
+  names contained `TRUE` instead of `T`
+  ([\#38](https://github.com/MRCIEU/ieugwasr/issues/38)).
+- [`ld_clump_local()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_clump_local.md),
+  and so
+  [`ld_clump()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_clump.md)
+  with a local `bfile`, no longer errors with “cannot open the
+  connection” when plink writes no `.clumped` file. If no variants pass
+  clumping it now returns no rows with a message, and if plink fails it
+  gives an informative error including the end of the plink log
+  ([\#30](https://github.com/MRCIEU/ieugwasr/issues/30),
+  [\#34](https://github.com/MRCIEU/ieugwasr/issues/34),
+  [\#44](https://github.com/MRCIEU/ieugwasr/issues/44)).
+- [`ld_clump()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_clump.md),
+  [`ld_clump_local()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_clump_local.md),
+  [`ld_matrix()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_matrix.md)
+  and
+  [`ld_matrix_local()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_matrix_local.md)
+  gain a `tmpdir` argument, the directory in which the temporary files
+  used by plink are written. The default,
+  [`tempdir()`](https://rdrr.io/r/base/tempfile.html), keeps the
+  previous behaviour
+  ([\#37](https://github.com/MRCIEU/ieugwasr/issues/37)).
+- [`ld_matrix_local()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_matrix_local.md)
+  now removes its temporary plink files when it exits.
+- [`ld_clump()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_clump.md)
+  now warns if several variants share the smallest p-value, e.g. because
+  p-values smaller than R can represent underflow to 0, or because other
+  software has capped them. Plink then chooses the lead variant among
+  them arbitrarily. The warning suggests lowering any cap, e.g. setting
+  `min_pval = 1e-300` in `TwoSampleMR::format_data()`
+  ([\#39](https://github.com/MRCIEU/ieugwasr/issues/39)).
+
+## ieugwasr 1.2.0
+
+CRAN release: 2026-10-07
+
+- [`associations()`](https://mrcieu.github.io/ieugwasr/dev/reference/associations.md)
+  now returns the processed tibble. Previously its `... %>% return()`
+  inside a pipe did not return from the function (since magrittr 2.0),
+  so the raw server data frame was returned instead, with `n` as
+  character.
+- Remove the flipping of `beta` for `ukb-e` datasets in
+  [`associations()`](https://mrcieu.github.io/ieugwasr/dev/reference/associations.md),
+  [`tophits()`](https://mrcieu.github.io/ieugwasr/dev/reference/tophits.md)
+  and
+  [`phewas()`](https://mrcieu.github.io/ieugwasr/dev/reference/phewas.md).
+  The flip was never applied in
+  [`associations()`](https://mrcieu.github.io/ieugwasr/dev/reference/associations.md)
+  (see above), and the OpenGWAS server is the right place to correct
+  these datasets.
+- Replace `%>% return()` with explicit
+  [`return()`](https://rdrr.io/r/base/function.html) calls throughout.
 - Update some GitHub Actions workflows, including no longer testing on R
   before R 4.1 due to the new testthat requirements
 - Tweak an API test
@@ -47,6 +102,7 @@
   [`as.POSIXct()`](https://rdrr.io/r/base/as.POSIXlt.html) in allowance
   reset handling (closes
   [\#103](https://github.com/MRCIEU/ieugwasr/issues/103))
+- Remove **utils** from Suggests, since it’s a Base package
 
 ## ieugwasr 1.1.0
 

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ieugwasr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.2.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,13 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ld_matrix_local</span><span class="op">(</span><span class="va">variants</span>, <span class="va">bfile</span>, <span class="va">plink_bin</span>, with_alleles <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ld_matrix_local</span><span class="op">(</span></span>
+<span>  <span class="va">variants</span>,</span>
+<span>  <span class="va">bfile</span>,</span>
+<span>  <span class="va">plink_bin</span>,</span>
+<span>  with_alleles <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  tmpdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -74,6 +80,10 @@ See <a href="https://github.com/MRCIEU/genetics.binaRies" class="external-link">
 <dt id="arg-with-alleles">with_alleles<a class="anchor" aria-label="anchor" href="#arg-with-alleles"></a></dt>
 <dd><p>Whether to append the allele names to the SNP names.
 Default: <code>TRUE</code></p></dd>
+
+
+<dt id="arg-tmpdir">tmpdir<a class="anchor" aria-label="anchor" href="#arg-tmpdir"></a></dt>
+<dd><p>Directory in which to write the temporary files used by plink. Default = <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code></p></dd>
 
 </dl></div>
     <div class="section level2">

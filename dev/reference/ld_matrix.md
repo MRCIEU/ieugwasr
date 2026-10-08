@@ -16,6 +16,7 @@ ld_matrix(
   opengwas_jwt = get_opengwas_jwt(),
   bfile = NULL,
   plink_bin = NULL,
+  tmpdir = tempdir(),
   ...
 )
 ```
@@ -52,6 +53,12 @@ ld_matrix(
   If `NULL` and bfile is not `NULL` then will detect packaged plink
   binary for specific OS. Otherwise specify path to plink binary.
   Default = `NULL`
+
+- tmpdir:
+
+  Directory in which to write the temporary files used by plink when
+  `bfile` is provided. Default =
+  [`tempdir()`](https://rdrr.io/r/base/tempfile.html)
 
 - ...:
 

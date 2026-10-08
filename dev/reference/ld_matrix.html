@@ -15,7 +15,7 @@ You can specify whether the allele names are displayed."><meta name="robots" con
 
     <a class="navbar-brand me-2" href="../index.html">ieugwasr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.2.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,6 +70,7 @@ You can specify whether the allele names are displayed.</p>
 <span>  opengwas_jwt <span class="op">=</span> <span class="fu"><a href="get_opengwas_jwt.html">get_opengwas_jwt</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  bfile <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  plink_bin <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tmpdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -104,6 +105,10 @@ panel with a slightly different set of markers</p></dd>
 <dt id="arg-plink-bin">plink_bin<a class="anchor" aria-label="anchor" href="#arg-plink-bin"></a></dt>
 <dd><p>If <code>NULL</code> and bfile is not <code>NULL</code> then will detect packaged
 plink binary for specific OS. Otherwise specify path to plink binary. Default = <code>NULL</code></p></dd>
+
+
+<dt id="arg-tmpdir">tmpdir<a class="anchor" aria-label="anchor" href="#arg-tmpdir"></a></dt>
+<dd><p>Directory in which to write the temporary files used by plink when <code>bfile</code> is provided. Default = <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code></p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

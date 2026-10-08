@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ieugwasr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.2.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +46,24 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ieugwasr-development-version">ieugwasr (development version)<a class="anchor" aria-label="anchor" href="#ieugwasr-development-version"></a></h2>
-<ul><li>Update some GitHub Actions workflows, including no longer testing on R before R 4.1 due to the new testthat requirements</li>
+<ul><li>
+<code><a href="../reference/ld_matrix_local.html">ld_matrix_local()</a></code> now reads the alleles in the <code>.bim</code> file as character. Previously a column of all <code>T</code> alleles was read as logical, so the row and column names contained <code>TRUE</code> instead of <code>T</code> (<a href="https://github.com/MRCIEU/ieugwasr/issues/38" class="external-link">#38</a>).</li>
+<li>
+<code><a href="../reference/ld_clump_local.html">ld_clump_local()</a></code>, and so <code><a href="../reference/ld_clump.html">ld_clump()</a></code> with a local <code>bfile</code>, no longer errors with “cannot open the connection” when plink writes no <code>.clumped</code> file. If no variants pass clumping it now returns no rows with a message, and if plink fails it gives an informative error including the end of the plink log (<a href="https://github.com/MRCIEU/ieugwasr/issues/30" class="external-link">#30</a>, <a href="https://github.com/MRCIEU/ieugwasr/issues/34" class="external-link">#34</a>, <a href="https://github.com/MRCIEU/ieugwasr/issues/44" class="external-link">#44</a>).</li>
+<li>
+<code><a href="../reference/ld_clump.html">ld_clump()</a></code>, <code><a href="../reference/ld_clump_local.html">ld_clump_local()</a></code>, <code><a href="../reference/ld_matrix.html">ld_matrix()</a></code> and <code><a href="../reference/ld_matrix_local.html">ld_matrix_local()</a></code> gain a <code>tmpdir</code> argument, the directory in which the temporary files used by plink are written. The default, <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>, keeps the previous behaviour (<a href="https://github.com/MRCIEU/ieugwasr/issues/37" class="external-link">#37</a>).</li>
+<li>
+<code><a href="../reference/ld_matrix_local.html">ld_matrix_local()</a></code> now removes its temporary plink files when it exits.</li>
+<li>
+<code><a href="../reference/ld_clump.html">ld_clump()</a></code> now warns if several variants share the smallest p-value, e.g. because p-values smaller than R can represent underflow to 0, or because other software has capped them. Plink then chooses the lead variant among them arbitrarily. The warning suggests lowering any cap, e.g. setting <code>min_pval = 1e-300</code> in <code>TwoSampleMR::format_data()</code> (<a href="https://github.com/MRCIEU/ieugwasr/issues/39" class="external-link">#39</a>).</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.0" id="ieugwasr-120">ieugwasr 1.2.0<a class="anchor" aria-label="anchor" href="#ieugwasr-120"></a></h2><p class="text-muted">CRAN release: 2026-10-07</p>
+<ul><li>
+<code><a href="../reference/associations.html">associations()</a></code> now returns the processed tibble. Previously its <code>... %&gt;% return()</code> inside a pipe did not return from the function (since magrittr 2.0), so the raw server data frame was returned instead, with <code>n</code> as character.</li>
+<li>Remove the flipping of <code>beta</code> for <code>ukb-e</code> datasets in <code><a href="../reference/associations.html">associations()</a></code>, <code><a href="../reference/tophits.html">tophits()</a></code> and <code><a href="../reference/phewas.html">phewas()</a></code>. The flip was never applied in <code><a href="../reference/associations.html">associations()</a></code> (see above), and the OpenGWAS server is the right place to correct these datasets.</li>
+<li>Replace <code>%&gt;% return()</code> with explicit <code><a href="https://rdrr.io/r/base/function.html" class="external-link">return()</a></code> calls throughout.</li>
+<li>Update some GitHub Actions workflows, including no longer testing on R before R 4.1 due to the new testthat requirements</li>
 <li>Tweak an API test</li>
 <li>Bump version of roxygen2</li>
 <li>Fix a typo in the documentation for <code><a href="../reference/ld_clump.html">ld_clump()</a></code>
@@ -70,6 +87,7 @@
 <li>Make <code><a href="../reference/get_query_content.html">get_query_content()</a></code> error path robust to non-JSON bodies</li>
 <li>Fix empty-result check in <code><a href="../reference/tophits.html">tophits()</a></code> (closes <a href="https://github.com/MRCIEU/ieugwasr/issues/76" class="external-link">#76</a>)</li>
 <li>Supply <code>origin</code> to <code><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct()</a></code> in allowance reset handling (closes <a href="https://github.com/MRCIEU/ieugwasr/issues/103" class="external-link">#103</a>)</li>
+<li>Remove <strong>utils</strong> from Suggests, since it’s a Base package</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.0" id="ieugwasr-110">ieugwasr 1.1.0<a class="anchor" aria-label="anchor" href="#ieugwasr-110"></a></h2><p class="text-muted">CRAN release: 2025-07-31</p>

@@ -364,6 +364,9 @@ associations <- function(variants, id, proxies=1, r2=0.8, align_alleles=1, palin
 				palindromes=palindromes,
 				maf_threshold=maf_threshold
 			), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
+			# Make n numeric in each chunk, otherwise bind_rows() fails when it
+			# is integer in one chunk and character in another
+			fix_n(out)
 		}) %>% dplyr::bind_rows()
 	}) %>%
 	dplyr::bind_rows()

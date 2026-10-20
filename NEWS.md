@@ -5,6 +5,7 @@
 * `ld_clump()`, `ld_clump_local()`, `ld_matrix()` and `ld_matrix_local()` gain a `tmpdir` argument, the directory in which the temporary files used by plink are written. The default, `tempdir()`, keeps the previous behaviour (#37).
 * `ld_matrix_local()` now removes its temporary plink files when it exits.
 * `ld_clump()` now warns if several variants share the smallest p-value, e.g. because p-values smaller than R can represent underflow to 0, or because other software has capped them. Plink then chooses the lead variant among them arbitrarily. The warning suggests lowering any cap, e.g. setting `min_pval = 1e-300` in `TwoSampleMR::format_data()` (#39).
+* `associations()` now converts `n` to numeric in each chunk of results before combining them. Previously, when querying many ids or variants, it could fail with "Can't combine `..1$n` <integer> and `..2$n` <character>" if `n` was missing for some datasets (#171).
 
 # ieugwasr 1.2.0
 

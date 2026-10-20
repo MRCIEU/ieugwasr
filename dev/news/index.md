@@ -36,6 +36,11 @@
   them arbitrarily. The warning suggests lowering any cap, e.g. setting
   `min_pval = 1e-300` in `TwoSampleMR::format_data()`
   ([\#39](https://github.com/MRCIEU/ieugwasr/issues/39)).
+- [`associations()`](https://mrcieu.github.io/ieugwasr/dev/reference/associations.md)
+  now converts `n` to numeric in each chunk of results before combining
+  them. Previously, when querying many ids or variants, it could fail
+  with “Can’t combine `..1$n` and `..2$n` ” if `n` was missing for some
+  datasets ([\#171](https://github.com/MRCIEU/ieugwasr/issues/171)).
 
 ## ieugwasr 1.2.0
 

@@ -5,15 +5,18 @@ skip_on_os("windows")
 #   "ok": write a .clumped file containing the first variant
 #   "none": log plink's no significant results warning and write no .clumped file
 #   "fail": log an error and exit with status 1
-# Each call appends its --out path to the file in attr(exe, "outs")
+# Each call appends its --out path to the file in attr(exe, "outs"), and its
+# whole command line to the file in attr(exe, "args")
 fake_plink <- function(bim_lines=character(0), clump=c("ok", "none", "fail")) {
 	clump <- match.arg(clump)
 	bim <- tempfile(fileext=".bim")
 	writeLines(bim_lines, bim)
 	exe <- tempfile()
 	outs <- tempfile()
+	args <- tempfile()
 	writeLines(c(
 		"#!/bin/sh",
+		paste0("echo \"$*\" >> '", args, "'"),
 		"while [ $# -gt 0 ]; do",
 		"  case \"$1\" in",
 		"    --out) out=\"$2\"; shift ;;",
@@ -36,6 +39,7 @@ fake_plink <- function(bim_lines=character(0), clump=c("ok", "none", "fail")) {
 	), exe)
 	Sys.chmod(exe, "755")
 	attr(exe, "outs") <- outs
+	attr(exe, "args") <- args
 	exe
 }
 
@@ -122,4 +126,32 @@ test_that("ld_clump does not warn about ties that do not matter (#39)", {
 	# Ties above clump_p cannot be lead variants
 	tied <- data.frame(rsid=c("rs1", "rs2", "rs3"), pval=c(0.5, 0.5, 0.6))
 	expect_no_warning(expect_message(ld_clump(tied, clump_p=0.1, bfile="fake", plink_bin=plink)))
+})
+
+test_that("ld_clump and ld_matrix pass threads and memory to plink (#41)", {
+	plink <- fake_plink(c("1\trs1\t0\t1\tA\tG", "1\trs2\t0\t2\tC\tT", "1\trs3\t0\t3\tA\tC"))
+	expect_message(ld_clump(dat, bfile="fake", plink_bin=plink, threads=1, memory=2000))
+	ld_matrix(dat$rsid, bfile="fake", plink_bin=plink, threads=1, memory=2000)
+	args <- readLines(attr(plink, "args"))
+	expect_length(args, 3)
+	expect_true(all(grepl("--threads 1 ", args, fixed=TRUE)))
+	expect_true(all(grepl("--memory 2000 ", args, fixed=TRUE)))
+})
+
+test_that("ld_clump and ld_matrix leave plink's threads and memory defaults by default (#41)", {
+	plink <- fake_plink(c("1\trs1\t0\t1\tA\tG", "1\trs2\t0\t2\tC\tT", "1\trs3\t0\t3\tA\tC"))
+	expect_message(ld_clump(dat, bfile="fake", plink_bin=plink))
+	ld_matrix(dat$rsid, bfile="fake", plink_bin=plink)
+	args <- readLines(attr(plink, "args"))
+	expect_length(args, 3)
+	expect_false(any(grepl("--threads|--memory", args)))
+})
+
+test_that("ld_clump_local and ld_matrix_local reject invalid threads and memory (#41)", {
+	plink <- fake_plink()
+	expect_error(ld_clump_local(dat, 10000, 0.001, 1, bfile="fake", plink_bin=plink, threads="1; echo x"), "threads must be NULL or a single positive whole number")
+	expect_error(ld_clump_local(dat, 10000, 0.001, 1, bfile="fake", plink_bin=plink, memory=-1), "memory must be NULL or a single positive whole number")
+	expect_error(ld_matrix_local(dat$rsid, bfile="fake", plink_bin=plink, threads=1.5), "threads must be")
+	expect_error(ld_matrix_local(dat$rsid, bfile="fake", plink_bin=plink, memory=c(1000, 2000)), "memory must be")
+	expect_false(file.exists(attr(plink, "args")))
 })

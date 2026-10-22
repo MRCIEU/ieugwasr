@@ -9,7 +9,9 @@ ld_matrix_local(
   bfile,
   plink_bin,
   with_alleles = TRUE,
-  tmpdir = tempdir()
+  tmpdir = tempdir(),
+  threads = NULL,
+  memory = NULL
 )
 }
 \arguments{
@@ -24,6 +26,10 @@ See \url{https://github.com/MRCIEU/genetics.binaRies} for convenient access to p
 Default: \code{TRUE}}
 
 \item{tmpdir}{Directory in which to write the temporary files used by plink. Default = \code{\link[=tempdir]{tempdir()}}}
+
+\item{threads}{Number of threads plink may use, passed as \code{--threads}. Default = \code{NULL}, plink's own default (all available cores)}
+
+\item{memory}{Memory in MB plink may reserve, passed as \code{--memory}. Default = \code{NULL}, plink's own default (half the system's RAM)}
 }
 \value{
 data frame

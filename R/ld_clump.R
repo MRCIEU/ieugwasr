@@ -33,12 +33,15 @@
 #' packaged plink binary for specific OS. Otherwise specify path to plink binary. 
 #' Default = `NULL`,
 #' @param tmpdir Directory in which to write the temporary files used by plink when `bfile` is provided. Default = [`tempdir()`]
+#' @param threads Number of threads plink may use when `bfile` is provided, passed as `--threads`. Default = `NULL`, plink's own default (all available cores)
+#' @param memory Memory in MB plink may reserve when `bfile` is provided, passed as `--memory`. Default = `NULL`, plink's own default (half the system's RAM)
 #' @param ... Additional arguments passed to [`ld_clump_api()`].
 #'
 #' @export
 #' @return Data frame
 ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99, 
-                     pop = "EUR", opengwas_jwt=get_opengwas_jwt(), bfile=NULL, plink_bin=NULL, tmpdir=tempdir(), ...)
+                     pop = "EUR", opengwas_jwt=get_opengwas_jwt(), bfile=NULL, plink_bin=NULL, tmpdir=tempdir(),
+                     threads=NULL, memory=NULL, ...)
 {
 
 	stopifnot("rsid" %in% names(dat))
@@ -90,7 +93,7 @@ ld_clump <- function(dat=NULL, clump_kb=10000, clump_r2=0.001, clump_p=0.99,
 			  res[[i]] <- ld_clump_api(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, pop=pop, opengwas_jwt=opengwas_jwt, ...)
 			} else {
 			  message("Clumping ", ids[i], ", ", nrow(x), " variants, using: ", bfile)
-				res[[i]] <- ld_clump_local(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, bfile=bfile, plink_bin=plink_bin, tmpdir=tmpdir)
+				res[[i]] <- ld_clump_local(x, clump_kb=clump_kb, clump_r2=clump_r2, clump_p=clump_p, bfile=bfile, plink_bin=plink_bin, tmpdir=tmpdir, threads=threads, memory=memory)
 			}
 		}
 	}
@@ -144,13 +147,16 @@ ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.001, clump_p=1, pop="EU
 #' @param plink_bin Specify path to plink binary. Default = `NULL`. 
 #' See \url{https://github.com/MRCIEU/genetics.binaRies} for convenient access to plink binaries
 #' @param tmpdir Directory in which to write the temporary files used by plink. Default = [`tempdir()`]
+#' @param threads Number of threads plink may use, passed as `--threads`. Default = `NULL`, plink's own default (all available cores)
+#' @param memory Memory in MB plink may reserve, passed as `--memory`. Default = `NULL`, plink's own default (half the system's RAM)
 #' @importFrom utils read.table
 #' @importFrom utils write.table
 #' @export
 #' @return data frame of clumped variants
-ld_clump_local <- function(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin, tmpdir=tempdir())
+ld_clump_local <- function(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin, tmpdir=tempdir(), threads=NULL, memory=NULL)
 {
 	if(!dir.exists(tmpdir)) stop("tmpdir does not exist: ", tmpdir)
+	resources <- plink_resource_flags(threads, memory)
 
 	# Make textfile
 	shell <- ifelse(Sys.info()['sysname'] == "Windows", "cmd", "sh")
@@ -164,6 +170,7 @@ ld_clump_local <- function(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin, t
 		" --clump-p1 ", clump_p, 
 		" --clump-r2 ", clump_r2, 
 		" --clump-kb ", clump_kb, 
+		resources,
 		" --out ", shQuote(fn, type=shell)
 	)
 	status <- system(fun2)
@@ -212,6 +219,23 @@ warn_tied_pval <- function(pval, clump_p, id)
 		)
 	}
 	invisible()
+}
+
+# plink's --threads and --memory flags, or "" for those left NULL so that plink
+# uses its own defaults. The values are pasted into the shell command unquoted,
+# so each must be a single positive whole number (#41)
+plink_resource_flags <- function(threads=NULL, memory=NULL)
+{
+	flag <- function(x, name)
+	{
+		if(is.null(x)) return("")
+		if(!is.numeric(x) || length(x) != 1 || is.na(x) || x < 1 || x != round(x))
+		{
+			stop(name, " must be NULL or a single positive whole number")
+		}
+		paste0(" --", name, " ", sprintf("%.0f", x))
+	}
+	paste0(flag(threads, "threads"), flag(memory, "memory"))
 }
 
 random_string <- function(n=1, len=6)

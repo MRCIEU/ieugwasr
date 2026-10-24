@@ -11,7 +11,9 @@ ld_clump_local(
   clump_p,
   bfile,
   plink_bin,
-  tmpdir = tempdir()
+  tmpdir = tempdir(),
+  threads = NULL,
+  memory = NULL
 )
 }
 \arguments{
@@ -30,6 +32,10 @@ If \code{id} is present then clumping will be done per unique id.}
 See \url{https://github.com/MRCIEU/genetics.binaRies} for convenient access to plink binaries}
 
 \item{tmpdir}{Directory in which to write the temporary files used by plink. Default = \code{\link[=tempdir]{tempdir()}}}
+
+\item{threads}{Number of threads plink may use, passed as \code{--threads}. Default = \code{NULL}, plink's own default (all available cores)}
+
+\item{memory}{Memory in MiB plink may reserve, passed as \code{--memory}. Default = \code{NULL}, plink's own default (half the system's RAM)}
 }
 \value{
 data frame of clumped variants

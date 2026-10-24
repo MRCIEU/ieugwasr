@@ -31,11 +31,13 @@
 #' @param plink_bin If `NULL` and bfile is not `NULL` then will detect packaged 
 #' plink binary for specific OS. Otherwise specify path to plink binary. Default = `NULL`
 #' @param tmpdir Directory in which to write the temporary files used by plink when `bfile` is provided. Default = [`tempdir()`]
+#' @param threads Number of threads plink may use when `bfile` is provided, passed as `--threads`. Default = `NULL`, plink's own default (all available cores)
+#' @param memory Memory in MiB plink may reserve when `bfile` is provided, passed as `--memory`. Default = `NULL`, plink's own default (half the system's RAM)
 #' @param ... Additional arguments passed to `ld_matrix_api()`.
 #'
 #' @export
 #' @return Matrix of LD r values
-ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_opengwas_jwt(), bfile=NULL, plink_bin=NULL, tmpdir=tempdir(), ...) {
+ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_opengwas_jwt(), bfile=NULL, plink_bin=NULL, tmpdir=tempdir(), threads=NULL, memory=NULL, ...) {
 	if(length(variants) > 500 & is.null(bfile))
 	{
 		stop("SNP list must be smaller than 500. Try running locally by providing local ld reference with bfile argument. See vignettes for a guide on how to do this.")
@@ -55,7 +57,7 @@ ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_o
 
 	if(!is.null(bfile))
 	{
-		return(ld_matrix_local(variants, bfile=bfile, plink_bin=plink_bin, with_alleles=with_alleles, tmpdir=tmpdir))
+		return(ld_matrix_local(variants, bfile=bfile, plink_bin=plink_bin, with_alleles=with_alleles, tmpdir=tmpdir, threads=threads, memory=memory))
 	}
 
 	res <- api_query('ld/matrix', query = list(rsid=variants, pop=pop), opengwas_jwt=opengwas_jwt, ...) %>% get_query_content()
@@ -95,11 +97,14 @@ ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_o
 #' @param with_alleles Whether to append the allele names to the SNP names. 
 #' Default: `TRUE`
 #' @param tmpdir Directory in which to write the temporary files used by plink. Default = [`tempdir()`]
+#' @param threads Number of threads plink may use, passed as `--threads`. Default = `NULL`, plink's own default (all available cores)
+#' @param memory Memory in MiB plink may reserve, passed as `--memory`. Default = `NULL`, plink's own default (half the system's RAM)
 #'
 #' @export
 #' @return data frame
-ld_matrix_local <- function(variants, bfile, plink_bin, with_alleles=TRUE, tmpdir=tempdir()) {
+ld_matrix_local <- function(variants, bfile, plink_bin, with_alleles=TRUE, tmpdir=tempdir(), threads=NULL, memory=NULL) {
 	if(!dir.exists(tmpdir)) stop("tmpdir does not exist: ", tmpdir)
+	resources <- plink_resource_flags(threads, memory)
 	# Make textfile
 	shell <- ifelse(Sys.info()['sysname'] == "Windows", "cmd", "sh")
 	fn <- tempfile(tmpdir=tmpdir)
@@ -113,6 +118,7 @@ ld_matrix_local <- function(variants, bfile, plink_bin, with_alleles=TRUE, tmpdi
 		" --extract ", shQuote(fn, type=shell), 
 		" --make-just-bim ", 
 		" --keep-allele-order ",
+		resources,
 		" --out ", shQuote(fn, type=shell)
 	)
 	system(fun1)
@@ -127,6 +133,7 @@ ld_matrix_local <- function(variants, bfile, plink_bin, with_alleles=TRUE, tmpdi
 		" --extract ", shQuote(fn, type=shell), 
 		" --r square ", 
 		" --keep-allele-order ",
+		resources,
 		" --out ", shQuote(fn, type=shell)
 	)
 	system(fun2)

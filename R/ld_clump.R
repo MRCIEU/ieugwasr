@@ -34,7 +34,7 @@
 #' Default = `NULL`,
 #' @param tmpdir Directory in which to write the temporary files used by plink when `bfile` is provided. Default = [`tempdir()`]
 #' @param threads Number of threads plink may use when `bfile` is provided, passed as `--threads`. Default = `NULL`, plink's own default (all available cores)
-#' @param memory Memory in MB plink may reserve when `bfile` is provided, passed as `--memory`. Default = `NULL`, plink's own default (half the system's RAM)
+#' @param memory Memory in MiB plink may reserve when `bfile` is provided, passed as `--memory`. Default = `NULL`, plink's own default (half the system's RAM)
 #' @param ... Additional arguments passed to [`ld_clump_api()`].
 #'
 #' @export
@@ -148,7 +148,7 @@ ld_clump_api <- function(dat, clump_kb=10000, clump_r2=0.001, clump_p=1, pop="EU
 #' See \url{https://github.com/MRCIEU/genetics.binaRies} for convenient access to plink binaries
 #' @param tmpdir Directory in which to write the temporary files used by plink. Default = [`tempdir()`]
 #' @param threads Number of threads plink may use, passed as `--threads`. Default = `NULL`, plink's own default (all available cores)
-#' @param memory Memory in MB plink may reserve, passed as `--memory`. Default = `NULL`, plink's own default (half the system's RAM)
+#' @param memory Memory in MiB plink may reserve, passed as `--memory`. Default = `NULL`, plink's own default (half the system's RAM)
 #' @importFrom utils read.table
 #' @importFrom utils write.table
 #' @export

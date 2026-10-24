@@ -32,7 +32,7 @@
 #' plink binary for specific OS. Otherwise specify path to plink binary. Default = `NULL`
 #' @param tmpdir Directory in which to write the temporary files used by plink when `bfile` is provided. Default = [`tempdir()`]
 #' @param threads Number of threads plink may use when `bfile` is provided, passed as `--threads`. Default = `NULL`, plink's own default (all available cores)
-#' @param memory Memory in MB plink may reserve when `bfile` is provided, passed as `--memory`. Default = `NULL`, plink's own default (half the system's RAM)
+#' @param memory Memory in MiB plink may reserve when `bfile` is provided, passed as `--memory`. Default = `NULL`, plink's own default (half the system's RAM)
 #' @param ... Additional arguments passed to `ld_matrix_api()`.
 #'
 #' @export
@@ -98,7 +98,7 @@ ld_matrix <- function(variants, with_alleles=TRUE, pop="EUR", opengwas_jwt=get_o
 #' Default: `TRUE`
 #' @param tmpdir Directory in which to write the temporary files used by plink. Default = [`tempdir()`]
 #' @param threads Number of threads plink may use, passed as `--threads`. Default = `NULL`, plink's own default (all available cores)
-#' @param memory Memory in MB plink may reserve, passed as `--memory`. Default = `NULL`, plink's own default (half the system's RAM)
+#' @param memory Memory in MiB plink may reserve, passed as `--memory`. Default = `NULL`, plink's own default (half the system's RAM)
 #'
 #' @export
 #' @return data frame

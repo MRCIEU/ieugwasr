@@ -71,6 +71,8 @@ You can specify whether the allele names are displayed.</p>
 <span>  bfile <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  plink_bin <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tmpdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  threads <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  memory <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -109,6 +111,14 @@ plink binary for specific OS. Otherwise specify path to plink binary. Default = 
 
 <dt id="arg-tmpdir">tmpdir<a class="anchor" aria-label="anchor" href="#arg-tmpdir"></a></dt>
 <dd><p>Directory in which to write the temporary files used by plink when <code>bfile</code> is provided. Default = <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code></p></dd>
+
+
+<dt id="arg-threads">threads<a class="anchor" aria-label="anchor" href="#arg-threads"></a></dt>
+<dd><p>Number of threads plink may use when <code>bfile</code> is provided, passed as <code>--threads</code>. Default = <code>NULL</code>, plink's own default (all available cores)</p></dd>
+
+
+<dt id="arg-memory">memory<a class="anchor" aria-label="anchor" href="#arg-memory"></a></dt>
+<dd><p>Memory in MiB plink may reserve when <code>bfile</code> is provided, passed as <code>--memory</code>. Default = <code>NULL</code>, plink's own default (half the system's RAM)</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

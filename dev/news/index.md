@@ -2,6 +2,17 @@
 
 ## ieugwasr (development version)
 
+- [`ld_clump()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_clump.md),
+  [`ld_clump_local()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_clump_local.md),
+  [`ld_matrix()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_matrix.md)
+  and
+  [`ld_matrix_local()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_matrix_local.md)
+  gain `threads` and `memory` arguments, passed to plink as `--threads`
+  and `--memory`. Without `--memory` plink reserves half of the system’s
+  RAM, so several local clumping or LD matrix jobs run at once could
+  exhaust memory. The default, `NULL`, keeps the previous behaviour
+  (thanks, [@rmgpanw](https://github.com/rmgpanw),
+  [\#41](https://github.com/MRCIEU/ieugwasr/issues/41)).
 - [`ld_matrix_local()`](https://mrcieu.github.io/ieugwasr/dev/reference/ld_matrix_local.md)
   now reads the alleles in the `.bim` file as character. Previously a
   column of all `T` alleles was read as logical, so the row and column

@@ -58,7 +58,9 @@
 <span>  <span class="va">clump_p</span>,</span>
 <span>  <span class="va">bfile</span>,</span>
 <span>  <span class="va">plink_bin</span>,</span>
-<span>  tmpdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  tmpdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  threads <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  memory <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -94,6 +96,14 @@ See <a href="https://github.com/MRCIEU/genetics.binaRies" class="external-link">
 
 <dt id="arg-tmpdir">tmpdir<a class="anchor" aria-label="anchor" href="#arg-tmpdir"></a></dt>
 <dd><p>Directory in which to write the temporary files used by plink. Default = <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code></p></dd>
+
+
+<dt id="arg-threads">threads<a class="anchor" aria-label="anchor" href="#arg-threads"></a></dt>
+<dd><p>Number of threads plink may use, passed as <code>--threads</code>. Default = <code>NULL</code>, plink's own default (all available cores)</p></dd>
+
+
+<dt id="arg-memory">memory<a class="anchor" aria-label="anchor" href="#arg-memory"></a></dt>
+<dd><p>Memory in MiB plink may reserve, passed as <code>--memory</code>. Default = <code>NULL</code>, plink's own default (half the system's RAM)</p></dd>
 
 </dl></div>
     <div class="section level2">

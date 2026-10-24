@@ -10,7 +10,9 @@ ld_matrix_local(
   bfile,
   plink_bin,
   with_alleles = TRUE,
-  tmpdir = tempdir()
+  tmpdir = tempdir(),
+  threads = NULL,
+  memory = NULL
 )
 ```
 
@@ -38,6 +40,16 @@ ld_matrix_local(
 
   Directory in which to write the temporary files used by plink. Default
   = [`tempdir()`](https://rdrr.io/r/base/tempfile.html)
+
+- threads:
+
+  Number of threads plink may use, passed as `--threads`. Default =
+  `NULL`, plink's own default (all available cores)
+
+- memory:
+
+  Memory in MiB plink may reserve, passed as `--memory`. Default =
+  `NULL`, plink's own default (half the system's RAM)
 
 ## Value
 

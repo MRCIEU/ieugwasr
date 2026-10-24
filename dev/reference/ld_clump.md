@@ -16,6 +16,8 @@ ld_clump(
   bfile = NULL,
   plink_bin = NULL,
   tmpdir = tempdir(),
+  threads = NULL,
+  memory = NULL,
   ...
 )
 ```
@@ -69,6 +71,18 @@ ld_clump(
   Directory in which to write the temporary files used by plink when
   `bfile` is provided. Default =
   [`tempdir()`](https://rdrr.io/r/base/tempfile.html)
+
+- threads:
+
+  Number of threads plink may use when `bfile` is provided, passed as
+  `--threads`. Default = `NULL`, plink's own default (all available
+  cores)
+
+- memory:
+
+  Memory in MiB plink may reserve when `bfile` is provided, passed as
+  `--memory`. Default = `NULL`, plink's own default (half the system's
+  RAM)
 
 - ...:
 

@@ -229,7 +229,7 @@ plink_resource_flags <- function(threads=NULL, memory=NULL)
 	flag <- function(x, name)
 	{
 		if(is.null(x)) return("")
-		if(!is.numeric(x) || length(x) != 1 || is.na(x) || x < 1 || x != round(x))
+		if(!is.numeric(x) || length(x) != 1 || !is.finite(x) || x < 1 || x != round(x))
 		{
 			stop(name, " must be NULL or a single positive whole number")
 		}

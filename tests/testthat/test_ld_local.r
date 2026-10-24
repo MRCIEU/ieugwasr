@@ -152,6 +152,7 @@ test_that("ld_clump_local and ld_matrix_local reject invalid threads and memory 
 	expect_error(ld_clump_local(dat, 10000, 0.001, 1, bfile="fake", plink_bin=plink, threads="1; echo x"), "threads must be NULL or a single positive whole number")
 	expect_error(ld_clump_local(dat, 10000, 0.001, 1, bfile="fake", plink_bin=plink, memory=-1), "memory must be NULL or a single positive whole number")
 	expect_error(ld_matrix_local(dat$rsid, bfile="fake", plink_bin=plink, threads=1.5), "threads must be")
+	expect_error(ld_matrix_local(dat$rsid, bfile="fake", plink_bin=plink, threads=Inf), "threads must be")
 	expect_error(ld_matrix_local(dat$rsid, bfile="fake", plink_bin=plink, memory=c(1000, 2000)), "memory must be")
 	expect_false(file.exists(attr(plink, "args")))
 })

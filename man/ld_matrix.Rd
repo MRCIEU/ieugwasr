@@ -38,7 +38,7 @@ plink binary for specific OS. Otherwise specify path to plink binary. Default = 
 
 \item{threads}{Number of threads plink may use when \code{bfile} is provided, passed as \code{--threads}. Default = \code{NULL}, plink's own default (all available cores)}
 
-\item{memory}{Memory in MB plink may reserve when \code{bfile} is provided, passed as \code{--memory}. Default = \code{NULL}, plink's own default (half the system's RAM)}
+\item{memory}{Memory in MiB plink may reserve when \code{bfile} is provided, passed as \code{--memory}. Default = \code{NULL}, plink's own default (half the system's RAM)}
 
 \item{...}{Additional arguments passed to \code{ld_matrix_api()}.}
 }

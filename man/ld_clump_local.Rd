@@ -35,7 +35,7 @@ See \url{https://github.com/MRCIEU/genetics.binaRies} for convenient access to p
 
 \item{threads}{Number of threads plink may use, passed as \code{--threads}. Default = \code{NULL}, plink's own default (all available cores)}
 
-\item{memory}{Memory in MB plink may reserve, passed as \code{--memory}. Default = \code{NULL}, plink's own default (half the system's RAM)}
+\item{memory}{Memory in MiB plink may reserve, passed as \code{--memory}. Default = \code{NULL}, plink's own default (half the system's RAM)}
 }
 \value{
 data frame of clumped variants

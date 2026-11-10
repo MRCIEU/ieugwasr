@@ -1,4 +1,4 @@
-# ieugwasr (development version)
+# ieugwasr 1.2.1
 
 * `ld_clump()`, `ld_clump_local()`, `ld_matrix()` and `ld_matrix_local()` gain `threads` and `memory` arguments, passed to plink as `--threads` and `--memory`. Without `--memory` plink reserves half of the system's RAM, so several local clumping or LD matrix jobs run at once could exhaust memory. The default, `NULL`, keeps the previous behaviour (thanks, @rmgpanw, #41).
 * `ld_matrix_local()` now reads the alleles in the `.bim` file as character. Previously a column of all `T` alleles was read as logical, so the row and column names contained `TRUE` instead of `T` (#38).

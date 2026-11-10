@@ -1,5 +1,58 @@
 # Changelog
 
+## ieugwasr 1.2.1
+
+- [`ld_clump()`](https://mrcieu.github.io/ieugwasr/reference/ld_clump.md),
+  [`ld_clump_local()`](https://mrcieu.github.io/ieugwasr/reference/ld_clump_local.md),
+  [`ld_matrix()`](https://mrcieu.github.io/ieugwasr/reference/ld_matrix.md)
+  and
+  [`ld_matrix_local()`](https://mrcieu.github.io/ieugwasr/reference/ld_matrix_local.md)
+  gain `threads` and `memory` arguments, passed to plink as `--threads`
+  and `--memory`. Without `--memory` plink reserves half of the system’s
+  RAM, so several local clumping or LD matrix jobs run at once could
+  exhaust memory. The default, `NULL`, keeps the previous behaviour
+  (thanks, [@rmgpanw](https://github.com/rmgpanw),
+  [\#41](https://github.com/MRCIEU/ieugwasr/issues/41)).
+- [`ld_matrix_local()`](https://mrcieu.github.io/ieugwasr/reference/ld_matrix_local.md)
+  now reads the alleles in the `.bim` file as character. Previously a
+  column of all `T` alleles was read as logical, so the row and column
+  names contained `TRUE` instead of `T`
+  ([\#38](https://github.com/MRCIEU/ieugwasr/issues/38)).
+- [`ld_clump_local()`](https://mrcieu.github.io/ieugwasr/reference/ld_clump_local.md),
+  and so
+  [`ld_clump()`](https://mrcieu.github.io/ieugwasr/reference/ld_clump.md)
+  with a local `bfile`, no longer errors with “cannot open the
+  connection” when plink writes no `.clumped` file. If no variants pass
+  clumping it now returns no rows with a message, and if plink fails it
+  gives an informative error including the end of the plink log
+  ([\#30](https://github.com/MRCIEU/ieugwasr/issues/30),
+  [\#34](https://github.com/MRCIEU/ieugwasr/issues/34),
+  [\#44](https://github.com/MRCIEU/ieugwasr/issues/44)).
+- [`ld_clump()`](https://mrcieu.github.io/ieugwasr/reference/ld_clump.md),
+  [`ld_clump_local()`](https://mrcieu.github.io/ieugwasr/reference/ld_clump_local.md),
+  [`ld_matrix()`](https://mrcieu.github.io/ieugwasr/reference/ld_matrix.md)
+  and
+  [`ld_matrix_local()`](https://mrcieu.github.io/ieugwasr/reference/ld_matrix_local.md)
+  gain a `tmpdir` argument, the directory in which the temporary files
+  used by plink are written. The default,
+  [`tempdir()`](https://rdrr.io/r/base/tempfile.html), keeps the
+  previous behaviour
+  ([\#37](https://github.com/MRCIEU/ieugwasr/issues/37)).
+- [`ld_matrix_local()`](https://mrcieu.github.io/ieugwasr/reference/ld_matrix_local.md)
+  now removes its temporary plink files when it exits.
+- [`ld_clump()`](https://mrcieu.github.io/ieugwasr/reference/ld_clump.md)
+  now warns if several variants share the smallest p-value, e.g. because
+  p-values smaller than R can represent underflow to 0, or because other
+  software has capped them. Plink then chooses the lead variant among
+  them arbitrarily. The warning suggests lowering any cap, e.g. setting
+  `min_pval = 1e-300` in `TwoSampleMR::format_data()`
+  ([\#39](https://github.com/MRCIEU/ieugwasr/issues/39)).
+- [`associations()`](https://mrcieu.github.io/ieugwasr/reference/associations.md)
+  now converts `n` to numeric in each chunk of results before combining
+  them. Previously, when querying many ids or variants, it could fail
+  with “Can’t combine `..1$n` and `..2$n` ” if `n` was missing for some
+  datasets ([\#171](https://github.com/MRCIEU/ieugwasr/issues/171)).
+
 ## ieugwasr 1.2.0
 
 CRAN release: 2026-10-07

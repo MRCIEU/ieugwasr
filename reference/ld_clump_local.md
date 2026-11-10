@@ -6,7 +6,17 @@ dataset
 ## Usage
 
 ``` r
-ld_clump_local(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin)
+ld_clump_local(
+  dat,
+  clump_kb,
+  clump_r2,
+  clump_p,
+  bfile,
+  plink_bin,
+  tmpdir = tempdir(),
+  threads = NULL,
+  memory = NULL
+)
 ```
 
 ## Arguments
@@ -39,6 +49,21 @@ ld_clump_local(dat, clump_kb, clump_r2, clump_p, bfile, plink_bin)
   Specify path to plink binary. Default = `NULL`. See
   <https://github.com/MRCIEU/genetics.binaRies> for convenient access to
   plink binaries
+
+- tmpdir:
+
+  Directory in which to write the temporary files used by plink. Default
+  = [`tempdir()`](https://rdrr.io/r/base/tempfile.html)
+
+- threads:
+
+  Number of threads plink may use, passed as `--threads`. Default =
+  `NULL`, plink's own default (all available cores)
+
+- memory:
+
+  Memory in MiB plink may reserve, passed as `--memory`. Default =
+  `NULL`, plink's own default (half the system's RAM)
 
 ## Value
 

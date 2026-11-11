@@ -2,6 +2,8 @@
 
 ## ieugwasr 1.2.1
 
+CRAN release: 2026-11-10
+
 - [`ld_clump()`](https://mrcieu.github.io/ieugwasr/reference/ld_clump.md),
   [`ld_clump_local()`](https://mrcieu.github.io/ieugwasr/reference/ld_clump_local.md),
   [`ld_matrix()`](https://mrcieu.github.io/ieugwasr/reference/ld_matrix.md)
